@@ -132,6 +132,10 @@
           "t": "Directed core platforms including the student information system and set interoperability standards for secure data exchange across 33,000 users."
         },
         {
+          "h": "Three platforms in one week",
+          "t": "Migrated and scaled three enterprise grade learning tools within a single week."
+        },
+        {
           "h": "Data privacy program",
           "t": "Oversaw the data privacy and governance program, reviewing over 250 vendor agreements annually."
         },
@@ -500,7 +504,14 @@
       "text": "I look past symptoms to the problem underneath, then align people, budget, and technology to fix it."
     }
   ],
-  "testimonials": [],
+  "testimonials": [
+    {
+      "quote": "Nic Carroll's visionary leadership and technical expertise make him an invaluable addition…",
+      "name": "Dr. Corey Murphy",
+      "title": "Superintendent, Aiken County Public Schools",
+      "source": "https://www.acpsd.net/article/1906779/"
+    }
+  ],
   "writing": [
     {
       "kind": "In the news",
@@ -508,6 +519,13 @@
       "title": "Georgia Southern University Passes CMMC Level 2 Assessment with a Perfect Score",
       "summary": "Planet Technologies on the GCC High research environment and the university's perfect CMMC Level 2 result.",
       "url": "https://go-planet.com/perspectives-blog/georgia-southern-university-passes-cmmc-level-2-assessment-with-a-perfect-score/"
+    },
+    {
+      "kind": "In the news",
+      "date": "December 2024",
+      "title": "District Names Nic Carroll as Executive Director of Technology",
+      "summary": "Aiken County Public Schools announces Nic as Executive Director of Technology, leading data governance, cybersecurity, and digital learning.",
+      "url": "https://www.acpsd.net/article/1906779/"
     }
   ]
 }
