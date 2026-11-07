@@ -1,0 +1,287 @@
+{
+  "name": "Nic Carroll",
+  "credentials": "Ed.S., CISSP, CETL",
+  "headline": "Executive Technology and Operations Leader",
+  "roles": "CIO, CTO, and CISO experience across higher education and K12",
+  "location": "Augusta, Georgia",
+  "email": "carroll.nic@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/nic-carroll/",
+  "summary": "Visionary IT executive with over 15 years of leadership experience driving enterprise wide transformation across P-20 institutions. Adept at translating complex business requirements into secure, scalable strategies that fuel operational excellence. Recognized for pioneering district wide AI integration, including establishing the foundational governance and ethical frameworks for its rollout. A collaborative C-suite partner who builds high performing teams, manages multi million dollar budgets, and navigates strict regulatory landscapes to reduce costs and maximize business value.",
+  "stats": [
+    {
+      "value": "15+",
+      "label": "Years of technology leadership"
+    },
+    {
+      "value": "$1.5M",
+      "label": "Year one savings at Aiken County"
+    },
+    {
+      "value": "100K",
+      "label": "Endpoints under lifecycle management"
+    },
+    {
+      "value": "250+",
+      "label": "Vendor privacy agreements reviewed yearly"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Chief Information Security Officer",
+      "org": "Georgia Southern University",
+      "place": "Statesboro, GA",
+      "dates": "June 2026 to Present",
+      "blurb": "Protects the digital ecosystem to ensure data integrity and operational resilience for 26,000 students and over 3,000 faculty and staff. Spearheads strategic governance, fortifies critical assets, and empowers secure innovation across a global campus network.",
+      "bullets": [
+        "Lead enterprise cybersecurity strategy as an executive team member, aligning risk management, data protection, and threat mitigation with strategic goals.",
+        "Oversee security architecture to ensure operational resilience by enhancing network defenses, data privacy, and threat management.",
+        "Implement security controls across divisions and establish cyber governance that balances digital innovation with regulatory compliance and business continuity.",
+        "Execute staffing and financial strategies, leading specialized security teams and optimizing budgets to build sustainable defense programs.",
+        "Promote a continuous culture of security awareness through comprehensive campaigns and targeted cyber training across academic and administrative areas.",
+        "Serve as the primary cybersecurity advisor for executives and partners, translating threat intelligence and compliance requirements into actionable strategy."
+      ]
+    },
+    {
+      "title": "Executive Director of Technology (CIO / CTO / CISO)",
+      "org": "Aiken County Public Schools",
+      "place": "Aiken, SC",
+      "dates": "September 2024 to May 2026",
+      "blurb": "Unified IT, technology, and security as district CIO, CTO, and CISO, guiding the digital ecosystem for 3,700 staff and 24,000 students.",
+      "bullets": [
+        "Reorganized a 40 person technology division, driving a 30% reduction in departmental spending ($1.5M in year one) by optimizing vendor contracts and eliminating external contractor dependencies.",
+        "Orchestrated a large scale core infrastructure overhaul (fiber, WAN/SD-WAN, firewalls, switches, routers) that doubled internet bandwidth and strengthened continuity against outages and cyber events.",
+        "Established the district's first comprehensive cybersecurity program, aligned with NIST and CIS frameworks, protecting data for over 28,000 users.",
+        "Directed lifecycle management of 100,000 endpoints, migrating all imaging to a cloud based solution and reallocating staff to strategic initiatives.",
+        "Built partnerships with the Superintendent, Board, and leaders to align IT with academic goals and secure funding for key investments.",
+        "Deployed new analytics platforms and governance policies that gave department heads and executives actionable operational insights."
+      ]
+    },
+    {
+      "title": "Director of IT, Digital Learning, and Media Services",
+      "org": "Columbia County Public Schools",
+      "place": "Evans, GA",
+      "dates": "June 2016 to September 2024",
+      "blurb": "Partnered with all departments to build and optimize a secure, modern digital ecosystem, leading the full lifecycle of technology solutions from implementation to enterprise wide adoption.",
+      "bullets": [
+        "Served as a key strategic advisor to the Superintendent and executive leadership, authoring technology policies and administrative procedures.",
+        "Managed the lifecycle of over 100 information system products and an annual technology budget exceeding $2.5M.",
+        "Directed core platforms including the student information system and set interoperability standards for secure data exchange across 33,000 users.",
+        "Oversaw the data privacy and governance program, reviewing over 250 vendor agreements annually.",
+        "Pioneered a partnership with the National Security Agency and US Cyber Command to embed K12 NexGen Cyber standards across all curricula.",
+        "Launched a districtwide microcredentialing platform serving over 4,000 employees.",
+        "Led a team of 80 technology, instruction, and media specialists."
+      ]
+    },
+    {
+      "title": "IT Coordinator, Teacher, and Coach",
+      "org": "North Gwinnett High School (Gwinnett County)",
+      "place": "Suwanee, GA",
+      "dates": "July 2003 to May 2016",
+      "blurb": "Championed instructional technology integration focused on empowering educators to differentiate instruction and develop higher order thinking for all learners.",
+      "bullets": [
+        "Managed a Google Workspace environment serving over 3,700 users and directed technology training for over 200 staff members.",
+        "Created The Studio, a project based course blending Computer Science, AP Social Studies, and Language Arts.",
+        "Designed and taught virtual courses for Gwinnett Online Campus and Georgia Virtual School.",
+        "Led testing operations as assessment coordinator and developed course test banks used by the Georgia Department of Education.",
+        "Served as World History team lead for AP, Honors, and Technical students."
+      ]
+    }
+  ],
+  "competencies": [
+    "Executive Leadership",
+    "Strategic Planning",
+    "Digital Transformation",
+    "Financial Management",
+    "Stakeholder Engagement",
+    "Change Management",
+    "Organizational Development",
+    "Team Leadership and Development",
+    "IT Project and Product Management",
+    "Cybersecurity and Cloud Strategy",
+    "Data Analysis and Integrations",
+    "Enterprise Information Technology",
+    "IT Governance and Compliance",
+    "Cross Functional Collaboration"
+  ],
+  "skills": [
+    "NIST",
+    "ISO 27001",
+    "SOC",
+    "COBIT",
+    "HIPAA",
+    "FERPA",
+    "CIS Controls",
+    "GDPR",
+    "PCI DSS",
+    "Google Cloud",
+    "AWS",
+    "Azure",
+    "Google Workspace",
+    "Microsoft 365",
+    "Teams",
+    "Adobe Creative Cloud",
+    "SaaS",
+    "SDLC",
+    "Asana",
+    "Slack",
+    "Cisco",
+    "Fortinet",
+    "Palo Alto",
+    "ERP",
+    "CRM",
+    "EDI",
+    "Ed-Fi",
+    "1EdTech"
+  ],
+  "certifications": [
+    {
+      "name": "CISSP",
+      "issuer": "ISC2"
+    },
+    {
+      "name": "CETL",
+      "issuer": "CoSN"
+    },
+    {
+      "name": "Certified in Cybersecurity",
+      "issuer": "ISC2"
+    },
+    {
+      "name": "Security+",
+      "issuer": "CompTIA"
+    },
+    {
+      "name": "Google for Education Trainer",
+      "issuer": "Google"
+    },
+    {
+      "name": "Data Analytics",
+      "issuer": "Google"
+    },
+    {
+      "name": "Cybersecurity",
+      "issuer": "Google"
+    },
+    {
+      "name": "TrustEd Apps Certified Leader",
+      "issuer": "1EdTech"
+    },
+    {
+      "name": "Certified Cybersecurity Evaluator",
+      "issuer": "Cybersecurity Coalition for Education"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Ed.S. Curriculum and Instruction",
+      "school": "Liberty University",
+      "place": "Lynchburg, VA"
+    },
+    {
+      "degree": "M.A.T. Secondary Education",
+      "school": "Georgia College and State University",
+      "place": "Milledgeville, GA"
+    },
+    {
+      "degree": "B.A. Political Science",
+      "school": "The University of Georgia",
+      "place": "Athens, GA"
+    },
+    {
+      "degree": "B.A. Religion",
+      "school": "The University of Georgia",
+      "place": "Athens, GA"
+    }
+  ],
+  "boards": [
+    {
+      "name": "Navigating the Future in K-12 Education Council",
+      "org": "Center for Digital Education"
+    },
+    {
+      "name": "State Strategic IT Plan: IT Leadership Leader",
+      "org": "South Carolina Department of Education"
+    },
+    {
+      "name": "Technology Advisory Board",
+      "org": "1EdTech"
+    },
+    {
+      "name": "Data Privacy and Security Board",
+      "org": "1EdTech"
+    },
+    {
+      "name": "Instructional Advisory Board",
+      "org": "Google"
+    }
+  ],
+  "highlights": [
+    {
+      "title": "Building a Cybersecurity Program from Zero",
+      "tag": "Security",
+      "text": "Stood up Aiken County's first comprehensive cybersecurity program, aligned to NIST and CIS, unifying physical and digital controls for 28,000+ users."
+    },
+    {
+      "title": "Technology Division Reorganization",
+      "tag": "Leadership",
+      "text": "Restructured a 40 person division, cutting spending 30% ($1.5M) in year one while improving team agility."
+    },
+    {
+      "title": "Core Infrastructure Overhaul",
+      "tag": "Infrastructure",
+      "text": "Fiber, SD-WAN, firewall, switching, and routing modernization that doubled bandwidth and hardened continuity."
+    },
+    {
+      "title": "K12 NexGen Cyber Standards",
+      "tag": "Education",
+      "text": "Partnership with the NSA and US Cyber Command to embed cybersecurity standards across all K12 curricula."
+    },
+    {
+      "title": "District AI Governance",
+      "tag": "AI",
+      "text": "Foundational governance and ethical frameworks for a district wide rollout of artificial intelligence."
+    },
+    {
+      "title": "Microcredentialing Platform",
+      "tag": "Professional Learning",
+      "text": "A districtwide certification program building specialized skills for over 4,000 employees."
+    }
+  ],
+  "intro": "I lead security and build the tools that make it work.",
+  "projects": [
+    {
+      "title": "Milestone Compass",
+      "status": "Live demo",
+      "summary": "A prototype adaptive practice platform for Georgia K12 students. Learners pick standards and Depth of Knowledge levels, get instant feedback on every answer choice, and teachers see results on a dashboard.",
+      "tags": [
+        "K12",
+        "Adaptive learning"
+      ],
+      "url": "https://nic-carroll.github.io/milestone-compass-demo/",
+      "repo": "https://github.com/nic-carroll/milestone-compass-demo",
+      "featured": true
+    },
+    {
+      "title": "Georgia Educational Analytics",
+      "status": "In progress",
+      "summary": "A five year GOSA data portal for Georgia schools with school profiles, regression analysis, and a slide deck builder for sharing findings with leaders.",
+      "tags": [
+        "Open data",
+        "Analytics"
+      ],
+      "url": "",
+      "repo": "https://github.com/nic-carroll/Georgia-School-Data"
+    },
+    {
+      "title": "This website",
+      "status": "Live",
+      "summary": "A resume site that deploys itself to Google Cloud Run every time I push to GitHub.",
+      "tags": [
+        "Google Cloud",
+        "Automation"
+      ],
+      "url": "/",
+      "repo": ""
+    }
+  ]
+}

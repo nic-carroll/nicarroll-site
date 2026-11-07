@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nic Carroll</title>
+<meta name="description" content="Nic Carroll, Ed.S., CISSP, CETL. CISO at Georgia Southern University. I lead cybersecurity and build tools for security, data, and learning.">
+<meta property="og:title" content="Nic Carroll">
+<meta property="og:description" content="Security leader and builder. CIO, CTO, and CISO experience across higher education and K12.">
+<meta name="theme-color" content="#17262b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f5c4f'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' fill='%23edf0ee' text-anchor='middle'%3ENC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #edf0ee;
+    --surface: #fafbfa;
+    --ink: #17262b;
+    --ink-soft: #4a5a5f;
+    --pine: #1f5c4f;
+    --pine-deep: #123a32;
+    --signal: #e3a72f;
+    --line: #cbd5d1;
+    --display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+    --body: "Public Sans", system-ui, sans-serif;
+    --measure: 68ch;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--pine); text-underline-offset: 3px; }
+  a:hover { color: var(--pine-deep); }
+  :focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
+  .wrap { width: min(1160px, 100% - 48px); margin-inline: auto; }
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 16px; top: 16px; background: var(--surface); padding: 8px 12px; z-index: 50; }
+
+  /* Top bar */
+  .bar { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .bar .mark { font: 800 20px/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
+  .bar nav { display: flex; gap: 26px; }
+  .bar nav a { color: var(--ink-soft); text-decoration: none; font-weight: 500; font-size: 15px; }
+  .bar nav a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; align-items: center; padding: 48px 0 88px; }
+  .hero h1 { font: 800 clamp(44px, 6.4vw, 88px)/0.98 var(--display); letter-spacing: -.035em; margin: 0; font-variation-settings: "opsz" 96; }
+  .hero .who { margin: 28px 0 0; font-size: 19px; color: var(--ink-soft); max-width: 46ch; }
+  .hero .who strong { color: var(--ink); font-weight: 600; }
+  .hero .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .btn { font: 600 15px/1 var(--body); padding: 14px 20px; border-radius: 10px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; cursor: pointer; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.solid { background: var(--pine); border-color: var(--pine); color: var(--surface); }
+  .btn.solid:hover { background: var(--pine-deep); border-color: var(--pine-deep); }
+
+  /* Network map: the one bold moment */
+  .map { width: 100%; height: auto; display: block; }
+  .map .edge { stroke: var(--line); stroke-width: 1.5; fill: none; }
+  .map .edge.live { stroke: var(--pine); stroke-width: 2; stroke-dasharray: 700; stroke-dashoffset: 700; animation: draw 1.4s cubic-bezier(.6,.1,.2,1) forwards; }
+  .map .node circle { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+  .map .node.core circle { fill: var(--pine); stroke: var(--pine); }
+  .map .node text { font: 600 14px var(--body); fill: var(--ink); }
+  .map .node.core text { fill: var(--surface); font: 800 17px var(--display); }
+  .map .pulse { fill: var(--signal); opacity: 0; animation: pulse 2.4s 1.5s ease-out 2; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pulse { 0% { opacity: .9; r: 6; } 100% { opacity: 0; r: 30; } }
+
+  /* Sections */
+  section { padding: 72px 0; border-top: 1.5px solid var(--ink); }
+  .sec-head { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; margin-bottom: 40px; align-items: end; }
+  .sec-head h2 { font: 800 clamp(32px, 4vw, 48px)/1 var(--display); letter-spacing: -.03em; margin: 0; }
+  .sec-head p { margin: 0; color: var(--ink-soft); max-width: 56ch; }
+
+  /* Building */
+  .featured { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; background: var(--ink); color: var(--paper); border-radius: 20px; padding: 36px; margin-bottom: 28px; }
+  .featured h3 { font: 800 36px/1.05 var(--display); letter-spacing: -.02em; margin: 14px 0 14px; }
+  .featured p { color: #c3cfcb; margin: 0 0 22px; }
+  .featured .links a { color: var(--signal); font-weight: 600; margin-right: 20px; }
+  .status { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+  .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+  .status.live::before { background: var(--signal); box-shadow: 0 0 0 4px rgba(227,167,47,.22); }
+  .status.progress::before { background: var(--pine); }
+  .featured .status.progress::before { background: #7fb3a6; }
+  .preview { position: relative; border-radius: 12px; overflow: hidden; background: var(--surface); aspect-ratio: 16 / 10; }
+  .preview .chrome { height: 30px; background: #dfe5e2; display: flex; align-items: center; gap: 6px; padding: 0 12px; }
+  .preview .chrome i { width: 10px; height: 10px; border-radius: 50%; background: #b8c4bf; }
+  .preview iframe { position: absolute; top: 30px; left: 0; width: 200%; height: calc((100% - 30px) * 2); border: 0; transform: scale(.5); transform-origin: 0 0; pointer-events: none; }
+  .preview a.cover { position: absolute; inset: 0; }
+
+  .builds { list-style: none; margin: 0; padding: 0; }
+  .builds li { display: grid; grid-template-columns: 160px 1fr auto; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .builds h3 { font: 600 24px/1.15 var(--display); margin: 0 0 6px; letter-spacing: -.01em; }
+  .builds p { margin: 0; color: var(--ink-soft); max-width: var(--measure); }
+  .builds .tags { margin-top: 10px; font-size: 14px; color: var(--ink-soft); }
+  .builds .links { display: flex; gap: 18px; font-weight: 600; white-space: nowrap; }
+
+  /* Impact */
+  .lede { font-size: 19px; max-width: var(--measure); margin: -8px 0 40px; }
+  .impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-left: 1px solid var(--line); }
+  .impact div { padding: 4px 28px 28px; border-right: 1px solid var(--line); }
+  .impact h3 { font: 600 20px/1.2 var(--display); margin: 0 0 8px; }
+  .impact p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+  .impact div:nth-child(n+4) { padding-top: 28px; border-top: 1px solid var(--line); }
+
+  /* Experience timeline */
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 170px; top: 8px; bottom: 8px; width: 1.5px; background: var(--line); }
+  .timeline > li { display: grid; grid-template-columns: 150px 1fr; gap: 60px; padding-bottom: 44px; position: relative; }
+  .timeline > li::after { content: ""; position: absolute; left: 164px; top: 8px; width: 13px; height: 13px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+  .timeline > li:first-child::after { background: var(--pine); border-color: var(--pine); }
+  .timeline .when { font-size: 15px; color: var(--ink-soft); padding-top: 2px; }
+  .timeline h3 { font: 600 24px/1.15 var(--display); margin: 0; letter-spacing: -.01em; }
+  .timeline .org { font-weight: 600; color: var(--pine); margin: 4px 0 12px; }
+  .timeline .blurb { margin: 0 0 8px; max-width: var(--measure); }
+  .timeline details summary { cursor: pointer; color: var(--ink-soft); font-weight: 600; font-size: 15px; }
+  .timeline details ul { margin: 12px 0 0; padding-left: 20px; max-width: var(--measure); }
+  .timeline details li { margin: 6px 0; }
+
+  /* Credentials */
+  .creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+  .creds h3 { font: 600 20px var(--display); margin: 0 0 14px; }
+  .creds ul { list-style: none; margin: 0; padding: 0; }
+  .creds li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .creds li span { display: block; color: var(--ink-soft); font-size: 15px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
+  .chips span { font-size: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+
+  /* Contact */
+  .contact { background: var(--pine); color: var(--surface); border-top: 0; padding: 88px 0; }
+  .contact h2 { font: 800 clamp(40px, 6vw, 76px)/1 var(--display); letter-spacing: -.035em; margin: 0 0 24px; max-width: 14ch; }
+  .contact p { font-size: 19px; color: #cfe1db; margin: 0 0 30px; max-width: 48ch; }
+  .contact .btn { border-color: var(--surface); color: var(--surface); }
+  .contact .btn:hover { background: var(--surface); color: var(--pine); }
+  .contact .btn.solid { background: var(--signal); border-color: var(--signal); color: var(--ink); }
+  footer { padding: 26px 0; font-size: 14px; color: var(--ink-soft); }
+
+  @media (max-width: 900px) {
+    .hero, .sec-head, .featured, .creds { grid-template-columns: 1fr; }
+    .hero { gap: 24px; padding-top: 24px; }
+    .impact { grid-template-columns: 1fr; border-left: 0; }
+    .impact div { border-right: 0; border-top: 1px solid var(--line); padding: 20px 0; }
+    .builds li { grid-template-columns: 1fr; gap: 8px; }
+    .timeline::before, .timeline > li::after { display: none; }
+    .timeline > li { grid-template-columns: 1fr; gap: 4px; }
+    .bar nav { display: none; }
+  }
+
+  @media print {
+    .bar, .cta, .map, .preview, .contact .btn, #building, footer { display: none !important; }
+    body { background: #fff; font-size: 10.5pt; }
+    .hero { display: block; padding: 0 0 12px; }
+    .hero h1 { font-size: 26pt; }
+    section { padding: 16px 0; }
+    .sec-head { margin-bottom: 12px; }
+    .sec-head h2 { font-size: 16pt; }
+    .timeline details > ul { display: block; }
+    .timeline > li { break-inside: avoid; padding-bottom: 16px; }
+    .contact { background: none; color: var(--ink); padding: 12px 0; }
+    .contact h2 { font-size: 14pt; }
+    .contact p { color: var(--ink); }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="mark" href="#top" id="top">Nic Carroll</a>
+    <nav aria-label="Sections">
+      <a href="#building">Building</a>
+      <a href="#impact">Impact</a>
+      <a href="#experience">Experience</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="hero">
+      <div>
+        <h1 id="intro">I lead security and build the tools that make it work.</h1>
+        <p class="who" id="who"></p>
+        <div class="cta">
+          <a class="btn solid" href="#building">See what I'm building</a>
+          <button class="btn" type="button" onclick="openAllAndPrint()">Download resume</button>
+        </div>
+      </div>
+      <svg class="map" viewBox="0 0 460 420" role="img" aria-label="A map connecting security, data, learning, cloud, and people">
+        <path class="edge" d="M230 210 L90 80" /><path class="edge" d="M230 210 L380 90" />
+        <path class="edge" d="M230 210 L70 300" /><path class="edge" d="M230 210 L390 320" />
+        <path class="edge" d="M230 210 L230 380" /><path class="edge" d="M90 80 L380 90" />
+        <path class="edge" d="M70 300 L230 380" /><path class="edge" d="M390 320 L230 380" />
+        <path class="edge live" d="M90 80 L230 210 L390 320" />
+        <path class="edge live" style="animation-delay:.35s" d="M380 90 L230 210 L70 300" />
+        <path class="edge live" style="animation-delay:.7s" d="M230 210 L230 380" />
+        <g class="node core"><circle cx="230" cy="210" r="50"/><text x="230" y="216" text-anchor="middle">Nic</text></g>
+        <circle class="pulse" cx="230" cy="210" r="6"/>
+        <g class="node"><circle cx="90" cy="80" r="9"/><text x="90" y="56" text-anchor="middle">Security</text></g>
+        <g class="node"><circle cx="380" cy="90" r="9"/><text x="380" y="66" text-anchor="middle">Data</text></g>
+        <g class="node"><circle cx="70" cy="300" r="9"/><text x="70" y="334" text-anchor="middle">Cloud</text></g>
+        <g class="node"><circle cx="390" cy="320" r="9"/><text x="390" y="354" text-anchor="middle">Learning</text></g>
+        <g class="node"><circle cx="230" cy="380" r="9"/><text x="230" y="410" text-anchor="middle">People</text></g>
+      </svg>
+    </div>
+
+    <section id="building">
+      <div class="sec-head">
+        <h2>Things I'm building</h2>
+        <p>Prototypes, tools, and experiments for schools and universities. Some are live, some are still taking shape.</p>
+      </div>
+      <div id="featured"></div>
+      <ul class="builds" id="builds"></ul>
+    </section>
+
+    <section id="impact">
+      <div class="sec-head">
+        <h2>Impact</h2>
+        <p>Results from leading technology, security, and learning at scale.</p>
+      </div>
+      <p class="lede" id="summary"></p>
+      <div class="impact" id="highlights"></div>
+    </section>
+
+    <section id="experience">
+      <div class="sec-head">
+        <h2>Experience</h2>
+        <p>Two decades in education technology, from the classroom to the cabinet.</p>
+      </div>
+      <ol class="timeline" id="timeline"></ol>
+    </section>
+
+    <section id="credentials">
+      <div class="sec-head">
+        <h2>Credentials</h2>
+        <p id="cred-line"></p>
+      </div>
+      <div class="creds">
+        <div><h3>Education</h3><ul id="edu"></ul></div>
+        <div><h3>Certifications</h3><ul id="certs"></ul></div>
+        <div><h3>Boards and task forces</h3><ul id="boards"></ul></div>
+      </div>
+      <div class="chips" id="skills" aria-label="Frameworks and platforms"></div>
+    </section>
+  </main>
+</div>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Let's build something secure.</h2>
+    <p>I'm glad to talk about cybersecurity programs, AI governance, or tools for schools and universities.</p>
+    <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn solid" id="mail" href="#">Email me</a>
+      <a class="btn" id="li" href="#" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap" id="foot"></footer>
+
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const $ = id => document.getElementById(id);
+const statusClass = s => /live/i.test(s) ? "live" : /progress/i.test(s) ? "progress" : "";
+
+function links(p) {
+  const out = [];
+  if (p.url) out.push(`<a href="${esc(p.url)}" ${p.url.startsWith("/") ? "" : 'target="_blank" rel="noopener"'}>Open it</a>`);
+  if (p.repo) out.push(`<a href="${esc(p.repo)}" target="_blank" rel="noopener">View code</a>`);
+  return out.join("");
+}
+
+function openAllAndPrint() {
+  document.querySelectorAll(".timeline details").forEach(d => d.open = true);
+  window.print();
+}
+
+fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
+  if (d.intro) $("intro").textContent = d.intro;
+  $("who").innerHTML = `<strong>${esc(d.name)}, ${esc(d.credentials)}.</strong> ${esc(d.experience[0].title)} at ${esc(d.experience[0].org)}, with ${esc(d.roles)}.`;
+  $("summary").textContent = d.summary;
+  $("mail").href = "mailto:" + d.email;
+  $("li").href = d.linkedin;
+
+  const feat = d.projects.find(p => p.featured) || d.projects[0];
+  const rest = d.projects.filter(p => p !== feat);
+  $("featured").innerHTML = `
+    <article class="featured">
+      <div>
+        <span class="status ${statusClass(feat.status)}">${esc(feat.status)}</span>
+        <h3>${esc(feat.title)}</h3>
+        <p>${esc(feat.summary)}</p>
+        <div class="links">${links(feat)}</div>
+      </div>
+      ${feat.url ? `<div class="preview" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i></div>
+        <iframe src="${esc(feat.url)}" loading="lazy" tabindex="-1" title="Preview of ${esc(feat.title)}"></iframe>
+        <a class="cover" href="${esc(feat.url)}" target="_blank" rel="noopener" tabindex="-1"></a></div>` : ""}
+    </article>`;
+  $("builds").innerHTML = rest.map(p => `
+    <li>
+      <span class="status ${statusClass(p.status)}">${esc(p.status)}</span>
+      <div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p><div class="tags">${p.tags.map(esc).join(", ")}</div></div>
+      <div class="links">${links(p)}</div>
+    </li>`).join("");
+
+  $("highlights").innerHTML = d.highlights.map(h => `<div><h3>${esc(h.title)}</h3><p>${esc(h.text)}</p></div>`).join("");
+
+  $("timeline").innerHTML = d.experience.map(j => `
+    <li>
+      <div class="when">${esc(j.dates)}</div>
+      <div>
+        <h3>${esc(j.title)}</h3>
+        <div class="org">${esc(j.org)}, ${esc(j.place)}</div>
+        <p class="blurb">${esc(j.blurb)}</p>
+        <details><summary>Key results</summary><ul>${j.bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul></details>
+      </div>
+    </li>`).join("");
+
+  $("cred-line").textContent = d.competencies.slice(0, 6).join(", ") + ", and more.";
+  $("edu").innerHTML = d.education.map(e => `<li>${esc(e.degree)}<span>${esc(e.school)}</span></li>`).join("");
+  $("certs").innerHTML = d.certifications.map(c => `<li>${esc(c.name)}<span>${esc(c.issuer)}</span></li>`).join("");
+  $("boards").innerHTML = d.boards.map(b => `<li>${esc(b.name)}<span>${esc(b.org)}</span></li>`).join("");
+  $("skills").innerHTML = d.skills.map(s => `<span>${esc(s)}</span>`).join("");
+  $("foot").textContent = `${d.name}, ${d.location}. Updated ${new Date(document.lastModified).toLocaleDateString("en-US", { month: "long", year: "numeric" })}.`;
+  document.title = `${d.name} | ${d.credentials}`;
+}).catch(() => { $("summary").textContent = "Resume details did not load. Refresh the page to try again."; });
+</script>
+</body>
+</html>
