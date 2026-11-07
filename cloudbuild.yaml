@@ -24,7 +24,7 @@ steps:
       - --allow-unauthenticated
       - --port=8080
       - --memory=256Mi
-      - --max-instances=3
+      - --max-instances=1
 
 images:
   - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$BUILD_ID
