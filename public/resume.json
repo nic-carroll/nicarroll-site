@@ -9,20 +9,20 @@
   "summary": "I'm an IT executive with over 15 years of leadership across P-20 institutions. Today I lead both Information Security and Identity and Access Management at Georgia Southern University, and I build AI tools and resources that are reimagining how a security department works. My teams have delivered a perfect CMMC Level 2 score, a $12 million school safety rollout, and a full move from Active Directory to Entra ID, while cutting costs and keeping strict regulatory programs on track.",
   "stats": [
     {
-      "value": "15+",
-      "label": "Years of technology leadership"
+      "value": "100%",
+      "label": "Score on a CMMC Level 2 assessment"
     },
     {
-      "value": "$1.5M",
-      "label": "Year one savings at Aiken County"
+      "value": "$12M",
+      "label": "School safety systems delivered across 44+ sites"
     },
     {
       "value": "100K",
       "label": "Endpoints under lifecycle management"
     },
     {
-      "value": "250+",
-      "label": "Vendor privacy agreements reviewed yearly"
+      "value": "33,500",
+      "label": "Students protected at Georgia Southern University"
     }
   ],
   "experience": [
