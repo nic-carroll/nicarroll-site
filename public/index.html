@@ -263,7 +263,7 @@
 <script>
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
 const $ = id => document.getElementById(id);
-const statusClass = s => /live/i.test(s) ? "live" : /progress/i.test(s) ? "progress" : "";
+const statusClass = s => /live|in use/i.test(s) ? "live" : /progress/i.test(s) ? "progress" : "";
 
 function links(p) {
   const out = [];

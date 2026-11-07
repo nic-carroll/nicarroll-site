@@ -6,7 +6,7 @@
   "location": "Augusta, Georgia",
   "email": "carroll.nic@gmail.com",
   "linkedin": "https://www.linkedin.com/in/nic-carroll/",
-  "summary": "Visionary IT executive with over 15 years of leadership experience driving enterprise wide transformation across P-20 institutions. Adept at translating complex business requirements into secure, scalable strategies that fuel operational excellence. Recognized for pioneering district wide AI integration, including establishing the foundational governance and ethical frameworks for its rollout. A collaborative C-suite partner who builds high performing teams, manages multi million dollar budgets, and navigates strict regulatory landscapes to reduce costs and maximize business value.",
+  "summary": "I'm an IT executive with over 15 years of leadership across P-20 institutions. Today I lead both Information Security and Identity and Access Management at Georgia Southern University, and I build AI tools and resources that are reimagining how a security department works. My teams have delivered a perfect CMMC Level 2 score, a $12 million school safety rollout, and a full move from Active Directory to Entra ID, while cutting costs and keeping strict regulatory programs on track.",
   "stats": [
     {
       "value": "15+",
@@ -31,13 +31,14 @@
       "org": "Georgia Southern University",
       "place": "Statesboro, GA",
       "dates": "June 2026 to Present",
-      "blurb": "Protects the digital ecosystem to ensure data integrity and operational resilience for 33,500 students and nearly 4,000 faculty. Spearheads strategic governance, fortifies critical assets, and empowers secure innovation across a global campus network.",
+      "blurb": "Leads Information Security and the Identity and Access Management group, protecting data integrity and operational resilience for 33,500 students and nearly 4,000 faculty across a global campus network. Uses AI tools built in house to reimagine how the security department works.",
       "bullets": [
-        "Lead enterprise cybersecurity strategy as an executive team member, aligning risk management, data protection, and threat mitigation with strategic goals.",
-        "Oversee security architecture to ensure operational resilience by enhancing network defenses, data privacy, and threat management.",
-        "Implement security controls across divisions and establish cyber governance that balances digital innovation with regulatory compliance and business continuity.",
-        "Execute staffing and financial strategies, leading specialized security teams and optimizing budgets to build sustainable defense programs.",
-        "Promote a continuous culture of security awareness through comprehensive campaigns and targeted cyber training across academic and administrative areas.",
+        "Led the research enclave through its CMMC Level 2 assessment, achieving a perfect score.",
+        "Built a unified dashboard that brings every Information Security and IAM application into one view, improving visibility across the environment and speeding the resolution of threats and vulnerabilities.",
+        "Building AI tools and resources to reimagine the Information Security department's processes, reporting, and daily operations.",
+        "Lead the Identity and Access Management group in addition to Information Security, aligning identity, provisioning, and access controls with security strategy.",
+        "Led a complete revision of the third party application review process to strengthen vendor risk management and data privacy.",
+        "Lead enterprise cybersecurity strategy as an executive team member, aligning risk management, data protection, and threat mitigation with institutional goals.",
         "Serve as the primary cybersecurity advisor for executives and partners, translating threat intelligence and compliance requirements into actionable strategy."
       ]
     },
@@ -48,8 +49,11 @@
       "dates": "September 2024 to May 2026",
       "blurb": "Unified IT, technology, and security as district CIO, CTO, and CISO, guiding the digital ecosystem for 3,700 staff and 24,000 students.",
       "bullets": [
+        "Led the $12 million installation of Audio Enhancement safety and security systems across all 44+ school sites.",
         "Reorganized a 40 person technology division, driving a 30% reduction in departmental spending ($1.5M in year one) by optimizing vendor contracts and eliminating external contractor dependencies.",
         "Orchestrated a large scale core infrastructure overhaul (fiber, WAN/SD-WAN, firewalls, switches, routers) that doubled internet bandwidth and strengthened continuity against outages and cyber events.",
+        "Led the complete revamp and migration of Active Directory to Microsoft Entra ID.",
+        "Led the management, updating, and patching of more than 50,000 devices.",
         "Established the district's first comprehensive cybersecurity program, aligned with NIST and CIS frameworks, protecting data for over 28,000 users.",
         "Directed lifecycle management of 100,000 endpoints, migrating all imaging to a cloud based solution and reallocating staff to strategic initiatives.",
         "Built partnerships with the Superintendent, Board, and leaders to align IT with academic goals and secure funding for key investments.",
@@ -97,6 +101,8 @@
     "Organizational Development",
     "Team Leadership and Development",
     "IT Project and Product Management",
+    "Identity and Access Management",
+    "AI Tool Development",
     "Cybersecurity and Cloud Strategy",
     "Data Analysis and Integrations",
     "Enterprise Information Technology",
@@ -131,7 +137,10 @@
     "CRM",
     "EDI",
     "Ed-Fi",
-    "1EdTech"
+    "1EdTech",
+    "Microsoft Entra ID",
+    "Active Directory",
+    "CMMC"
   ],
   "certifications": [
     {
@@ -217,34 +226,49 @@
   ],
   "highlights": [
     {
+      "title": "Perfect CMMC Level 2 Score",
+      "tag": "Compliance",
+      "text": "Led Georgia Southern University's research enclave through a CMMC Level 2 assessment with a perfect score."
+    },
+    {
+      "title": "Unified Security Dashboard",
+      "tag": "Security",
+      "text": "One view of every Information Security and IAM application, for faster threat and vulnerability response."
+    },
+    {
+      "title": "AI for the Security Department",
+      "tag": "AI",
+      "text": "AI tools and resources that reimagine how an information security team works day to day."
+    },
+    {
+      "title": "$12M School Safety Systems",
+      "tag": "Safety",
+      "text": "Audio Enhancement safety and security systems installed across all 44+ Aiken County school sites."
+    },
+    {
+      "title": "Active Directory to Entra ID",
+      "tag": "Identity",
+      "text": "Led a complete identity revamp and migration from on premises Active Directory to Microsoft Entra ID."
+    },
+    {
       "title": "Building a Cybersecurity Program from Zero",
       "tag": "Security",
-      "text": "Stood up Aiken County's first comprehensive cybersecurity program, aligned to NIST and CIS, unifying physical and digital controls for 28,000+ users."
+      "text": "Stood up Aiken County's first comprehensive cybersecurity program, aligned to NIST and CIS, for 28,000+ users."
     },
     {
       "title": "Technology Division Reorganization",
       "tag": "Leadership",
-      "text": "Restructured a 40 person division, cutting spending 30% ($1.5M) in year one while improving team agility."
+      "text": "Restructured a 40 person division, cutting spending 30% ($1.5M) in year one."
     },
     {
-      "title": "Core Infrastructure Overhaul",
-      "tag": "Infrastructure",
-      "text": "Fiber, SD-WAN, firewall, switching, and routing modernization that doubled bandwidth and hardened continuity."
+      "title": "50,000+ Devices Kept Current",
+      "tag": "Operations",
+      "text": "Led management, updates, and patching across more than 50,000 devices."
     },
     {
       "title": "K12 NexGen Cyber Standards",
       "tag": "Education",
-      "text": "Partnership with the NSA and US Cyber Command to embed cybersecurity standards across all K12 curricula."
-    },
-    {
-      "title": "District AI Governance",
-      "tag": "AI",
-      "text": "Foundational governance and ethical frameworks for a district wide rollout of artificial intelligence."
-    },
-    {
-      "title": "Microcredentialing Platform",
-      "tag": "Professional Learning",
-      "text": "A districtwide certification program building specialized skills for over 4,000 employees."
+      "text": "Partnership with the NSA and US Cyber Command to embed cybersecurity standards across K12 curricula."
     }
   ],
   "intro": "I lead security and build the tools that make it work.",
@@ -260,6 +284,18 @@
       "url": "https://nic-carroll.github.io/milestone-compass-demo/",
       "repo": "https://github.com/nic-carroll/milestone-compass-demo",
       "featured": true
+    },
+    {
+      "title": "Unified Security Dashboard",
+      "status": "In use",
+      "summary": "An internal tool that pulls Georgia Southern University's Information Security and IAM applications into one dashboard, giving the team visibility across the environment and a faster path from alert to fix.",
+      "tags": [
+        "Security",
+        "AI assisted",
+        "Internal"
+      ],
+      "url": "",
+      "repo": ""
     },
     {
       "title": "Georgia Educational Analytics",
