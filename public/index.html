@@ -323,7 +323,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   $("certs").innerHTML = d.certifications.map(c => `<li>${esc(c.name)}<span>${esc(c.issuer)}</span></li>`).join("");
   $("boards").innerHTML = d.boards.map(b => `<li>${esc(b.name)}<span>${esc(b.org)}</span></li>`).join("");
   $("skills").innerHTML = d.skills.map(s => `<span>${esc(s)}</span>`).join("");
-  $("foot").textContent = `${d.name}, ${d.location}. Updated ${new Date(document.lastModified).toLocaleDateString("en-US", { month: "long", year: "numeric" })}.`;
+  $("foot").textContent = `${d.name}, ${d.location}. Deployed automatically on Google Cloud Run.`;
   document.title = `${d.name} | ${d.credentials}`;
 }).catch(() => { $("summary").textContent = "Resume details did not load. Refresh the page to try again."; });
 </script>
