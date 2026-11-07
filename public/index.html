@@ -69,8 +69,8 @@
   .btn.glass:hover { background: rgba(255,255,255,.12); }
   .btn svg { width: 18px; height: 18px; }
 
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; align-items: center; }
-  .portrait { position: relative; justify-self: end; width: 300px; aspect-ratio: 1; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: center; }
+  .portrait { position: relative; justify-self: end; width: 320px; aspect-ratio: 4 / 5; margin: 0; }
   .portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 28px; display: block; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
   .portrait::before { content: ""; position: absolute; inset: -12px -12px 12px 12px; border: 2px solid var(--amber); border-radius: 32px; }
   .portrait figcaption { position: absolute; left: -28px; bottom: 26px; background: #fff; color: var(--ink); border-radius: 14px; padding: 10px 14px; font-size: 14px; line-height: 1.35; box-shadow: 0 12px 30px rgba(0,0,0,.25); }
@@ -207,7 +207,7 @@
 
   @media (max-width: 960px) {
     .hero-grid, .cases, .lead-band { grid-template-columns: 1fr; }
-    .portrait { justify-self: start; width: 220px; order: -1; margin: 10px 0 8px 12px; }
+    .portrait { justify-self: start; width: 200px; order: -1; margin: 10px 0 8px 12px; }
     .portrait figcaption { display: none; }
     .lead-band { padding: 36px 28px; }
     .posts li { grid-template-columns: 1fr; gap: 4px; }
@@ -290,7 +290,7 @@
       </a>
     </div>
     </div>
-    <figure class="portrait" id="portrait"><img src="assets/nic.jpg" alt="Portrait of Nic Carroll" width="300" height="300"><figcaption><b>Nic Carroll</b>Visionary executive leader</figcaption></figure>
+    <figure class="portrait" id="portrait"><img src="assets/nic.jpg" alt="Portrait of Nic Carroll" width="320" height="400"><figcaption><b>Nic Carroll</b>Visionary executive leader</figcaption></figure>
    </div>
     <div class="proof" id="proof"></div>
   </div>
