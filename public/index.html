@@ -89,7 +89,8 @@
   .case .result { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: var(--night); color: #fff; font-weight: 500; }
   .case .result span { color: var(--amber); font-weight: 700; margin-right: 6px; }
   .case .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
-  .case-link { margin-top: 16px; font-weight: 600; color: #1f5f9e; text-underline-offset: 3px; }
+  .case-links { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
+  .case-link { margin-top: 0; font-weight: 600; color: #1f5f9e; text-underline-offset: 3px; }
   .case .tools span { font-size: 13px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink-soft); }
 
   /* How I lead */
@@ -483,7 +484,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
       <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I did</dt><dd>${esc(c.approach)}</dd></div></dl>
       <div class="result"><span>Result</span>${esc(c.result)}</div>
       <div class="tools">${(c.tools || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>
-      ${c.link ? `<a class="case-link" href="${esc(c.link.url)}" target="_blank" rel="noopener">${esc(c.link.label)}</a>` : ""}
+      ${(c.links || []).length ? `<div class="case-links">${c.links.map(l => `<a class="case-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div>` : ""}
     </article>`).join("");
   $("approach-list").innerHTML = (d.approach || []).map(a => `<div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>`).join("");
   if ((d.testimonials || []).length) {

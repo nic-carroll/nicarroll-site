@@ -318,7 +318,7 @@
     {
       "title": "Perfect CMMC Level 2 Score",
       "tag": "Compliance",
-      "text": "Led Georgia Southern University's GCC High research enclave, built for CUI and ITAR and EAR data, through a CMMC Level 2 assessment with a perfect score."
+      "text": "Led Georgia Southern University's Talon Secure research enclave, built for CUI and ITAR and EAR data, to a perfect score on its CMMC Level 2 assessment."
     },
     {
       "title": "Unified Security Dashboard",
@@ -415,10 +415,10 @@
   "photo": "assets/nic.jpg",
   "caseStudies": [
     {
-      "title": "A perfect CMMC Level 2 score",
+      "title": "Talon Secure: a perfect CMMC Level 2 score",
       "org": "Georgia Southern University",
       "tag": "Compliance",
-      "challenge": "Researchers needed a place to store and work with Controlled Unclassified Information and export controlled (ITAR and EAR) data that would stand up to federal CMMC requirements.",
+      "challenge": "Researchers needed a place to store and work with Controlled Unclassified Information and export controlled (ITAR and EAR) data for DoD, DoE, and other federal research that would stand up to CMMC requirements.",
       "approach": "Led the GCC High research enclave with partner Planet Technologies: a segregated environment on Microsoft 365 GCC High and Azure Government with approved collaboration tools, protected storage, virtual desktops, and controlled communication. Drove the documentation, policies, control validation, mock assessments, and evidence needed for a C3PAO assessment.",
       "tools": [
         "Microsoft 365 GCC High",
@@ -426,12 +426,18 @@
         "CMMC Level 2",
         "C3PAO"
       ],
-      "result": "Perfect score on the CMMC Level 2 C3PAO assessment, positioning the university for federal defense, intelligence, and research work that requires handling CUI.",
+      "result": "Perfect score on the CMMC Level 2 C3PAO assessment. Talon Secure is now available to researchers as a CMMC Level 2 certified Azure cloud tenant, positioning the university for federal defense, intelligence, and research work that requires handling CUI.",
       "metric": "100%",
-      "link": {
-        "label": "Read the coverage",
-        "url": "https://go-planet.com/perspectives-blog/georgia-southern-university-passes-cmmc-level-2-assessment-with-a-perfect-score/"
-      }
+      "links": [
+        {
+          "label": "Read the coverage",
+          "url": "https://go-planet.com/perspectives-blog/georgia-southern-university-passes-cmmc-level-2-assessment-with-a-perfect-score/"
+        },
+        {
+          "label": "See Talon Secure",
+          "url": "https://www.georgiasouthern.edu/offices/it-services/departments/research-computing"
+        }
+      ]
     },
     {
       "title": "Reorganizing a 40 person technology division",
