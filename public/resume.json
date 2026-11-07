@@ -419,14 +419,19 @@
       "org": "Georgia Southern University",
       "tag": "Compliance",
       "challenge": "Researchers needed a place to store and work with Controlled Unclassified Information and export controlled (ITAR and EAR) data that would stand up to federal CMMC requirements.",
-      "approach": "Led the GCC High research enclave, a segregated, high security environment on Microsoft 365 GCC High and Azure Government, and took it through its CMMC Level 2 assessment.",
+      "approach": "Led the GCC High research enclave with partner Planet Technologies: a segregated environment on Microsoft 365 GCC High and Azure Government with approved collaboration tools, protected storage, virtual desktops, and controlled communication. Drove the documentation, policies, control validation, mock assessments, and evidence needed for a C3PAO assessment.",
       "tools": [
         "Microsoft 365 GCC High",
         "Azure Government",
-        "CMMC Level 2"
+        "CMMC Level 2",
+        "C3PAO"
       ],
-      "result": "Perfect score on the CMMC Level 2 assessment.",
-      "metric": "100%"
+      "result": "Perfect score on the CMMC Level 2 C3PAO assessment, positioning the university for federal defense, intelligence, and research work that requires handling CUI.",
+      "metric": "100%",
+      "link": {
+        "label": "Read the coverage",
+        "url": "https://go-planet.com/perspectives-blog/georgia-southern-university-passes-cmmc-level-2-assessment-with-a-perfect-score/"
+      }
     },
     {
       "title": "Reorganizing a 40 person technology division",
@@ -490,5 +495,13 @@
     }
   ],
   "testimonials": [],
-  "writing": []
+  "writing": [
+    {
+      "kind": "In the news",
+      "date": "October 2026",
+      "title": "Georgia Southern University Passes CMMC Level 2 Assessment with a Perfect Score",
+      "summary": "Planet Technologies on the GCC High research environment and the university's perfect CMMC Level 2 result.",
+      "url": "https://go-planet.com/perspectives-blog/georgia-southern-university-passes-cmmc-level-2-assessment-with-a-perfect-score/"
+    }
+  ]
 }
