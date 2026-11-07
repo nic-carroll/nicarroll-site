@@ -33,13 +33,34 @@
       "dates": "June 2026 to Present",
       "blurb": "Leads Information Security and the Identity and Access Management group, protecting data integrity and operational resilience for 33,500 students and nearly 4,000 faculty across a global campus network. Uses AI tools built in house to reimagine how the security department works.",
       "bullets": [
-        "Led the GCC High research enclave, a segregated Microsoft 365 GCC High and Azure Government environment for Controlled Unclassified Information and export controlled (ITAR and EAR) data, through its CMMC Level 2 assessment, achieving a perfect score.",
-        "Built a unified dashboard that brings every Information Security and IAM application into one view, improving visibility across the environment and speeding the resolution of threats and vulnerabilities.",
-        "Building AI tools and resources to reimagine the Information Security department's processes, reporting, and daily operations.",
-        "Lead the Identity and Access Management group in addition to Information Security, aligning identity, provisioning, and access controls with security strategy.",
-        "Led a complete revision of the third party application review process to strengthen vendor risk management and data privacy.",
-        "Lead enterprise cybersecurity strategy as an executive team member, aligning risk management, data protection, and threat mitigation with institutional goals.",
-        "Serve as the primary cybersecurity advisor for executives and partners, translating threat intelligence and compliance requirements into actionable strategy."
+        {
+          "h": "Perfect CMMC Level 2 score",
+          "t": "Led the GCC High research enclave, a segregated Microsoft 365 GCC High and Azure Government environment for Controlled Unclassified Information and export controlled (ITAR and EAR) data, through its CMMC Level 2 assessment, achieving a perfect score."
+        },
+        {
+          "h": "Unified security dashboard",
+          "t": "Built a unified dashboard that brings every Information Security and IAM application into one view, improving visibility across the environment and speeding the resolution of threats and vulnerabilities."
+        },
+        {
+          "h": "AI for Information Security",
+          "t": "Building AI tools and resources to reimagine the Information Security department's processes, reporting, and daily operations."
+        },
+        {
+          "h": "Identity and Access Management",
+          "t": "Lead the Identity and Access Management group in addition to Information Security, aligning identity, provisioning, and access controls with security strategy."
+        },
+        {
+          "h": "Third party application review",
+          "t": "Led a complete revision of the third party application review process to strengthen vendor risk management and data privacy."
+        },
+        {
+          "h": "Enterprise security strategy",
+          "t": "Lead enterprise cybersecurity strategy as an executive team member, aligning risk management, data protection, and threat mitigation with institutional goals."
+        },
+        {
+          "h": "Executive cybersecurity advisor",
+          "t": "Serve as the primary cybersecurity advisor for executives and partners, translating threat intelligence and compliance requirements into actionable strategy."
+        }
       ]
     },
     {
@@ -49,16 +70,46 @@
       "dates": "September 2024 to May 2026",
       "blurb": "Unified IT, technology, and security as district CIO, CTO, and CISO, guiding the digital ecosystem for 3,700 staff and 24,000 students.",
       "bullets": [
-        "Managed an annual budget of more than $12 million and technology assets valued at more than $75 million.",
-        "Led the $12 million installation of Audio Enhancement safety and security systems across all 44+ school sites.",
-        "Reorganized a 40 person technology division, driving a 30% reduction in departmental spending ($1.5M in year one) by optimizing vendor contracts and eliminating external contractor dependencies.",
-        "Orchestrated a large scale core infrastructure overhaul (fiber, WAN/SD-WAN, firewalls, switches, routers) that doubled internet bandwidth and strengthened continuity against outages and cyber events.",
-        "Led the complete revamp and migration of Active Directory to Microsoft Entra ID.",
-        "Led the management, updating, and patching of more than 50,000 devices.",
-        "Established the district's first comprehensive cybersecurity program, aligned with NIST and CIS frameworks, protecting data for over 28,000 users.",
-        "Directed lifecycle management of 100,000 endpoints, migrating all imaging to a cloud based solution and reallocating staff to strategic initiatives.",
-        "Built partnerships with the Superintendent, Board, and leaders to align IT with academic goals and secure funding for key investments.",
-        "Deployed new analytics platforms and governance policies that gave department heads and executives actionable operational insights."
+        {
+          "h": "$12M+ budget, $75M+ assets",
+          "t": "Managed an annual budget of more than $12 million and technology assets valued at more than $75 million."
+        },
+        {
+          "h": "$12M school safety systems",
+          "t": "Led the $12 million installation of Audio Enhancement safety and security systems across all 44+ school sites."
+        },
+        {
+          "h": "Division reorganization",
+          "t": "Reorganized a 40 person technology division, driving a 30% reduction in departmental spending ($1.5M in year one) by optimizing vendor contracts and eliminating external contractor dependencies."
+        },
+        {
+          "h": "Core infrastructure overhaul",
+          "t": "Orchestrated a large scale core infrastructure overhaul (fiber, WAN/SD-WAN, firewalls, switches, routers) that doubled internet bandwidth and strengthened continuity against outages and cyber events."
+        },
+        {
+          "h": "Active Directory to Entra ID",
+          "t": "Led the complete revamp and migration of Active Directory to Microsoft Entra ID."
+        },
+        {
+          "h": "50,000+ devices patched",
+          "t": "Led the management, updating, and patching of more than 50,000 devices."
+        },
+        {
+          "h": "First cybersecurity program",
+          "t": "Established the district's first comprehensive cybersecurity program, aligned with NIST and CIS frameworks, protecting data for over 28,000 users."
+        },
+        {
+          "h": "100,000 endpoints",
+          "t": "Directed lifecycle management of 100,000 endpoints, migrating all imaging to a cloud based solution and reallocating staff to strategic initiatives."
+        },
+        {
+          "h": "Board and leadership partnerships",
+          "t": "Built partnerships with the Superintendent, Board, and leaders to align IT with academic goals and secure funding for key investments."
+        },
+        {
+          "h": "Data driven decisions",
+          "t": "Deployed new analytics platforms and governance policies that gave department heads and executives actionable operational insights."
+        }
       ]
     },
     {
@@ -68,13 +119,34 @@
       "dates": "June 2016 to September 2024",
       "blurb": "Partnered with all departments to build and optimize a secure, modern digital ecosystem, leading the full lifecycle of technology solutions from implementation to enterprise wide adoption.",
       "bullets": [
-        "Served as a key strategic advisor to the Superintendent and executive leadership, authoring technology policies and administrative procedures.",
-        "Managed the lifecycle of over 100 information system products and an annual technology budget exceeding $2.5M.",
-        "Directed core platforms including the student information system and set interoperability standards for secure data exchange across 33,000 users.",
-        "Oversaw the data privacy and governance program, reviewing over 250 vendor agreements annually.",
-        "Pioneered a partnership with the National Security Agency and US Cyber Command to embed K12 NexGen Cyber standards across all curricula.",
-        "Launched a districtwide microcredentialing platform serving over 4,000 employees.",
-        "Led a team of 80 technology, instruction, and media specialists."
+        {
+          "h": "Strategic advisor",
+          "t": "Served as a key strategic advisor to the Superintendent and executive leadership, authoring technology policies and administrative procedures."
+        },
+        {
+          "h": "100+ information systems, $2.5M+ budget",
+          "t": "Managed the lifecycle of over 100 information system products and an annual technology budget exceeding $2.5M."
+        },
+        {
+          "h": "Student information and interoperability",
+          "t": "Directed core platforms including the student information system and set interoperability standards for secure data exchange across 33,000 users."
+        },
+        {
+          "h": "Data privacy program",
+          "t": "Oversaw the data privacy and governance program, reviewing over 250 vendor agreements annually."
+        },
+        {
+          "h": "NSA and US Cyber Command partnership",
+          "t": "Pioneered a partnership with the National Security Agency and US Cyber Command to embed K12 NexGen Cyber standards across all curricula."
+        },
+        {
+          "h": "Microcredentialing for 4,000+",
+          "t": "Launched a districtwide microcredentialing platform serving over 4,000 employees."
+        },
+        {
+          "h": "Team of 80 specialists",
+          "t": "Led a team of 80 technology, instruction, and media specialists."
+        }
       ]
     },
     {
@@ -84,11 +156,26 @@
       "dates": "July 2003 to May 2016",
       "blurb": "Championed instructional technology integration focused on empowering educators to differentiate instruction and develop higher order thinking for all learners.",
       "bullets": [
-        "Managed a Google Workspace environment serving over 3,700 users and directed technology training for over 200 staff members.",
-        "Created The Studio, a project based course blending Computer Science, AP Social Studies, and Language Arts.",
-        "Designed and taught virtual courses for Gwinnett Online Campus and Georgia Virtual School.",
-        "Led testing operations as assessment coordinator and developed course test banks used by the Georgia Department of Education.",
-        "Served as World History team lead for AP, Honors, and Technical students."
+        {
+          "h": "Google Workspace for 3,700+",
+          "t": "Managed a Google Workspace environment serving over 3,700 users and directed technology training for over 200 staff members."
+        },
+        {
+          "h": "The Studio",
+          "t": "Created The Studio, a project based course blending Computer Science, AP Social Studies, and Language Arts."
+        },
+        {
+          "h": "Virtual courses",
+          "t": "Designed and taught virtual courses for Gwinnett Online Campus and Georgia Virtual School."
+        },
+        {
+          "h": "Assessment coordinator",
+          "t": "Led testing operations as assessment coordinator and developed course test banks used by the Georgia Department of Education."
+        },
+        {
+          "h": "World History team lead",
+          "t": "Served as World History team lead for AP, Honors, and Technical students."
+        }
       ]
     }
   ],
