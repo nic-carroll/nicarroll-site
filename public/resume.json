@@ -21,8 +21,8 @@
       "label": "Technology assets managed, with a $12M+ annual budget"
     },
     {
-      "value": "33,500",
-      "label": "Students protected at Georgia Southern University"
+      "value": "37,000+",
+      "label": "Students, faculty, and staff protected at Georgia Southern University"
     }
   ],
   "experience": [
@@ -411,5 +411,84 @@
     }
   ],
   "badge": "CIO, CTO, and CISO leader. Currently CISO at Georgia Southern University.",
-  "who": "A visionary leader who has served as CIO, CTO, and CISO and led entire information technology departments. I solve hard problems, create new tools, processes, and procedures, and make sure projects get finished."
+  "who": "A visionary leader who has served as CIO, CTO, and CISO and led entire information technology departments. I solve hard problems, create new tools, processes, and procedures, and make sure projects get finished.",
+  "photo": "assets/nic.jpg",
+  "caseStudies": [
+    {
+      "title": "A perfect CMMC Level 2 score",
+      "org": "Georgia Southern University",
+      "tag": "Compliance",
+      "challenge": "Researchers needed a place to store and work with Controlled Unclassified Information and export controlled (ITAR and EAR) data that would stand up to federal CMMC requirements.",
+      "approach": "Led the GCC High research enclave, a segregated, high security environment on Microsoft 365 GCC High and Azure Government, and took it through its CMMC Level 2 assessment.",
+      "tools": [
+        "Microsoft 365 GCC High",
+        "Azure Government",
+        "CMMC Level 2"
+      ],
+      "result": "Perfect score on the CMMC Level 2 assessment.",
+      "metric": "100%"
+    },
+    {
+      "title": "Reorganizing a 40 person technology division",
+      "org": "Aiken County Public Schools",
+      "tag": "Leadership",
+      "challenge": "A 40 person technology division carried high spending and depended on outside contractors.",
+      "approach": "Reorganized the division, optimized vendor contracts, and eliminated external contractor dependencies, while managing a $12M+ annual budget and $75M+ in technology assets.",
+      "tools": [
+        "Org design",
+        "Vendor management",
+        "Budget strategy"
+      ],
+      "result": "30% reduction in departmental spending, $1.5M saved in year one, and a more agile team.",
+      "metric": "$1.5M"
+    },
+    {
+      "title": "$12M in safety and security systems across 44+ sites",
+      "org": "Aiken County Public Schools",
+      "tag": "Safety",
+      "challenge": "Every school and site in the district needed modern audio, safety, and security systems.",
+      "approach": "Led the installation and completion of Audio Enhancement safety and security systems at every district site.",
+      "tools": [
+        "Audio Enhancement",
+        "Project management",
+        "Vendor coordination"
+      ],
+      "result": "A $12 million installation completed across all 44+ sites.",
+      "metric": "44+"
+    },
+    {
+      "title": "One view of security and identity",
+      "org": "Georgia Southern University",
+      "tag": "Security",
+      "challenge": "Information Security and IAM tools lived in separate systems, which limited visibility across the environment.",
+      "approach": "Built a unified dashboard that brings every Information Security and IAM application into one view, as part of using AI tools to reimagine how the department works.",
+      "tools": [
+        "AI assisted development",
+        "Security tooling",
+        "IAM"
+      ],
+      "result": "Greater visibility and faster resolution of threats and vulnerabilities, for a safe, secure, and reliable environment.",
+      "metric": "1 view"
+    }
+  ],
+  "approach": [
+    {
+      "title": "Vision that gets finished",
+      "text": "I set a clear direction and stay with it until the work is done. A strategy only counts when the project is complete."
+    },
+    {
+      "title": "Build what's missing",
+      "text": "When the right tool, process, or procedure doesn't exist, I create it. Today that includes AI tools built for my own teams."
+    },
+    {
+      "title": "On time, at scale, under budget",
+      "text": "From a $12 million safety rollout to a $1.5 million savings in year one, I plan for delivery and cost from day one."
+    },
+    {
+      "title": "Solve the real problem",
+      "text": "I look past symptoms to the problem underneath, then align people, budget, and technology to fix it."
+    }
+  ],
+  "testimonials": [],
+  "writing": []
 }

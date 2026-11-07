@@ -57,7 +57,7 @@
   .hero-inner { position: relative; z-index: 2; padding: 168px 0 56px; }
   .hello { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 8px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); font-size: 14px; color: #d6e2f0; }
   .hello i { width: 9px; height: 9px; border-radius: 50%; background: #5fd38d; box-shadow: 0 0 0 4px rgba(95,211,141,.2); }
-  .hero h1 { font: 760 clamp(44px, 6.4vw, 92px)/.96 var(--display); letter-spacing: -.04em; margin: 26px 0 0; max-width: 15ch; }
+  .hero h1 { font: 760 clamp(42px, 5.6vw, 80px)/.97 var(--display); letter-spacing: -.04em; margin: 26px 0 0; max-width: 15ch; }
   .hero .who { margin: 28px 0 0; font-size: 20px; line-height: 1.55; color: #c5d3e4; max-width: 52ch; }
   .hero .who strong { color: #fff; font-weight: 600; }
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
@@ -68,6 +68,47 @@
   .btn.glass { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.22); color: #fff; }
   .btn.glass:hover { background: rgba(255,255,255,.12); }
   .btn svg { width: 18px; height: 18px; }
+
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; align-items: center; }
+  .portrait { position: relative; justify-self: end; width: 300px; aspect-ratio: 1; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 28px; display: block; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+  .portrait::before { content: ""; position: absolute; inset: -12px -12px 12px 12px; border: 2px solid var(--amber); border-radius: 32px; }
+  .portrait figcaption { position: absolute; left: -28px; bottom: 26px; background: #fff; color: var(--ink); border-radius: 14px; padding: 10px 14px; font-size: 14px; line-height: 1.35; box-shadow: 0 12px 30px rgba(0,0,0,.25); }
+  .portrait figcaption b { display: block; font: 700 15px var(--display); }
+
+  /* Case studies */
+  .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .case { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
+  .case .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .case .org { font-size: 14px; font-weight: 600; color: #1f5f9e; }
+  .case h3 { font: 760 26px/1.1 var(--display); letter-spacing: -.02em; margin: 6px 0 18px; }
+  .case .metric { font: 760 34px/1 var(--display); letter-spacing: -.03em; color: var(--night); background: var(--sky-soft); border-radius: 14px; padding: 12px 14px; white-space: nowrap; }
+  .case dl { margin: 0; display: grid; gap: 14px; }
+  .case dt { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .case dd { margin: 0; color: var(--ink-soft); font-size: 16px; }
+  .case .result { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: var(--night); color: #fff; font-weight: 500; }
+  .case .result span { color: var(--amber); font-weight: 700; margin-right: 6px; }
+  .case .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .case .tools span { font-size: 13px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink-soft); }
+
+  /* How I lead */
+  .lead-band { background: var(--night); color: #fff; border-radius: 28px; padding: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px 56px; }
+  .lead-band h3 { font: 700 24px/1.15 var(--display); margin: 0 0 8px; letter-spacing: -.015em; display: flex; gap: 12px; align-items: baseline; }
+  .lead-band h3::before { content: ""; flex: 0 0 10px; height: 10px; border-radius: 3px; background: var(--amber); transform: translateY(-3px); }
+  .lead-band p { margin: 0; color: #c0cfe0; padding-left: 22px; }
+
+  /* Testimonials and writing (shown only when there is content) */
+  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+  .quote { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 30px; margin: 0; }
+  .quote blockquote { margin: 0 0 18px; font-size: 18px; line-height: 1.55; }
+  .quote figcaption b { display: block; }
+  .quote figcaption span { color: var(--ink-soft); font-size: 15px; }
+  .posts { list-style: none; margin: 0; padding: 0; }
+  .posts li { border-top: 1px solid var(--line); padding: 20px 0; display: grid; grid-template-columns: 140px 1fr; gap: 24px; }
+  .posts a { font: 700 21px/1.2 var(--display); color: var(--ink); text-decoration: none; }
+  .posts a:hover { color: #1f5f9e; }
+  .posts .k { color: var(--ink-soft); font-size: 14px; }
+  .posts p { margin: 6px 0 0; color: var(--ink-soft); }
 
   .proof { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 88px; border-top: 1px solid rgba(255,255,255,.12); }
   .proof div { padding: 26px 24px 30px 0; }
@@ -165,6 +206,11 @@
   footer .wrap { padding: 24px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
   @media (max-width: 960px) {
+    .hero-grid, .cases, .lead-band { grid-template-columns: 1fr; }
+    .portrait { justify-self: start; width: 220px; order: -1; margin: 10px 0 8px 12px; }
+    .portrait figcaption { display: none; }
+    .lead-band { padding: 36px 28px; }
+    .posts li { grid-template-columns: 1fr; gap: 4px; }
     .featured, .creds { grid-template-columns: 1fr; }
     .featured .stage { padding: 28px 0 0 28px; }
     .cards, .impact { grid-template-columns: 1fr 1fr; }
@@ -185,7 +231,7 @@
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 
   @media print {
-    .nav, .hero canvas, .cta, .hello, #building, .contact .glow, footer, .proof { display: none !important; }
+    .nav, .hero canvas, .cta, .hello, #building, #cases, #approach, #voices, #writing, .portrait, .contact .glow, footer, .proof { display: none !important; }
     body { background: #fff; font-size: 10.5pt; }
     .hero { background: none; color: var(--ink); }
     .hero::after { display: none; }
@@ -218,8 +264,9 @@
   <div class="wrap">
     <a class="mark" href="#top"><b>NC</b>Nic Carroll</a>
     <nav aria-label="Sections">
+      <a href="#cases">Case studies</a>
+      <a href="#approach">How I lead</a>
       <a href="#building">Building</a>
-      <a href="#impact">Impact</a>
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
       <a href="#contact">Contact</a>
@@ -230,21 +277,42 @@
 <div class="hero" id="top">
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
+   <div class="hero-grid">
+    <div>
     <span class="hello"><i></i><span id="role-line">CIO, CTO, and CISO leader</span></span>
     <h1 id="intro">I lead technology that gets delivered on time, at scale, and under budget.</h1>
     <p class="who" id="who"></p>
     <div class="cta">
-      <a class="btn amber" href="#building">See what I'm building</a>
+      <a class="btn amber" href="#cases">See my case studies</a>
       <a class="btn glass" href="Nic_Carroll_Resume.pdf" download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
         Download resume (PDF)
       </a>
     </div>
+    </div>
+    <figure class="portrait" id="portrait"><img src="assets/nic.jpg" alt="Portrait of Nic Carroll" width="300" height="300"><figcaption><b>Nic Carroll</b>CIO, CTO, and CISO leader</figcaption></figure>
+   </div>
     <div class="proof" id="proof"></div>
   </div>
 </div>
 
 <main id="main" class="wrap">
+  <section class="block" id="cases">
+    <div class="head">
+      <h2>Case studies</h2>
+      <p>The challenge, what I did, and what changed.</p>
+    </div>
+    <div class="cases" id="case-list"></div>
+  </section>
+
+  <section class="block" id="approach">
+    <div class="head">
+      <h2>How I lead</h2>
+      <p>The principles behind every team I've built and every project I've finished.</p>
+    </div>
+    <div class="lead-band" id="approach-list"></div>
+  </section>
+
   <section class="block" id="building">
     <div class="head">
       <h2>Things I'm building</h2>
@@ -261,6 +329,22 @@
     </div>
     <p class="lede" id="summary"></p>
     <div class="impact" id="highlights"></div>
+  </section>
+
+  <section class="block" id="voices" hidden>
+    <div class="head">
+      <h2>What colleagues say</h2>
+      <p>From board members, peers, and the people I've led.</p>
+    </div>
+    <div class="quotes" id="quote-list"></div>
+  </section>
+
+  <section class="block" id="writing" hidden>
+    <div class="head">
+      <h2>Ideas and talks</h2>
+      <p>Where I think technology, security, and education are heading.</p>
+    </div>
+    <ul class="posts" id="post-list"></ul>
   </section>
 
   <section class="block" id="experience">
@@ -390,6 +474,24 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
         <div class="links">${links(p, "")}</div>
       </div>
     </article>`).join("") + (rest.length % 3 === 0 ? "" : `<div class="add-yours"><div><b>More on the way</b>New tools land here as I build them.</div></div>`);
+
+  if (d.photo) $("portrait").querySelector("img").src = d.photo;
+  $("case-list").innerHTML = (d.caseStudies || []).map(c => `
+    <article class="case">
+      <div class="top"><div><div class="org">${esc(c.org)}</div><h3>${esc(c.title)}</h3></div>${c.metric ? `<div class="metric">${esc(c.metric)}</div>` : ""}</div>
+      <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I did</dt><dd>${esc(c.approach)}</dd></div></dl>
+      <div class="result"><span>Result</span>${esc(c.result)}</div>
+      <div class="tools">${(c.tools || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>
+    </article>`).join("");
+  $("approach-list").innerHTML = (d.approach || []).map(a => `<div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>`).join("");
+  if ((d.testimonials || []).length) {
+    $("voices").hidden = false;
+    $("quote-list").innerHTML = d.testimonials.map(t => `<figure class="quote"><blockquote>${esc(t.quote)}</blockquote><figcaption><b>${esc(t.name)}</b><span>${esc(t.title)}</span></figcaption></figure>`).join("");
+  }
+  if ((d.writing || []).length) {
+    $("writing").hidden = false;
+    $("post-list").innerHTML = d.writing.map(w => `<li><div class="k">${esc(w.kind || "")}<br>${esc(w.date || "")}</div><div><a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.title)}</a>${w.summary ? `<p>${esc(w.summary)}</p>` : ""}</div></li>`).join("");
+  }
 
   $("highlights").innerHTML = d.highlights.map(h => `
     <div class="icard"><div class="ico">${icon(h.tag)}</div><h3>${esc(h.title)}</h3><p>${esc(h.text)}</p></div>`).join("");
