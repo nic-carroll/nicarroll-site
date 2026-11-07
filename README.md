@@ -12,7 +12,7 @@ Everything on the page comes from **`public/resume.json`**. Edit it on GitHub (p
 * `projects`: the "Things I'm building" section. Set `"featured": true` on the one you want shown large with a live preview.
 * `certifications`, `education`, `boards`, `skills`
 
-The **Download resume** button prints the page as a clean one column resume, so the site and the PDF never drift apart.
+The **Download resume** button serves `public/Nic_Carroll_Resume.pdf`, built in the original two column navy resume format from `resume-pdf/resume.html`. To change the PDF, edit the `R` data at the top of that file's script and run `python3 resume-pdf/build.py` (needs Playwright), then commit the new PDF.
 
 ## Host something you built
 

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nic Carroll Resume</title>
+<style>
+  @font-face { font-family: Rubik; src: url(fonts/rubik-latin-400-normal.woff2); font-weight: 400; }
+  @font-face { font-family: Rubik; src: url(fonts/rubik-latin-500-normal.woff2); font-weight: 500; }
+  @font-face { font-family: Inter; src: url(fonts/inter-latin-400-normal.woff2); font-weight: 400; }
+  @font-face { font-family: Inter; src: url(fonts/inter-latin-500-normal.woff2); font-weight: 500; }
+  @page { size: 612pt 792pt; margin: 0; }
+  :root { --navy: #22405c; --navy-dark: #172c40; --text: #3e3e3e; --muted: #6b6b6b; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: Inter, sans-serif; color: var(--text); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 612pt; height: 792pt; position: relative; overflow: hidden; page-break-after: always; break-after: page; display: flex; }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  .main { width: 400pt; padding: 18pt 15pt 20pt 25.4pt; height: 792pt; overflow: hidden; }
+  .side { width: 212pt; background: var(--navy); color: #fff; height: 792pt; padding: 0 20pt 0 21pt; position: relative; }
+  .side::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 14pt; background: var(--navy-dark); }
+
+  h1 { font: 500 21pt/1.12 Rubik, sans-serif; text-transform: uppercase; margin: 0; color: var(--text); letter-spacing: .1pt; }
+  .tagline { font: 400 12pt/1.25 Rubik, sans-serif; color: var(--navy); margin: 1pt 0 6pt; }
+  .contact { font: 400 8.3pt/1.4 Inter, sans-serif; display: flex; flex-wrap: wrap; column-gap: 9pt; max-width: 330pt; }
+  .contact span { display: inline-flex; align-items: center; gap: 3pt; }
+  .contact svg { width: 8pt; height: 8pt; stroke: var(--muted); }
+  .contact a { color: var(--text); }
+
+  .sec { font: 400 13pt/1.2 Rubik, sans-serif; text-transform: uppercase; margin: 18pt 0 6pt; padding-bottom: 3pt; border-bottom: 1.4pt solid #bfbfbf; color: var(--text); }
+  .main .sec.first-on-page { margin-top: 0; }
+  p.body { font: 400 8.5pt/1.22 Inter, sans-serif; margin: 0; }
+  .job { margin-top: 7pt; }
+  .job .row { display: flex; justify-content: space-between; align-items: baseline; }
+  .job .title { font: 400 11.5pt/1.25 Rubik, sans-serif; color: var(--text); }
+  .job .dates { font: 400 9.2pt Rubik, sans-serif; color: var(--text); white-space: nowrap; }
+  .job .org { font: 400 11pt/1.3 Rubik, sans-serif; color: var(--navy); }
+  .job .place { font: 400 9.2pt Rubik, sans-serif; color: var(--text); }
+  .blurb { margin-top: 3pt !important; }
+  ul.b { margin: 1pt 0 0; padding: 0 0 0 12pt; }
+  ul.b li { font: 400 8.5pt/1.22 Inter, sans-serif; margin: 0; }
+
+  .photo { width: 76pt; height: 76pt; border-radius: 50%; overflow: hidden; margin: 28pt auto 0; position: relative; left: -2pt; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .side .sec { color: #fff; border-color: #fff; border-bottom-width: 1.2pt; margin: 20pt 0 8pt; }
+  .side .sec.top { margin-top: 30pt; }
+  .comp { list-style: none; margin: 0; padding: 0; }
+  .comp li { display: flex; gap: 8pt; font: 400 10pt/1.22 Rubik, sans-serif; margin: 0 0 7.3pt; }
+  .comp svg { flex: 0 0 11pt; width: 11pt; height: 11pt; margin-top: 1pt; fill: #fff; }
+  .entry { margin-bottom: 6.5pt; }
+  .entry .t { font: 500 10pt/1.3 Rubik, sans-serif; }
+  .entry .s { font: 400 8.7pt/1.6 Inter, sans-serif; color: #eef2f6; }
+  .entry .s2 { font: 400 7.6pt/1.55 Inter, sans-serif; color: #dfe6ee; }
+  .entry.cert .t, .entry.board .t { font-weight: 400; }
+  .skills { font: 400 7.9pt/2.05 Inter, sans-serif; }
+</style>
+</head>
+<body>
+<div id="out"></div>
+
+<template id="ico">
+  <!-- simple solid icons standing in for the competency icon set -->
+</template>
+
+<script>
+const R = {
+  name: "Nic Carroll, Ed.S., CISSP, CETL",
+  tagline: "Executive Technology & Operations Leader (CIO/CTO/CISO)",
+  phone: "+1-(678)-232-8864",
+  email: "carroll.nic@gmail.com",
+  linkedin: "https://www.linkedin.com/in/nic-carroll/",
+  location: "Augusta, Georgia",
+  summary: "Visionary IT executive with over 15 years of leadership experience driving enterprise-wide transformation across P-20 institutions. Adept at translating complex business requirements into secure, scalable strategies that fuel operational excellence. Recognized for pioneering district-wide AI integration, building AI tools that are reimagining the Information Security department, and leading a research enclave to a perfect CMMC Level 2 assessment. A collaborative C-suite partner who builds high-performing teams, manages multi-million-dollar budgets, and navigates strict regulatory landscapes to reduce costs and maximize business value.",
+  jobs: [
+    { title: "Chief Information Security Officer", dates: "06/2026 - Present", org: "Georgia Southern University", place: "Statesboro, GA",
+      blurb: "Protects the digital ecosystem to ensure data integrity and operational resilience for 33,500 students and nearly 4,000 faculty. Leads Information Security and the Identity and Access Management (IAM) group, spearheading strategic governance, fortifying critical assets, and empowering secure innovation across a global campus network.",
+      bullets: [
+        "Led the GCC High research enclave, a segregated Microsoft 365 GCC High and Azure Government environment for CUI and export-controlled (ITAR/EAR) data, through its CMMC Level 2 assessment, achieving a perfect score.",
+        "Built a unified dashboard that brings all Information Security and IAM applications into one view, increasing visibility across the environment and accelerating the resolution of security threats and vulnerabilities to ensure a safe, secure, and reliable environment.",
+        "Build AI tools and resources to reimagine the Information Security department's processes, reporting, and daily operations.",
+        "Led the complete revision of the third-party application review process, strengthening vendor risk management and data privacy.",
+        "Lead enterprise cybersecurity strategies as an executive team member by aligning risk management, data protection, and threat mitigation with strategic goals.",
+        "Implement security controls across divisions. Establish cyber governance that balances digital innovation with strict regulatory compliance and business continuity.",
+        "Serve as the primary cybersecurity advisor for executives and partners, translating complex threat intelligence and compliance requirements into actionable strategies for secure enterprise growth."
+      ] },
+    { title: "Executive Director of Technology (CIO/CTO/CISO)", dates: "09/2024 - 05/2026", org: "Aiken County Public Schools", place: "Aiken, SC",
+      blurb: "Tech executive unifying IT, tech, and security as district CIO, CTO, CISO. Guided digital ecosystem for educational outcomes and excellence for 3,700+ staff, 24,000+ students. Lead visionary initiatives, safeguards data, and fosters innovation across all departments and schools.",
+      bullets: [
+        "Led the $12 million installation and completion of Audio Enhancement safety and security systems across all 44+ district sites.",
+        "Spearheaded a comprehensive reorganization of a 40-person technology division, driving a 30% reduction in departmental spending ($1.5M+) in year one by optimizing vendor contracts, eliminating external contractor dependencies, and boosting team agility.",
+        "Orchestrated a large-scale core infrastructure overhaul (fiber, WAN/SD-WAN, firewalls, switches, routers) that doubled internet bandwidth and ensured absolute business continuity against outages and cyber events.",
+        "Established the district's first comprehensive cybersecurity program from the ground up, aligned with NIST and CIS frameworks and unifying physical and digital controls to protect data for over 28,000 users.",
+        "Led the complete revamp and migration of Active Directory to Microsoft Entra ID.",
+        "Directed the lifecycle management of 100,000+ endpoints and led the management, updating, and patching of 50,000+ devices, migrating all imaging to a cloud-based solution and reallocating technical staff from manual tasks to strategic initiatives.",
+        "Built partnerships with the Superintendent, Board, and leaders to align IT with academic goals. Translated technical strategies to secure funding for key investments.",
+        "Championed a district-wide shift in decision-making by deploying new analytics platforms and governance policies, empowering department heads and executives with actionable operational insights."
+      ] },
+    { title: "Director of IT, Digital Learning, & Media Services", dates: "06/2016 - 09/2024", org: "Columbia County Public Schools", place: "Evans, GA",
+      blurb: "A strategic technology leader who partnered with all departments to build and optimize a secure, modern digital ecosystem. Led the full lifecycle of technology solutions, from initial implementation to enterprise-wide training and user adoption. Established technology policies, ensured data integrity and security, and evaluated the impact of instructional technology to drive continuous improvement.",
+      bullets: [
+        "Served as a key strategic advisor to the Superintendent and executive leadership to shape enterprise digital strategy, while authoring comprehensive technology policies and administrative procedures that streamlined operations and public communications.",
+        "Orchestrated the complete lifecycle for over 100 information system products and managed an annual technology budget exceeding 2.5 million dollars, expertly driving cost negotiations, contract execution, and districtwide deployments.",
+        "Directed core technology platforms including the student information system, and established strict interoperability standards to automate secure data exchange across the digital ecosystem for over 33,000 users.",
+        "Oversaw the data privacy and governance program by managing the rigorous review and execution of over 250 vendor agreements annually, ensuring strict regulatory compliance and mitigating institutional risk.",
+        "Pioneered a strategic partnership with the National Security Agency and US Cyber Command to develop and embed K12 NexGen Cyber standards across all curricula, establishing a premier national model for cybersecurity education.",
+        "Championed comprehensive analytics by evaluating complex datasets and developing customized dashboards that provided executive leadership with actionable insights regarding program effectiveness and return on investment.",
+        "Spearheaded technology training strategies by launching an innovative districtwide microcredentialing platform, creating recognized certification programs to foster continuous development and specialized skills for over 4,000 employees.",
+        "Led a team of 80 tech, instruction, and media specialists for effective execution of educational initiatives."
+      ] },
+    { title: "IT Coordinator, Teacher, & Coach", dates: "07/2003 - 05/2016", org: "North Gwinnett High School (Gwinnett County)", place: "Suwanee, GA",
+      blurb: "Championed and executed a vision for instructional technology integration focused on empowering educators to differentiate instruction. By modeling innovative pedagogical strategies and tools that fostered an educational environment that promoted the development of higher-order thinking skills for all learners.",
+      bullets: [
+        "Collaborated with executive leadership to establish and execute a shared districtwide vision for instructional technology integration, driving strategic plans that supported organizational goals and modernized educational outcomes.",
+        "Managed a comprehensive Google Workspace environment serving over 3,700 users and directed robust technology training programs for over 200 staff members, ensuring seamless adoption of critical district platforms.",
+        "Designed and facilitated professional learning programs rooted in adult education principles, directly coaching staff to integrate advanced digital strategies that foster student creativity and critical thinking.",
+        "Spearheaded the creation and rollout of The Studio, a pioneering project-based learning course that seamlessly blended Computer Science, Advanced Placement Social Studies, and Language Arts to deliver an engaging collaborative environment.",
+        "Instructed and designed comprehensive virtual courses utilizing D2L platforms across multiple subjects for Gwinnett Online Campus and Georgia Virtual School, consistently achieving superior student performance metrics on Georgia End of Course assessments.",
+        "Led testing operations as assessment coordinator, managing test logistics. Developed course test banks used by the Georgia Department of Education.",
+        "Designed programs shifting from traditional to performance-based evaluations. Standardized countywide curriculum pacing, benchmarks, and pretests.",
+        "Served as World History team lead and instructed a diverse population of Advanced Placement, Honors, and Technical students by tailoring content delivery to distinct learning styles and driving successful state graduation test remediation programs."
+      ] }
+  ],
+  competencies: [
+    ["people", "Executive Leadership"], ["chess", "Strategic Planning"], ["phone", "Digital Transformation"],
+    ["chart", "Financial Management"], ["thumb", "Stakeholder Engagement"], ["target", "Change Management"],
+    ["org", "Organizational Development"], ["puzzle", "Team Leadership & Development"], ["list", "IT Project & Product Management"],
+    ["shield", "Cybersecurity & Cloud Strategy"], ["key", "Identity & Access Management"], ["bars", "Data Analysis & Integrations"],
+    ["db", "Enterprise Information Technology"], ["check", "IT Governance & Compliance"], ["gears", "Cross-Functional Collaboration"]
+  ],
+  education: [
+    ["Ed.S. Curriculum & Instruction", "Liberty University", "Lynchburg, VA"],
+    ["M.A.T. Secondary Education", "Georgia College & State University", "Milledgeville, GA"],
+    ["B.A. Political Science", "The University of Georgia", "Athens, GA"],
+    ["B.A. Religion", "The University of Georgia", "Athens, GA"]
+  ],
+  skills: ["NIST", "ISO 27001", "SOC", "COBIT", "HIPAA", "FERPA", "CIS Controls", "GDPR", "PCI DSS", "CMMC", "CIS Controls", "Google Cloud", "AWS", "AZURE", "Azure Government", "M365 GCC High", "Microsoft Entra ID", "Active Directory", "Google Workspace", "MS O365", "Teams", "Adobe Creative Cloud", "SaaS", "SDLC", "Asana", "SLACK", "Cisco", "Fortinet", "Palo Alto", "ERP", "CRM", "GL", "EDI", "EDFI", "1EdTech", "AI Tool Development"],
+  certs: [["CISSP", "ISC2"], ["CETL", "COSN"], ["Certified in Cybersecurity", "ISC2"], ["Security +", "CompTIA"], ["Google for Education Trainer", "Google"], ["Data Analytics", "Google"], ["Cybersecurity", "Google"], ["TrustEd Apps Certified Leader", "1EdTech"], ["Certified Cybersecurity Evaluator", "Cybersecurity Coalition for Education"]],
+  boards: [["Navigating the Future in K-12 Education Council", "Center for Digital Education"], ["State Strategic IT Plan: IT Leadership Leader", "South Carolina Department of Education"], ["Technology Advisory Board", "1EdTech"], ["Data Privacy & Security Board", "1EdTech"], ["Instructional Advisory Board", "Google"]]
+};
+// remove the duplicate "CIS Controls" that the original list carried
+R.skills = [...new Set(R.skills)];
+
+const I = {
+  people: '<circle cx="8" cy="5" r="3"/><circle cx="16.5" cy="6" r="2.5"/><path d="M2 20c0-4 2.7-7 6-7s6 3 6 7Z"/><path d="M15 12.5c3.5 0 6 2.6 6 6.5h-5.2c-.3-2.6-1.1-4.8-2.6-6.3.6-.1 1.2-.2 1.8-.2Z"/>',
+  chess: '<path d="M7 21h10v-2.5H7Zm1.5-4h7l-1-6h-5Zm-1-7h9l1.5-5.5-3 1.5L12 3 9 6 6 4.5Z"/>',
+  phone: '<path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm0 3v13h10V5Z"/>',
+  chart: '<path d="M3 3h2v16h16v2H3Z"/><path d="m6 15 4.5-5 3.5 3 5.5-6.5 1.5 1.3-6.8 8.2-3.5-3-3.2 3.5Z"/>',
+  thumb: '<path d="M2 10h4v11H2Zm6 11h9.5a2 2 0 0 0 2-1.6l1.4-7A2 2 0 0 0 18.9 10H14l.9-4.2A2 2 0 0 0 13 3.4L8 10Z"/>',
+  target: '<path d="M12 2a10 10 0 1 0 10 10h-2.5A7.5 7.5 0 1 1 12 4.5Zm0 5a5 5 0 1 0 5 5h-2.5a2.5 2.5 0 1 1-2.5-2.5Z"/><path d="m12.5 11.5 7-7V2l2.5 2.5-2.5.1Z"/>',
+  org: '<path d="M10 2h4v4h-1v3h6v4h1v4h-4v-4h1v-2.5h-4.5V13h1v4h-4v-4h1v-2.5H6.5V13h1v4h-4v-4h1V9h6V6h-1Z"/>',
+  puzzle: '<path d="M10 3a2 2 0 0 1 4 0v2h5v5h-1.5a2 2 0 1 0 0 4H19v6h-6v-1.5a2 2 0 1 0-4 0V20H3v-6h1.5a2 2 0 1 0 0-4H3V5h7Z"/>',
+  list: '<path d="M3 4h18v16H3Zm2 3v2h2V7Zm4 0v2h10V7Zm-4 4v2h2v-2Zm4 0v2h10v-2Zm-4 4v2h2v-2Zm4 0v2h10v-2Z"/>',
+  shield: '<path d="M12 2 4 5v6c0 5.2 3.4 9.4 8 11 4.6-1.6 8-5.8 8-11V5Zm-1 13.4-3.7-3.7 1.4-1.4 2.3 2.3 4.6-4.6 1.4 1.4Z"/>',
+  key: '<path d="M7.5 9a5.5 5.5 0 1 1 4.9 5.5L11 16H9v2H7v2H3v-3.5l5.6-5.6A5.5 5.5 0 0 1 7.5 9Zm7-2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/>',
+  bars: '<path d="M4 13h3v8H4Zm6.5-6h3v14h-3ZM17 3h3v18h-3Z"/>',
+  db: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 7.5c0 1.7 3.6 3 8 3s8-1.3 8-3V11c0 1.7-3.6 3-8 3s-8-1.3-8-3Zm0 6c0 1.7 3.6 3 8 3s8-1.3 8-3V19c0 1.7-3.6 3-8 3s-8-1.3-8-3Z"/>',
+  check: '<path d="m9 16.2-4.2-4.2-1.4 1.4L9 19 21 7l-1.4-1.4Z"/>',
+  gears: '<path d="M9 2h2l.4 2.1 1.6.7 1.8-1.2 1.4 1.4-1.2 1.8.7 1.6L17.8 9v2l-2.1.4-.7 1.6 1.2 1.8-1.4 1.4-1.8-1.2-1.6.7L11 17.8H9l-.4-2.1-1.6-.7-1.8 1.2-1.4-1.4L5 13l-.7-1.6L2.2 11V9l2.1-.4L5 7 3.8 5.2l1.4-1.4L7 5l1.6-.7Zm1 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/><path d="M17 14h1.6l.3 1.4 1 .5 1.3-.8 1 1.1-.8 1.2.4 1.1 1.4.3v1.6l-1.4.3-.4 1-.1.1.9 1.2-1.1 1.1Z" transform="scale(.9) translate(2 -1)"/>'
+};
+const ico = k => `<svg viewBox="0 0 24 24">${I[k]}</svg>`;
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const line = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">';
+
+function sidebar1() {
+  return `<div class="photo"><img src="photo.jpg" alt=""></div>
+    <div class="sec">Core Competencies</div>
+    <ul class="comp">${R.competencies.map(([k, t]) => `<li>${ico(k)}<span>${esc(t)}</span></li>`).join("")}</ul>
+    <div class="sec">Education</div>
+    ${R.education.map(([d, s, p]) => `<div class="entry"><div class="t">${esc(d)}</div><div class="s">${esc(s)}</div><div class="s2">${esc(p)}</div></div>`).join("")}`;
+}
+function sidebar2() {
+  return `<div class="sec top">Technical Skills</div>
+    <div class="skills">${R.skills.map(s => `<span style="white-space:nowrap">${esc(s)}</span>`).join(" · ")}</div>
+    <div class="sec">Certifications</div>
+    ${R.certs.map(([n, i]) => `<div class="entry cert"><div class="t">${esc(n)}</div><div class="s2">${esc(i)}</div></div>`).join("")}
+    <div class="sec">Task Force & Boards</div>
+    ${R.boards.map(([n, o]) => `<div class="entry board"><div class="t">${esc(n)}</div><div class="s2">${esc(o)}</div></div>`).join("")}`;
+}
+
+// Build flowing blocks for the main column
+const blocks = [];
+blocks.push(`<h1>${esc(R.name)}</h1><div class="tagline">${esc(R.tagline)}</div>
+  <div class="contact">
+    <span>${line}<path stroke="#6b6b6b" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>${esc(R.phone)}</span>
+    <span>${line}<circle stroke="#6b6b6b" cx="12" cy="12" r="4"/><path stroke="#6b6b6b" d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>${esc(R.email)}</span>
+    <span>${line}<path stroke="#6b6b6b" d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><a href="${esc(R.linkedin)}">${esc(R.linkedin)}</a></span>
+    <span>${line}<path stroke="#6b6b6b" d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle stroke="#6b6b6b" cx="12" cy="9" r="2.5"/></svg>${esc(R.location)}</span>
+  </div>`);
+blocks.push(`<div class="sec">Summary</div><p class="body">${esc(R.summary)}</p>`);
+blocks.push({ sec: "Professional Experience" });
+for (const j of R.jobs) {
+  blocks.push({ job: j, html: `<div class="job"><div class="row"><span class="title">${esc(j.title)}</span><span class="dates">${esc(j.dates)}</span></div>
+    <div class="row"><span class="org">${esc(j.org)}</span><span class="place">${esc(j.place)}</span></div>
+    <p class="body blurb">${esc(j.blurb)}</p></div>` });
+  for (const b of j.bullets) blocks.push({ bullet: b });
+}
+
+Promise.all([...document.fonts].map(f => f.load())).then(() => document.fonts.ready).then(() => {
+// Lay blocks into pages, starting a new page when the main column fills
+const out = document.getElementById("out");
+let pageNo = 0, main, list;
+function newPage() {
+  pageNo++;
+  const p = document.createElement("div"); p.className = "page";
+  p.innerHTML = `<div class="main"></div><div class="side">${pageNo === 1 ? sidebar1() : pageNo === 2 ? sidebar2() : ""}</div>`;
+  out.appendChild(p); main = p.querySelector(".main"); list = null;
+  if (pageNo > 1) { main.insertAdjacentHTML("beforeend", `<div class="sec first-on-page">Professional Experience</div>`); }
+}
+const fits = () => main.scrollHeight <= main.clientHeight;
+newPage();
+for (const blk of blocks) {
+  if (typeof blk === "string") { main.insertAdjacentHTML("beforeend", blk); continue; }
+  if (blk.sec) { main.insertAdjacentHTML("beforeend", `<div class="sec">${esc(blk.sec)}</div>`); continue; }
+  if (blk.job) {
+    main.insertAdjacentHTML("beforeend", blk.html); list = null;
+    const el = main.lastElementChild;
+    // keep the job header with at least its first bullet
+    const probe = document.createElement("ul"); probe.className = "b"; probe.innerHTML = `<li>${esc(blk.job.bullets[0])}</li>`;
+    main.appendChild(probe);
+    const ok = fits(); probe.remove();
+    if (!ok) { el.remove(); newPage(); main.insertAdjacentHTML("beforeend", blk.html); }
+    continue;
+  }
+  if (blk.bullet) {
+    if (!list) { list = document.createElement("ul"); list.className = "b"; main.appendChild(list); }
+    const li = document.createElement("li"); li.textContent = blk.bullet; list.appendChild(li);
+    if (!fits()) { li.remove(); newPage(); list = document.createElement("ul"); list.className = "b"; main.appendChild(list); list.appendChild(li); }
+  }
+}
+document.body.dataset.pages = pageNo;
+document.body.dataset.ready = "1";
+});
+</script>
+</body>
+</html>
