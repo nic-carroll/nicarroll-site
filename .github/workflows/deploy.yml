@@ -1,0 +1,55 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT_ID: claude-503801
+  PROJECT_NUMBER: "388842205758"
+  REGION: us-east1
+  SERVICE: nicarroll-site
+  REPO: web
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/${{ env.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github/providers/github
+          service_account: site-deployer@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and push image
+        run: |
+          IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO}/${SERVICE}:${GITHUB_SHA::12}"
+          gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+
+      - name: Deploy
+        run: |
+          gcloud run deploy "$SERVICE" --image "$IMAGE" --region "$REGION" \
+            --platform managed --allow-unauthenticated --port 8080 \
+            --memory 256Mi --max-instances 3 --quiet
+
+      - name: Check the live site
+        run: |
+          URL=$(gcloud run services describe "$SERVICE" --region "$REGION" --format='value(status.url)')
+          echo "Live at $URL"
+          for path in / /resume.json; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$URL$path")
+            echo "$path -> $code"
+            [ "$code" = "200" ] || exit 1
+          done

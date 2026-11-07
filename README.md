@@ -24,7 +24,9 @@ The **Download resume** button prints the page as a clean one column resume, so 
 
 ## How deploys work
 
-`cloudbuild.yaml` builds the container (`Dockerfile` + `nginx.conf`), pushes it to Artifact Registry, and deploys it to the Cloud Run service `nicarroll-site` in `us-east1`.
+Every push to `main` runs `.github/workflows/deploy.yml` in GitHub Actions: it signs in to Google Cloud with keyless Workload Identity Federation (set up once by `setup-github-deploy.sh`), builds the container, deploys to Cloud Run, and checks the live site. Progress shows on the repo's **Actions** tab.
+
+`cloudbuild.yaml` (manual fallback: `gcloud builds submit --config cloudbuild.yaml --region us-east1`) builds the container (`Dockerfile` + `nginx.conf`), pushes it to Artifact Registry, and deploys it to the Cloud Run service `nicarroll-site` in `us-east1`.
 
 ## One time Google Cloud setup
 
