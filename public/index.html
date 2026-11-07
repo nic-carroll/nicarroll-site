@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nic Carroll</title>
-<meta name="description" content="Nic Carroll, Ed.S., CISSP, CETL. Chief Information Security Officer at Georgia Southern University. I lead security and build the tools that make it work.">
+<meta name="description" content="Nic Carroll, Ed.S., CISSP, CETL. Visionary technology leader who has served as CIO, CTO, and CISO, delivering projects on time, at scale, and under budget.">
 <meta property="og:title" content="Nic Carroll">
-<meta property="og:description" content="Security leader and builder. CIO, CTO, and CISO experience across higher education and K12.">
+<meta property="og:description" content="Visionary technology leader. CIO, CTO, and CISO experience across higher education and K12.">
 <meta name="theme-color" content="#0c1a2e">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c1a2e'/%3E%3Ctext x='16' y='21.5' font-family='Arial' font-weight='800' font-size='14' fill='%23f2b43c' text-anchor='middle'%3ENC%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -57,7 +57,7 @@
   .hero-inner { position: relative; z-index: 2; padding: 168px 0 56px; }
   .hello { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 8px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); font-size: 14px; color: #d6e2f0; }
   .hello i { width: 9px; height: 9px; border-radius: 50%; background: #5fd38d; box-shadow: 0 0 0 4px rgba(95,211,141,.2); }
-  .hero h1 { font: 760 clamp(46px, 7.2vw, 104px)/.95 var(--display); letter-spacing: -.04em; margin: 26px 0 0; max-width: 12ch; }
+  .hero h1 { font: 760 clamp(44px, 6.4vw, 92px)/.96 var(--display); letter-spacing: -.04em; margin: 26px 0 0; max-width: 15ch; }
   .hero .who { margin: 28px 0 0; font-size: 20px; line-height: 1.55; color: #c5d3e4; max-width: 52ch; }
   .hero .who strong { color: #fff; font-weight: 600; }
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
@@ -227,8 +227,8 @@
 <div class="hero" id="top">
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
-    <span class="hello"><i></i><span id="role-line">Chief Information Security Officer</span></span>
-    <h1 id="intro">I lead security and build the tools that make it work.</h1>
+    <span class="hello"><i></i><span id="role-line">CIO, CTO, and CISO leader</span></span>
+    <h1 id="intro">I lead technology that gets delivered on time, at scale, and under budget.</h1>
     <p class="who" id="who"></p>
     <div class="cta">
       <a class="btn amber" href="#building">See what I'm building</a>
@@ -254,7 +254,7 @@
   <section class="block" id="impact">
     <div class="head">
       <h2>Impact</h2>
-      <p>Results from leading technology, security, and learning at scale.</p>
+      <p>Projects led from idea to completion, on time and under budget.</p>
     </div>
     <p class="lede" id="summary"></p>
     <div class="impact" id="highlights"></div>
@@ -285,8 +285,8 @@
 <section class="contact" id="contact">
   <div class="glow"></div>
   <div class="wrap">
-    <h2>Let's build something secure.</h2>
-    <p>I'm glad to talk about cybersecurity programs, identity, AI governance, or tools for schools and universities.</p>
+    <h2>Let's build what's next.</h2>
+    <p>I'm glad to talk about technology leadership, cybersecurity, AI, or new tools for schools and universities.</p>
     <div class="cta">
       <a class="btn amber" id="mail" href="#">Email me</a>
       <a class="btn glass" id="li" href="#" target="_blank" rel="noopener">Connect on LinkedIn</a>
@@ -352,8 +352,8 @@ function links(p, cls) {
 fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   const now = d.experience[0];
   if (d.intro) $("intro").textContent = d.intro;
-  $("role-line").textContent = `${now.title}, ${now.org}`;
-  $("who").innerHTML = `<strong>${esc(d.name)}, ${esc(d.credentials)}.</strong> I lead Information Security and Identity and Access Management, with ${esc(d.roles)}.`;
+  $("role-line").textContent = d.badge || `${now.title}, ${now.org}`;
+  $("who").innerHTML = `<strong>${esc(d.name)}, ${esc(d.credentials)}.</strong> ${esc(d.who)}`;
   $("proof").innerHTML = (d.stats || []).map(s => `<div><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join("");
   $("summary").textContent = d.summary;
   $("mail").href = "mailto:" + d.email;
