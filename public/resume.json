@@ -33,7 +33,7 @@
       "dates": "June 2026 to Present",
       "blurb": "Leads Information Security and the Identity and Access Management group, protecting data integrity and operational resilience for 33,500 students and nearly 4,000 faculty across a global campus network. Uses AI tools built in house to reimagine how the security department works.",
       "bullets": [
-        "Led the research enclave through its CMMC Level 2 assessment, achieving a perfect score.",
+        "Led the GCC High research enclave, a segregated Microsoft 365 GCC High and Azure Government environment for Controlled Unclassified Information and export controlled (ITAR and EAR) data, through its CMMC Level 2 assessment, achieving a perfect score.",
         "Built a unified dashboard that brings every Information Security and IAM application into one view, improving visibility across the environment and speeding the resolution of threats and vulnerabilities.",
         "Building AI tools and resources to reimagine the Information Security department's processes, reporting, and daily operations.",
         "Lead the Identity and Access Management group in addition to Information Security, aligning identity, provisioning, and access controls with security strategy.",
@@ -140,7 +140,9 @@
     "1EdTech",
     "Microsoft Entra ID",
     "Active Directory",
-    "CMMC"
+    "CMMC",
+    "Microsoft 365 GCC High",
+    "Azure Government"
   ],
   "certifications": [
     {
@@ -228,7 +230,7 @@
     {
       "title": "Perfect CMMC Level 2 Score",
       "tag": "Compliance",
-      "text": "Led Georgia Southern University's research enclave through a CMMC Level 2 assessment with a perfect score."
+      "text": "Led Georgia Southern University's GCC High research enclave, built for CUI and ITAR and EAR data, through a CMMC Level 2 assessment with a perfect score."
     },
     {
       "title": "Unified Security Dashboard",
