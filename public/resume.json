@@ -10,7 +10,7 @@
   "stats": [
     {
       "value": "100%",
-      "label": "Score on a CMMC Level 2 assessment"
+      "label": "CMMC Level 2 score: 110 controls, zero deficiencies"
     },
     {
       "value": "$12M",
@@ -430,9 +430,13 @@
         "CMMC Level 2",
         "C3PAO"
       ],
-      "result": "Perfect score on the CMMC Level 2 C3PAO assessment. Talon Secure is now available to researchers as a CMMC Level 2 certified Azure cloud tenant, positioning the university for federal defense, intelligence, and research work that requires handling CUI.",
+      "result": "A perfect score from a Certified Third Party Assessor Organization: 110 security controls tested against 320 assessment objectives, with no deficiencies in any of the 14 security categories. Faculty can now pursue larger Department of War grants and partner with defense companies.",
       "metric": "100%",
       "links": [
+        {
+          "label": "Georgia Southern University news",
+          "url": "https://www.georgiasouthern.edu/2026/10/26/georgia-southern-receives-perfect-score-on-cybersecurity-audit-gains-access-to-increased-research-opportunities-from-the-department-of-defense"
+        },
         {
           "label": "Read the coverage",
           "url": "https://go-planet.com/perspectives-blog/georgia-southern-university-passes-cmmc-level-2-assessment-with-a-perfect-score/"
@@ -441,7 +445,12 @@
           "label": "See Talon Secure",
           "url": "https://www.georgiasouthern.edu/offices/it-services/departments/research-computing"
         }
-      ]
+      ],
+      "quote": {
+        "text": "The assessment confirmed our protections are followed in practice, not just written down.",
+        "by": "Nic Carroll, quoted by Georgia Southern University"
+      },
+      "credit": "The university's Research Security and Export Controls director credited Nic and his team with taking point on preparation."
     },
     {
       "title": "Reorganizing a 40 person technology division",
@@ -513,6 +522,13 @@
     }
   ],
   "writing": [
+    {
+      "kind": "In the news",
+      "date": "October 2026",
+      "title": "Georgia Southern receives perfect score on cybersecurity audit, gains access to increased research opportunities from the Department of Defense",
+      "summary": "Georgia Southern University on Talon Secure's CMMC Level 2 certification, with Nic and his team credited for leading preparation.",
+      "url": "https://www.georgiasouthern.edu/2026/10/26/georgia-southern-receives-perfect-score-on-cybersecurity-audit-gains-access-to-increased-research-opportunities-from-the-department-of-defense"
+    },
     {
       "kind": "In the news",
       "date": "October 2026",

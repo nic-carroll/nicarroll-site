@@ -89,6 +89,9 @@
   .case .result { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: var(--night); color: #fff; font-weight: 500; }
   .case .result span { color: var(--amber); font-weight: 700; margin-right: 6px; }
   .case .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .case-quote { margin: 18px 0 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--amber); font: 600 19px/1.4 var(--display); color: var(--ink); }
+  .case-quote cite { display: block; margin-top: 6px; font: 400 14px var(--body); color: var(--ink-soft); font-style: normal; }
+  .case-credit { margin: 12px 0 0; font-size: 15px; color: var(--ink-soft); }
   .case-links { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
   .case-link { margin-top: 0; font-weight: 600; color: #1f5f9e; text-underline-offset: 3px; }
   .case .tools span { font-size: 13px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink-soft); }
@@ -483,6 +486,8 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
       <div class="top"><div><div class="org">${esc(c.org)}</div><h3>${esc(c.title)}</h3></div>${c.metric ? `<div class="metric">${esc(c.metric)}</div>` : ""}</div>
       <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I did</dt><dd>${esc(c.approach)}</dd></div></dl>
       <div class="result"><span>Result</span>${esc(c.result)}</div>
+      ${c.quote ? `<blockquote class="case-quote">“${esc(c.quote.text)}”<cite>${esc(c.quote.by)}</cite></blockquote>` : ""}
+      ${c.credit ? `<p class="case-credit">${esc(c.credit)}</p>` : ""}
       <div class="tools">${(c.tools || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>
       ${(c.links || []).length ? `<div class="case-links">${c.links.map(l => `<a class="case-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div>` : ""}
     </article>`).join("");
