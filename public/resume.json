@@ -17,8 +17,8 @@
       "label": "School safety systems delivered across 44+ sites"
     },
     {
-      "value": "100K",
-      "label": "Endpoints under lifecycle management"
+      "value": "$75M+",
+      "label": "Technology assets managed, with a $12M+ annual budget"
     },
     {
       "value": "33,500",
@@ -49,6 +49,7 @@
       "dates": "September 2024 to May 2026",
       "blurb": "Unified IT, technology, and security as district CIO, CTO, and CISO, guiding the digital ecosystem for 3,700 staff and 24,000 students.",
       "bullets": [
+        "Managed an annual budget of more than $12 million and technology assets valued at more than $75 million.",
         "Led the $12 million installation of Audio Enhancement safety and security systems across all 44+ school sites.",
         "Reorganized a 40 person technology division, driving a 30% reduction in departmental spending ($1.5M in year one) by optimizing vendor contracts and eliminating external contractor dependencies.",
         "Orchestrated a large scale core infrastructure overhaul (fiber, WAN/SD-WAN, firewalls, switches, routers) that doubled internet bandwidth and strengthened continuity against outages and cyber events.",
@@ -263,9 +264,9 @@
       "text": "Restructured a 40 person division, cutting spending 30% ($1.5M) in year one."
     },
     {
-      "title": "50,000+ Devices Kept Current",
-      "tag": "Operations",
-      "text": "Led management, updates, and patching across more than 50,000 devices."
+      "title": "$12M+ Budget, $75M+ in Assets",
+      "tag": "Finance",
+      "text": "Managed Aiken County's annual technology budget of more than $12 million and assets valued at more than $75 million."
     },
     {
       "title": "K12 NexGen Cyber Standards",
