@@ -10,7 +10,7 @@
   "stats": [
     {
       "value": "100%",
-      "label": "CMMC Level 2 score: 110 controls, zero deficiencies"
+      "label": "CMMC Level 2: all 110 NIST SP 800-171 controls met, zero deficiencies"
     },
     {
       "value": "$12M",
@@ -35,7 +35,7 @@
       "bullets": [
         {
           "h": "Perfect CMMC Level 2 Score",
-          "t": "Led the GCC High research enclave, a segregated Microsoft 365 GCC High and Azure Government environment for Controlled Unclassified Information and export controlled (ITAR and EAR) data, through its CMMC Level 2 assessment, achieving a perfect score."
+          "t": "Led the GCC High research enclave, a segregated Microsoft 365 GCC High and Azure Government environment for Controlled Unclassified Information and export controlled (ITAR and EAR) data, through its CMMC Level 2 assessment, implementing all 110 NIST SP 800-171 controls and achieving a perfect score."
         },
         {
           "h": "Unified Security Dashboard",
@@ -276,6 +276,7 @@
   ],
   "skills": [
     "NIST",
+    "NIST SP 800-171",
     "ISO 27001",
     "SOC",
     "COBIT",
@@ -411,7 +412,7 @@
     {
       "title": "Perfect CMMC Level 2 Score",
       "tag": "Compliance",
-      "text": "Led Georgia Southern University's Talon Secure research enclave, built for CUI and ITAR and EAR data, to a perfect score on its CMMC Level 2 assessment."
+      "text": "Led Georgia Southern University's Talon Secure research enclave, built for CUI and ITAR and EAR data, to a perfect score on its CMMC Level 2 assessment: all 110 NIST SP 800-171 controls in place, the standard the Department of War requires to protect sensitive federal information."
     },
     {
       "title": "Unified Security Dashboard",
@@ -548,7 +549,8 @@
       "org": "Georgia Southern University",
       "tag": "Compliance",
       "challenge": "Researchers needed a place to store and work with Controlled Unclassified Information and export controlled (ITAR and EAR) data for DoD, DoE, and other federal research that would stand up to CMMC requirements.",
-      "approach": "Led the GCC High research enclave with partner Planet Technologies: a segregated environment on Microsoft 365 GCC High and Azure Government with approved collaboration tools, protected storage, virtual desktops, and controlled communication. Drove the documentation, policies, control validation, mock assessments, and evidence needed for a C3PAO assessment.",
+      "approach": "Led the GCC High research enclave with partner Planet Technologies: a segregated environment on Microsoft 365 GCC High and Azure Government with approved collaboration tools, protected storage, virtual desktops, and controlled communication. Translated NIST SP 800-171 into daily practice, leading the implementation of all 110 required controls across 14 families, from access control and audit logging to incident response and configuration management. Drove the documentation, policies, control validation, mock assessments, and evidence needed for a C3PAO assessment.",
+      "why": "CMMC, the Cybersecurity Maturity Model Certification, is how the Department of War, formerly the Department of Defense, verifies that the contractors and research partners it works with protect Controlled Unclassified Information. Level 2 requires every one of the 110 security requirements in NIST SP 800-171, checked by an independent assessor against 320 objectives. Without it, a university is shut out of a growing share of defense research. A perfect score shows the controls work in practice, not just on paper.",
       "tools": [
         "Microsoft 365 GCC High",
         "Azure Government",

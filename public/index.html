@@ -93,6 +93,8 @@
   .case dt { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
   .case dd { margin: 0; color: var(--ink-soft); font-size: 16px; }
   .case .result { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: var(--night); color: #fff; font-weight: 500; }
+  .case .why { margin-top: 14px; padding: 16px 18px; border-radius: 12px; background: var(--sky-soft); color: var(--ink); font-size: 16px; line-height: 1.55; }
+  .case .why b { display: block; font: 700 13px var(--body); letter-spacing: .04em; text-transform: uppercase; color: #1f5f9e; margin-bottom: 4px; }
   .case .result span { color: var(--amber); font-weight: 700; margin-right: 6px; }
   .case .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
   .case-quote { margin: 18px 0 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--amber); font: 600 19px/1.4 var(--display); color: var(--ink); }
@@ -554,6 +556,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
       <div class="top"><div><div class="org">${esc(c.org)}</div><h3>${esc(c.title)}</h3></div>${c.metric ? `<div class="metric">${esc(c.metric)}${c.metricLabel ? `<small>${esc(c.metricLabel)}</small>` : ""}</div>` : ""}</div>
       <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I Did</dt><dd>${esc(c.approach)}</dd></div></dl>
       <div class="result"><span>Result</span>${esc(c.result)}</div>
+      ${c.why ? `<div class="why"><b>Why It Matters</b>${esc(c.why)}</div>` : ""}
       ${c.quote ? `<blockquote class="case-quote">“${esc(c.quote.text)}”<cite>${esc(c.quote.by)}</cite></blockquote>` : ""}
       ${c.credit ? `<p class="case-credit">${esc(c.credit)}</p>` : ""}
       <div class="tools">${(c.tools || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>
