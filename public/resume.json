@@ -164,6 +164,18 @@
           "t": "Directed core platforms including the student information system and set interoperability standards for secure data exchange across 33,000 users."
         },
         {
+          "h": "ClassLink Single Sign On and Rostering",
+          "t": "Led the move to ClassLink single sign on and the integration of core educational resources, rostering through an interoperability standard. Cut the time to roster a new product from months to a few weeks and dramatically reduced roster errors."
+        },
+        {
+          "h": "Google Classroom LMS",
+          "t": "Led and managed Google Classroom as the district's learning management system."
+        },
+        {
+          "h": "Credit Recovery Programs",
+          "t": "Led the district's credit recovery programs, giving students a path back on track to graduate."
+        },
+        {
           "h": "Three Platforms in One Week",
           "t": "Migrated and scaled three enterprise grade learning tools within a single week."
         },
@@ -211,6 +223,14 @@
         {
           "h": "The Studio",
           "t": "Created The Studio, a project based course blending Computer Science, AP Social Studies, and Language Arts."
+        },
+        {
+          "h": "Moodle for the Hybrid Program",
+          "t": "Led and managed Moodle as the learning management system for the school's hybrid program."
+        },
+        {
+          "h": "Credit Recovery Program",
+          "t": "Led the school's credit recovery program."
         },
         {
           "h": "Virtual Courses",
@@ -283,6 +303,9 @@
     "EDI",
     "Ed-Fi",
     "1EdTech",
+    "ClassLink",
+    "Google Classroom",
+    "Moodle",
     "Microsoft Entra ID",
     "Active Directory",
     "CMMC",
@@ -738,6 +761,22 @@
       "result": "About 1,200 staff became Google Certified Educator Level 1, 400 earned Level 2, and more than 27 became Google Certified Trainers, with both platforms in use across the district.",
       "metric": "1,600+",
       "metricLabel": "Google certifications earned by staff"
+    },
+    {
+      "title": "One Login and Clean Rosters With ClassLink",
+      "org": "Columbia County Public Schools",
+      "tag": "Identity",
+      "challenge": "Students and teachers juggled separate logins for core learning tools, and getting rosters into each new product took months of manual work and produced frequent errors.",
+      "approach": "Led the move to ClassLink single sign on and integrated the district's core educational resources, moving rostering to an interoperability standard so class data flowed to each product the same way every time.",
+      "tools": [
+        "ClassLink",
+        "Single sign on",
+        "Rostering standards",
+        "Google Classroom"
+      ],
+      "result": "Rostering a new product went from months to a few weeks, roster errors dropped dramatically, and students and teachers reached their tools with one login.",
+      "metric": "Weeks",
+      "metricLabel": "Not months, to roster a new product"
     },
     {
       "title": "Redefined the Media Specialist and Instructional Technology Roles",
