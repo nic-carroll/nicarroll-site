@@ -606,7 +606,8 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
     ["Georgia Southern University", "Georgia Southern University", "Chief Information Security Officer"],
     ["Aiken County Public Schools", "Aiken County Public Schools", "Executive Director of Technology (CIO, CTO, CISO)"],
     ["Columbia County Public Schools", "Columbia County Public Schools", "Director of IT, Digital Learning, and Media Services"],
-    ["1EdTech Consortium", "National Work With 1EdTech", "Institutional representative and task force member"]
+    ["1EdTech Consortium", "National Work With 1EdTech", "Institutional representative and task force member"],
+    ["Independent Projects", "Products I'm Building", "Founder and builder"]
   ];
   $("case-list").className = "";
   $("case-list").innerHTML = GROUPS.map(([org, label, role], gi) => {

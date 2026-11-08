@@ -505,6 +505,30 @@
       "featured": true
     },
     {
+      "title": "RosterEditor",
+      "status": "Live demo",
+      "summary": "Edit OneRoster 1.1 and 1.2 rosters for ClassLink: combine sections and courses, add or swap teachers, and export a clean file, with built in rules and a REST API.",
+      "tags": [
+        "Rostering",
+        "OneRoster",
+        "ClassLink"
+      ],
+      "url": "https://rostereditor-388842205758.us-east1.run.app",
+      "repo": ""
+    },
+    {
+      "title": "EduSite",
+      "status": "Beta",
+      "summary": "An accessible, low cost website platform that runs a district site and every school site from one dashboard, with an AI assistant for staff updates.",
+      "tags": [
+        "Accessibility",
+        "Websites",
+        "K12"
+      ],
+      "url": "https://edusite-demo-beta-388842205758.us-east1.run.app",
+      "repo": ""
+    },
+    {
       "title": "Unified Security Dashboard",
       "status": "In use",
       "summary": "An internal tool that pulls Georgia Southern University's Information Security and IAM applications into one dashboard, giving the team visibility across the environment and a faster path from alert to fix.",
@@ -826,7 +850,13 @@
       ],
       "result": "Rostering a new product went from months to a few weeks, roster errors dropped dramatically, and students and teachers reached their tools with one login.",
       "metric": "Weeks",
-      "metricLabel": "Not months, to roster a new product"
+      "metricLabel": "Not months, to roster a new product",
+      "links": [
+        {
+          "label": "See RosterEditor, What I Built Next",
+          "url": "https://rostereditor-388842205758.us-east1.run.app"
+        }
+      ]
     },
     {
       "title": "Redefined the Media Specialist and Instructional Technology Roles",
@@ -878,6 +908,51 @@
         }
       ],
       "lead": true
+    },
+    {
+      "title": "RosterEditor: Fix OneRoster Files Without the Wait",
+      "org": "Independent Projects",
+      "tag": "Identity",
+      "lead": true,
+      "challenge": "Districts often need to combine sections, swap teachers, or correct a roster before it reaches ClassLink, and that work usually means waiting on the student information system or hand editing CSV files.",
+      "approach": "Built RosterEditor, which imports a OneRoster 1.1 or 1.2 bulk file and lets staff combine sections and courses, add or swap teachers, and fix any row in a dashboard or through a REST API, then exports a clean file in the same version for ClassLink. The combining rules are built in, so no AI is needed to do the work.",
+      "tools": [
+        "OneRoster 1.1 and 1.2",
+        "ClassLink",
+        "REST API",
+        "Google Cloud Run"
+      ],
+      "result": "A live demo with invented data built on real Georgia state course codes, preview before every change, undo for the last 50 edits, and the first step toward an open source rostering hub.",
+      "metric": "1.1 + 1.2",
+      "metricLabel": "OneRoster versions, in and out",
+      "links": [
+        {
+          "label": "Try the Live Demo",
+          "url": "https://rostereditor-388842205758.us-east1.run.app"
+        }
+      ]
+    },
+    {
+      "title": "EduSite: One Accessible Platform for Every District and School Site",
+      "org": "Independent Projects",
+      "tag": "Education",
+      "challenge": "Districts must meet the ADA Title II rule (WCAG 2.1 Level AA) on the district site and every school site, often with separate tools, inconsistent menus, and high costs.",
+      "approach": "Built EduSite, one install that runs the district site and every school site from a single dashboard, with shared menus and theme, drafts, review, and an audit log, accessibility checks that block publishing on errors, and an AI assistant where staff type or dictate changes without breaking the design.",
+      "tools": [
+        "WCAG 2.1 AA",
+        "Section 508",
+        "AI assistant",
+        "Google Cloud Run"
+      ],
+      "result": "A live beta demo modeled on Columbia County and Aiken County with a district switcher, built to stay low cost for districts to run themselves or have hosted.",
+      "metric": "AA",
+      "metricLabel": "WCAG 2.1 accessibility built in",
+      "links": [
+        {
+          "label": "Try the Beta Demo",
+          "url": "https://edusite-demo-beta-388842205758.us-east1.run.app"
+        }
+      ]
     }
   ],
   "approach": [
