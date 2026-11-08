@@ -626,7 +626,13 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   }
   if ((d.writing || []).length) {
     $("writing").hidden = false;
-    $("post-list").innerHTML = d.writing.map(w => `<li><div class="k">${esc(w.kind || "")}<br>${esc(w.date || "")}</div><div>${w.url ? `<a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.title)}</a>` : `<a role="text" style="cursor:default">${esc(w.title)}</a>`}${w.summary ? `<p>${esc(w.summary)}</p>` : ""}</div></li>`).join("");
+    const pitem = w => `<li><div class="k">${esc(w.kind || "")}<br>${esc(w.date || "")}</div><div>${w.url ? `<a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.title)}</a>` : `<a role="text" style="cursor:default">${esc(w.title)}</a>`}${w.summary ? `<p>${esc(w.summary)}</p>` : ""}</div></li>`;
+    const PSHOW = 5, ptop = d.writing.slice(0, PSHOW), pextra = d.writing.slice(PSHOW);
+    $("post-list").innerHTML = ptop.map(pitem).join("");
+    if (pextra.length) {
+      $("post-list").insertAdjacentHTML("afterend", `<ul class="posts" id="post-more" hidden>${pextra.map(pitem).join("")}</ul><button class="more-btn" id="post-btn" type="button" aria-expanded="false" aria-controls="post-more">Show ${pextra.length} more</button>`);
+      $("post-btn").addEventListener("click", () => { const m = $("post-more"); m.hidden = !m.hidden; $("post-btn").setAttribute("aria-expanded", String(!m.hidden)); $("post-btn").textContent = (m.hidden ? "Show " : "Hide ") + pextra.length + " more"; });
+    }
   }
 
   $("highlights").innerHTML = d.highlights.map(h => `
