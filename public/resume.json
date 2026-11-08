@@ -50,8 +50,8 @@
           "t": "Lead the Identity and Access Management group in addition to Information Security, aligning identity, provisioning, and access controls with security strategy."
         },
         {
-          "h": "Third Party Application Review",
-          "t": "Led a complete revision of the third party application review process to strengthen vendor risk management and data privacy."
+          "h": "4,000+ Products Reviewed and Approved",
+          "t": "In the first six months, reimagined the third party review and approval process, making it transparent and integrating legal review, procurement, and information technology systems review. Reviewed and approved more than 4,000 products, from Chrome extensions, hardware, and applications for the research environment to the tools departments and divisions use every day."
         },
         {
           "h": "Enterprise Security Strategy",
@@ -156,8 +156,12 @@
           "t": "Created the evaluation systems for media specialists and instructional technology personnel, including the district's adoption of the Media Keys Effectiveness System in 2020 to 2021, and used them to redefine and improve how both roles serve teachers and students."
         },
         {
-          "h": "Microcredentialing for 4,000+",
-          "t": "Launched a districtwide microcredentialing platform serving over 4,000 employees."
+          "h": "Google Workspace in a Microsoft District",
+          "t": "Brought in to introduce Google Workspace tools into a Microsoft environment, and built the plan that let both platforms grow and be used side by side."
+        },
+        {
+          "h": "Microcredential Program Built From the Ground Up",
+          "t": "Built a districtwide microcredential program serving over 4,000 employees. About 1,200 staff became Google Certified Educator Level 1, 400 earned Level 2, and the district grew 27+ Google Certified Trainers."
         },
         {
           "h": "Team of 80 Specialists",
@@ -355,11 +359,6 @@
       "text": "AI tools and resources that reimagine how an information security team works day to day."
     },
     {
-      "title": "$12M School Safety Systems",
-      "tag": "Safety",
-      "text": "Audio Enhancement safety and security systems installed across all 44+ Aiken County school sites."
-    },
-    {
       "title": "Active Directory to Entra ID",
       "tag": "Identity",
       "text": "Led a complete identity revamp and migration from on premises Active Directory to Microsoft Entra ID."
@@ -370,9 +369,14 @@
       "text": "Stood up Aiken County's first comprehensive cybersecurity program, aligned to NIST and CIS, for 28,000+ users."
     },
     {
-      "title": "2,000+ Cameras, 500+ Doors, One System",
-      "tag": "Safety",
-      "text": "Unified Aiken County's cameras and door access across 44+ campuses into a single physical security system."
+      "title": "4,000+ Products Reviewed in Six Months",
+      "tag": "Compliance",
+      "text": "Reimagined Georgia Southern University's third party review and approval process, bringing legal, procurement, and IT systems review into one transparent path."
+    },
+    {
+      "title": "1,600+ Google Certifications",
+      "tag": "Education",
+      "text": "Built Columbia County's microcredential program from the ground up: about 1,200 Level 1 and 400 Level 2 certified educators, plus 27+ Google Certified Trainers."
     },
     {
       "title": "Evaluation Systems That Redefined Two Roles",
@@ -498,6 +502,22 @@
       "metricLabel": "CMMC Level 2 score"
     },
     {
+      "title": "Reimagined Third Party Review: 4,000+ Products in Six Months",
+      "org": "Georgia Southern University",
+      "tag": "Compliance",
+      "challenge": "Departments, divisions, and researchers needed new software, hardware, and extensions approved, but the review process was hard to see into and legal, procurement, and IT each worked on their own.",
+      "approach": "In my first six months, completely changed the third party review and approval process. Made it transparent to requesters and built legal review, procurement, and information technology systems review into a single path, strengthening vendor risk management and data privacy.",
+      "tools": [
+        "Vendor risk management",
+        "Legal review",
+        "Procurement",
+        "IT systems review"
+      ],
+      "result": "More than 4,000 products reviewed and approved, from Chrome extensions, hardware, and applications for the research environment to the tools departments and divisions use every day.",
+      "metric": "4,000+",
+      "metricLabel": "Products reviewed and approved"
+    },
+    {
       "title": "Reorganized a 40 Person Technology Division",
       "org": "Aiken County Public Schools",
       "tag": "Leadership",
@@ -583,6 +603,22 @@
           "url": "https://ccboe.net/apps/video/"
         }
       ]
+    },
+    {
+      "title": "Google and Microsoft, Side by Side, With 1,600+ Certifications",
+      "org": "Columbia County Public Schools",
+      "tag": "Education",
+      "challenge": "Columbia County ran on Microsoft, and teachers needed Google Workspace tools for teaching and learning, plus the skills to use them well.",
+      "approach": "Brought in to introduce Google Workspace into the Microsoft environment and let both platforms grow and be used. Built a microcredential program from the ground up so staff could earn Google certifications and grow a trainer corps to support their colleagues.",
+      "tools": [
+        "Google Workspace",
+        "Microsoft 365",
+        "Microcredentials",
+        "Google Certified Educator"
+      ],
+      "result": "About 1,200 staff became Google Certified Educator Level 1, 400 earned Level 2, and more than 27 became Google Certified Trainers, with both platforms in use across the district.",
+      "metric": "1,600+",
+      "metricLabel": "Google certifications earned by staff"
     },
     {
       "title": "Redefined the Media Specialist and Instructional Technology Roles",
