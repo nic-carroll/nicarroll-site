@@ -83,8 +83,16 @@
           "t": "Reorganized a 40 person technology division, driving a 30% reduction in departmental spending ($1.5M in year one) by optimizing vendor contracts and eliminating external contractor dependencies."
         },
         {
-          "h": "Core Infrastructure Overhaul",
-          "t": "Orchestrated a large scale core infrastructure overhaul (fiber, WAN/SD-WAN, firewalls, switches, routers) that doubled internet bandwidth and strengthened continuity against outages and cyber events."
+          "h": "Network Upgrade Across 44+ Campuses",
+          "t": "Led the upgrade of internet circuits for all 44+ campuses and replaced every router and switch, along with fiber, WAN and SD-WAN, and firewalls, doubling internet bandwidth and protecting continuity against outages and cyber events."
+        },
+        {
+          "h": "Hyperconverged Infrastructure Overhaul",
+          "t": "Overhauled the district's hyperconverged infrastructure to modernize compute and storage."
+        },
+        {
+          "h": "2,000+ Cameras and 500+ Doors, One System",
+          "t": "Unified more than 2,000 cameras and 500 doors into a single physical security system."
         },
         {
           "h": "Active Directory to Entra ID",
@@ -350,9 +358,9 @@
       "text": "Stood up Aiken County's first comprehensive cybersecurity program, aligned to NIST and CIS, for 28,000+ users."
     },
     {
-      "title": "Technology Division Reorganization",
-      "tag": "Leadership",
-      "text": "Restructured a 40 person division, cutting spending 30% ($1.5M) in year one."
+      "title": "2,000+ Cameras, 500+ Doors, One System",
+      "tag": "Safety",
+      "text": "Unified Aiken County's cameras and door access across 44+ campuses into a single physical security system."
     },
     {
       "title": "$12M+ Budget, $75M+ in Assets",
@@ -479,6 +487,21 @@
       ],
       "result": "A $12 million installation completed across all 44+ sites.",
       "metric": "44+"
+    },
+    {
+      "title": "Rebuilding the Network and Physical Security for 44+ Campuses",
+      "org": "Aiken County Public Schools",
+      "tag": "Infrastructure",
+      "challenge": "More than 44 campuses ran on aging internet circuits, routers, switches, and infrastructure, with cameras and door access spread across separate systems.",
+      "approach": "Led the upgrade of every campus internet circuit, replaced all routers and switches, overhauled the hyperconverged infrastructure, and unified more than 2,000 cameras and 500 doors into one system.",
+      "tools": [
+        "Internet circuits",
+        "Routers and switches",
+        "Hyperconverged infrastructure",
+        "Unified physical security"
+      ],
+      "result": "Doubled internet bandwidth, stronger continuity against outages and cyber events, and one view of cameras and doors across every campus.",
+      "metric": "2,000+"
     },
     {
       "title": "One View of Security and Identity",

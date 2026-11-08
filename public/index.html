@@ -83,6 +83,7 @@
   /* Case studies */
   .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
   .case { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
+  .case:first-child { grid-column: 1 / -1; }
   .case .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
   .case .org { font-size: 14px; font-weight: 600; color: #1f5f9e; }
   .case h3 { font: 760 26px/1.1 var(--display); letter-spacing: -.02em; margin: 6px 0 18px; }
