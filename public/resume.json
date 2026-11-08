@@ -412,6 +412,30 @@
       "repo": ""
     },
     {
+      "title": "Policy Search, Editing, and Approval",
+      "status": "In use",
+      "summary": "A tool I built for Georgia Southern University that takes a policy from search to approval in one place: find any policy, edit it, submit a proposed change, and route it through review and approval.",
+      "tags": [
+        "Governance",
+        "Workflow",
+        "Internal"
+      ],
+      "url": "",
+      "repo": ""
+    },
+    {
+      "title": "Open Records Request Automation",
+      "status": "In use",
+      "summary": "A system I built that manages open records requests and automates the redaction of personally identifiable information, so records are released faster and private data stays protected.",
+      "tags": [
+        "Privacy",
+        "Automation",
+        "Internal"
+      ],
+      "url": "",
+      "repo": ""
+    },
+    {
       "title": "Georgia Educational Analytics",
       "status": "In progress",
       "summary": "A five year GOSA data portal for Georgia schools with school profiles, regression analysis, and a slide deck builder for sharing findings with leaders.",
