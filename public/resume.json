@@ -99,6 +99,10 @@
           "t": "Led the upgrade of internet circuits for all 44+ campuses and replaced every router and switch, along with fiber, WAN and SD-WAN, and firewalls, doubling internet bandwidth and protecting continuity against outages and cyber events."
         },
         {
+          "h": "POTS to Cellular Emergency Phones at 44+ Sites",
+          "t": "Led a complete retrofit at all 44+ sites, retiring copper POTS lines for a new emergency phone system on cellular service with internet backup."
+        },
+        {
           "h": "Hyperconverged Infrastructure Overhaul",
           "t": "Overhauled the district's hyperconverged infrastructure to modernize compute and storage."
         },
@@ -239,6 +243,7 @@
     "Data Analysis and Integrations",
     "Enterprise Information Technology",
     "IT Governance and Compliance",
+    "E-Rate Funding",
     "Cross Functional Collaboration"
   ],
   "skills": [
@@ -274,7 +279,8 @@
     "Active Directory",
     "CMMC",
     "Microsoft 365 GCC High",
-    "Azure Government"
+    "Azure Government",
+    "E-Rate"
   ],
   "certifications": [
     {
@@ -641,14 +647,15 @@
       "org": "Aiken County Public Schools",
       "tag": "Infrastructure",
       "challenge": "More than 44 campuses, spread across a district larger than Rhode Island, ran on aging internet circuits, routers, switches, and infrastructure, with cameras and door access spread across separate systems.",
-      "approach": "Led the upgrade of every campus internet circuit, replaced all routers and switches, overhauled the hyperconverged infrastructure, and unified more than 2,000 cameras and 500 doors into one system.",
+      "approach": "Led the upgrade of every campus internet circuit, replaced all routers and switches, overhauled the hyperconverged infrastructure, retrofitted every site from POTS lines to a new emergency phone system on cellular service with internet backup, and unified more than 2,000 cameras and 500 doors into one system.",
       "tools": [
         "Internet circuits",
         "Routers and switches",
         "Hyperconverged infrastructure",
-        "Unified physical security"
+        "Unified physical security",
+        "Cellular emergency phones"
       ],
-      "result": "Doubled internet bandwidth, stronger continuity against outages and cyber events, and one view of cameras and doors across every campus.",
+      "result": "Doubled internet bandwidth, emergency phones that keep working when a line goes down, stronger continuity against outages and cyber events, and one view of cameras and doors across every campus.",
       "metric": "2,000+",
       "metricLabel": "Cameras unified in one system"
     },
