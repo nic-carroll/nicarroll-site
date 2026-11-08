@@ -312,6 +312,10 @@
     {
       "name": "Certified Cybersecurity Evaluator",
       "issuer": "Cybersecurity Coalition for Education"
+    },
+    {
+      "name": "Certified Residential and Commercial Property Inspector",
+      "issuer": "InterNACHI"
     }
   ],
   "education": [
@@ -805,7 +809,7 @@
     {
       "title": "Certified Property Inspector",
       "tag": "Compliance",
-      "text": "Certified residential and commercial property inspector with more than 500 homes and 200 commercial properties inspected. The same eye for risk, standards, and clear findings I bring to security assessments."
+      "text": "InterNACHI certified residential and commercial property inspector with more than 500 homes and 200 commercial properties inspected. The same eye for risk, standards, and clear findings I bring to security assessments."
     },
     {
       "title": "Restaurant Manager, From the Line Up",
