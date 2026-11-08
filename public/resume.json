@@ -42,6 +42,10 @@
           "t": "Built a unified dashboard that brings every Information Security and IAM application into one view, improving visibility across the environment and speeding the resolution of threats and vulnerabilities."
         },
         {
+          "h": "Reimagine IT Project Methodology",
+          "t": "Reimagined project management at Georgia Southern University with Reimagine IT: Frame it, Build it, Loop it, Launch it, Tend it. Cross functional teams build a working draft with AI partners in a day and launch in days or weeks, with security and IAM built in, not bolted on."
+        },
+        {
           "h": "AI for Information Security",
           "t": "Building AI tools and resources to reimagine the Information Security department's processes, reporting, and daily operations."
         },
@@ -516,6 +520,22 @@
       "result": "More than 4,000 products reviewed and approved, from Chrome extensions, hardware, and applications for the research environment to the tools departments and divisions use every day.",
       "metric": "4,000+",
       "metricLabel": "Products reviewed and approved"
+    },
+    {
+      "title": "Reimagine IT: A New Way to Run Projects",
+      "org": "Georgia Southern University",
+      "tag": "Leadership",
+      "challenge": "Projects followed the old way: scope for weeks, build behind closed doors, deliver once, and hope it fits. Every change pulled the whole team back together, and staff were tied to old habits, processes, and tools.",
+      "approach": "Tasked by the CIO with rethinking how the university builds tools, I designed Reimagine IT, a five move cycle: Frame it, Build it, Loop it, Launch it, Tend it. The project owner builds with university approved AI tools while security, IAM, applications, UX, and academic partners shape the work in the room. Guardrails are set once, up front, and every project has one named owner, a backup, and a shared record from the first hour to the change catalog.",
+      "tools": [
+        "Project methodology",
+        "AI partners",
+        "Change management",
+        "Security by design"
+      ],
+      "result": "A methodology for any project, an app, a process, or anything else, that runs at the pace of a day, a week, or a month. Teams leave Build it with a working first draft instead of a plan, and launch in days or weeks instead of months.",
+      "metric": "1 day",
+      "metricLabel": "From idea to a working first draft"
     },
     {
       "title": "Reorganized a 40 Person Technology Division",
