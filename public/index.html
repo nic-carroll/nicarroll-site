@@ -32,6 +32,7 @@
     --measure: 66ch;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.65 var(--body); -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
@@ -83,7 +84,20 @@
   /* Case studies */
   .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
   .case { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
-  .case:first-child, .case:nth-child(even):last-child { grid-column: 1 / -1; }
+  .case-group + .case-group { margin-top: 56px; }
+  .group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 0 0 18px; padding-bottom: 12px; border-bottom: 2px solid var(--line); }
+  .group-head h3 { font: 760 clamp(24px, 2.6vw, 32px)/1.1 var(--display); letter-spacing: -.02em; margin: 0; }
+  .group-head span { font-size: 15px; color: var(--ink-soft); }
+  .cases.lead-row { grid-template-columns: 1fr; }
+  .cases.more { margin-top: 22px; }
+  .cases.more .case:nth-child(odd):last-child { grid-column: 1 / -1; }
+  .case details.story { margin: 0 0 4px; }
+  .case details.story summary { cursor: pointer; font-weight: 600; font-size: 15px; color: #1f5f9e; list-style: none; margin-bottom: 12px; }
+  .case details.story summary::-webkit-details-marker { display: none; }
+  .case details.story summary::after { content: " +"; }
+  .case details.story[open] summary::after { content: " \2212"; }
+  .more-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 18px; padding: 16px 20px; border-radius: 14px; border: 1.5px dashed #9fb3cc; background: transparent; font: 600 16px var(--body); color: var(--ink); cursor: pointer; }
+  .more-btn:hover { background: var(--surface); border-style: solid; }
   .case .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
   .case .org { font-size: 14px; font-weight: 600; color: #1f5f9e; }
   .case h3 { font: 760 26px/1.1 var(--display); letter-spacing: -.02em; margin: 6px 0 18px; }
@@ -181,7 +195,12 @@
   .icard .ico svg { width: 24px; height: 24px; }
   .icard h3 { font: 700 21px/1.2 var(--display); margin: 20px 0 8px; letter-spacing: -.01em; }
   .icard p { margin: 0; color: var(--ink-soft); font-size: 16px; }
-  .lede { font-size: 20px; line-height: 1.6; max-width: 60ch; margin: 0 0 40px; color: #2a3a4f; }
+  .lede { font: 600 clamp(22px, 2.2vw, 28px)/1.4 var(--display); letter-spacing: -.01em; max-width: none; margin: 0 0 28px; color: var(--ink); }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin: 0 0 22px; }
+  .pillars div { border-top: 3px solid var(--amber); padding: 16px 30px 0; }
+  .pillars b { display: block; font: 700 18px/1.25 var(--display); color: var(--ink); margin-bottom: 6px; }
+  .pillars p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-soft); }
+  @media (max-width: 960px) { .pillars { grid-template-columns: 1fr; } }
 
   /* Timeline */
   .timeline { list-style: none; margin: 0; padding: 0; }
@@ -319,7 +338,7 @@
       <h2>Case Studies</h2>
       <p>The challenge, what I did, and what changed.</p>
     </div>
-    <div class="cases" id="case-list"></div>
+    <div id="case-list"></div>
   </section>
 
   <section class="block" id="approach">
@@ -345,6 +364,7 @@
       <p>Projects led from idea to completion, on time and under budget.</p>
     </div>
     <p class="lede" id="summary"></p>
+    <div class="pillars" id="pillars"></div>
     <div class="impact" id="highlights"></div>
   </section>
 
@@ -520,6 +540,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   $("now").innerHTML = d.now ? `<span>Now</span>${esc(d.now)}` : "";
   $("proof").innerHTML = (d.stats || []).map(s => `<div><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join("");
   $("summary").textContent = d.summary;
+  $("pillars").innerHTML = (d.summaryPoints || []).map(p => `<div><b>${esc(p.title)}</b><p>${esc(p.text)}</p></div>`).join("");
   $("mail").href = "mailto:" + d.email;
   $("li").href = d.linkedin;
 
@@ -552,21 +573,53 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
     </article>`).join("") + (rest.length % 3 === 0 ? "" : `<div class="add-yours"><div><b>More on the Way</b>New tools land here as I build them.</div></div>`);
 
   if (d.photo) $("portrait").querySelector("img").src = d.photo;
-  $("case-list").innerHTML = (d.caseStudies || []).map(c => `
+  const caseCard = (c, full) => `
     <article class="case">
       <div class="top"><div><div class="org">${esc(c.org)}</div><h3>${esc(c.title)}</h3></div>${c.metric ? `<div class="metric">${esc(c.metric)}${c.metricLabel ? `<small>${esc(c.metricLabel)}</small>` : ""}</div>` : ""}</div>
-      <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I Did</dt><dd>${esc(c.approach)}</dd></div></dl>
+      <details class="story" ${full ? "open" : ""}><summary>The challenge and what I did</summary>
+      <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I Did</dt><dd>${esc(c.approach)}</dd></div></dl></details>
       <div class="result"><span>Result</span>${esc(c.result)}</div>
       ${c.why ? `<div class="why"><b>Why It Matters</b>${esc(c.why)}</div>` : ""}
       ${c.quote ? `<blockquote class="case-quote">“${esc(c.quote.text)}”<cite>${esc(c.quote.by)}</cite></blockquote>` : ""}
       ${c.credit ? `<p class="case-credit">${esc(c.credit)}</p>` : ""}
       <div class="tools">${(c.tools || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>
-      ${(c.links || []).length ? `<div class="case-links">${c.links.map(l => `<a class="case-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div>` : ""}
-    </article>`).join("");
+      ${(c.links || []).length ? `<div class="case-links">${c.links.map(l => `<a class="case-link" href="${esc(l.url)}" ${l.url.startsWith("assets/") ? "" : 'target="_blank" rel="noopener"'}>${esc(l.label)}</a>`).join("")}</div>` : ""}
+    </article>`;
+  const GROUPS = [
+    ["Georgia Southern University", "Georgia Southern University", "Chief Information Security Officer"],
+    ["Aiken County Public Schools", "Aiken County Public Schools", "Executive Director of Technology (CIO, CTO, CISO)"],
+    ["Columbia County Public Schools", "Columbia County Public Schools", "Director of IT, Digital Learning, and Media Services"],
+    ["1EdTech Consortium", "National Work With 1EdTech", "Institutional representative and task force member"]
+  ];
+  $("case-list").className = "";
+  $("case-list").innerHTML = GROUPS.map(([org, label, role], gi) => {
+    const list = (d.caseStudies || []).filter(c => c.org === org);
+    if (!list.length) return "";
+    const lead = list.find(c => c.lead) || list[0];
+    const rest = list.filter(c => c !== lead);
+    return `<div class="case-group">
+      <div class="group-head"><h3>${esc(label)}</h3><span>${esc(role)}</span></div>
+      <div class="cases lead-row">${caseCard(lead, true)}</div>
+      ${rest.length ? `<div class="cases more" id="more-${gi}" hidden>${rest.map(c => caseCard(c, false)).join("")}</div>
+      <button class="more-btn" type="button" aria-expanded="false" aria-controls="more-${gi}" data-label="${rest.length} more from ${esc(label)}">Show ${rest.length} more from ${esc(label)}</button>` : ""}
+    </div>`;
+  }).join("");
+  $("case-list").querySelectorAll(".more-btn").forEach(b => b.addEventListener("click", () => {
+    const box = document.getElementById(b.getAttribute("aria-controls"));
+    box.hidden = !box.hidden;
+    b.setAttribute("aria-expanded", String(!box.hidden));
+    b.textContent = (box.hidden ? "Show " : "Hide ") + b.dataset.label;
+  }));
   $("approach-list").innerHTML = (d.approach || []).map(a => `<div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>`).join("");
   if ((d.testimonials || []).length) {
     $("voices").hidden = false;
-    $("quote-list").innerHTML = d.testimonials.map(t => `<figure class="quote"><blockquote>${esc(t.quote)}</blockquote><figcaption><b>${esc(t.name)}</b><span>${esc(t.title)}</span>${t.source ? `<br><a href="${esc(t.source)}" target="_blank" rel="noopener" style="font-size:14px;color:#1f5f9e">${/linkedin/.test(t.source) ? "Read it on LinkedIn" : "Source"}</a>` : ""}</figcaption></figure>`).join("");
+    const qcard = t => `<figure class="quote"><blockquote>${esc(t.quote)}</blockquote><figcaption><b>${esc(t.name)}</b><span>${esc(t.title)}</span>${t.source ? `<br><a href="${esc(t.source)}" target="_blank" rel="noopener" style="font-size:14px;color:#1f5f9e">${/linkedin/.test(t.source) ? "Read it on LinkedIn" : "Source"}</a>` : ""}</figcaption></figure>`;
+    const SHOW = 4, top = d.testimonials.slice(0, SHOW), extra = d.testimonials.slice(SHOW);
+    $("quote-list").innerHTML = top.map(qcard).join("");
+    if (extra.length) {
+      $("quote-list").insertAdjacentHTML("afterend", `<div class="quotes" id="quote-more" hidden>${extra.map(qcard).join("")}</div><button class="more-btn" id="quote-btn" type="button" aria-expanded="false" aria-controls="quote-more">Show ${extra.length} more endorsements</button>`);
+      $("quote-btn").addEventListener("click", () => { const m = $("quote-more"); m.hidden = !m.hidden; $("quote-btn").setAttribute("aria-expanded", String(!m.hidden)); $("quote-btn").textContent = (m.hidden ? "Show " : "Hide ") + extra.length + " more endorsements"; });
+    }
   }
   if ((d.writing || []).length) {
     $("writing").hidden = false;

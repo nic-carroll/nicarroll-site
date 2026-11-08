@@ -6,7 +6,21 @@
   "location": "Augusta, Georgia",
   "email": "carroll.nic@gmail.com",
   "linkedin": "https://www.linkedin.com/in/nic-carroll/",
-  "summary": "I've led the whole of information technology as a CIO, CTO, and CISO, and today I lead Information Security and Identity and Access Management at Georgia Southern University. I'm a visionary problem solver who makes sure projects are completed on time, at scale, and under budget. I excel at creating new tools, processes, and procedures, including AI tools that are reimagining how a security department works. Over my career I have deployed more than 100 Google Workspace domains and led enterprise migrations between Microsoft and Google in both directions.",
+  "summary": "I've led the whole of information technology as a CIO, CTO, and CISO. Today I lead Information Security and Identity and Access Management at Georgia Southern University.",
+  "summaryPoints": [
+    {
+      "title": "On time, at scale, under budget",
+      "text": "A visionary problem solver who makes sure every project is finished, and finished well."
+    },
+    {
+      "title": "I build what is missing",
+      "text": "New tools, processes, and procedures, including AI tools that are reimagining how a security department works."
+    },
+    {
+      "title": "Google and Microsoft at scale",
+      "text": "More than 100 Google Workspace domains deployed, and enterprise migrations between Microsoft and Google in both directions."
+    }
+  ],
   "stats": [
     {
       "value": "100%",
@@ -591,23 +605,8 @@
         "by": "Nic Carroll, quoted by Georgia Southern University"
       },
       "credit": "The university's Research Security and Export Controls director credited Nic and his team with taking point on preparation.",
-      "metricLabel": "CMMC Level 2 score"
-    },
-    {
-      "title": "Reimagined Third Party Review: 4,000+ Products in Six Months",
-      "org": "Georgia Southern University",
-      "tag": "Compliance",
-      "challenge": "Departments, divisions, and researchers needed new software, hardware, and extensions approved, but the review process was hard to see into and legal, procurement, and IT each worked on their own.",
-      "approach": "In my first six months, completely changed the third party review and approval process. Made it transparent to requesters and built legal review, procurement, and information technology systems review into a single path, strengthening vendor risk management and data privacy.",
-      "tools": [
-        "Vendor risk management",
-        "Legal review",
-        "Procurement",
-        "IT systems review"
-      ],
-      "result": "More than 4,000 products reviewed and approved, from Chrome extensions, hardware, and applications for the research environment to the tools departments and divisions use every day.",
-      "metric": "4,000+",
-      "metricLabel": "Products reviewed and approved"
+      "metricLabel": "CMMC Level 2 score",
+      "lead": true
     },
     {
       "title": "Rearchitected Email Defense: 95% Less Phishing and Spam",
@@ -625,20 +624,20 @@
       "metricLabel": "Less phishing and spam reaching inboxes"
     },
     {
-      "title": "Reimagine IT: A New Way to Run Projects",
+      "title": "Reimagined Third Party Review: 4,000+ Products in Six Months",
       "org": "Georgia Southern University",
-      "tag": "Leadership",
-      "challenge": "Projects followed the old way: scope for weeks, build behind closed doors, deliver once, and hope it fits. Every change pulled the whole team back together, and staff were tied to old habits, processes, and tools.",
-      "approach": "Tasked by the CIO with rethinking how the university builds tools, I designed Reimagine IT, a five move cycle: Frame it, Build it, Loop it, Launch it, Tend it. The project owner builds with university approved AI tools while security, IAM, applications, UX, and academic partners shape the work in the room. Guardrails are set once, up front, and every project has one named owner, a backup, and a shared record from the first hour to the change catalog.",
+      "tag": "Compliance",
+      "challenge": "Departments, divisions, and researchers needed new software, hardware, and extensions approved, but the review process was hard to see into and legal, procurement, and IT each worked on their own.",
+      "approach": "In my first six months, completely changed the third party review and approval process. Made it transparent to requesters and built legal review, procurement, and information technology systems review into a single path, strengthening vendor risk management and data privacy.",
       "tools": [
-        "Project methodology",
-        "AI partners",
-        "Change management",
-        "Security by design"
+        "Vendor risk management",
+        "Legal review",
+        "Procurement",
+        "IT systems review"
       ],
-      "result": "A methodology for any project, an app, a process, or anything else, that runs at the pace of a day, a week, or a month. Teams leave Build it with a working first draft instead of a plan, and launch in days or weeks instead of months.",
-      "metric": "1 day",
-      "metricLabel": "From idea to a working first draft"
+      "result": "More than 4,000 products reviewed and approved, from Chrome extensions, hardware, and applications for the research environment to the tools departments and divisions use every day.",
+      "metric": "4,000+",
+      "metricLabel": "Products reviewed and approved"
     },
     {
       "title": "Policy Library: Every Policy, From Need to Next Review",
@@ -658,6 +657,28 @@
       "metricLabel": "From draft to posted policy and its next review"
     },
     {
+      "title": "Reimagine IT: A New Way to Run Projects",
+      "org": "Georgia Southern University",
+      "tag": "Leadership",
+      "challenge": "Projects followed the old way: scope for weeks, build behind closed doors, deliver once, and hope it fits. Every change pulled the whole team back together, and staff were tied to old habits, processes, and tools.",
+      "approach": "Tasked by the CIO with rethinking how the university builds tools, I designed Reimagine IT, a five move cycle: Frame it, Build it, Loop it, Launch it, Tend it. The project owner builds with university approved AI tools while security, IAM, applications, UX, and academic partners shape the work in the room. Guardrails are set once, up front, and every project has one named owner, a backup, and a shared record from the first hour to the change catalog.",
+      "tools": [
+        "Project methodology",
+        "AI partners",
+        "Change management",
+        "Security by design"
+      ],
+      "result": "A methodology for any project, an app, a process, or anything else, that runs at the pace of a day, a week, or a month. Teams leave Build it with a working first draft instead of a plan, and launch in days or weeks instead of months.",
+      "metric": "1 day",
+      "metricLabel": "From idea to a working first draft",
+      "links": [
+        {
+          "label": "Read the Reimagine IT Guide (PDF)",
+          "url": "assets/Reimagine_IT_Georgia_Southern.pdf"
+        }
+      ]
+    },
+    {
       "title": "Sign In Once: Reimagining Single Sign On and Authorization",
       "org": "Georgia Southern University",
       "tag": "Identity",
@@ -674,6 +695,21 @@
       "metricLabel": "Instead of 2 to 3 prompts each morning"
     },
     {
+      "title": "One View of Security and Identity",
+      "org": "Georgia Southern University",
+      "tag": "Security",
+      "challenge": "Information Security and IAM tools lived in separate systems, which limited visibility across the environment.",
+      "approach": "Built a unified dashboard that brings every Information Security and IAM application into one view, as part of using AI tools to reimagine how the department works.",
+      "tools": [
+        "AI assisted development",
+        "Security tooling",
+        "IAM"
+      ],
+      "result": "Greater visibility and faster resolution of threats and vulnerabilities, for a safe, secure, and reliable environment.",
+      "metric": "1 view",
+      "metricLabel": "For all security and IAM tools"
+    },
+    {
       "title": "Reorganized a 40 Person Technology Division",
       "org": "Aiken County Public Schools",
       "tag": "Leadership",
@@ -686,7 +722,8 @@
       ],
       "result": "Saved 30%, or $1.5 million, in the first year through reorganization, with a more agile team.",
       "metric": "30%",
-      "metricLabel": "Spending saved in year one"
+      "metricLabel": "Spending saved in year one",
+      "lead": true
     },
     {
       "title": "Delivered $12M in Safety and Security Systems Across 44+ Sites",
@@ -721,19 +758,83 @@
       "metricLabel": "Cameras unified in one system"
     },
     {
-      "title": "One View of Security and Identity",
-      "org": "Georgia Southern University",
-      "tag": "Security",
-      "challenge": "Information Security and IAM tools lived in separate systems, which limited visibility across the environment.",
-      "approach": "Built a unified dashboard that brings every Information Security and IAM application into one view, as part of using AI tools to reimagine how the department works.",
+      "title": "Google and Microsoft, Side by Side, With 1,600+ Certifications",
+      "org": "Columbia County Public Schools",
+      "tag": "Education",
+      "challenge": "Columbia County ran on Microsoft, and teachers needed Google Workspace tools for teaching and learning, plus the skills to use them well.",
+      "approach": "Brought in to introduce Google Workspace into the Microsoft environment and let both platforms grow and be used. Built the Level Up microcredential program from the ground up so staff could earn Google certifications, with a Google Certified Educator sign outside each certified teacher's classroom, and founded summer EdTech Summits with nationally recognized teachers and speakers.",
       "tools": [
-        "AI assisted development",
-        "Security tooling",
-        "IAM"
+        "Google Workspace",
+        "Microsoft 365",
+        "Microcredentials",
+        "Google Certified Educator"
       ],
-      "result": "Greater visibility and faster resolution of threats and vulnerabilities, for a safe, secure, and reliable environment.",
-      "metric": "1 view",
-      "metricLabel": "For all security and IAM tools"
+      "result": "About 1,200 staff became Google Certified Educator Level 1, 400 earned Level 2, and more than 27 became Google Certified Trainers, with both platforms in use across the district.",
+      "metric": "1,600+",
+      "metricLabel": "Google certifications earned by staff",
+      "quote": {
+        "text": "Nic is somewhat of an anomaly in that he has deep knowledge of both the technical skills as well as the best practices of instructional pedagogy.",
+        "by": "Dr. Jeff Carney, former Associate Superintendent, Columbia County School District"
+      },
+      "lead": true
+    },
+    {
+      "title": "NexGen Cyber: Cybersecurity in Every Subject, K12",
+      "org": "Columbia County Public Schools",
+      "tag": "Education",
+      "challenge": "Cyber now touches every career, not just IT, yet cybersecurity lived in a few elective pathways. The region around Fort Gordon needed every student ready for a cyber driven workforce.",
+      "approach": "Pioneered a partnership with the National Security Agency and US Cyber Command to embed NexGen Cyber standards across the K12 curriculum, so lessons from math to cosmetology connect to the cyber world. Served on the Cyber Education Taskforce with the CSRA Alliance for Fort Gordon.",
+      "tools": [
+        "NSA",
+        "US Cyber Command",
+        "K12 curriculum standards",
+        "Fort Gordon Cyber District"
+      ],
+      "result": "The Board of Education approved NexGen Cyber in late 2022, and it continues today as a districtwide initiative to equip every student for an ever evolving cyber world.",
+      "metric": "K12",
+      "metricLabel": "Cyber standards in every subject",
+      "links": [
+        {
+          "label": "Alliance for Fort Gordon Coverage",
+          "url": "https://www.fortgordonalliance.com/columbia-county-school-district-to-create-nexgen-cyber-education-curriculum"
+        },
+        {
+          "label": "Watch the District Video",
+          "url": "https://ccboe.net/apps/video/"
+        }
+      ]
+    },
+    {
+      "title": "One Login and Clean Rosters With ClassLink",
+      "org": "Columbia County Public Schools",
+      "tag": "Identity",
+      "challenge": "Students and teachers juggled separate logins for core learning tools, and getting rosters into each new product took months of manual work and produced frequent errors.",
+      "approach": "Led the move to ClassLink single sign on and integrated the district's core educational resources, moving rostering to an interoperability standard so class data flowed to each product the same way every time.",
+      "tools": [
+        "ClassLink",
+        "Single sign on",
+        "Rostering standards",
+        "Google Classroom"
+      ],
+      "result": "Rostering a new product went from months to a few weeks, roster errors dropped dramatically, and students and teachers reached their tools with one login.",
+      "metric": "Weeks",
+      "metricLabel": "Not months, to roster a new product"
+    },
+    {
+      "title": "Redefined the Media Specialist and Instructional Technology Roles",
+      "org": "Columbia County Public Schools",
+      "tag": "Leadership",
+      "challenge": "Media specialists and instructional technology personnel were evaluated on tools that did not reflect the modern work of either role, which made it hard to set expectations or help people grow.",
+      "approach": "Created evaluation systems built for each role, including bringing the Media Keys Effectiveness System, with its 10 standards for the 21st century library media specialist, to the district in 2020 to 2021. Used walkthroughs and portfolios to give feedback and reshape how both positions support teaching and learning.",
+      "tools": [
+        "Media Keys Effectiveness System",
+        "Walkthrough observations",
+        "Portfolio evaluation",
+        "Professional growth"
+      ],
+      "result": "Clear, role specific standards for an 80 person team of technology, instruction, and media specialists, and positions refocused on teaching, learning, and student success.",
+      "metric": "10",
+      "metricLabel": "Standards for the modern media specialist"
     },
     {
       "title": "A National Data Privacy and Security Agreement for Education",
@@ -767,85 +868,8 @@
           "label": "Watch the Webinar",
           "url": "https://www.1edtech.org/events/webinar-data-privacy-security-special-template"
         }
-      ]
-    },
-    {
-      "title": "NexGen Cyber: Cybersecurity in Every Subject, K12",
-      "org": "Columbia County Public Schools",
-      "tag": "Education",
-      "challenge": "Cyber now touches every career, not just IT, yet cybersecurity lived in a few elective pathways. The region around Fort Gordon needed every student ready for a cyber driven workforce.",
-      "approach": "Pioneered a partnership with the National Security Agency and US Cyber Command to embed NexGen Cyber standards across the K12 curriculum, so lessons from math to cosmetology connect to the cyber world. Served on the Cyber Education Taskforce with the CSRA Alliance for Fort Gordon.",
-      "tools": [
-        "NSA",
-        "US Cyber Command",
-        "K12 curriculum standards",
-        "Fort Gordon Cyber District"
       ],
-      "result": "The Board of Education approved NexGen Cyber in late 2022, and it continues today as a districtwide initiative to equip every student for an ever evolving cyber world.",
-      "metric": "K12",
-      "metricLabel": "Cyber standards in every subject",
-      "links": [
-        {
-          "label": "Alliance for Fort Gordon Coverage",
-          "url": "https://www.fortgordonalliance.com/columbia-county-school-district-to-create-nexgen-cyber-education-curriculum"
-        },
-        {
-          "label": "Watch the District Video",
-          "url": "https://ccboe.net/apps/video/"
-        }
-      ]
-    },
-    {
-      "title": "Google and Microsoft, Side by Side, With 1,600+ Certifications",
-      "org": "Columbia County Public Schools",
-      "tag": "Education",
-      "challenge": "Columbia County ran on Microsoft, and teachers needed Google Workspace tools for teaching and learning, plus the skills to use them well.",
-      "approach": "Brought in to introduce Google Workspace into the Microsoft environment and let both platforms grow and be used. Built the Level Up microcredential program from the ground up so staff could earn Google certifications, with a Google Certified Educator sign outside each certified teacher's classroom, and founded summer EdTech Summits with nationally recognized teachers and speakers.",
-      "tools": [
-        "Google Workspace",
-        "Microsoft 365",
-        "Microcredentials",
-        "Google Certified Educator"
-      ],
-      "result": "About 1,200 staff became Google Certified Educator Level 1, 400 earned Level 2, and more than 27 became Google Certified Trainers, with both platforms in use across the district.",
-      "metric": "1,600+",
-      "metricLabel": "Google certifications earned by staff",
-      "quote": {
-        "text": "Nic is somewhat of an anomaly in that he has deep knowledge of both the technical skills as well as the best practices of instructional pedagogy.",
-        "by": "Dr. Jeff Carney, former Associate Superintendent, Columbia County School District"
-      }
-    },
-    {
-      "title": "One Login and Clean Rosters With ClassLink",
-      "org": "Columbia County Public Schools",
-      "tag": "Identity",
-      "challenge": "Students and teachers juggled separate logins for core learning tools, and getting rosters into each new product took months of manual work and produced frequent errors.",
-      "approach": "Led the move to ClassLink single sign on and integrated the district's core educational resources, moving rostering to an interoperability standard so class data flowed to each product the same way every time.",
-      "tools": [
-        "ClassLink",
-        "Single sign on",
-        "Rostering standards",
-        "Google Classroom"
-      ],
-      "result": "Rostering a new product went from months to a few weeks, roster errors dropped dramatically, and students and teachers reached their tools with one login.",
-      "metric": "Weeks",
-      "metricLabel": "Not months, to roster a new product"
-    },
-    {
-      "title": "Redefined the Media Specialist and Instructional Technology Roles",
-      "org": "Columbia County Public Schools",
-      "tag": "Leadership",
-      "challenge": "Media specialists and instructional technology personnel were evaluated on tools that did not reflect the modern work of either role, which made it hard to set expectations or help people grow.",
-      "approach": "Created evaluation systems built for each role, including bringing the Media Keys Effectiveness System, with its 10 standards for the 21st century library media specialist, to the district in 2020 to 2021. Used walkthroughs and portfolios to give feedback and reshape how both positions support teaching and learning.",
-      "tools": [
-        "Media Keys Effectiveness System",
-        "Walkthrough observations",
-        "Portfolio evaluation",
-        "Professional growth"
-      ],
-      "result": "Clear, role specific standards for an 80 person team of technology, instruction, and media specialists, and positions refocused on teaching, learning, and student success.",
-      "metric": "10",
-      "metricLabel": "Standards for the modern media specialist"
+      "lead": true
     }
   ],
   "approach": [
@@ -892,11 +916,6 @@
       "source": "https://www.acpsd.net/article/1906779/"
     },
     {
-      "quote": "I have known Mr. Carroll for 11 years in a professional capacity and have watched him grow into a leader who stands out in our school district… He is intelligent, honest, fair, and determined.",
-      "name": "Dr. Kristen L. Carroll",
-      "title": "Assistant Superintendent, Columbia County School District"
-    },
-    {
       "quote": "Nic has created and implemented an innovative and creative program at North Gwinnett which includes project based learning and embedded credit. Student data proves that this approach is increasing achievement for all students… If Nic were to obtain a new position in any district, it would be a huge loss for Gwinnett County Public Schools.",
       "name": "Jody Reeves",
       "title": "Director, Career and Technical Education, Gwinnett County Public Schools."
@@ -912,9 +931,19 @@
       "title": "Associate Superintendent, Gwinnett County Public Schools"
     },
     {
+      "quote": "…very clear that you’ll play a huge role in the higher-ed world!",
+      "name": "Gauthier Philippart",
+      "title": "Founder and CEO, Actionaly. Fellow 1EdTech DPSA presenter"
+    },
+    {
       "quote": "1EdTech chose well… I never worked with anyone who had more drive, caring and determination to learn, give back and create a better future for children!",
       "name": "Barry Brahier",
       "title": "Retired K12 Educator and Software Product Professional, on Nic's 1EdTech Leadership Award"
+    },
+    {
+      "quote": "I have known Mr. Carroll for 11 years in a professional capacity and have watched him grow into a leader who stands out in our school district… He is intelligent, honest, fair, and determined.",
+      "name": "Dr. Kristen L. Carroll",
+      "title": "Assistant Superintendent, Columbia County School District"
     }
   ],
   "writing": [
