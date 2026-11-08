@@ -410,7 +410,7 @@
     },
     {
       "name": "Data Privacy and Security Agreement Task Force, Institutional Representative",
-      "org": "1EdTech, award recipient"
+      "org": "1EdTech, 2024 Leadership Award recipient"
     },
     {
       "name": "Instructional Advisory Board",
@@ -747,7 +747,7 @@
         "Procurement",
         "TrustEd Apps"
       ],
-      "result": "A national DPSA Template available to every 1EdTech member institution and supplier, part of the 1EdTech TrustEd Apps Program and adopted by districts such as Prince George's County Public Schools. Recognized with an award from 1EdTech, and invited to present the DPSA to members in a 1EdTech webinar.",
+      "result": "A national DPSA Template available to every 1EdTech member institution and supplier, part of the 1EdTech TrustEd Apps Program and adopted by districts such as Prince George's County Public Schools. Recognized with a 1EdTech Leadership Award at Learning Impact 2024, and invited to present the DPSA to members in a 1EdTech webinar.",
       "metric": "National",
       "metricLabel": "Agreement for all 1EdTech member institutions",
       "links": [
@@ -953,6 +953,13 @@
       "title": "District Names Nic Carroll as Executive Director of Technology",
       "summary": "Aiken County Public Schools announces Nic as Executive Director of Technology, leading data governance, cybersecurity, and digital learning.",
       "url": "https://www.acpsd.net/article/1906779/"
+    },
+    {
+      "kind": "Award",
+      "date": "2024",
+      "title": "1EdTech Leadership Award, Learning Impact 2024",
+      "summary": "Recognized by the 1EdTech Consortium for leadership in creating open, trusted, and innovative digital ecosystems that empower learners, including work on the national Data Privacy and Security Agreement.",
+      "url": ""
     },
     {
       "kind": "Program coverage",
