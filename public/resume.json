@@ -801,6 +801,23 @@
       "url": "https://www.fortgordonalliance.com/columbia-county-school-district-to-create-nexgen-cyber-education-curriculum"
     }
   ],
+  "beyond": [
+    {
+      "title": "Certified Property Inspector",
+      "tag": "Compliance",
+      "text": "Certified residential and commercial property inspector with more than 500 homes and 200 commercial properties inspected. The same eye for risk, standards, and clear findings I bring to security assessments."
+    },
+    {
+      "title": "Restaurant Manager, From the Line Up",
+      "tag": "Leadership",
+      "text": "Worked as a server and cook, then as assistant manager and manager. I learned to lead a team under pressure, serve people well, and keep operations running on a busy night."
+    },
+    {
+      "title": "Mechanic, Repair Tech, and Retail",
+      "tag": "Operations",
+      "text": "Worked as a mechanic, repaired video arcade equipment, and worked in retail. Hands on troubleshooting taught me how systems work, how they fail, and how to fix them."
+    }
+  ],
   "heroPoints": [
     "Led entire IT organizations as CIO, CTO, and CISO",
     "Perfect CMMC Level 2 score and a $12M safety rollout across 44+ sites",

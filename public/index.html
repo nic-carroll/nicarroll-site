@@ -369,6 +369,14 @@
     <ol class="timeline" id="timeline"></ol>
   </section>
 
+  <section class="block" id="beyond" hidden>
+    <div class="head">
+      <h2>Beyond IT</h2>
+      <p>Hands on work that taught me how things run, how to serve people, and how to lead a team.</p>
+    </div>
+    <div class="impact" id="beyond-list"></div>
+  </section>
+
   <section class="block" id="credentials">
     <div class="head">
       <h2>Credentials</h2>
@@ -523,6 +531,12 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
         <details ${i < 2 ? "open" : ""}><summary>Key Results</summary><ul>${j.bullets.map(b => typeof b === "string" ? `<li>${esc(b)}</li>` : `<li><b>${esc(b.h)}</b>${esc(b.t)}</li>`).join("")}</ul></details>
       </div>
     </li>`).join("");
+
+  if ((d.beyond || []).length) {
+    $("beyond").hidden = false;
+    $("beyond-list").innerHTML = d.beyond.map(h => `
+      <div class="icard"><div class="ico">${icon(h.tag)}</div><h3>${esc(h.title)}</h3><p>${esc(h.text)}</p></div>`).join("");
+  }
 
   $("cred-line").textContent = d.competencies.slice(0, 5).join(", ") + ", and more.";
   $("edu").innerHTML = d.education.map(e => `<li>${esc(e.degree)}<span>${esc(e.school)}</span></li>`).join("");
