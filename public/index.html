@@ -511,7 +511,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   $("approach-list").innerHTML = (d.approach || []).map(a => `<div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>`).join("");
   if ((d.testimonials || []).length) {
     $("voices").hidden = false;
-    $("quote-list").innerHTML = d.testimonials.map(t => `<figure class="quote"><blockquote>${esc(t.quote)}</blockquote><figcaption><b>${esc(t.name)}</b><span>${esc(t.title)}</span>${t.source ? `<br><a href="${esc(t.source)}" target="_blank" rel="noopener" style="font-size:14px;color:#1f5f9e">Source</a>` : ""}</figcaption></figure>`).join("");
+    $("quote-list").innerHTML = d.testimonials.map(t => `<figure class="quote"><blockquote>${esc(t.quote)}</blockquote><figcaption><b>${esc(t.name)}</b><span>${esc(t.title)}</span>${t.source ? `<br><a href="${esc(t.source)}" target="_blank" rel="noopener" style="font-size:14px;color:#1f5f9e">${/linkedin/.test(t.source) ? "Read it on LinkedIn" : "Source"}</a>` : ""}</figcaption></figure>`).join("");
   }
   if ((d.writing || []).length) {
     $("writing").hidden = false;
