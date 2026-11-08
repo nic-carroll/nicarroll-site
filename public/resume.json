@@ -409,6 +409,10 @@
       "org": "1EdTech"
     },
     {
+      "name": "Data Privacy and Security Agreement Task Force, Institutional Representative",
+      "org": "1EdTech, award recipient"
+    },
+    {
       "name": "Instructional Advisory Board",
       "org": "Google"
     },
@@ -732,6 +736,32 @@
       "metricLabel": "For all security and IAM tools"
     },
     {
+      "title": "A National Data Privacy and Security Agreement for Education",
+      "org": "1EdTech Consortium",
+      "tag": "Governance",
+      "challenge": "Every district and university negotiated data privacy and security terms with every edtech supplier on its own, slowing procurement and leaving protections for student data uneven from one contract to the next.",
+      "approach": "Served as an institutional representative on the 1EdTech task force of institutional and supplier experts that created the Data Privacy and Security Agreement (DPSA) Template, a single agreement that covers both data privacy and data security. Helped shape the terms institutions and suppliers now use to protect student data, mitigate security risks, and speed up RFPs and contracting.",
+      "tools": [
+        "Data privacy",
+        "Vendor security",
+        "Procurement",
+        "TrustEd Apps"
+      ],
+      "result": "A national DPSA Template available to every 1EdTech member institution and supplier, part of the 1EdTech TrustEd Apps Program and adopted by districts such as Prince George's County Public Schools. Recognized with an award from 1EdTech, and invited to present the DPSA to members in a 1EdTech webinar.",
+      "metric": "National",
+      "metricLabel": "Agreement for all 1EdTech member institutions",
+      "links": [
+        {
+          "label": "About the 1EdTech DPSA",
+          "url": "https://www.1edtech.org/resource/dpsa"
+        },
+        {
+          "label": "Watch the Webinar",
+          "url": "https://www.1edtech.org/events/webinar-data-privacy-security-special-template"
+        }
+      ]
+    },
+    {
       "title": "NexGen Cyber: Cybersecurity in Every Subject, K12",
       "org": "Columbia County Public Schools",
       "tag": "Education",
@@ -909,6 +939,13 @@
       "title": "Columbia County School District NexGen Cyber",
       "summary": "The district's video on NexGen Cyber, the K12 initiative to equip every student for an ever evolving cyber world.",
       "url": "https://ccboe.net/apps/video/"
+    },
+    {
+      "kind": "Speaker",
+      "date": "February 2025",
+      "title": "Data Privacy and Security: Special Template, 1EdTech Webinar",
+      "summary": "Featured speaker for 1EdTech members on using the Data Privacy and Security Agreement Template to streamline procurement while protecting student data.",
+      "url": "https://www.1edtech.org/events/webinar-data-privacy-security-special-template"
     },
     {
       "kind": "In the news",
