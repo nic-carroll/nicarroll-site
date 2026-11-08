@@ -617,14 +617,14 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
       <div class="group-head"><h3>${esc(label)}</h3><span>${esc(role)}</span></div>
       <div class="cases lead-row">${caseCard(lead, true)}</div>
       ${rest.length ? `<div class="cases more" id="more-${gi}" hidden>${rest.map(c => caseCard(c, false)).join("")}</div>
-      <button class="more-btn" type="button" aria-expanded="false" aria-controls="more-${gi}" data-label="${rest.length} more from ${esc(label)}">Show ${rest.length} more from ${esc(label)}</button>` : ""}
+      <button class="more-btn" type="button" aria-expanded="false" aria-controls="more-${gi}" >Show More</button>` : ""}
     </div>`;
   }).join("");
   $("case-list").querySelectorAll(".more-btn").forEach(b => b.addEventListener("click", () => {
     const box = document.getElementById(b.getAttribute("aria-controls"));
     box.hidden = !box.hidden;
     b.setAttribute("aria-expanded", String(!box.hidden));
-    b.textContent = (box.hidden ? "Show " : "Hide ") + b.dataset.label;
+    b.textContent = box.hidden ? "Show More" : "Show Less";
   }));
   $("approach-list").innerHTML = (d.approach || []).map(a => `<div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>`).join("");
   if ((d.testimonials || []).length) {
@@ -633,8 +633,8 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
     const SHOW = 4, top = d.testimonials.slice(0, SHOW), extra = d.testimonials.slice(SHOW);
     $("quote-list").innerHTML = top.map(qcard).join("");
     if (extra.length) {
-      $("quote-list").insertAdjacentHTML("afterend", `<div class="quotes" id="quote-more" hidden>${extra.map(qcard).join("")}</div><button class="more-btn" id="quote-btn" type="button" aria-expanded="false" aria-controls="quote-more">Show ${extra.length} more endorsements</button>`);
-      $("quote-btn").addEventListener("click", () => { const m = $("quote-more"); m.hidden = !m.hidden; $("quote-btn").setAttribute("aria-expanded", String(!m.hidden)); $("quote-btn").textContent = (m.hidden ? "Show " : "Hide ") + extra.length + " more endorsements"; });
+      $("quote-list").insertAdjacentHTML("afterend", `<div class="quotes" id="quote-more" hidden>${extra.map(qcard).join("")}</div><button class="more-btn" id="quote-btn" type="button" aria-expanded="false" aria-controls="quote-more">Show More</button>`);
+      $("quote-btn").addEventListener("click", () => { const m = $("quote-more"); m.hidden = !m.hidden; $("quote-btn").setAttribute("aria-expanded", String(!m.hidden)); $("quote-btn").textContent = m.hidden ? "Show More" : "Show Less"; });
     }
   }
   if ((d.writing || []).length) {
@@ -643,8 +643,8 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
     const PSHOW = 5, ptop = d.writing.slice(0, PSHOW), pextra = d.writing.slice(PSHOW);
     $("post-list").innerHTML = ptop.map(pitem).join("");
     if (pextra.length) {
-      $("post-list").insertAdjacentHTML("afterend", `<ul class="posts" id="post-more" hidden>${pextra.map(pitem).join("")}</ul><button class="more-btn" id="post-btn" type="button" aria-expanded="false" aria-controls="post-more">Show ${pextra.length} more</button>`);
-      $("post-btn").addEventListener("click", () => { const m = $("post-more"); m.hidden = !m.hidden; $("post-btn").setAttribute("aria-expanded", String(!m.hidden)); $("post-btn").textContent = (m.hidden ? "Show " : "Hide ") + pextra.length + " more"; });
+      $("post-list").insertAdjacentHTML("afterend", `<ul class="posts" id="post-more" hidden>${pextra.map(pitem).join("")}</ul><button class="more-btn" id="post-btn" type="button" aria-expanded="false" aria-controls="post-more">Show More</button>`);
+      $("post-btn").addEventListener("click", () => { const m = $("post-more"); m.hidden = !m.hidden; $("post-btn").setAttribute("aria-expanded", String(!m.hidden)); $("post-btn").textContent = m.hidden ? "Show More" : "Show Less"; });
     }
   }
 
