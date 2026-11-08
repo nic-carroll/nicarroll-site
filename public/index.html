@@ -434,22 +434,72 @@ const ICON = {
 };
 const icon = t => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON[t] || ICON.Security}</svg>`;
 
-/* Generated header art for each project card */
-function art(seed, i) {
-  let h = 0; for (const c of seed) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+/* Generated header art for each project card: a motif that matches the project, on its own color */
+const PALETTES = [
+  ["#0c1a2e", "#1d3a62"], ["#1d3a62", "#2f6aa8"], ["#123c3a", "#1f6b62"],
+  ["#2a1f3d", "#4a3a73"], ["#13263f", "#3a5f8c"], ["#3a2a14", "#7a5420"]
+];
+function motifFor(p) {
+  const s = (p.title + " " + (p.tags || []).join(" ")).toLowerCase();
+  if (/dashboard|security/.test(s)) return "dash";
+  if (/policy|governance/.test(s)) return "policy";
+  if (/records|privacy|redact/.test(s)) return "redact";
+  if (/survey|feedback/.test(s)) return "gauge";
+  if (/analytics|data/.test(s)) return "trend";
+  if (/website|cloud/.test(s)) return "browser";
+  return "dash";
+}
+function art(p, i) {
+  let h = 0; for (const c of p.title) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   const rnd = () => ((h = (h * 1664525 + 1013904223) >>> 0) / 4294967296);
-  const bgs = [["#0c1a2e", "#1d3a62"], ["#1d3a62", "#2f6aa8"], ["#13263f", "#3a5f8c"]];
-  const [a, b] = bgs[i % bgs.length];
-  let bars = "";
-  const n = 16;
-  for (let k = 0; k < n; k++) {
-    const x = 24 + k * 22, hgt = 18 + rnd() * 80;
-    const hot = rnd() > .82;
-    bars += `<rect x="${x}" y="${130 - hgt}" width="12" height="${hgt}" rx="3" fill="${hot ? "#f2b43c" : "rgba(143,184,222,.55)"}"/>`;
+  const [a, b] = PALETTES[i % PALETTES.length];
+  const A = "#f2b43c", L = "rgba(255,255,255,.85)", M = "rgba(255,255,255,.35)", F = "rgba(255,255,255,.12)";
+  let g = "";
+  switch (motifFor(p)) {
+    case "dash":
+      g += `<rect x="40" y="22" width="320" height="110" rx="10" fill="${F}"/>`;
+      for (let k = 0; k < 3; k++) g += `<rect x="${56 + k * 100}" y="36" width="84" height="30" rx="6" fill="${k === 0 ? A : M}" opacity="${k === 0 ? .9 : .7}"/>`;
+      g += `<polyline fill="none" stroke="${L}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="${Array.from({ length: 9 }, (_, k) => `${60 + k * 35},${118 - rnd() * 36}`).join(" ")}"/>`;
+      break;
+    case "policy":
+      for (let k = 0; k < 3; k++) {
+        const x = 70 + k * 96, y = 24 + k * 6;
+        g += `<rect x="${x}" y="${y}" width="76" height="100" rx="6" fill="${k === 1 ? "#fff" : F}" opacity="${k === 1 ? .92 : 1}"/>`;
+        for (let r = 0; r < 5; r++) g += `<rect x="${x + 12}" y="${y + 16 + r * 14}" width="${30 + rnd() * 30}" height="5" rx="2.5" fill="${k === 1 ? "#9fb3cc" : M}"/>`;
+        g += `<circle cx="${x + 62}" cy="${y + 86}" r="10" fill="${A}"/><path d="M${x + 57} ${y + 86} l4 4 7-8" fill="none" stroke="#0c1a2e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+      }
+      break;
+    case "redact":
+      g += `<rect x="110" y="16" width="180" height="120" rx="8" fill="#fff" opacity=".92"/>`;
+      for (let r = 0; r < 7; r++) {
+        const w = 60 + rnd() * 90, red = r % 2 === 1;
+        g += `<rect x="128" y="${32 + r * 14}" width="${w}" height="7" rx="2" fill="${red ? "#0c1a2e" : "#c3ccd7"}"/>`;
+      }
+      g += `<circle cx="300" cy="118" r="22" fill="${A}"/><path d="M291 112v-4a9 9 0 0 1 18 0v4M288 112h24v16h-24z" fill="none" stroke="#0c1a2e" stroke-width="2.4" stroke-linejoin="round"/>`;
+      break;
+    case "gauge":
+      g += `<path d="M120 120a80 80 0 0 1 160 0" fill="none" stroke="${F}" stroke-width="18" stroke-linecap="round"/>`;
+      g += `<path d="M120 120a80 80 0 0 1 132 -61" fill="none" stroke="${A}" stroke-width="18" stroke-linecap="round"/>`;
+      g += `<line x1="200" y1="120" x2="246" y2="74" stroke="${L}" stroke-width="4" stroke-linecap="round"/><circle cx="200" cy="120" r="7" fill="${L}"/>`;
+      for (let k = 0; k < 5; k++) g += `<path transform="translate(${44 + k * 16} 30) scale(.55)" d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.6 5.8 21.1l1.4-7L2 9.3l7-.8z" fill="${k < 4 ? A : M}"/>`;
+      break;
+    case "trend":
+      for (let k = 0; k < 4; k++) g += `<line x1="40" y1="${30 + k * 30}" x2="360" y2="${30 + k * 30}" stroke="${F}" stroke-width="1.5"/>`;
+      { const pts = Array.from({ length: 10 }, (_, k) => [44 + k * 35, 118 - k * 7 - rnd() * 22]);
+        g += `<polygon fill="rgba(242,180,60,.18)" points="44,120 ${pts.map(q => q.join(",")).join(" ")} 359,120"/>`;
+        g += `<polyline fill="none" stroke="${A}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" points="${pts.map(q => q.join(",")).join(" ")}"/>`;
+        pts.forEach((q, k) => { if (k % 3 === 0) g += `<circle cx="${q[0]}" cy="${q[1]}" r="5" fill="#fff"/>`; }); }
+      break;
+    case "browser":
+      g += `<rect x="70" y="20" width="260" height="118" rx="10" fill="#fff" opacity=".92"/><rect x="70" y="20" width="260" height="22" rx="10" fill="#e8edf3"/>`;
+      g += [0, 1, 2].map(k => `<circle cx="${86 + k * 13}" cy="31" r="4" fill="${["#ff6b5f", "#ffbd2f", "#29c840"][k]}"/>`).join("");
+      g += `<rect x="88" y="54" width="110" height="14" rx="4" fill="#0c1a2e"/><rect x="88" y="76" width="160" height="6" rx="3" fill="#c3ccd7"/><rect x="88" y="88" width="130" height="6" rx="3" fill="#c3ccd7"/>`;
+      g += `<rect x="88" y="104" width="62" height="18" rx="6" fill="${A}"/><path d="M280 100a14 14 0 0 1 26-6 11 11 0 1 1 2 22h-30a9 9 0 0 1 2-16z" fill="#8fb8de"/>`;
+      break;
   }
   let dots = "";
-  for (let k = 0; k < 5; k++) dots += `<circle cx="${40 + rnd() * 320}" cy="${18 + rnd() * 30}" r="${1.5 + rnd() * 2}" fill="rgba(255,255,255,.5)"/>`;
-  return `<svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="400" height="150" fill="url(#g${i})"/>${dots}${bars}</svg>`;
+  for (let k = 0; k < 4; k++) dots += `<circle cx="${20 + rnd() * 360}" cy="${8 + rnd() * 18}" r="${1.2 + rnd() * 1.6}" fill="rgba(255,255,255,.45)"/>`;
+  return `<svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="400" height="150" fill="url(#g${i})"/>${dots}${g}</svg>`;
 }
 
 function links(p, cls) {
@@ -487,7 +537,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
     </article>`;
   $("cards").innerHTML = rest.map((p, i) => `
     <article class="pcard">
-      <div class="art" aria-hidden="true">${art(p.title, i)}</div>
+      <div class="art" aria-hidden="true">${art(p, i)}</div>
       <div class="body">
         <span class="pill ${statusClass(p.status)}">${esc(p.status)}</span>
         <h3>${esc(p.title)}</h3>
