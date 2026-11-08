@@ -80,7 +80,7 @@
       "org": "Aiken County Public Schools",
       "place": "Aiken, SC",
       "dates": "September 2024 to May 2026",
-      "blurb": "Unified IT, technology, and security as district CIO, CTO, and CISO, guiding the digital ecosystem for 3,700 staff and 24,000 students.",
+      "blurb": "Unified IT, technology, and security as district CIO, CTO, and CISO for 24,000+ students and 3,500+ staff across 44+ sites, in a district that covers about 1,070 square miles, more land than the state of Rhode Island.",
       "bullets": [
         {
           "h": "$12M+ Budget, $75M+ Assets",
@@ -137,7 +137,7 @@
       "org": "Columbia County Public Schools",
       "place": "Evans, GA",
       "dates": "June 2016 to September 2024",
-      "blurb": "Partnered with all departments to build and optimize a secure, modern digital ecosystem, leading the full lifecycle of technology solutions from implementation to enterprise wide adoption.",
+      "blurb": "Partnered with all departments to build and optimize a secure, modern digital ecosystem for 28,000+ students and 3,500+ staff, leading the full lifecycle of technology solutions from implementation to enterprise wide adoption.",
       "bullets": [
         {
           "h": "Strategic Advisor",
@@ -624,7 +624,7 @@
       "title": "Rebuilt the Network and Physical Security for 44+ Campuses",
       "org": "Aiken County Public Schools",
       "tag": "Infrastructure",
-      "challenge": "More than 44 campuses ran on aging internet circuits, routers, switches, and infrastructure, with cameras and door access spread across separate systems.",
+      "challenge": "More than 44 campuses, spread across a district larger than Rhode Island, ran on aging internet circuits, routers, switches, and infrastructure, with cameras and door access spread across separate systems.",
       "approach": "Led the upgrade of every campus internet circuit, replaced all routers and switches, overhauled the hyperconverged infrastructure, and unified more than 2,000 cameras and 500 doors into one system.",
       "tools": [
         "Internet circuits",
