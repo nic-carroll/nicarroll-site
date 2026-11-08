@@ -52,13 +52,13 @@
 
   /* Hero */
   .hero { position: relative; background: radial-gradient(1200px 600px at 78% 30%, #1d3a62 0%, transparent 60%), var(--night); color: #fff; overflow: hidden; }
-  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 40%, #000 75%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 40%, #000 75%); }
   .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 160px; background: linear-gradient(transparent, var(--night)); pointer-events: none; }
-  .hero-inner { position: relative; z-index: 2; padding: 168px 0 56px; }
-  .hello { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 8px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); font-size: 14px; color: #d6e2f0; }
-  .hello i { width: 9px; height: 9px; border-radius: 50%; background: #5fd38d; box-shadow: 0 0 0 4px rgba(95,211,141,.2); }
-  .hero h1 { font: 760 clamp(42px, 5.6vw, 80px)/.97 var(--display); letter-spacing: -.04em; margin: 26px 0 0; max-width: 15ch; }
-  .hero .who { margin: 28px 0 0; font-size: 20px; line-height: 1.55; color: #c5d3e4; max-width: 52ch; }
+  .hero-inner { position: relative; z-index: 2; padding: 150px 0 56px; }
+  .hero h1 { font: 760 clamp(52px, 7vw, 96px)/.95 var(--display); letter-spacing: -.04em; margin: 0; }
+  .hero-title { margin: 18px 0 0; font: 600 clamp(20px, 2vw, 26px)/1.3 var(--display); color: var(--amber); letter-spacing: -.01em; }
+  .hero-value { margin: 26px 0 0; font: 500 clamp(22px, 2.3vw, 30px)/1.3 var(--display); color: #fff; max-width: 24ch; letter-spacing: -.015em; }
+  .hero .who { margin: 18px 0 0; font-size: 18px; line-height: 1.6; color: #b4c4d8; max-width: 54ch; }
   .hero .who strong { color: #fff; font-weight: 600; }
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
   .btn { display: inline-flex; align-items: center; gap: 8px; font: 600 16px/1 var(--body); padding: 15px 22px; border-radius: 12px; border: 1.5px solid transparent; text-decoration: none; cursor: pointer; transition: transform .15s, background .15s; }
@@ -69,12 +69,9 @@
   .btn.glass:hover { background: rgba(255,255,255,.12); }
   .btn svg { width: 18px; height: 18px; }
 
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: center; }
-  .portrait { position: relative; justify-self: end; width: 320px; aspect-ratio: 4 / 5; margin: 0; }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 28px; display: block; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
-  .portrait::before { content: ""; position: absolute; inset: -12px -12px 12px 12px; border: 2px solid var(--amber); border-radius: 32px; }
-  .portrait figcaption { position: absolute; left: -28px; bottom: 26px; background: #fff; color: var(--ink); border-radius: 14px; padding: 10px 14px; font-size: 14px; line-height: 1.35; box-shadow: 0 12px 30px rgba(0,0,0,.25); }
-  .portrait figcaption b { display: block; font: 700 15px var(--display); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 72px; align-items: center; }
+  .portrait { justify-self: end; width: 340px; aspect-ratio: 4 / 5; margin: 0; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; display: block; box-shadow: 0 24px 60px rgba(0,0,0,.4); outline: 1px solid rgba(255,255,255,.12); outline-offset: -1px; }
 
   /* Case studies */
   .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
@@ -212,8 +209,7 @@
 
   @media (max-width: 960px) {
     .hero-grid, .cases, .lead-band { grid-template-columns: 1fr; }
-    .portrait { justify-self: start; width: 200px; order: -1; margin: 10px 0 8px 12px; }
-    .portrait figcaption { display: none; }
+    .portrait { justify-self: start; width: 180px; order: -1; margin: 0 0 8px; }
     .lead-band { padding: 36px 28px; }
     .posts li { grid-template-columns: 1fr; gap: 4px; }
     .featured, .creds { grid-template-columns: 1fr; }
@@ -236,7 +232,7 @@
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 
   @media print {
-    .nav, .hero canvas, .cta, .hello, #building, #cases, #approach, #voices, #writing, .portrait, .contact .glow, footer, .proof { display: none !important; }
+    .nav, .hero canvas, .cta, #building, #cases, #approach, #voices, #writing, .portrait, .contact .glow, footer, .proof { display: none !important; }
     body { background: #fff; font-size: 10.5pt; }
     .hero { background: none; color: var(--ink); }
     .hero::after { display: none; }
@@ -283,19 +279,20 @@
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
    <div class="hero-grid">
-    <div>
-    <span class="hello"><i></i><span id="role-line">Visionary executive leader</span></span>
-    <h1 id="intro">I lead technology that gets delivered on time, at scale, and under budget.</h1>
-    <p class="who" id="who"></p>
-    <div class="cta">
-      <a class="btn amber" href="#cases">See my case studies</a>
-      <a class="btn glass" href="Nic_Carroll_Resume.pdf" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
-        Download resume (PDF)
-      </a>
+    <div class="hero-copy">
+      <h1 id="hero-name">Nic Carroll</h1>
+      <p class="hero-title" id="hero-title">Visionary executive leader. CIO, CTO, and CISO.</p>
+      <p class="hero-value" id="intro">I turn bold technology vision into results, delivered on time, at scale, and under budget.</p>
+      <p class="who" id="who"></p>
+      <div class="cta">
+        <a class="btn amber" href="#cases">See my case studies</a>
+        <a class="btn glass" href="Nic_Carroll_Resume.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+          Download resume (PDF)
+        </a>
+      </div>
     </div>
-    </div>
-    <figure class="portrait" id="portrait"><img src="assets/nic.jpg" alt="Portrait of Nic Carroll" width="320" height="400"><figcaption><b>Nic Carroll</b>Visionary executive leader</figcaption></figure>
+    <figure class="portrait" id="portrait"><img src="assets/nic.jpg" alt="Portrait of Nic Carroll" width="320" height="400"></figure>
    </div>
     <div class="proof" id="proof"></div>
   </div>
@@ -445,8 +442,7 @@ function links(p, cls) {
 fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   const now = d.experience[0];
   if (d.intro) $("intro").textContent = d.intro;
-  $("role-line").textContent = d.badge || `${now.title}, ${now.org}`;
-  $("who").innerHTML = `<strong>${esc(d.name)}, ${esc(d.credentials)}.</strong> ${esc(d.who)}`;
+  $("who").innerHTML = `<strong style="color:#fff;font-weight:600">${esc(d.credentials)}.</strong> ${esc(d.who)} Currently Chief Information Security Officer at Georgia Southern University.`;
   $("proof").innerHTML = (d.stats || []).map(s => `<div><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join("");
   $("summary").textContent = d.summary;
   $("mail").href = "mailto:" + d.email;
