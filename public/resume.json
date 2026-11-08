@@ -51,7 +51,7 @@
         },
         {
           "h": "From Need to SOP, Policy, and Procedure",
-          "t": "Created a complete process that takes a need from request to an approved standard operating procedure, policy, and procedure, supported by a tool for searching, editing, proposing, reviewing, and approving policies."
+          "t": "Created a complete process that takes a need to an approved SOP, policy, and procedure, and built the Policy Library to run it: a leadership dashboard, tracked change revisions with sign offs, sentence by sentence USG alignment, cited AI answers, and nightly change detection."
         },
         {
           "h": "AI for Information Security",
@@ -428,9 +428,9 @@
       "repo": ""
     },
     {
-      "title": "Policy Search, Editing, and Approval",
+      "title": "Policy Library",
       "status": "In use",
-      "summary": "A tool and process I built for Georgia Southern University that takes a need all the way to an approved SOP, policy, and procedure: find any policy, edit it, submit a proposed change, and route it through review and approval in one place.",
+      "summary": "A policy platform I built for Georgia Southern University: a live dashboard of policy health, tracked change revisions with sign offs, sentence by sentence alignment with the USG manuals, AI answers cited to the policy text, and nightly change detection.",
       "tags": [
         "Governance",
         "Workflow",
@@ -544,6 +544,23 @@
       "result": "A methodology for any project, an app, a process, or anything else, that runs at the pace of a day, a week, or a month. Teams leave Build it with a working first draft instead of a plan, and launch in days or weeks instead of months.",
       "metric": "1 day",
       "metricLabel": "From idea to a working first draft"
+    },
+    {
+      "title": "Policy Library: Every Policy, From Need to Next Review",
+      "org": "Georgia Southern University",
+      "tag": "Governance",
+      "challenge": "Policies, standards, and procedures were spread across published collections, with no single view of which were current, which were overdue for review, or where Georgia Southern's policies agreed or conflicted with the University System of Georgia manuals.",
+      "approach": "Built the Policy Library and a complete process that takes a need to an approved SOP, policy, and procedure in eight steps. A leadership dashboard shows policy health by area, review schedules, revisions in progress, and decisions waiting on leadership. Revisions open the policy as the document itself, with tracked changes, paragraph comments, reviewer verdicts, and Cabinet and President sign offs. Every policy is compared sentence by sentence against the USG manuals, and people can ask questions in plain words and get answers cited to the official text.",
+      "tools": [
+        "Policy lifecycle",
+        "Tracked change review",
+        "USG alignment",
+        "AI with citations",
+        "Role based access"
+      ],
+      "result": "One place to find, revise, approve, and track every policy. Leadership sees what is overdue and what needs a decision, policies that only restate USG are flagged to retire, possible conflicts are flagged for revision, and every edit, comment, and sign off is logged for audits and open records requests.",
+      "metric": "8 steps",
+      "metricLabel": "From draft to posted policy and its next review"
     },
     {
       "title": "Sign In Once: Reimagining Single Sign On and Authorization",
@@ -731,11 +748,18 @@
       "url": "https://go-planet.com/perspectives-blog/georgia-southern-university-passes-cmmc-level-2-assessment-with-a-perfect-score/"
     },
     {
-      "kind": "In the news",
-      "date": "December 2024",
-      "title": "District Names Nic Carroll as Executive Director of Technology",
-      "summary": "Aiken County Public Schools announces Nic as Executive Director of Technology, leading data governance, cybersecurity, and digital learning.",
-      "url": "https://www.acpsd.net/article/1906779/"
+      "kind": "Speaker",
+      "date": "Fall 2026",
+      "title": "Presenter, Fall 2026 USG CIO and CISO Professional Learning Conference",
+      "summary": "Spoke to University System of Georgia technology and security leaders on security patching: balancing security with availability for academic and administrative system owners, and pairing a predictable quarterly cycle with a risk based fast lane for actively exploited flaws.",
+      "url": ""
+    },
+    {
+      "kind": "Speaker",
+      "date": "April 2026",
+      "title": "Presenter, CoSN 2026 Annual Conference, Chicago",
+      "summary": "Presented to K12 technology leaders at CoSN's national conference, Building What's Next, Together.",
+      "url": "https://cosn2026.eventscribe.net/fsPopup.asp?PresenterId=2376054&mode=presenterinfo"
     },
     {
       "kind": "Program coverage",
@@ -745,18 +769,18 @@
       "url": "https://ccboe.net/apps/video/"
     },
     {
+      "kind": "In the news",
+      "date": "December 2024",
+      "title": "District Names Nic Carroll as Executive Director of Technology",
+      "summary": "Aiken County Public Schools announces Nic as Executive Director of Technology, leading data governance, cybersecurity, and digital learning.",
+      "url": "https://www.acpsd.net/article/1906779/"
+    },
+    {
       "kind": "Program coverage",
       "date": "December 2022",
       "title": "Columbia County School District to create NexGen cyber education curriculum",
       "summary": "The Alliance for Fort Gordon on board approval of NexGen, a K12 cyber curriculum reaching every subject from math to cosmetology.",
       "url": "https://www.fortgordonalliance.com/columbia-county-school-district-to-create-nexgen-cyber-education-curriculum"
-    },
-    {
-      "kind": "Speaker",
-      "date": "April 2026",
-      "title": "Presenter, CoSN 2026 Annual Conference, Chicago",
-      "summary": "Presented to K12 technology leaders at CoSN's national conference, Building What's Next, Together.",
-      "url": "https://cosn2026.eventscribe.net/fsPopup.asp?PresenterId=2376054&mode=presenterinfo"
     }
   ],
   "heroPoints": [

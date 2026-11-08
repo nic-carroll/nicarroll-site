@@ -507,7 +507,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   }
   if ((d.writing || []).length) {
     $("writing").hidden = false;
-    $("post-list").innerHTML = d.writing.map(w => `<li><div class="k">${esc(w.kind || "")}<br>${esc(w.date || "")}</div><div><a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.title)}</a>${w.summary ? `<p>${esc(w.summary)}</p>` : ""}</div></li>`).join("");
+    $("post-list").innerHTML = d.writing.map(w => `<li><div class="k">${esc(w.kind || "")}<br>${esc(w.date || "")}</div><div>${w.url ? `<a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.title)}</a>` : `<a role="text" style="cursor:default">${esc(w.title)}</a>`}${w.summary ? `<p>${esc(w.summary)}</p>` : ""}</div></li>`).join("");
   }
 
   $("highlights").innerHTML = d.highlights.map(h => `
