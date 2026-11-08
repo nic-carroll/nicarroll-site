@@ -493,6 +493,24 @@
   "intro": "Innovation that scales. Security that holds. Leadership that delivers.",
   "projects": [
     {
+      "title": "RosterEditor",
+      "status": "Live demo",
+      "summary": "Import a OneRoster 1.1 or 1.2 file, combine sections and courses, add or swap teachers, and export a clean file for ClassLink, in a dashboard or through a REST API. The combining rules are built in, so no AI is needed. The demo uses invented data on real Georgia state course codes.",
+      "tags": [
+        "OneRoster 1.1 and 1.2",
+        "ClassLink",
+        "REST API",
+        "Google Cloud Run"
+      ],
+      "url": "https://rostereditor-388842205758.us-east1.run.app",
+      "repo": "",
+      "featured": true,
+      "sub": "Fix OneRoster Files Without the Wait",
+      "metric": "1.1 + 1.2",
+      "metricLabel": "OneRoster versions, in and out",
+      "linkLabel": "Try the Live Demo"
+    },
+    {
       "title": "Milestone Compass",
       "status": "Live demo",
       "summary": "A prototype adaptive practice platform for Georgia K12 students. Learners pick standards and Depth of Knowledge levels, get instant feedback on every answer choice, and teachers see results on a dashboard.",
@@ -501,32 +519,24 @@
         "Adaptive learning"
       ],
       "url": "https://nic-carroll.github.io/milestone-compass-demo/",
-      "repo": "https://github.com/nic-carroll/milestone-compass-demo",
-      "featured": true
-    },
-    {
-      "title": "RosterEditor",
-      "status": "Live demo",
-      "summary": "Edit OneRoster 1.1 and 1.2 rosters for ClassLink: combine sections and courses, add or swap teachers, and export a clean file, with built in rules and a REST API.",
-      "tags": [
-        "Rostering",
-        "OneRoster",
-        "ClassLink"
-      ],
-      "url": "https://rostereditor-388842205758.us-east1.run.app",
-      "repo": ""
+      "repo": "https://github.com/nic-carroll/milestone-compass-demo"
     },
     {
       "title": "EduSite",
       "status": "Beta",
       "summary": "An accessible, low cost website platform that runs a district site and every school site from one dashboard, with an AI assistant for staff updates.",
       "tags": [
-        "Accessibility",
-        "Websites",
-        "K12"
+        "WCAG 2.1 AA",
+        "Section 508",
+        "AI assistant",
+        "Google Cloud Run"
       ],
       "url": "https://edusite-demo-beta-388842205758.us-east1.run.app",
-      "repo": ""
+      "repo": "",
+      "sub": "One Accessible Platform for Every District and School Site",
+      "metric": "AA",
+      "metricLabel": "WCAG 2.1 accessibility built in",
+      "linkLabel": "Try the Beta Demo"
     },
     {
       "title": "Unified Security Dashboard",

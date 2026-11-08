@@ -192,6 +192,21 @@
 
   /* Project cards */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 22px; }
+  .art-stage { padding: 24px !important; align-items: center !important; justify-content: center; background: linear-gradient(140deg, #1d3a62, #2a5487) !important; }
+  .art-stage svg { border-radius: 16px; }
+  .art-stage svg { width: 100%; height: 100%; display: block; }
+  .feat-top, .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .feat-sub { color: var(--amber) !important; font-weight: 600; margin: -6px 0 14px !important; }
+  .card-sub { color: #1f5f9e !important; font-weight: 600; font-size: 15px !important; margin: -2px 0 10px !important; }
+  .pmetric { text-align: right; }
+  .pmetric b { display: block; font: 760 22px/1 var(--display); color: var(--night); }
+  .pmetric span { display: block; margin-top: 4px; font-size: 12px; line-height: 1.3; color: var(--ink-soft); max-width: 17ch; margin-left: auto; }
+  .pmetric.dark b { color: #fff; font-size: 30px; }
+  .pmetric.dark span { color: #9fb3cc; }
+  .pchips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 22px; }
+  .pchips span { font-size: 12.5px; padding: 3px 9px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink-soft); }
+  .featured .pchips span { border-color: rgba(255,255,255,.2); color: #c0cfe0; }
+  .pcard .pchips { margin-top: auto; margin-bottom: 0; }
   .pcard { display: flex; flex-direction: column; background: var(--surface); border-radius: 22px; overflow: hidden; border: 1px solid var(--line); }
   .pcard .art { height: 150px; }
   .pcard .art svg { display: block; width: 100%; height: 100%; }
@@ -327,8 +342,8 @@
   <div class="wrap">
     <a class="mark" href="#top"><b>NC</b><span>Nic Carroll<small>, Ed.S., CISSP, CETL</small></span></a>
     <nav aria-label="Sections">
-      <a href="#cases">Case Studies</a>
       <a href="#approach">How I Lead</a>
+      <a href="#cases">Case Studies</a>
       <a href="#building">Building</a>
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
@@ -364,20 +379,20 @@
 </div>
 
 <main id="main" class="wrap">
-  <section class="block" id="cases">
-    <div class="head">
-      <h2>Case Studies</h2>
-      <p>The challenge, what I did, and what changed.</p>
-    </div>
-    <div id="case-list"></div>
-  </section>
-
   <section class="block" id="approach">
     <div class="head">
       <h2>How I Lead</h2>
       <p>The principles behind every team I've built and every project I've finished.</p>
     </div>
     <div class="lead-band" id="approach-list"></div>
+  </section>
+
+  <section class="block" id="cases">
+    <div class="head">
+      <h2>Case Studies</h2>
+      <p>The challenge, what I did, and what changed.</p>
+    </div>
+    <div id="case-list"></div>
   </section>
 
   <section class="block" id="building">
@@ -502,6 +517,7 @@ function motifFor(p) {
   const s = (p.title + " " + (p.tags || []).join(" ")).toLowerCase();
   if (/dashboard|security/.test(s)) return "dash";
   if (/policy|governance/.test(s)) return "policy";
+  if (/roster/.test(s)) return "roster";
   if (/records|privacy|redact/.test(s)) return "redact";
   if (/survey|feedback/.test(s)) return "gauge";
   if (/analytics|data/.test(s)) return "trend";
@@ -519,6 +535,14 @@ function art(p, i) {
       g += `<rect x="40" y="22" width="320" height="110" rx="10" fill="${F}"/>`;
       for (let k = 0; k < 3; k++) g += `<rect x="${56 + k * 100}" y="36" width="84" height="30" rx="6" fill="${k === 0 ? A : M}" opacity="${k === 0 ? .9 : .7}"/>`;
       g += `<polyline fill="none" stroke="${L}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="${Array.from({ length: 9 }, (_, k) => `${60 + k * 35},${118 - rnd() * 36}`).join(" ")}"/>`;
+      break;
+    case "roster":
+      for (let k = 0; k < 2; k++) {
+        const x = 52 + k * 186;
+        g += `<rect x="${x}" y="26" width="110" height="100" rx="8" fill="${k === 1 ? "#fff" : F}" opacity="${k === 1 ? .92 : 1}"/>`;
+        for (let r = 0; r < 5; r++) g += `<rect x="${x + 12}" y="${40 + r * 16}" width="${k === 1 ? 86 : 40 + rnd() * 46}" height="8" rx="3" fill="${k === 1 ? (r === 1 ? A : "#c3ccd7") : M}"/>`;
+      }
+      g += `<path d="M172 64h50m-12-10 12 10-12 10M172 92h50m-12-10 12 10-12 10" fill="none" stroke="${A}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
       break;
     case "policy":
       for (let k = 0; k < 3; k++) {
@@ -563,7 +587,7 @@ function art(p, i) {
 
 function links(p, cls) {
   const out = [];
-  if (p.url) out.push(`<a class="${cls}" href="${esc(p.url)}" ${p.url.startsWith("/") ? "" : 'target="_blank" rel="noopener"'}>Open It</a>`);
+  if (p.url) out.push(`<a class="${cls}" href="${esc(p.url)}" ${p.url.startsWith("/") ? "" : 'target="_blank" rel="noopener"'}>${esc(p.linkLabel || "Open It")}</a>`);
   if (p.repo) out.push(`<a class="${cls === "btn amber" ? "btn glass" : cls}" href="${esc(p.repo)}" target="_blank" rel="noopener">View Code</a>`);
   return out.join("");
 }
@@ -582,28 +606,29 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
 
   const feat = d.projects.find(p => p.featured) || d.projects[0];
   const rest = d.projects.filter(p => p !== feat);
+  const metricBox = (p, dark) => p.metric ? `<div class="pmetric${dark ? " dark" : ""}"><b>${esc(p.metric)}</b><span>${esc(p.metricLabel || "")}</span></div>` : "";
+  const chips = p => `<div class="pchips">${(p.tags || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>`;
   $("featured").innerHTML = `
     <article class="featured">
       <div class="copy">
-        <span class="pill ${statusClass(feat.status)}">${esc(feat.status)}</span>
+        <div class="feat-top"><span class="pill ${statusClass(feat.status)}">${esc(feat.status)}</span>${metricBox(feat, true)}</div>
         <h3>${esc(feat.title)}</h3>
+        ${feat.sub ? `<p class="feat-sub">${esc(feat.sub)}</p>` : ""}
         <p>${esc(feat.summary)}</p>
+        ${chips(feat)}
         <div class="links">${links(feat, "btn amber")}</div>
       </div>
-      <div class="stage">
-        ${feat.url ? `<div class="preview" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i></div>
-          <iframe src="${esc(feat.url)}" loading="lazy" tabindex="-1" title="Preview of ${esc(feat.title)}"></iframe>
-          <a class="cover" href="${esc(feat.url)}" target="_blank" rel="noopener" tabindex="-1"></a></div>` : ""}
-      </div>
+      <div class="stage art-stage" aria-hidden="true">${art(feat, 7).replace('preserveAspectRatio="xMidYMid slice"', 'preserveAspectRatio="xMidYMid meet"').replace('<rect width="400" height="150" fill="url(#g7)"/>', '')}</div>
     </article>`;
   $("cards").innerHTML = rest.map((p, i) => `
     <article class="pcard">
       <div class="art" aria-hidden="true">${art(p, i)}</div>
       <div class="body">
-        <span class="pill ${statusClass(p.status)}">${esc(p.status)}</span>
+        <div class="card-top"><span class="pill ${statusClass(p.status)}">${esc(p.status)}</span>${metricBox(p, false)}</div>
         <h3>${esc(p.title)}</h3>
+        ${p.sub ? `<p class="card-sub">${esc(p.sub)}</p>` : ""}
         <p>${esc(p.summary)}</p>
-        <div class="tags">${p.tags.map(esc).join(", ")}</div>
+        ${chips(p)}
         <div class="links">${links(p, "")}</div>
       </div>
     </article>`).join("") + (rest.length % 3 === 0 ? "" : `<div class="add-yours"><div><b>More on the Way</b>New tools land here as I build them.</div></div>`);
@@ -625,8 +650,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
     ["Georgia Southern University", "Georgia Southern University", "Chief Information Security Officer"],
     ["Aiken County Public Schools", "Aiken County Public Schools", "Executive Director of Technology (CIO, CTO, CISO)"],
     ["Columbia County Public Schools", "Columbia County Public Schools", "Director of IT, Digital Learning, and Media Services"],
-    ["1EdTech Consortium", "National Work With 1EdTech", "Institutional representative and task force member"],
-    ["Independent Projects", "Products I'm Building", "Founder and builder"]
+    ["1EdTech Consortium", "National Work With 1EdTech", "Institutional representative and task force member"]
   ];
   $("case-list").className = "";
   $("case-list").innerHTML = GROUPS.map(([org, label, role], gi) => {
