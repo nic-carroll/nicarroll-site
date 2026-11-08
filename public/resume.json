@@ -6,7 +6,7 @@
   "location": "Augusta, Georgia",
   "email": "carroll.nic@gmail.com",
   "linkedin": "https://www.linkedin.com/in/nic-carroll/",
-  "summary": "I've led the whole of information technology as a CIO, CTO, and CISO, and today I lead Information Security and Identity and Access Management at Georgia Southern University. I'm a visionary problem solver who makes sure projects are completed on time, at scale, and under budget. I excel at creating new tools, processes, and procedures, including AI tools that are reimagining how a security department works.",
+  "summary": "I've led the whole of information technology as a CIO, CTO, and CISO, and today I lead Information Security and Identity and Access Management at Georgia Southern University. I'm a visionary problem solver who makes sure projects are completed on time, at scale, and under budget. I excel at creating new tools, processes, and procedures, including AI tools that are reimagining how a security department works. Over my career I have deployed more than 100 Google Workspace domains and led enterprise migrations between Microsoft and Google in both directions.",
   "stats": [
     {
       "value": "100%",
@@ -270,6 +270,7 @@
     "Cybersecurity and Cloud Strategy",
     "Data Analysis and Integrations",
     "Enterprise Information Technology",
+    "Google Workspace and Microsoft 365 Migrations",
     "IT Governance and Compliance",
     "E-Rate Funding",
     "Cross Functional Collaboration"
@@ -415,9 +416,9 @@
       "text": "Led Georgia Southern University's Talon Secure research enclave, built for CUI and ITAR and EAR data, to a perfect score on its CMMC Level 2 assessment: all 110 NIST SP 800-171 controls in place, the standard the Department of War requires to protect sensitive federal information."
     },
     {
-      "title": "Unified Security Dashboard",
-      "tag": "Security",
-      "text": "One view of every Information Security and IAM application, for faster threat and vulnerability response."
+      "title": "100+ Google Workspace Domains",
+      "tag": "Operations",
+      "text": "Deployed more than 100 Google Workspace domains over my career and led enterprise migrations in both directions between Microsoft and Google."
     },
     {
       "title": "AI for the Security Department",
