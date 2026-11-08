@@ -152,6 +152,10 @@
           "t": "Pioneered a partnership with the National Security Agency and US Cyber Command to embed K12 NexGen Cyber standards across all curricula."
         },
         {
+          "h": "Evaluation Systems for Media and Instructional Technology",
+          "t": "Created the evaluation systems for media specialists and instructional technology personnel, including the district's adoption of the Media Keys Effectiveness System in 2020 to 2021, and used them to redefine and improve how both roles serve teachers and students."
+        },
+        {
           "h": "Microcredentialing for 4,000+",
           "t": "Launched a districtwide microcredentialing platform serving over 4,000 employees."
         },
@@ -328,6 +332,10 @@
     {
       "name": "Instructional Advisory Board",
       "org": "Google"
+    },
+    {
+      "name": "Cyber Education Taskforce",
+      "org": "CSRA Alliance for Fort Gordon"
     }
   ],
   "highlights": [
@@ -367,9 +375,9 @@
       "text": "Unified Aiken County's cameras and door access across 44+ campuses into a single physical security system."
     },
     {
-      "title": "$12M+ Budget, $75M+ in Assets",
-      "tag": "Finance",
-      "text": "Managed Aiken County's annual technology budget of more than $12 million and assets valued at more than $75 million."
+      "title": "Evaluation Systems That Redefined Two Roles",
+      "tag": "Leadership",
+      "text": "Created the evaluation systems for Columbia County's media specialists and instructional technology personnel, and used them to improve how both roles work."
     },
     {
       "title": "K12 NexGen Cyber Standards",
@@ -525,6 +533,48 @@
       "result": "Greater visibility and faster resolution of threats and vulnerabilities, for a safe, secure, and reliable environment.",
       "metric": "1 view",
       "metricLabel": "For all security and IAM tools"
+    },
+    {
+      "title": "NexGen Cyber: Cybersecurity in Every Subject, K12",
+      "org": "Columbia County Public Schools",
+      "tag": "Education",
+      "challenge": "Cyber now touches every career, not just IT, yet cybersecurity lived in a few elective pathways. The region around Fort Gordon needed every student ready for a cyber driven workforce.",
+      "approach": "Pioneered a partnership with the National Security Agency and US Cyber Command to embed NexGen Cyber standards across the K12 curriculum, so lessons from math to cosmetology connect to the cyber world. Served on the Cyber Education Taskforce with the CSRA Alliance for Fort Gordon.",
+      "tools": [
+        "NSA",
+        "US Cyber Command",
+        "K12 curriculum standards",
+        "Fort Gordon Cyber District"
+      ],
+      "result": "The Board of Education approved NexGen Cyber in late 2022, and it continues today as a districtwide initiative to equip every student for an ever evolving cyber world.",
+      "metric": "K12",
+      "metricLabel": "Cyber standards in every subject",
+      "links": [
+        {
+          "label": "Alliance for Fort Gordon Coverage",
+          "url": "https://www.fortgordonalliance.com/columbia-county-school-district-to-create-nexgen-cyber-education-curriculum"
+        },
+        {
+          "label": "Watch the District Video",
+          "url": "https://ccboe.net/apps/video/"
+        }
+      ]
+    },
+    {
+      "title": "Redefined the Media Specialist and Instructional Technology Roles",
+      "org": "Columbia County Public Schools",
+      "tag": "Leadership",
+      "challenge": "Media specialists and instructional technology personnel were evaluated on tools that did not reflect the modern work of either role, which made it hard to set expectations or help people grow.",
+      "approach": "Created evaluation systems built for each role, including bringing the Media Keys Effectiveness System, with its 10 standards for the 21st century library media specialist, to the district in 2020 to 2021. Used walkthroughs and portfolios to give feedback and reshape how both positions support teaching and learning.",
+      "tools": [
+        "Media Keys Effectiveness System",
+        "Walkthrough observations",
+        "Portfolio evaluation",
+        "Professional growth"
+      ],
+      "result": "Clear, role specific standards for an 80 person team of technology, instruction, and media specialists, and positions refocused on teaching, learning, and student success.",
+      "metric": "10",
+      "metricLabel": "Standards for the modern media specialist"
     }
   ],
   "approach": [
@@ -543,11 +593,19 @@
     {
       "title": "Solve the Real Problem",
       "text": "I look past symptoms to the problem underneath, then align people, budget, and technology to fix it."
+    },
+    {
+      "title": "Start With Teaching and Learning",
+      "text": "I began as a classroom teacher, so technology decisions start with what students and teachers need. That is why I built project based courses, cyber standards for every subject, and evaluation systems that help people grow."
+    },
+    {
+      "title": "Grow the People Who Do the Work",
+      "text": "I set clear standards for every role, give honest feedback, and help each person improve. Strong teams outlast any single project."
     }
   ],
   "testimonials": [
     {
-      "quote": "Nic Carroll's visionary leadership and technical expertise make him an invaluable addition…",
+      "quote": "Nic Carroll's visionary leadership and technical expertise make him an invaluable addition to our team.",
       "name": "Dr. Corey Murphy",
       "title": "Superintendent, Aiken County Public Schools",
       "source": "https://www.acpsd.net/article/1906779/"
@@ -574,6 +632,20 @@
       "title": "District Names Nic Carroll as Executive Director of Technology",
       "summary": "Aiken County Public Schools announces Nic as Executive Director of Technology, leading data governance, cybersecurity, and digital learning.",
       "url": "https://www.acpsd.net/article/1906779/"
+    },
+    {
+      "kind": "Program coverage",
+      "date": "March 2026",
+      "title": "Columbia County School District NexGen Cyber",
+      "summary": "The district's video on NexGen Cyber, the K12 initiative to equip every student for an ever evolving cyber world.",
+      "url": "https://ccboe.net/apps/video/"
+    },
+    {
+      "kind": "Program coverage",
+      "date": "December 2022",
+      "title": "Columbia County School District to create NexGen cyber education curriculum",
+      "summary": "The Alliance for Fort Gordon on board approval of NexGen, a K12 cyber curriculum reaching every subject from math to cosmetology.",
+      "url": "https://www.fortgordonalliance.com/columbia-county-school-district-to-create-nexgen-cyber-education-curriculum"
     },
     {
       "kind": "Speaker",
