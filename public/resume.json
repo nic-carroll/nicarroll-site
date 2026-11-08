@@ -740,7 +740,7 @@
       "org": "1EdTech Consortium",
       "tag": "Governance",
       "challenge": "Every district and university negotiated data privacy and security terms with every edtech supplier on its own, slowing procurement and leaving protections for student data uneven from one contract to the next.",
-      "approach": "Served as an institutional representative on the 1EdTech task force of institutional and supplier experts that created the Data Privacy and Security Agreement (DPSA) Template, a single agreement that covers both data privacy and data security. Helped shape the terms institutions and suppliers now use to protect student data, mitigate security risks, and speed up RFPs and contracting.",
+      "approach": "Served as an institutional representative on the 1EdTech task force of 33 K12, state education, and edtech supplier experts that created the Data Privacy and Security Agreement (DPSA) Template, a single agreement that covers both data privacy and data security. Helped shape the terms institutions and suppliers now use to protect student data, mitigate security risks, and speed up RFPs and contracting.",
       "tools": [
         "Data privacy",
         "Vendor security",
@@ -750,10 +750,18 @@
       "result": "A national DPSA Template available to every 1EdTech member institution and supplier, part of the 1EdTech TrustEd Apps Program and adopted by districts such as Prince George's County Public Schools. Recognized with a 1EdTech Leadership Award at Learning Impact 2024, and invited to present the DPSA to members in a 1EdTech webinar.",
       "metric": "National",
       "metricLabel": "Agreement for all 1EdTech member institutions",
+      "quote": {
+        "text": "The 1EdTech Data Privacy and Security Agreement empowers K-12 school members by streamlining access to educational resources, fostering collaboration, and enhancing data privacy and security between vendors and institutions, reducing onboarding time and ultimately enriching the learning experience for all.",
+        "by": "Nic Carroll, quoted by 1EdTech"
+      },
       "links": [
         {
           "label": "About the 1EdTech DPSA",
           "url": "https://www.1edtech.org/resource/dpsa"
+        },
+        {
+          "label": "Read the 1EdTech Article",
+          "url": "https://www.1edtech.org/blog/prioritize-security-with-1edtechs-data-privacy-and-security-agreement-template"
         },
         {
           "label": "Watch the Webinar",
@@ -958,6 +966,13 @@
       "title": "District Names Nic Carroll as Executive Director of Technology",
       "summary": "Aiken County Public Schools announces Nic as Executive Director of Technology, leading data governance, cybersecurity, and digital learning.",
       "url": "https://www.acpsd.net/article/1906779/"
+    },
+    {
+      "kind": "In the news",
+      "date": "July 2024",
+      "title": "Prioritize Security With 1EdTech's Data Privacy and Security Agreement Template",
+      "summary": "1EdTech introduces the national DPSA Template and quotes Nic on how it streamlines access to resources, strengthens privacy and security, and reduces onboarding time for K12 members.",
+      "url": "https://www.1edtech.org/blog/prioritize-security-with-1edtechs-data-privacy-and-security-agreement-template"
     },
     {
       "kind": "Award",
