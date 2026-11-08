@@ -34,11 +34,11 @@
       "blurb": "Leads Information Security and the Identity and Access Management group, protecting data integrity and operational resilience for 33,500 students and nearly 4,000 faculty across a global campus network. Uses AI tools built in house to reimagine how the security department works.",
       "bullets": [
         {
-          "h": "Perfect CMMC Level 2 score",
+          "h": "Perfect CMMC Level 2 Score",
           "t": "Led the GCC High research enclave, a segregated Microsoft 365 GCC High and Azure Government environment for Controlled Unclassified Information and export controlled (ITAR and EAR) data, through its CMMC Level 2 assessment, achieving a perfect score."
         },
         {
-          "h": "Unified security dashboard",
+          "h": "Unified Security Dashboard",
           "t": "Built a unified dashboard that brings every Information Security and IAM application into one view, improving visibility across the environment and speeding the resolution of threats and vulnerabilities."
         },
         {
@@ -50,15 +50,15 @@
           "t": "Lead the Identity and Access Management group in addition to Information Security, aligning identity, provisioning, and access controls with security strategy."
         },
         {
-          "h": "Third party application review",
+          "h": "Third Party Application Review",
           "t": "Led a complete revision of the third party application review process to strengthen vendor risk management and data privacy."
         },
         {
-          "h": "Enterprise security strategy",
+          "h": "Enterprise Security Strategy",
           "t": "Lead enterprise cybersecurity strategy as an executive team member, aligning risk management, data protection, and threat mitigation with institutional goals."
         },
         {
-          "h": "Executive cybersecurity advisor",
+          "h": "Executive Cybersecurity Advisor",
           "t": "Serve as the primary cybersecurity advisor for executives and partners, translating threat intelligence and compliance requirements into actionable strategy."
         }
       ]
@@ -71,19 +71,19 @@
       "blurb": "Unified IT, technology, and security as district CIO, CTO, and CISO, guiding the digital ecosystem for 3,700 staff and 24,000 students.",
       "bullets": [
         {
-          "h": "$12M+ budget, $75M+ assets",
+          "h": "$12M+ Budget, $75M+ Assets",
           "t": "Managed an annual budget of more than $12 million and technology assets valued at more than $75 million."
         },
         {
-          "h": "$12M school safety systems",
+          "h": "$12M School Safety Systems",
           "t": "Led the $12 million installation of Audio Enhancement safety and security systems across all 44+ school sites."
         },
         {
-          "h": "Division reorganization",
+          "h": "Division Reorganization",
           "t": "Reorganized a 40 person technology division, driving a 30% reduction in departmental spending ($1.5M in year one) by optimizing vendor contracts and eliminating external contractor dependencies."
         },
         {
-          "h": "Core infrastructure overhaul",
+          "h": "Core Infrastructure Overhaul",
           "t": "Orchestrated a large scale core infrastructure overhaul (fiber, WAN/SD-WAN, firewalls, switches, routers) that doubled internet bandwidth and strengthened continuity against outages and cyber events."
         },
         {
@@ -91,23 +91,23 @@
           "t": "Led the complete revamp and migration of Active Directory to Microsoft Entra ID."
         },
         {
-          "h": "50,000+ devices patched",
+          "h": "50,000+ Devices Patched",
           "t": "Led the management, updating, and patching of more than 50,000 devices."
         },
         {
-          "h": "First cybersecurity program",
+          "h": "First Cybersecurity Program",
           "t": "Established the district's first comprehensive cybersecurity program, aligned with NIST and CIS frameworks, protecting data for over 28,000 users."
         },
         {
-          "h": "100,000 endpoints",
+          "h": "100,000 Endpoints",
           "t": "Directed lifecycle management of 100,000 endpoints, migrating all imaging to a cloud based solution and reallocating staff to strategic initiatives."
         },
         {
-          "h": "Board and leadership partnerships",
+          "h": "Board and Leadership Partnerships",
           "t": "Built partnerships with the Superintendent, Board, and leaders to align IT with academic goals and secure funding for key investments."
         },
         {
-          "h": "Data driven decisions",
+          "h": "Data Driven Decisions",
           "t": "Deployed new analytics platforms and governance policies that gave department heads and executives actionable operational insights."
         }
       ]
@@ -120,27 +120,27 @@
       "blurb": "Partnered with all departments to build and optimize a secure, modern digital ecosystem, leading the full lifecycle of technology solutions from implementation to enterprise wide adoption.",
       "bullets": [
         {
-          "h": "Strategic advisor",
+          "h": "Strategic Advisor",
           "t": "Served as a key strategic advisor to the Superintendent and executive leadership, authoring technology policies and administrative procedures."
         },
         {
-          "h": "100+ information systems, $2.5M+ budget",
+          "h": "100+ Information Systems, $2.5M+ Budget",
           "t": "Managed the lifecycle of over 100 information system products and an annual technology budget exceeding $2.5M."
         },
         {
-          "h": "Student information and interoperability",
+          "h": "Student Information and Interoperability",
           "t": "Directed core platforms including the student information system and set interoperability standards for secure data exchange across 33,000 users."
         },
         {
-          "h": "Three platforms in one week",
+          "h": "Three Platforms in One Week",
           "t": "Migrated and scaled three enterprise grade learning tools within a single week."
         },
         {
-          "h": "Data privacy program",
+          "h": "Data Privacy Program",
           "t": "Oversaw the data privacy and governance program, reviewing over 250 vendor agreements annually."
         },
         {
-          "h": "NSA and US Cyber Command partnership",
+          "h": "NSA and US Cyber Command Partnership",
           "t": "Pioneered a partnership with the National Security Agency and US Cyber Command to embed K12 NexGen Cyber standards across all curricula."
         },
         {
@@ -148,7 +148,7 @@
           "t": "Launched a districtwide microcredentialing platform serving over 4,000 employees."
         },
         {
-          "h": "Team of 80 specialists",
+          "h": "Team of 80 Specialists",
           "t": "Led a team of 80 technology, instruction, and media specialists."
         }
       ]
@@ -169,15 +169,15 @@
           "t": "Created The Studio, a project based course blending Computer Science, AP Social Studies, and Language Arts."
         },
         {
-          "h": "Virtual courses",
+          "h": "Virtual Courses",
           "t": "Designed and taught virtual courses for Gwinnett Online Campus and Georgia Virtual School."
         },
         {
-          "h": "Assessment coordinator",
+          "h": "Assessment Coordinator",
           "t": "Led testing operations as assessment coordinator and developed course test banks used by the Georgia Department of Education."
         },
         {
-          "h": "World History team lead",
+          "h": "World History Team Lead",
           "t": "Served as World History team lead for AP, Honors, and Technical students."
         }
       ]
@@ -365,7 +365,7 @@
       "text": "Partnership with the NSA and US Cyber Command to embed cybersecurity standards across K12 curricula."
     }
   ],
-  "intro": "I turn bold technology vision into results, delivered on time, at scale, and under budget.",
+  "intro": "Innovation that scales. Security that holds. Leadership that delivers.",
   "projects": [
     {
       "title": "Milestone Compass",
@@ -415,11 +415,11 @@
     }
   ],
   "badge": "Visionary executive leader. Former CIO and CTO, currently CISO at Georgia Southern University.",
-  "who": "I've led entire information technology organizations as CIO, CTO, and CISO, from a perfect CMMC Level 2 score to a $12 million safety rollout across 44+ sites. I build what doesn't exist yet, including AI tools that are reimagining how security teams work.",
+  "who": "I've led entire information technology organizations as CIO, CTO, and CISO, delivering on time, at scale, and under budget, from a perfect CMMC Level 2 score to a $12 million safety rollout across 44+ sites. I build what doesn't exist yet, including AI tools that are reimagining how security teams work.",
   "photo": "assets/nic.jpg",
   "caseStudies": [
     {
-      "title": "Talon Secure: a perfect CMMC Level 2 score",
+      "title": "Talon Secure: A Perfect CMMC Level 2 Score",
       "org": "Georgia Southern University",
       "tag": "Compliance",
       "challenge": "Researchers needed a place to store and work with Controlled Unclassified Information and export controlled (ITAR and EAR) data for DoD, DoE, and other federal research that would stand up to CMMC requirements.",
@@ -434,11 +434,11 @@
       "metric": "100%",
       "links": [
         {
-          "label": "Georgia Southern University news",
+          "label": "Georgia Southern University News",
           "url": "https://www.georgiasouthern.edu/2026/10/26/georgia-southern-receives-perfect-score-on-cybersecurity-audit-gains-access-to-increased-research-opportunities-from-the-department-of-defense"
         },
         {
-          "label": "Read the coverage",
+          "label": "Read the Coverage",
           "url": "https://go-planet.com/perspectives-blog/georgia-southern-university-passes-cmmc-level-2-assessment-with-a-perfect-score/"
         },
         {
@@ -453,7 +453,7 @@
       "credit": "The university's Research Security and Export Controls director credited Nic and his team with taking point on preparation."
     },
     {
-      "title": "Reorganizing a 40 person technology division",
+      "title": "Reorganizing a 40 Person Technology Division",
       "org": "Aiken County Public Schools",
       "tag": "Leadership",
       "challenge": "A 40 person technology division carried high spending and depended on outside contractors.",
@@ -467,7 +467,7 @@
       "metric": "$1.5M"
     },
     {
-      "title": "$12M in safety and security systems across 44+ sites",
+      "title": "$12M in Safety and Security Systems Across 44+ Sites",
       "org": "Aiken County Public Schools",
       "tag": "Safety",
       "challenge": "Every school and site in the district needed modern audio, safety, and security systems.",
@@ -481,7 +481,7 @@
       "metric": "44+"
     },
     {
-      "title": "One view of security and identity",
+      "title": "One View of Security and Identity",
       "org": "Georgia Southern University",
       "tag": "Security",
       "challenge": "Information Security and IAM tools lived in separate systems, which limited visibility across the environment.",
@@ -497,19 +497,19 @@
   ],
   "approach": [
     {
-      "title": "Vision that gets finished",
+      "title": "Vision That Gets Finished",
       "text": "I set a clear direction and stay with it until the work is done. A strategy only counts when the project is complete."
     },
     {
-      "title": "Build what's missing",
+      "title": "Build What's Missing",
       "text": "When the right tool, process, or procedure doesn't exist, I create it. Today that includes AI tools built for my own teams."
     },
     {
-      "title": "On time, at scale, under budget",
+      "title": "On Time, at Scale, Under Budget",
       "text": "From a $12 million safety rollout to a $1.5 million savings in year one, I plan for delivery and cost from day one."
     },
     {
-      "title": "Solve the real problem",
+      "title": "Solve the Real Problem",
       "text": "I look past symptoms to the problem underneath, then align people, budget, and technology to fix it."
     }
   ],
@@ -550,5 +550,11 @@
       "summary": "Presented to K12 technology leaders at CoSN's national conference, Building What's Next, Together.",
       "url": "https://cosn2026.eventscribe.net/fsPopup.asp?PresenterId=2376054&mode=presenterinfo"
     }
-  ]
+  ],
+  "heroPoints": [
+    "Led entire IT organizations as CIO, CTO, and CISO",
+    "Perfect CMMC Level 2 score and a $12M safety rollout across 44+ sites",
+    "Building AI tools that reimagine how security teams work"
+  ],
+  "now": "Chief Information Security Officer, Georgia Southern University"
 }

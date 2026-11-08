@@ -57,9 +57,14 @@
   .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 160px; background: linear-gradient(transparent, var(--night)); pointer-events: none; }
   .hero-inner { position: relative; z-index: 2; padding: 150px 0 56px; }
   .hero h1 { font: 760 clamp(52px, 7vw, 96px)/.95 var(--display); letter-spacing: -.04em; margin: 0; }
+  .points { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 10px; }
+  .points li { position: relative; padding-left: 28px; font-size: 18px; line-height: 1.45; color: #d6e2f0; }
+  .points li::before { content: ""; position: absolute; left: 0; top: .5em; width: 14px; height: 2px; background: var(--amber); }
+  .now { margin: 22px 0 0; font-size: 16px; color: #b4c4d8; }
+  .now span { display: inline-block; margin-right: 10px; padding: 3px 10px; border-radius: 999px; background: rgba(95,211,141,.14); color: #7fe0a4; font-weight: 600; font-size: 13px; }
   .hero-creds { margin: 12px 0 0; font: 600 18px var(--body); letter-spacing: .06em; color: #d6e2f0; }
   .hero-title { margin: 18px 0 0; font: 600 clamp(20px, 2vw, 26px)/1.3 var(--display); color: var(--amber); letter-spacing: -.01em; }
-  .hero-value { margin: 26px 0 0; font: 500 clamp(22px, 2.3vw, 30px)/1.3 var(--display); color: #fff; max-width: 24ch; letter-spacing: -.015em; }
+  .hero-value { margin: 26px 0 0; font: 500 clamp(22px, 2.3vw, 30px)/1.3 var(--display); color: #fff; max-width: none; letter-spacing: -.015em; }
   .hero .who { margin: 18px 0 0; font-size: 18px; line-height: 1.6; color: #b4c4d8; max-width: 54ch; }
   .hero .who strong { color: #fff; font-weight: 600; }
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
@@ -241,7 +246,7 @@
     .hero::after { display: none; }
     .hero-inner { padding: 0 0 10px; }
     .hero h1 { font-size: 26pt; max-width: none; }
-    .hero .who { color: var(--ink); font-size: 11pt; }
+    .hero .who, .points li, .now { color: var(--ink); font-size: 11pt; }
     .hero .who strong { color: var(--ink); }
     section.block { padding-top: 16px; }
     .head { margin-bottom: 10px; }
@@ -268,8 +273,8 @@
   <div class="wrap">
     <a class="mark" href="#top"><b>NC</b><span>Nic Carroll<small>, Ed.S., CISSP, CETL</small></span></a>
     <nav aria-label="Sections">
-      <a href="#cases">Case studies</a>
-      <a href="#approach">How I lead</a>
+      <a href="#cases">Case Studies</a>
+      <a href="#approach">How I Lead</a>
       <a href="#building">Building</a>
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
@@ -286,13 +291,14 @@
       <h1 id="hero-name">Nic Carroll</h1>
       <p class="hero-creds">Ed.S., CISSP, CETL</p>
       <p class="hero-title" id="hero-title">Visionary executive leader. CIO, CTO, and CISO.</p>
-      <p class="hero-value" id="intro">I turn bold technology vision into results, delivered on time, at scale, and under budget.</p>
-      <p class="who" id="who"></p>
+      <p class="hero-value" id="intro">Innovation that scales. Security that holds. Leadership that delivers.</p>
+      <ul class="points" id="points"></ul>
+      <p class="now" id="now"></p>
       <div class="cta">
-        <a class="btn amber" href="#cases">See my case studies</a>
+        <a class="btn amber" href="#cases">See My Case Studies</a>
         <a class="btn glass" href="Nic_Carroll_Resume.pdf" download>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
-          Download resume (PDF)
+          Download Resume (PDF)
         </a>
       </div>
     </div>
@@ -305,7 +311,7 @@
 <main id="main" class="wrap">
   <section class="block" id="cases">
     <div class="head">
-      <h2>Case studies</h2>
+      <h2>Case Studies</h2>
       <p>The challenge, what I did, and what changed.</p>
     </div>
     <div class="cases" id="case-list"></div>
@@ -313,7 +319,7 @@
 
   <section class="block" id="approach">
     <div class="head">
-      <h2>How I lead</h2>
+      <h2>How I Lead</h2>
       <p>The principles behind every team I've built and every project I've finished.</p>
     </div>
     <div class="lead-band" id="approach-list"></div>
@@ -321,7 +327,7 @@
 
   <section class="block" id="building">
     <div class="head">
-      <h2>Things I'm building</h2>
+      <h2>Things I'm Building</h2>
       <p>Prototypes, tools, and experiments for schools, universities, and security teams.</p>
     </div>
     <div id="featured"></div>
@@ -339,7 +345,7 @@
 
   <section class="block" id="voices" hidden>
     <div class="head">
-      <h2>What leaders say</h2>
+      <h2>What Leaders Say</h2>
       <p>From superintendents, board members, peers, and the people I've led.</p>
     </div>
     <div class="quotes" id="quote-list"></div>
@@ -347,7 +353,7 @@
 
   <section class="block" id="writing" hidden>
     <div class="head">
-      <h2>News and ideas</h2>
+      <h2>News and Ideas</h2>
       <p>Coverage of the work, and where I think technology, security, and education are heading.</p>
     </div>
     <ul class="posts" id="post-list"></ul>
@@ -369,7 +375,7 @@
     <div class="creds">
       <div class="ccol"><h3>Education</h3><ul id="edu"></ul></div>
       <div class="ccol"><h3>Certifications</h3><ul id="certs"></ul></div>
-      <div class="ccol"><h3>Boards and task forces</h3><ul id="boards"></ul></div>
+      <div class="ccol"><h3>Boards and Task Forces</h3><ul id="boards"></ul></div>
     </div>
     <div class="chips" id="skills" aria-label="Frameworks and platforms"></div>
   </section>
@@ -378,10 +384,10 @@
 <section class="contact" id="contact">
   <div class="glow"></div>
   <div class="wrap">
-    <h2>Let's build what's next.</h2>
+    <h2>Let's Build What's Next.</h2>
     <p>I'm glad to talk about technology leadership, cybersecurity, AI, or new tools for schools and universities.</p>
     <div class="cta">
-      <a class="btn amber" id="mail" href="#">Email me</a>
+      <a class="btn amber" id="mail" href="#">Email Me</a>
       <a class="btn glass" id="li" href="#" target="_blank" rel="noopener">Connect on LinkedIn</a>
     </div>
   </div>
@@ -438,15 +444,16 @@ function art(seed, i) {
 
 function links(p, cls) {
   const out = [];
-  if (p.url) out.push(`<a class="${cls}" href="${esc(p.url)}" ${p.url.startsWith("/") ? "" : 'target="_blank" rel="noopener"'}>Open it</a>`);
-  if (p.repo) out.push(`<a class="${cls === "btn amber" ? "btn glass" : cls}" href="${esc(p.repo)}" target="_blank" rel="noopener">View code</a>`);
+  if (p.url) out.push(`<a class="${cls}" href="${esc(p.url)}" ${p.url.startsWith("/") ? "" : 'target="_blank" rel="noopener"'}>Open It</a>`);
+  if (p.repo) out.push(`<a class="${cls === "btn amber" ? "btn glass" : cls}" href="${esc(p.repo)}" target="_blank" rel="noopener">View Code</a>`);
   return out.join("");
 }
 
 fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   const now = d.experience[0];
-  if (d.intro) $("intro").textContent = d.intro;
-  $("who").innerHTML = `${esc(d.who)} Currently Chief Information Security Officer at Georgia Southern University.`;
+  if (d.intro) $("intro").innerHTML = d.intro.split(/(?<=\.)\s+/).map(t => `<span style="display:block">${esc(t)}</span>`).join("");
+  $("points").innerHTML = (d.heroPoints || []).map(t => `<li>${esc(t)}</li>`).join("");
+  $("now").innerHTML = d.now ? `<span>Now</span>${esc(d.now)}` : "";
   $("proof").innerHTML = (d.stats || []).map(s => `<div><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join("");
   $("summary").textContent = d.summary;
   $("mail").href = "mailto:" + d.email;
@@ -478,13 +485,13 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
         <div class="tags">${p.tags.map(esc).join(", ")}</div>
         <div class="links">${links(p, "")}</div>
       </div>
-    </article>`).join("") + (rest.length % 3 === 0 ? "" : `<div class="add-yours"><div><b>More on the way</b>New tools land here as I build them.</div></div>`);
+    </article>`).join("") + (rest.length % 3 === 0 ? "" : `<div class="add-yours"><div><b>More on the Way</b>New tools land here as I build them.</div></div>`);
 
   if (d.photo) $("portrait").querySelector("img").src = d.photo;
   $("case-list").innerHTML = (d.caseStudies || []).map(c => `
     <article class="case">
       <div class="top"><div><div class="org">${esc(c.org)}</div><h3>${esc(c.title)}</h3></div>${c.metric ? `<div class="metric">${esc(c.metric)}</div>` : ""}</div>
-      <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I did</dt><dd>${esc(c.approach)}</dd></div></dl>
+      <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I Did</dt><dd>${esc(c.approach)}</dd></div></dl>
       <div class="result"><span>Result</span>${esc(c.result)}</div>
       ${c.quote ? `<blockquote class="case-quote">“${esc(c.quote.text)}”<cite>${esc(c.quote.by)}</cite></blockquote>` : ""}
       ${c.credit ? `<p class="case-credit">${esc(c.credit)}</p>` : ""}
@@ -511,7 +518,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
         <h3>${esc(j.title)}</h3>
         <div class="org">${esc(j.org)}, ${esc(j.place)}</div>
         <p class="blurb">${esc(j.blurb)}</p>
-        <details ${i < 2 ? "open" : ""}><summary>Key results</summary><ul>${j.bullets.map(b => typeof b === "string" ? `<li>${esc(b)}</li>` : `<li><b>${esc(b.h)}</b>${esc(b.t)}</li>`).join("")}</ul></details>
+        <details ${i < 2 ? "open" : ""}><summary>Key Results</summary><ul>${j.bullets.map(b => typeof b === "string" ? `<li>${esc(b)}</li>` : `<li><b>${esc(b.h)}</b>${esc(b.t)}</li>`).join("")}</ul></details>
       </div>
     </li>`).join("");
 
