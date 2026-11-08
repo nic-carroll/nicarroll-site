@@ -111,8 +111,9 @@
   .lead-band p { margin: 0; color: #c0cfe0; padding-left: 22px; }
 
   /* Testimonials and writing (shown only when there is content) */
-  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
-  .quote { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 30px; margin: 0; }
+  .quotes { columns: 2; column-gap: 22px; }
+  .quote { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 30px; margin: 0 0 22px; break-inside: avoid; }
+  @media (max-width: 760px) { .quotes { columns: 1; } }
   .quote blockquote { margin: 0 0 18px; font-size: 18px; line-height: 1.55; }
   .quote figcaption b { display: block; }
   .quote figcaption span { color: var(--ink-soft); font-size: 15px; }

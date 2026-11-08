@@ -196,12 +196,16 @@
           "t": "Hired as the district's first Director of Digital Learning and led a districtwide Google Classroom rollout to more than 2,000 teachers, which had the district ready when the pandemic moved learning home."
         },
         {
+          "h": "EdTech Summits for 1,000+ Teachers a Year",
+          "t": "Founded the district's summer EdTech Summits, bringing in nationally recognized teachers and speakers. Attendance was voluntary, and more than 1,000 teachers took courses each summer."
+        },
+        {
           "h": "Google Workspace in a Microsoft District",
           "t": "Brought in to introduce Google Workspace tools into a Microsoft environment, and built the plan that let both platforms grow and be used side by side."
         },
         {
-          "h": "Microcredential Program Built From the Ground Up",
-          "t": "Built a districtwide microcredential program serving over 4,000 employees. About 1,200 staff became Google Certified Educator Level 1, 400 earned Level 2, and the district grew 27+ Google Certified Trainers."
+          "h": "Level Up Microcredential Program",
+          "t": "Built the Level Up microcredential program from the ground up, serving over 4,000 employees. About 1,200 staff became Google Certified Educator Level 1, 400 earned Level 2, and the district grew 27+ Google Certified Trainers."
         },
         {
           "h": "Team of 80 Specialists",
@@ -754,7 +758,7 @@
       "org": "Columbia County Public Schools",
       "tag": "Education",
       "challenge": "Columbia County ran on Microsoft, and teachers needed Google Workspace tools for teaching and learning, plus the skills to use them well.",
-      "approach": "Brought in to introduce Google Workspace into the Microsoft environment and let both platforms grow and be used. Built a microcredential program from the ground up so staff could earn Google certifications and grow a trainer corps to support their colleagues.",
+      "approach": "Brought in to introduce Google Workspace into the Microsoft environment and let both platforms grow and be used. Built the Level Up microcredential program from the ground up so staff could earn Google certifications, with a Google Certified Educator sign outside each certified teacher's classroom, and founded summer EdTech Summits with nationally recognized teachers and speakers.",
       "tools": [
         "Google Workspace",
         "Microsoft 365",
@@ -763,7 +767,11 @@
       ],
       "result": "About 1,200 staff became Google Certified Educator Level 1, 400 earned Level 2, and more than 27 became Google Certified Trainers, with both platforms in use across the district.",
       "metric": "1,600+",
-      "metricLabel": "Google certifications earned by staff"
+      "metricLabel": "Google certifications earned by staff",
+      "quote": {
+        "text": "Nic is somewhat of an anomaly in that he has deep knowledge of both the technical skills as well as the best practices of instructional pedagogy.",
+        "by": "Dr. Jeff Carney, former Associate Superintendent, Columbia County School District"
+      }
     },
     {
       "title": "One Login and Clean Rosters With ClassLink",
@@ -826,15 +834,25 @@
   ],
   "testimonials": [
     {
+      "quote": "Nic stands out as one of the truly innovative and dedicated professionals I have encountered… His expertise in digital learning, data integration, and cybersecurity, combined with his strategic planning and execution skills, makes him an invaluable asset to any organization.",
+      "name": "Brian Cohen",
+      "title": "Vice President, Center for Digital Education. Former Vice Chancellor and University CIO, City University of New York"
+    },
+    {
+      "quote": "I was fortunate to hire Nic for our first Director of Digital Learning. He was able to implement a large scale rollout of Google Classroom across our district that included over 2000 teachers. If it weren't for Nic's dedication and expertise, our district would have been wholly unprepared when the pandemic hit when we had to resort to learn from home. Nic is extremely proficient both with technical knowledge and all levels of academic curriculum. He just gets it. He is very professional, has strong communication skills, and is a team player. By far, he is one of the most valuable hires I made while at the CCBOE.",
+      "name": "Dr. Jeff Carney, SHRM-SCP",
+      "title": "Former Associate Superintendent and Human Resources Director, Columbia County School District"
+    },
+    {
       "quote": "Nic Carroll's visionary leadership and technical expertise make him an invaluable addition to our team.",
       "name": "Dr. Corey Murphy",
       "title": "Superintendent, Aiken County Public Schools",
       "source": "https://www.acpsd.net/article/1906779/"
     },
     {
-      "quote": "I was fortunate to hire Nic for our first Director of Digital Learning. He was able to implement a large scale rollout of Google Classroom across our district that included over 2000 teachers. If it weren't for Nic's dedication and expertise, our district would have been wholly unprepared when the pandemic hit when we had to resort to learn from home. Nic is extremely proficient both with technical knowledge and all levels of academic curriculum. He just gets it. He is very professional, has strong communication skills, and is a team player. By far, he is one of the most valuable hires I made while at the CCBOE.",
-      "name": "Dr. Jeff Carney, SHRM-SCP",
-      "title": "Human Resources Director, Columbia County Board of Education"
+      "quote": "I have known Mr. Carroll for 11 years in a professional capacity and have watched him grow into a leader who stands out in our school district… He is intelligent, honest, fair, and determined.",
+      "name": "Dr. Kristen L. Carroll",
+      "title": "Assistant Superintendent, Columbia County School District"
     }
   ],
   "writing": [
