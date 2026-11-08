@@ -930,7 +930,8 @@
           "label": "Try the Live Demo",
           "url": "https://rostereditor-388842205758.us-east1.run.app"
         }
-      ]
+      ],
+      "blurb": "Edit OneRoster 1.1 and 1.2 rosters for ClassLink: combine sections and courses, add or swap teachers, and export a clean file. Rules are built in, no AI required."
     },
     {
       "title": "EduSite: One Accessible Platform for Every District and School Site",
@@ -952,7 +953,8 @@
           "label": "Try the Beta Demo",
           "url": "https://edusite-demo-beta-388842205758.us-east1.run.app"
         }
-      ]
+      ],
+      "blurb": "One accessible platform that runs a district site and every school site from a single dashboard, with an AI assistant for staff updates."
     }
   ],
   "approach": [

@@ -114,6 +114,20 @@
   .case-quote { margin: 18px 0 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--amber); font: 600 19px/1.4 var(--display); color: var(--ink); }
   .case-quote cite { display: block; margin-top: 6px; font: 400 14px var(--body); color: var(--ink-soft); font-style: normal; }
   .case-credit { margin: 12px 0 0; font-size: 15px; color: var(--ink-soft); }
+  .prod-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .prod { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; }
+  .prod-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .prod h4 { margin: 0; font: 760 26px/1.1 var(--display); letter-spacing: -.02em; color: var(--ink); }
+  .prod-metric { text-align: right; }
+  .prod-metric b { display: block; font: 760 22px/1 var(--display); color: var(--night); }
+  .prod-metric span { display: block; margin-top: 4px; font-size: 12px; color: var(--ink-soft); max-width: 16ch; }
+  .prod-sub { margin: 6px 0 12px; font-weight: 600; color: #1f5f9e; font-size: 15px; }
+  .prod-text { margin: 0; color: var(--ink-soft); font-size: 15.5px; line-height: 1.55; }
+  .prod-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .prod-tags span { font-size: 12.5px; padding: 3px 9px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink-soft); }
+  .prod-status { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--sky-soft); color: var(--ink); white-space: nowrap; }
+  .prod h4 { font-size: 22px !important; }
+  .prod-btn { margin-top: 18px; align-self: flex-start; padding: 11px 16px; font-size: 15px; }
   .case-links { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
   .case-link { margin-top: 0; font-weight: 600; color: #1f5f9e; text-underline-offset: 3px; }
   .case .tools span { font-size: 13px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); color: var(--ink-soft); }
@@ -248,6 +262,7 @@
   footer .wrap { padding: 24px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
   @media (max-width: 960px) {
+    .prod-cards { grid-template-columns: 1fr 1fr; }
     .hero-grid, .cases, .lead-band { grid-template-columns: 1fr; }
     .portrait { justify-self: start; width: 180px; order: -1; margin: 0 0 8px; }
     .lead-band { padding: 36px 28px; }
@@ -263,6 +278,7 @@
     .nav nav { display: none; }
   }
   @media (max-width: 620px) {
+    .prod-cards { grid-template-columns: 1fr; }
     .mark small { display: none; }
     .cards, .impact { grid-template-columns: 1fr; }
     .featured .copy { padding: 30px; }
@@ -613,6 +629,23 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   $("case-list").innerHTML = GROUPS.map(([org, label, role], gi) => {
     const list = (d.caseStudies || []).filter(c => c.org === org);
     if (!list.length) return "";
+    if (org === "Independent Projects") {
+      const seen = new Set(list.map(c => c.title.split(":")[0].trim()));
+      const extra = (d.projects || []).filter(p => !seen.has(p.title) && p.title !== "This website");
+      const card = x => `<article class="prod">
+        <div class="prod-top"><h4>${esc(x.name)}</h4>${x.metric ? `<div class="prod-metric"><b>${esc(x.metric)}</b><span>${esc(x.metricLabel || "")}</span></div>` : (x.status ? `<span class="prod-status">${esc(x.status)}</span>` : "")}</div>
+        ${x.sub ? `<p class="prod-sub">${esc(x.sub)}</p>` : ""}
+        <p class="prod-text">${esc(x.text)}</p>
+        <div class="prod-tags">${(x.tags || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>
+        ${x.url ? `<a class="btn amber prod-btn" href="${esc(x.url)}" ${x.url.startsWith("/") || x.url.startsWith("assets/") ? "" : 'target="_blank" rel="noopener"'}>${esc(x.label || "Open It")}</a>` : ""}
+      </article>`;
+      const items = list.map(c => ({ name: c.title.split(":")[0].trim(), sub: (c.title.split(":")[1] || "").trim(), text: c.blurb || c.result, tags: c.tools, metric: c.metric, metricLabel: c.metricLabel, url: (c.links || [])[0]?.url, label: (c.links || [])[0]?.label }))
+        .concat(extra.map(p => ({ name: p.title, text: p.summary, tags: p.tags, status: p.status, url: p.url, label: p.url ? "Open It" : "" })));
+      return `<div class="case-group">
+      <div class="group-head"><h3>${esc(label)}</h3><span>${esc(role)}</span></div>
+      <div class="prod-cards">${items.map(card).join("")}</div>
+    </div>`;
+    }
     const lead = list.find(c => c.lead) || list[0];
     const rest = list.filter(c => c !== lead);
     return `<div class="case-group">
