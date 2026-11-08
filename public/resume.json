@@ -46,6 +46,14 @@
           "t": "Reimagined project management at Georgia Southern University with Reimagine IT: Frame it, Build it, Loop it, Launch it, Tend it. Cross functional teams build a working draft with AI partners in a day and launch in days or weeks, with security and IAM built in, not bolted on."
         },
         {
+          "h": "Single Sign On and Authorization",
+          "t": "Mapped every tool, account lifecycle, and sign in path across the university and built a phased plan to move from repeated password prompts to signing in once, with Microsoft Entra ID as the front door and a live tracker for every step."
+        },
+        {
+          "h": "From Need to SOP, Policy, and Procedure",
+          "t": "Created a complete process that takes a need from request to an approved standard operating procedure, policy, and procedure, supported by a tool for searching, editing, proposing, reviewing, and approving policies."
+        },
+        {
           "h": "AI for Information Security",
           "t": "Building AI tools and resources to reimagine the Information Security department's processes, reporting, and daily operations."
         },
@@ -422,7 +430,7 @@
     {
       "title": "Policy Search, Editing, and Approval",
       "status": "In use",
-      "summary": "A tool I built for Georgia Southern University that takes a policy from search to approval in one place: find any policy, edit it, submit a proposed change, and route it through review and approval.",
+      "summary": "A tool and process I built for Georgia Southern University that takes a need all the way to an approved SOP, policy, and procedure: find any policy, edit it, submit a proposed change, and route it through review and approval in one place.",
       "tags": [
         "Governance",
         "Workflow",
@@ -536,6 +544,22 @@
       "result": "A methodology for any project, an app, a process, or anything else, that runs at the pace of a day, a week, or a month. Teams leave Build it with a working first draft instead of a plan, and launch in days or weeks instead of months.",
       "metric": "1 day",
       "metricLabel": "From idea to a working first draft"
+    },
+    {
+      "title": "Sign In Once: Reimagining Single Sign On and Authorization",
+      "org": "Georgia Southern University",
+      "tag": "Identity",
+      "challenge": "Students, faculty, and staff were asked to sign in again and again. Three different systems checked passwords behind about ten sign in services, and settings no one had chosen added prompts. Students, who mostly use their own laptops and phones, felt it most.",
+      "approach": "Mapped the whole sign in experience end to end: every tool and the sign in it uses, how accounts are created and removed, and a day of sign ins for each kind of user. Built a phased plan to make Microsoft Entra ID the single front door with the existing campus sign in kept behind it, a separate track for personal devices, quick wins the teams could ship without buying anything, and a live tracker so every step's status is visible to everyone involved.",
+      "tools": [
+        "Microsoft Entra ID",
+        "Single sign on",
+        "MFA",
+        "Identity lifecycle"
+      ],
+      "result": "A clear path from two or three password prompts each morning to signing in once: none on a university computer and one on a personal device, with every sign in logged and protected by the same MFA rules in one place.",
+      "metric": "1 sign in",
+      "metricLabel": "Instead of 2 to 3 prompts each morning"
     },
     {
       "title": "Reorganized a 40 Person Technology Division",
