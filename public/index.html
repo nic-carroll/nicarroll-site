@@ -343,8 +343,8 @@
     <a class="mark" href="#top"><b>NC</b><span>Nic Carroll<small>, Ed.S., CISSP, CETL</small></span></a>
     <nav aria-label="Sections">
       <a href="#approach">How I Lead</a>
-      <a href="#cases">Case Studies</a>
       <a href="#building">Building</a>
+      <a href="#cases">Case Studies</a>
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
       <a href="security.html">Security</a>
@@ -387,14 +387,6 @@
     <div class="lead-band" id="approach-list"></div>
   </section>
 
-  <section class="block" id="cases">
-    <div class="head">
-      <h2>Case Studies</h2>
-      <p>The challenge, what I did, and what changed.</p>
-    </div>
-    <div id="case-list"></div>
-  </section>
-
   <section class="block" id="building">
     <div class="head">
       <h2>Things I'm Building</h2>
@@ -402,6 +394,14 @@
     </div>
     <div id="featured"></div>
     <div class="cards light" id="cards"></div>
+  </section>
+
+  <section class="block" id="cases">
+    <div class="head">
+      <h2>Case Studies</h2>
+      <p>The challenge, what I did, and what changed.</p>
+    </div>
+    <div id="case-list"></div>
   </section>
 
   <section class="block" id="impact">
@@ -604,22 +604,10 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   $("mail").href = "mailto:" + d.email;
   $("li").href = d.linkedin;
 
-  const feat = d.projects.find(p => p.featured) || d.projects[0];
-  const rest = d.projects.filter(p => p !== feat);
+  const rest = d.projects;
   const metricBox = (p, dark) => p.metric ? `<div class="pmetric${dark ? " dark" : ""}"><b>${esc(p.metric)}</b><span>${esc(p.metricLabel || "")}</span></div>` : "";
   const chips = p => `<div class="pchips">${(p.tags || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>`;
-  $("featured").innerHTML = `
-    <article class="featured">
-      <div class="copy">
-        <div class="feat-top"><span class="pill ${statusClass(feat.status)}">${esc(feat.status)}</span>${metricBox(feat, true)}</div>
-        <h3>${esc(feat.title)}</h3>
-        ${feat.sub ? `<p class="feat-sub">${esc(feat.sub)}</p>` : ""}
-        <p>${esc(feat.summary)}</p>
-        ${chips(feat)}
-        <div class="links">${links(feat, "btn amber")}</div>
-      </div>
-      <div class="stage art-stage" aria-hidden="true">${art(feat, 7).replace('preserveAspectRatio="xMidYMid slice"', 'preserveAspectRatio="xMidYMid meet"').replace('<rect width="400" height="150" fill="url(#g7)"/>', '')}</div>
-    </article>`;
+  $("featured").innerHTML = "";
   $("cards").innerHTML = rest.map((p, i) => `
     <article class="pcard">
       <div class="art" aria-hidden="true">${art(p, i)}</div>
