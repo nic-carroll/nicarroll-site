@@ -17,8 +17,8 @@
       "label": "School safety systems delivered across 44+ sites"
     },
     {
-      "value": "$75M+",
-      "label": "Technology assets managed, with a $12M+ annual budget"
+      "value": "95%",
+      "label": "Less phishing and spam reaching inboxes, in under three months"
     },
     {
       "value": "37,000+",
@@ -44,6 +44,10 @@
         {
           "h": "Reimagine IT Project Methodology",
           "t": "Reimagined project management at Georgia Southern University with Reimagine IT: Frame it, Build it, Loop it, Launch it, Tend it. Cross functional teams build a working draft with AI partners in a day and launch in days or weeks, with security and IAM built in, not bolted on."
+        },
+        {
+          "h": "95% Less Phishing and Spam",
+          "t": "In less than three months, revamped and rearchitected the phishing and spam defense process, cutting the phishing and spam that reaches institutional email by 95% and reducing the time the team spends on it."
         },
         {
           "h": "Single Sign On and Authorization",
@@ -397,9 +401,9 @@
       "text": "AI tools and resources that reimagine how an information security team works day to day."
     },
     {
-      "title": "Active Directory to Entra ID",
-      "tag": "Identity",
-      "text": "Led a complete identity revamp and migration from on premises Active Directory to Microsoft Entra ID."
+      "title": "95% Less Phishing and Spam",
+      "tag": "Security",
+      "text": "Rearchitected Georgia Southern University's phishing and spam defense in under three months, cutting what reaches institutional email by 95%."
     },
     {
       "title": "Building a Cybersecurity Program from Zero",
@@ -566,6 +570,21 @@
       "result": "More than 4,000 products reviewed and approved, from Chrome extensions, hardware, and applications for the research environment to the tools departments and divisions use every day.",
       "metric": "4,000+",
       "metricLabel": "Products reviewed and approved"
+    },
+    {
+      "title": "Rearchitected Email Defense: 95% Less Phishing and Spam",
+      "org": "Georgia Southern University",
+      "tag": "Security",
+      "challenge": "Phishing and spam were getting through to institutional email, putting students, faculty, and staff at risk and taking up a large share of the security team's time.",
+      "approach": "Revamped the phishing and spam defense process from the ground up and rearchitected how email threats are filtered, handled, and resolved, all in less than three months.",
+      "tools": [
+        "Email security",
+        "Process redesign",
+        "Threat response"
+      ],
+      "result": "A 95% reduction in phishing and spam reaching institutional email services, and far less time spent by the team handling it.",
+      "metric": "95%",
+      "metricLabel": "Less phishing and spam reaching inboxes"
     },
     {
       "title": "Reimagine IT: A New Way to Run Projects",
