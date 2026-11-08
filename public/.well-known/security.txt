@@ -1,0 +1,4 @@
+Contact: mailto:carroll.nic@gmail.com
+Expires: 2027-11-08T00:00:00.000Z
+Preferred-Languages: en
+Policy: https://nicarroll-site-qjsgyud2vq-ue.a.run.app/security.html#report

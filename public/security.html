@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security | Nic Carroll</title>
+<meta name="description" content="How Nic Carroll, CISSP, protects the tools he builds, how they are monitored, and how to report a security issue.">
+<meta name="theme-color" content="#0c1a2e">
+<style>
+  @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 200 800; font-display: swap; }
+  @font-face { font-family: "Public Sans"; src: url("fonts/public-sans-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
+  :root { --night: #0c1a2e; --night-2: #13263f; --paper: #f3f5f8; --surface: #fff; --ink: #0f1c2e; --ink-soft: #4d5b6e; --line: #d9e0e9; --amber: #f2b43c; --sky: #8fb8de; --display: "Bricolage", "Arial Narrow", sans-serif; --body: "Public Sans", Arial, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 18px/1.65 var(--body); }
+  .wrap { width: min(1040px, calc(100% - 40px)); margin: 0 auto; }
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 12px; top: 12px; background: #fff; padding: 8px 12px; z-index: 5; }
+  a { color: #17508c; }
+  a:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+  header { background: var(--night); color: #fff; padding: 20px 0 76px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 64px; }
+  .top a { color: #c5d3e4; text-decoration: none; font-weight: 500; font-size: 16px; }
+  .top a:hover { color: #fff; text-decoration: underline; }
+  .eyebrow { color: var(--amber); font-weight: 700; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 12px; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.12; margin: 0; }
+  h1 { font-size: clamp(40px, 7vw, 68px); max-width: 15ch; }
+  .lede { color: #c5d3e4; font-size: 21px; max-width: 58ch; margin: 22px 0 0; }
+  section { padding: 64px 0 0; }
+  section:last-of-type { padding-bottom: 72px; }
+  h2 { font-size: clamp(30px, 4.5vw, 40px); margin-bottom: 12px; }
+  .intro { color: var(--ink-soft); max-width: 62ch; margin: 0 0 28px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .card h3 { font-size: 23px; margin-bottom: 8px; }
+  .card p { margin: 0; color: var(--ink-soft); }
+  .card ul { margin: 10px 0 0; padding-left: 20px; color: var(--ink-soft); }
+  .card li { margin-bottom: 6px; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .steps li { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--amber); border-radius: 10px; padding: 18px 22px; }
+  .steps strong { display: block; font-family: var(--display); font-size: 21px; }
+  .report { background: var(--night); color: #dbe5f1; border-radius: 16px; padding: 34px; }
+  .report h2 { color: #fff; }
+  .report a { color: var(--amber); }
+  .report p { max-width: 62ch; }
+  footer { background: var(--night); color: #8ea3bf; font-size: 15px; padding: 24px 0; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } body { font-size: 17px; } .report { padding: 24px; } header { padding-bottom: 52px; } .top { margin-bottom: 40px; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap">
+    <div class="top"><a href="index.html">Nic Carroll, Ed.S., CISSP, CETL</a><a href="index.html">Back to Home</a></div>
+    <p class="eyebrow">Security</p>
+    <h1>Security Is Part of How I Build</h1>
+    <p class="lede">I am a Chief Information Security Officer who also builds software for schools and universities. The people those tools serve deserve the same care I would expect from any vendor. This page explains how I protect what I build.</p>
+  </div>
+</header>
+<main id="main" class="wrap">
+  <section aria-labelledby="principles">
+    <h2 id="principles">The Principles I Build By</h2>
+    <p class="intro">Education runs on trust. Families hand schools information about their children, and that information has to be handled accordingly.</p>
+    <div class="grid">
+      <div class="card"><h3>Collect Less</h3><p>The safest data is data a tool never holds. Public demonstrations use made up or publicly reported information, never real student records.</p></div>
+      <div class="card"><h3>Give Only the Access Needed</h3><p>People and systems receive the permissions their job requires and nothing more, with roles that separate who can edit from who can publish.</p></div>
+      <div class="card"><h3>Keep Secrets Out of Code</h3><p>Deployments authenticate with short lived identity tokens instead of stored passwords or long lived keys wherever the platform allows it.</p></div>
+      <div class="card"><h3>Fail Safely</h3><p>When something required for security is missing, a tool should refuse to run rather than quietly run unprotected.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="products">
+    <h2 id="products">How the Tools Are Protected</h2>
+    <p class="intro">Controls match what each tool does. A static website and a multi user platform carry very different risks.</p>
+    <div class="grid">
+      <div class="card"><h3>This Website</h3><ul>
+        <li>Static pages with no database, accounts, or forms to attack</li>
+        <li>Encrypted connections and a strict browser security policy</li>
+        <li>Automatic deployment with no stored cloud credentials</li>
+      </ul></div>
+      <div class="card"><h3>EduSite School Website Platform</h3><ul>
+        <li>Slow, salted password hashing and limits on repeated sign in attempts</li>
+        <li>District, school, and editor roles with separate publishing rights</li>
+        <li>Protection against forged requests and unsafe page content</li>
+        <li>Restricted upload types and a record of administrative actions</li>
+        <li>Automated tests and a beta release before anything reaches production</li>
+      </ul></div>
+      <div class="card"><h3>Georgia School Data</h3><ul>
+        <li>Built on publicly released education data</li>
+        <li>Published as static pages with no accounts or visitor data to protect</li>
+      </ul></div>
+      <div class="card"><h3>Milestone Compass Demo</h3><ul>
+        <li>Runs entirely in the browser using demonstration data</li>
+        <li>No real sign in, and practice progress stays in the visitor's own browser</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="monitoring">
+    <h2 id="monitoring">How They Are Monitored</h2>
+    <p class="intro">Security is not a one time review. Automation handles the constant checks, and a person makes the decisions.</p>
+    <ol class="steps">
+      <li><strong>Every Day: Automated Scans</strong>Each code repository is scanned for exposed credentials, known vulnerable components, and risky coding patterns. This website is checked for its expected security protections.</li>
+      <li><strong>Every Week: Dependency Updates</strong>Component and build tool updates are proposed automatically so that fixes can be reviewed and applied quickly.</li>
+      <li><strong>Every Week: AI Assisted Security Review</strong>An AI agent reads the code, build pipelines, and scan results with a security reviewer's eye and reports what it finds. It has no permission to change anything on its own.</li>
+      <li><strong>Always: Human Judgment</strong>I review the findings, decide what gets fixed and in what order, and approve the changes.</li>
+    </ol>
+  </section>
+
+  <section id="report" aria-labelledby="report-h">
+    <div class="report">
+      <h2 id="report-h">Report a Security Issue</h2>
+      <p>If you believe you have found a vulnerability in anything I build, please email <a href="mailto:carroll.nic@gmail.com?subject=Security%20report">carroll.nic@gmail.com</a> with what you found and how to reproduce it. Please do not post it publicly until it has been addressed, and do not access data that is not yours or disrupt service while testing.</p>
+      <p>I will read every good faith report and work with you on a fix. No system is perfectly secure, which is why I value hearing from people who find what I missed.</p>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Designed and updated by Nic Carroll</div></footer>
+</body>
+</html>
