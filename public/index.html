@@ -218,18 +218,24 @@
   .timeline details summary::after { content: "+"; font-size: 18px; line-height: 1; }
   .timeline details[open] summary::after { content: "\2212"; }
   .timeline details ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .timeline details[open] ul { animation: kr-in .35s ease; }
+  @keyframes kr-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   .timeline details li { margin: 0; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 12px; padding: 14px 16px; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
   .timeline details li b { display: block; font: 700 16px/1.25 var(--display); color: var(--ink); margin-bottom: 4px; letter-spacing: -.005em; }
 
   /* Credentials */
-  .creds { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; }
+  .creds { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: stretch; }
+  .cstack { display: grid; gap: 22px; align-content: start; }
   .ccol { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 30px; }
   .ccol h3 { font: 700 21px var(--display); margin: 0 0 12px; }
   .ccol ul { list-style: none; margin: 0; padding: 0; }
   .ccol li { padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 600; font-size: 16px; }
   .ccol li:last-child { border-bottom: 0; }
   .ccol li span { display: block; font-weight: 400; color: var(--ink-soft); font-size: 14px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0; }
+  .chips-head { font: 700 21px var(--display); margin: 40px 0 14px; }
+  .comp { display: flex; flex-wrap: wrap; gap: 8px; }
+  .comp span { font-size: 14px; padding: 6px 12px; border-radius: 10px; background: var(--sky-soft); color: var(--ink); }
   .chips span { font-size: 14px; padding: 7px 13px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
 
   /* Contact */
@@ -285,7 +291,9 @@
     .timeline > li { padding: 12px 0; break-inside: avoid; }
     .timeline details summary { display: none; }
     .timeline details ul { grid-template-columns: 1fr 1fr; gap: 6px; }
-    .timeline details li { padding: 6px 8px; font-size: 9pt; }
+    .timeline details[open] ul { animation: kr-in .35s ease; }
+  @keyframes kr-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .timeline details li { padding: 6px 8px; font-size: 9pt; }
     .contact { margin: 10px 0 0; background: none; color: var(--ink); }
     .contact .wrap { padding: 10px 0; }
     .contact h2 { font-size: 14pt; }
@@ -409,10 +417,15 @@
       <p id="cred-line"></p>
     </div>
     <div class="creds">
-      <div class="ccol"><h3>Education</h3><ul id="edu"></ul></div>
+      <div class="cstack">
+        <div class="ccol"><h3>Education</h3><ul id="edu"></ul></div>
+        <div class="ccol"><h3>Boards and Task Forces</h3><ul id="boards"></ul></div>
+      </div>
       <div class="ccol"><h3>Certifications</h3><ul id="certs"></ul></div>
-      <div class="ccol"><h3>Boards and Task Forces</h3><ul id="boards"></ul></div>
     </div>
+    <h3 class="chips-head">Core Competencies</h3>
+    <div class="comp" id="comp"></div>
+    <h3 class="chips-head">Frameworks and Platforms</h3>
     <div class="chips" id="skills" aria-label="Frameworks and platforms"></div>
   </section>
 </main>
@@ -645,7 +658,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
         <h3>${esc(j.title)}</h3>
         <div class="org">${esc(j.org)}, ${esc(j.place)}</div>
         <p class="blurb">${esc(j.blurb)}</p>
-        <details ${i < 2 ? "open" : ""}><summary>Key Results</summary><ul>${j.bullets.map(b => typeof b === "string" ? `<li>${esc(b)}</li>` : `<li><b>${esc(b.h)}</b>${esc(b.t)}</li>`).join("")}</ul></details>
+        <details class="kr"><summary>Key Results</summary><ul>${j.bullets.map(b => typeof b === "string" ? `<li>${esc(b)}</li>` : `<li><b>${esc(b.h)}</b>${esc(b.t)}</li>`).join("")}</ul></details>
       </div>
     </li>`).join("");
 
@@ -655,10 +668,29 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
       <div class="icard"><div class="ico">${icon(h.tag)}</div><h3>${esc(h.title)}</h3><p>${esc(h.text)}</p></div>`).join("");
   }
 
-  $("cred-line").textContent = d.competencies.slice(0, 5).join(", ") + ", and more.";
+  /* Key Results: the job under the middle of the screen is open, the others close, and the page stays anchored */
+  {
+    const items = [...document.querySelectorAll("#timeline > li")];
+    let current = -2, ticking = false;
+    const update = () => {
+      ticking = false;
+      const mid = innerHeight / 2;
+      const idx = items.findIndex(li => { const r = li.getBoundingClientRect(); return r.top <= mid && r.bottom > mid; });
+      if (idx === current) return;
+      current = idx;
+      const anchor = document.elementFromPoint(innerWidth / 2, mid);
+      const before = anchor ? anchor.getBoundingClientRect().top : 0;
+      items.forEach((li, k) => { li.querySelector("details.kr").open = k === idx; });
+      if (anchor) { const shift = anchor.getBoundingClientRect().top - before; if (Math.abs(shift) > 1) window.scrollBy({ top: shift, behavior: "instant" }); }
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+  $("cred-line").textContent = "Degrees, certifications, and the boards and task forces I serve on.";
   $("edu").innerHTML = d.education.map(e => `<li>${esc(e.degree)}<span>${esc(e.school)}</span></li>`).join("");
   $("certs").innerHTML = d.certifications.map(c => `<li>${esc(c.name)}<span>${esc(c.issuer)}</span></li>`).join("");
   $("boards").innerHTML = d.boards.map(b => `<li>${esc(b.name)}<span>${esc(b.org)}</span></li>`).join("");
+  $("comp").innerHTML = d.competencies.map(c => `<span>${esc(c)}</span>`).join("");
   $("skills").innerHTML = d.skills.map(s => `<span>${esc(s)}</span>`).join("");
   const when = new Date(d.updated || lastMod || document.lastModified);
   if (!isNaN(when)) $("updated").textContent = `. Last updated ${when.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" })}`;
