@@ -306,6 +306,10 @@
   ],
   "boards": [
     {
+      "name": "Higher Education Chief Information Security Officers Board",
+      "org": "Center for Digital Education"
+    },
+    {
       "name": "Navigating the Future in K-12 Education Council",
       "org": "Center for Digital Education"
     },
@@ -461,7 +465,7 @@
       "credit": "The university's Research Security and Export Controls director credited Nic and his team with taking point on preparation."
     },
     {
-      "title": "Reorganizing a 40 Person Technology Division",
+      "title": "Reorganized a 40 Person Technology Division",
       "org": "Aiken County Public Schools",
       "tag": "Leadership",
       "challenge": "A 40 person technology division carried high spending and depended on outside contractors.",
@@ -475,7 +479,7 @@
       "metric": "$1.5M"
     },
     {
-      "title": "$12M in Safety and Security Systems Across 44+ Sites",
+      "title": "Delivered $12M in Safety and Security Systems Across 44+ Sites",
       "org": "Aiken County Public Schools",
       "tag": "Safety",
       "challenge": "Every school and site in the district needed modern audio, safety, and security systems.",
@@ -489,7 +493,7 @@
       "metric": "44+"
     },
     {
-      "title": "Rebuilding the Network and Physical Security for 44+ Campuses",
+      "title": "Rebuilt the Network and Physical Security for 44+ Campuses",
       "org": "Aiken County Public Schools",
       "tag": "Infrastructure",
       "challenge": "More than 44 campuses ran on aging internet circuits, routers, switches, and infrastructure, with cameras and door access spread across separate systems.",
