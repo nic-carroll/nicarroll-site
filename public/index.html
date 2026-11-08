@@ -402,7 +402,7 @@
     </div>
   </div>
 </section>
-<footer><div class="wrap"><span id="foot-left"></span><span>Designed and updated by Nic Carroll</span></div></footer>
+<footer><div class="wrap"><span id="foot-left"></span><span>Designed and updated by Nic Carroll<span id="updated"></span></span></div></footer>
 
 <script>
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
@@ -509,7 +509,8 @@ function links(p, cls) {
   return out.join("");
 }
 
-fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
+let lastMod = "";
+fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get("Last-Modified") || ""; return r.json(); }).then(d => {
   const now = d.experience[0];
   if (d.intro) $("intro").innerHTML = d.intro.split(/(?<=\.)\s+/).map(t => `<span style="display:block">${esc(t)}</span>`).join("");
   $("points").innerHTML = (d.heroPoints || []).map(t => `<li>${esc(t)}</li>`).join("");
@@ -593,6 +594,8 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   $("certs").innerHTML = d.certifications.map(c => `<li>${esc(c.name)}<span>${esc(c.issuer)}</span></li>`).join("");
   $("boards").innerHTML = d.boards.map(b => `<li>${esc(b.name)}<span>${esc(b.org)}</span></li>`).join("");
   $("skills").innerHTML = d.skills.map(s => `<span>${esc(s)}</span>`).join("");
+  const when = new Date(d.updated || lastMod || document.lastModified);
+  if (!isNaN(when)) $("updated").textContent = `. Last updated ${when.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" })}`;
   $("foot-left").textContent = `© ${new Date().getFullYear()} ${d.name}, ${d.location}`;
   document.title = `${d.name} | ${d.credentials}`;
 }).catch(() => { $("summary").textContent = "Resume details did not load. Refresh the page to try again."; });
