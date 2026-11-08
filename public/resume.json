@@ -462,7 +462,8 @@
         "text": "The assessment confirmed our protections are followed in practice, not just written down.",
         "by": "Nic Carroll, quoted by Georgia Southern University"
       },
-      "credit": "The university's Research Security and Export Controls director credited Nic and his team with taking point on preparation."
+      "credit": "The university's Research Security and Export Controls director credited Nic and his team with taking point on preparation.",
+      "metricLabel": "CMMC Level 2 score"
     },
     {
       "title": "Reorganized a 40 Person Technology Division",
@@ -475,8 +476,9 @@
         "Vendor management",
         "Budget strategy"
       ],
-      "result": "Saved 30%, or $1.5 million, in the first year, with a more agile team.",
-      "metric": "30%"
+      "result": "Saved 30%, or $1.5 million, in the first year through reorganization, with a more agile team.",
+      "metric": "30%",
+      "metricLabel": "Spending saved in year one"
     },
     {
       "title": "Delivered $12M in Safety and Security Systems Across 44+ Sites",
@@ -490,7 +492,8 @@
         "Vendor coordination"
       ],
       "result": "A $12 million installation completed across all 44+ sites.",
-      "metric": "44+"
+      "metric": "44+",
+      "metricLabel": "Sites with new safety systems"
     },
     {
       "title": "Rebuilt the Network and Physical Security for 44+ Campuses",
@@ -505,7 +508,8 @@
         "Unified physical security"
       ],
       "result": "Doubled internet bandwidth, stronger continuity against outages and cyber events, and one view of cameras and doors across every campus.",
-      "metric": "2,000+"
+      "metric": "2,000+",
+      "metricLabel": "Cameras unified in one system"
     },
     {
       "title": "One View of Security and Identity",
@@ -519,7 +523,8 @@
         "IAM"
       ],
       "result": "Greater visibility and faster resolution of threats and vulnerabilities, for a safe, secure, and reliable environment.",
-      "metric": "1 view"
+      "metric": "1 view",
+      "metricLabel": "For all security and IAM tools"
     }
   ],
   "approach": [

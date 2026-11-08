@@ -87,7 +87,8 @@
   .case .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
   .case .org { font-size: 14px; font-weight: 600; color: #1f5f9e; }
   .case h3 { font: 760 26px/1.1 var(--display); letter-spacing: -.02em; margin: 6px 0 18px; }
-  .case .metric { font: 760 34px/1 var(--display); letter-spacing: -.03em; color: var(--night); background: var(--sky-soft); border-radius: 14px; padding: 12px 14px; white-space: nowrap; }
+  .case .metric small { display: block; margin-top: 6px; font: 600 12px/1.25 var(--body); letter-spacing: 0; color: var(--ink-soft); white-space: normal; }
+  .case .metric { font: 760 34px/1 var(--display); letter-spacing: -.03em; color: var(--night); background: var(--sky-soft); border-radius: 14px; padding: 12px 16px; white-space: nowrap; text-align: center; width: 150px; flex: 0 0 150px; }
   .case dl { margin: 0; display: grid; gap: 14px; }
   .case dt { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
   .case dd { margin: 0; color: var(--ink-soft); font-size: 16px; }
@@ -209,7 +210,7 @@
   /* Contact */
   .contact { margin-top: 120px; background: var(--night); color: #fff; position: relative; overflow: hidden; }
   .contact .wrap { position: relative; padding: 110px 0; }
-  .contact h2 { font: 760 clamp(44px, 6.5vw, 92px)/.98 var(--display); letter-spacing: -.04em; margin: 0 0 24px; max-width: 13ch; }
+  .contact h2 { font: 760 clamp(40px, 5.4vw, 76px)/1 var(--display); letter-spacing: -.035em; margin: 0 0 24px; max-width: 18ch; }
   .contact p { font-size: 20px; color: #c0cfe0; margin: 0; max-width: 46ch; }
   .contact .glow { position: absolute; right: -120px; top: -120px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(242,180,60,.28), transparent 65%); }
   footer { background: var(--night); color: #8ea3bf; font-size: 14px; border-top: 1px solid rgba(255,255,255,.08); }
@@ -385,7 +386,7 @@
 <section class="contact" id="contact">
   <div class="glow"></div>
   <div class="wrap">
-    <h2>Let's Build What's Next.</h2>
+    <h2>Leading, Innovating, and Building for the Future.</h2>
     <p>I'm glad to talk about technology leadership, cybersecurity, AI, or new tools for schools and universities.</p>
     <div class="cta">
       <a class="btn amber" id="mail" href="#">Email Me</a>
@@ -491,7 +492,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
   if (d.photo) $("portrait").querySelector("img").src = d.photo;
   $("case-list").innerHTML = (d.caseStudies || []).map(c => `
     <article class="case">
-      <div class="top"><div><div class="org">${esc(c.org)}</div><h3>${esc(c.title)}</h3></div>${c.metric ? `<div class="metric">${esc(c.metric)}</div>` : ""}</div>
+      <div class="top"><div><div class="org">${esc(c.org)}</div><h3>${esc(c.title)}</h3></div>${c.metric ? `<div class="metric">${esc(c.metric)}${c.metricLabel ? `<small>${esc(c.metricLabel)}</small>` : ""}</div>` : ""}</div>
       <dl><div><dt>Challenge</dt><dd>${esc(c.challenge)}</dd></div><div><dt>What I Did</dt><dd>${esc(c.approach)}</dd></div></dl>
       <div class="result"><span>Result</span>${esc(c.result)}</div>
       ${c.quote ? `<blockquote class="case-quote">“${esc(c.quote.text)}”<cite>${esc(c.quote.by)}</cite></blockquote>` : ""}
