@@ -557,7 +557,8 @@
       "sub": "One Accessible Platform for Every District and School Site",
       "metric": "AA",
       "metricLabel": "WCAG 2.1 accessibility built in",
-      "linkLabel": "Try the Beta Demo"
+      "linkLabel": "Try the Beta Demo",
+      "image": "assets/showcase/edusite-1-district-home.jpg"
     },
     {
       "title": "Resume Builder",
@@ -576,6 +577,24 @@
       "metricLabel": "resume styles, six color schemes",
       "linkLabel": "See the Three Styles",
       "image": "assets/showcase/resume-navy.jpg"
+    },
+    {
+      "title": "Brand Systems",
+      "status": "In use",
+      "summary": "Complete brand packages I design: logos in every version, color with measured contrast, type, voice, design tokens, and a rules file an AI agent can read. Includes my own brand and the made up Oakhaven district and school brands used across my K12 tools.",
+      "tags": [
+        "Logo systems",
+        "Design tokens",
+        "Contrast rules",
+        "K12 brand standard"
+      ],
+      "url": "/showcase.html#brand",
+      "repo": "",
+      "sub": "Logos, Color, Type, and Rules That Agents Can Follow",
+      "metric": "5",
+      "metricLabel": "brand packages, each with its own rules",
+      "linkLabel": "See the Brand Work",
+      "image": "assets/showcase/brand-oakhaven-district.jpg"
     },
     {
       "title": "Unified Security Dashboard",
