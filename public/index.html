@@ -709,7 +709,7 @@
 <dialog id="follow-dlg" aria-labelledby="fd-title">
   <p class="dd-meta">One Quick Ask</p>
   <h2 id="fd-title">Follow Me Before You Download</h2>
-  <p>These agents and playbooks are free to use. If they help, follow me on LinkedIn, where I share new ones and how I use them to lead, save money, and move faster.</p>
+  <p>These agents and playbooks are free to use and share. If they help, follow me on LinkedIn, where I share new ones and how I use them to lead, save money, and move faster.</p>
   <div class="dd-act"><a class="btn amber" id="fd-follow" href="https://www.linkedin.com/in/nic-carroll/" target="_blank" rel="noopener me">Follow on LinkedIn</a><a class="dd-copy" id="fd-go" href="#" download>Continue to Download</a><button type="button" class="fd-x" id="fd-close">Cancel</button></div>
 </dialog>
 <footer><div class="wrap"><span id="foot-left"></span><a href="security.html" style="color:inherit">Security</a><span>Designed and updated by Nic Carroll<span id="updated"></span></span></div></footer>
@@ -1119,15 +1119,19 @@ function mdToHtml(src) {
 })();
 
 /* A friendly ask to follow on LinkedIn before the first agent or playbook download. It never blocks the download. */
-(() => { const dlg = $("follow-dlg"); if (!dlg || !dlg.showModal) return; let asked = false;
+(() => { const dlg = $("follow-dlg"); if (!dlg || !dlg.showModal) return; let asked = false, pending = null;
   try { asked = sessionStorage.getItem("nc.followAsk") === "1"; } catch (e) {}
   const done = () => { asked = true; try { sessionStorage.setItem("nc.followAsk", "1"); } catch (e) {} };
-  document.addEventListener("click", e => { const a = e.target.closest && e.target.closest('a[download][href^="agents/"]'); if (!a || asked || a.id === "fd-go") return;
-    e.preventDefault(); $("fd-go").href = a.getAttribute("href"); $("fd-go").textContent = "Continue to Download"; dlg.showModal(); }, true);
-  $("fd-follow").addEventListener("click", () => { $("fd-go").textContent = "Download Now"; });
-  $("fd-go").addEventListener("click", () => { done(); setTimeout(() => dlg.close(), 50); });
-  $("fd-close").addEventListener("click", () => dlg.close());
-  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  const go = $("fd-go"), title = $("fd-title");
+  const ask = (kind, label) => { title.textContent = "Follow Me Before You " + kind; go.dataset.label = label; go.textContent = "Continue to " + label; dlg.showModal(); };
+  document.addEventListener("click", e => { if (asked || !e.target.closest) return;
+    const a = e.target.closest('a[download][href^="agents/"]'), c = e.target.closest("[data-copy], #dd-copy, #dd-copytext");
+    if (a && a.id !== "fd-go") { e.preventDefault(); e.stopPropagation(); pending = null; go.setAttribute("href", a.getAttribute("href")); go.setAttribute("download", ""); ask("Download", "Download"); }
+    else if (c) { e.preventDefault(); e.stopPropagation(); pending = c; go.setAttribute("href", "#"); go.removeAttribute("download"); const text = c.id === "dd-copytext"; ask(text ? "Copy" : "Share", text ? "Copy All Text" : "Copy Link"); } }, true);
+  $("fd-follow").addEventListener("click", () => { go.textContent = (go.dataset.label || "Download") + " Now"; });
+  go.addEventListener("click", e => { done(); if (pending) { e.preventDefault(); const t = pending; pending = null; dlg.close(); t.click(); } else setTimeout(() => dlg.close(), 50); });
+  $("fd-close").addEventListener("click", () => { pending = null; dlg.close(); });
+  dlg.addEventListener("click", e => { if (e.target === dlg) { pending = null; dlg.close(); } });
 })();
 
 /* Project cards rise in as they come into view. */
