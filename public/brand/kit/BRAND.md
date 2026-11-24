@@ -94,8 +94,9 @@ A new scheme may only be added if `tokens/check-schemes.py` passes. The rules:
 | Headlines and numbers | Bricolage Grotesque | 700 | Tight letter spacing, about minus 2 percent |
 | Body and labels | Public Sans | 400, 500, 600 | 17 pixel body, 1.65 line height on the web |
 | Eyebrows and chips | Public Sans | 600 to 700 | Uppercase with wide letter spacing, 12 to 13 pixels |
+| Terminal readouts and code | JetBrains Mono | 400 to 500 | Only for real code, commands, and hex values. Never for labels or body text |
 
-Both fonts are open source under the SIL Open Font License and are included in `fonts/`. If they are not available, fall back to Arial Narrow for headlines and the system sans serif for body.
+All three fonts are open source under the SIL Open Font License and are included in `fonts/`. If they are not available, fall back to Arial Narrow for headlines and the system sans serif for body.
 
 ## Design system
 
@@ -127,7 +128,7 @@ Use these exactly when a short proof point is needed.
 | `logos/svg` | Every logo as a scalable SVG |
 | `logos/png` | PNG exports: marks at 1024 and 256 pixels, lockups at 1680 pixels wide, transparent where the name says so |
 | `favicon` | Browser and app icons: `favicon.ico`, `favicon.svg`, and PNGs at 32, 180, 192, and 512 pixels |
-| `fonts` | Bricolage Grotesque and Public Sans as variable web fonts |
+| `fonts` | Bricolage Grotesque, Public Sans, and JetBrains Mono as variable web fonts |
 | `tokens` | `brand.css` (CSS variables), `colors.json`, `schemes.css` (the four schemes), and `check-schemes.py` (the contrast checker) |
 | `skill/nic-carroll-brand` | `SKILL.md`, the same rules written for AI agents |
 | `Brand_Guide.pdf` | A three page visual guide |

@@ -1,3 +1,4 @@
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 800; font-display: swap; }
 /* Color schemes for nicarroll-site. One scheme is active at a time through data-scheme on <html>.
    Every scheme must pass scripts/check-schemes.py before it ships:
      accent on night at least 4.5 to 1, text on the accent fill at least 4.5 to 1,
