@@ -16,9 +16,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://niccarroll.org/k12-playbook.html">
 <link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+<script src="titlecase.js" defer></script>
 <style>
 @font-face { font-family: "Public Sans"; src: url("fonts/public-sans-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
-@font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 200 800; font-display: swap; }
 @font-face { font-family: "JetBrains Mono"; src: url("fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 800; font-display: swap; }
 /* Material Design 3, light scheme: color roles, type scale, shape scale, top app bar, tabs, segmented buttons, outlined fields. Layout: sticky top bar, one scrolling column of sections, each a tonal surface with the working parts inside. */
 :root{
@@ -104,7 +104,7 @@ section{padding:40px 0}
 .seg button{display:inline-flex;align-items:center;gap:8px;height:40px}
 .seg button[aria-pressed="true"]{background:var(--primary-container);color:var(--on-primary-container)}
 .seg button[aria-pressed="true"]::before{content:"\2713";font-weight:700;font-size:15px;line-height:1}
-.chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:8px;font-size:.8125rem;font-weight:500;background:var(--secondary-container);color:var(--on-secondary-container)}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:28px;max-width:100%;padding:4px 12px;overflow-wrap:anywhere;align-self:flex-start;border-radius:8px;font-size:.8125rem;font-weight:500;background:var(--secondary-container);color:var(--on-secondary-container)}
 .chip.file{font-family:var(--font-mono);font-weight:400}
 .rowgap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .stepnav{display:flex;gap:8px;justify-content:space-between;margin-top:auto;padding-top:8px}
@@ -117,7 +117,8 @@ section{padding:40px 0}
 .demo-top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:16px 20px;background:var(--primary);color:var(--on-primary)}
 .demo-top h3{font-size:1.375rem;line-height:1.75rem;font-weight:400}
 .badge{font-size:.75rem;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.2)}
-.demo-body{padding:20px;display:grid;gap:20px}
+.demo-body{padding:20px;display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
+.demo-body>*,.panel>*,.flow>*{min-width:0}
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .kpi{background:var(--surface-low);border-radius:var(--r-m);padding:14px 16px;border-left:4px solid var(--primary)}
 .kpi.good{border-left-color:var(--tertiary)} .kpi.warn{border-left-color:var(--warn)} .kpi.bad{border-left-color:var(--error)}
@@ -152,7 +153,7 @@ tr:last-child td{border-bottom:0}
 .pill.info{background:var(--primary-container);color:var(--on-primary-container)}
 .empty{padding:24px;text-align:center;color:var(--on-surface-variant)}
 .ideas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
-.idea{background:var(--card);border:1px solid var(--outline-variant);border-radius:var(--r-m);padding:16px;display:grid;gap:6px}
+.idea{min-width:0;overflow-wrap:anywhere;background:var(--card);border:1px solid var(--outline-variant);border-radius:var(--r-m);padding:16px;display:grid;gap:6px}
 .idea .who{font-size:.75rem;font-weight:500;color:var(--primary);letter-spacing:.04em;text-transform:uppercase}
 
 .tgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
@@ -170,7 +171,8 @@ tr:last-child td{border-bottom:0}
 .matrix{overflow-x:auto;margin-top:12px;border:1px solid var(--outline-variant);border-radius:var(--r-m);background:var(--card)}
 .howto{margin-top:32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
 .howto ol{margin:0;padding-left:20px;display:grid;gap:8px}
-@media (max-width:860px){.tgrid,.howto{grid-template-columns:1fr}}
+.howto>*{min-width:0}
+@media (max-width:860px){.tgrid,.howto{grid-template-columns:minmax(0,1fr)}}
 
 /* versions */
 .vers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
@@ -207,7 +209,8 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
 .files{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 
 @media (max-width:860px){
-  .hero-grid,.flow,.two{grid-template-columns:1fr}
+  .hero-grid,.flow,.two{grid-template-columns:minmax(0,1fr)}
+  .field{min-width:0;flex:1 1 140px}
   .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ideas,.vers,.layers{grid-template-columns:1fr !important}
   .steps{flex-direction:row;overflow-x:auto;padding-bottom:6px}
@@ -218,10 +221,8 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 .byline{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;align-items:center;background:#0c1a2e;color:#dbe7f5;text-decoration:none;font-size:.875rem;padding:9px 16px}.byline em{font-style:normal}.byline b{color:#fff}.byline span{color:#f2b43c;font-weight:600}.byline:hover span{text-decoration:underline}
 .dl-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.dl-row a{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--outline);color:var(--primary);font-weight:500;font-size:.875rem;text-decoration:none;background:var(--card)}.dl-row a.fill{background:var(--primary);color:var(--on-primary);border-color:transparent}.dl-row a:hover{box-shadow:var(--e1)}
-.flow>*,.howto>*,.tgrid>*,.two>*,.hero-grid>*{min-width:0}@media (max-width:860px){.howto,.tgrid,.two,.hero-grid{grid-template-columns:minmax(0,1fr)}.howto ol,.howto ul{grid-template-columns:minmax(0,1fr);max-width:100%}.howto li{min-width:0;overflow-wrap:anywhere}.flow{grid-template-columns:minmax(0,1fr)}.steps{max-width:100%}}
-@media (max-width:900px){.ideas{grid-template-columns:1fr 1fr !important}}@media (max-width:520px){.ideas{grid-template-columns:1fr !important}}
+.flow>*,.howto>*,.tgrid>*,.two>*,.hero-grid>*{min-width:0}@media (max-width:860px){.howto,.tgrid,.two,.hero-grid{grid-template-columns:minmax(0,1fr)}.howto ol,.howto ul{grid-template-columns:minmax(0,1fr);max-width:100%}.howto li{min-width:0;overflow-wrap:anywhere}.steps{max-width:100%}}
 </style>
-<script src="titlecase.js" defer></script>
 </head>
 <body>
 
@@ -284,11 +285,12 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
       <h2>Working examples, built the playbook way</h2>
       <p class="muted">The three tools below are live. Filter, search, and change assignments. All names and records are invented sample data for Oakhaven High School, an imaginary school.</p>
     </div>
-    <h3 style="margin-bottom:12px">Four tools built this way</h3>
-    <div class="ideas" style="grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 32px">
+    <h3 style="margin-bottom:12px">Tools built this way</h3>
+    <div class="ideas" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:0 0 32px">
       <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--primary)" href="#try" data-tab="tab-flex"><span class="who">Administrators</span><b>Flex Period Scheduling</b><span class="muted">Assign students, manage sessions and seats, place everyone left over in one click.</span><span class="chip file">04 and 05</span></a>
       <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--on-primary-container)" href="#try" data-tab="tab-team"><span class="who">Teams</span><b>Grade Level Team Dashboard</b><span class="muted">One shared page where each role edits only its own sections.</span><span class="chip file">08_team_dashboard.md</span></a>
       <div class="idea" style="text-decoration:none;color:inherit;border-top:5px solid #006A6A"><span class="who">Elementary teachers</span><b>My Classroom Hub</b><span class="muted">Links, weekly focus, to do lists, calendar stickers, meeting notes, and ideas.</span><span class="chip file">09_teacher_dashboard.md</span></div>
+      <div class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--warn)"><span class="who">Teachers and students</span><b>Classroom Quiz Show</b><span class="muted">A quiz game with Georgia Milestones item types. Gemini drafts questions for the standard you pick.</span><span class="chip file">11_quiz_show.md</span></div>
       <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--tertiary)" href="#try" data-tab="tab-rep"><span class="who">Technology staff</span><b>Chromebook Repair Tracker</b><span class="muted">Tickets by building and status, with repairs open too long flagged.</span><span class="chip file">04 and 05</span></a>
     </div>
     <h3 id="try" style="margin-bottom:4px">Try three of them right here</h3>
@@ -459,7 +461,7 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
       <h2>Build it so it outlives the builder</h2>
       <p class="muted">A tool in one person's account disappears when that person changes roles or leaves. These five rules make every tool belong to the school.</p>
     </div>
-    <div class="ideas" style="grid-template-columns:repeat(5,minmax(0,1fr));margin-top:0">
+    <div class="ideas" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-top:0">
       <div class="idea"><span class="who">Rule 1</span><b>The organization owns it</b><span class="muted">Every file lives in a shared drive, never in My Drive.</span></div>
       <div class="idea"><span class="who">Rule 2</span><b>Roles get access</b><span class="muted">Share with Google Groups so access follows the job, not the person.</span></div>
       <div class="idea"><span class="who">Rule 3</span><b>Two people can fix it</b><span class="muted">An owner and a backup, both managers of the shared drive.</span></div>
@@ -496,7 +498,7 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
     <div class="dl-row"><a class="fill" href="agents/k12-gemini-tool-builder-playbook.zip" download>Download All Five (zip)</a><a href="agents/k12-gemini-playbook-workflow.md" download>Workflow</a><a href="agents/k12-gemini-playbook-prompt-library.md" download>Prompt Library</a><a href="agents/k12-gemini-playbook-sharing.md" download>Sharing</a><a href="agents/k12-gemini-playbook-continuity.md" download>Keep Tools Alive</a><a href="agents/k12-gemini-playbook-access-versions.md" download>Know Your Access</a></div>
     <p style="margin-top:20px">The steps on this page name the Builder Kit files they pair with.</p>
     <div class="files">
-      <span class="chip file">00_START_HERE.md</span><span class="chip file">01_tool_brief.md</span><span class="chip file">02_data_sheet_setup.md</span><span class="chip file">03_gem_instructions.md</span><span class="chip file">04_build_prompts.md</span><span class="chip file">05_live_data_prompts.md</span><span class="chip file">06_publish_and_share.md</span><span class="chip file">07_version_notes.md</span><span class="chip file">08_team_dashboard.md</span><span class="chip file">09_teacher_dashboard.md</span><span class="chip file">10_keep_tools_alive.md</span>
+      <span class="chip file">00_START_HERE.md</span><span class="chip file">01_tool_brief.md</span><span class="chip file">02_data_sheet_setup.md</span><span class="chip file">03_gem_instructions.md</span><span class="chip file">04_build_prompts.md</span><span class="chip file">05_live_data_prompts.md</span><span class="chip file">06_publish_and_share.md</span><span class="chip file">07_version_notes.md</span><span class="chip file">08_team_dashboard.md</span><span class="chip file">09_teacher_dashboard.md</span><span class="chip file">10_keep_tools_alive.md</span><span class="chip file">11_quiz_show.md</span>
     </div>
     <p style="margin-top:16px">Practical guidance, not legal advice. Your district privacy lead owns the final reading of FERPA and state law.</p>
   </div>
