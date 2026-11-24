@@ -1,0 +1,25 @@
+/* Phone layout: long stacks become swipe rows and long blocks fold, so no page is an endless scroll. Inert above 700px. */
+.m-ctl, .m-more { display: none; }
+@media (max-width: 700px) {
+  .m-swipe:not([hidden]) { display: flex !important; grid-template-columns: none !important; flex-wrap: nowrap !important; align-items: stretch; gap: 12px !important; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 20px; margin-inline: -20px !important; padding-inline: 20px !important; padding-bottom: 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .m-swipe::-webkit-scrollbar { display: none; }
+  .m-swipe > * { flex: 0 0 84% !important; max-width: 84%; min-width: 0; scroll-snap-align: start; margin: 0 !important; grid-column: auto !important; transform: none !important; }
+  .m-swipe.m-small > * { flex-basis: 44% !important; max-width: 44%; }
+  .m-swipe .reveal, .m-swipe.reveal, .m-swipe > .fx-rv { opacity: 1 !important; transform: none !important; }
+  .m-swipe > * { opacity: 1 !important; }
+  .m-swipe::after { content: ""; flex: 0 0 8px; }
+  .m-ctl { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 10px 0 0; font: 600 13.5px/1 "Public Sans", system-ui, sans-serif; color: inherit; opacity: .9; }
+  .m-ctl button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid currentColor; background: none; color: inherit; font: 600 18px/1 "Public Sans", system-ui, sans-serif; cursor: pointer; opacity: .75; } .m-ctl button:disabled { opacity: .25; }
+  .m-clamp { position: relative; overflow: hidden; max-height: var(--m-h, 220px); }
+  .m-clamp::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 56px; background: linear-gradient(180deg, transparent, var(--m-fade, #f3f5f8)); pointer-events: none; }
+  .m-clamp.m-open { max-height: none; } .m-clamp.m-open::after { display: none; }
+  .m-more { display: inline-flex; align-items: center; align-self: flex-start; width: auto; margin: 8px 0 0; padding: 9px 16px; border-radius: 999px; border: 1px solid currentColor; background: none; color: inherit; font: 600 14px/1 "Public Sans", system-ui, sans-serif; cursor: pointer; opacity: .85; }
+  .m-clamp > .m-more.m-in { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 2; margin: 0; background: var(--m-fade, #f3f5f8); opacity: 1; white-space: nowrap; }
+  .m-clamp.m-open > .m-more.m-in { position: static; transform: none; margin: 12px 0 0; }
+  .m-clamp:has(> .m-more.m-in) { padding-bottom: 0; }
+  /* tighter sections and type on a phone */
+  section { padding-top: 56px !important; padding-bottom: 56px !important; }
+  .ag-stats { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  #sis .facts, .tool .facts { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .case .story[open] { max-height: none; }
+}
