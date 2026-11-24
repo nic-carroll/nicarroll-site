@@ -594,6 +594,19 @@
       "repo": ""
     },
     {
+      "title": "Donor Email",
+      "status": "In use",
+      "summary": "A Gmail add on and team dashboard I built for Georgia Southern University's fundraising staff. Gift officers send personal emails from their own Gmail and see when donors open them, with a picture guide for setup.",
+      "tags": [
+        "Gmail add on",
+        "Dashboard",
+        "Internal"
+      ],
+      "url": "/showcase.html#donor",
+      "repo": "",
+      "linkLabel": "See Sample Screens"
+    },
+    {
       "title": "Staff Feedback Survey System",
       "status": "Built and coded by me",
       "summary": "A survey platform I designed, coded, and programmed so every teacher, staff member, and administrator could be evaluated by the students or employees they serve, with an individualized score for each teacher and leader.",
