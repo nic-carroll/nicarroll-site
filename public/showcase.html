@@ -38,6 +38,33 @@
   .jump a { background: var(--surface); color: var(--ink); text-decoration: none; border-radius: var(--shape-l); padding: 16px 18px; font: 700 17px/1.2 var(--display); box-shadow: var(--elev-2); display: grid; gap: 6px; transition: transform .15s, box-shadow .15s; }
   .jump a:hover { transform: translateY(-3px); box-shadow: var(--elev-4); }
   .jump span { font: 600 12px/1 var(--body); letter-spacing: .1em; color: #9a6b00; }
+  /* Hero, second pass */
+  .hero { position: relative; overflow: visible; background: radial-gradient(900px 480px at 88% 0%, rgba(143,184,222,.30), transparent 62%), radial-gradient(700px 420px at 0% 100%, rgba(242,180,60,.18), transparent 60%), linear-gradient(160deg, #0c1a2e 0%, #13263f 60%, #1c3354 100%); padding-top: 132px; }
+  .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 44px 44px; -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 70%); mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 70%); pointer-events: none; }
+  .hero .wrap { position: relative; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 48px; align-items: center; }
+  h1 { background: linear-gradient(92deg, #fff 55%, #f2b43c); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .08em; }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 30px; }
+  .hero-stats div { display: grid; gap: 2px; padding-left: 14px; border-left: 3px solid var(--amber); }
+  .hero-stats b { font: 700 30px/1 var(--display); letter-spacing: -.02em; } .hero-stats span { font-size: 14px; color: #b4c4d8; }
+  .collage { position: relative; height: 430px; }
+  .collage img { position: absolute; border-radius: 12px; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 24px 60px rgba(0,0,0,.5); object-fit: cover; object-position: top; animation: floaty 9s ease-in-out infinite; }
+  .collage .c1 { width: 78%; aspect-ratio: 16 / 10; right: 0; top: 4%; z-index: 2; }
+  .collage .c2 { width: 58%; aspect-ratio: 16 / 10; left: 0; top: 46%; z-index: 3; animation-delay: -3s; }
+  .collage .c3 { width: 46%; aspect-ratio: 16 / 10; right: 2%; top: 58%; z-index: 4; animation-delay: -6s; }
+  .collage .c4 { width: 30%; aspect-ratio: 85 / 110; left: 6%; top: 0; z-index: 1; opacity: .9; animation-delay: -4.5s; }
+  @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .jump { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; margin-top: 56px; }
+  .jump a { padding: 0 0 14px; overflow: hidden; font-size: 15.5px; gap: 4px; border: 1px solid rgba(12,26,46,.08); }
+  .jump a img, .jump a .dots { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .jump a .dots { background: radial-gradient(circle, #9fb3cc 2px, transparent 2.5px) 0 0 / 16px 16px, var(--sky-soft); }
+  .jump a span, .jump a { padding-inline: 0; } .jump a span { padding: 0 14px; } .jump a { text-indent: 0; }
+  .jump a::after { content: ""; }
+  .jump a b { padding: 0 14px; font: inherit; }
+  .jump a:hover img { filter: saturate(1.15); }
+  @media (max-width: 1100px) { .jump { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .collage { display: none; } .jump { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (prefers-reduced-motion: reduce) { .collage img { animation: none; } }
   .tool { padding: 104px 0 0; }
   .tool:first-of-type { padding-top: 132px; }
   .tool.alt .wrap, .tool.dark { position: relative; }
@@ -130,11 +157,20 @@
 <main id="main">
   <div class="hero">
     <div class="wrap">
+      <div class="hero-grid"><div>
       <span class="eyebrow">Tool Showcase</span>
       <h1>Tools I Designed and Built</h1>
       <p class="lede">I build working tools with AI partners so security, identity, and governance teams can see their environment and act on it. These are real screens from those tools.</p>
       <p class="notice">University screens use sample data from a fictional university. No real systems, people, or records are shown.</p>
-      <nav class="jump" aria-label="Tools on this page"><a href="#sis"><span>Featured</span>NextGen SIS</a><a href="#resume-builder"><span>01</span>Resume Builder</a><a href="#eagleaudit"><span>02</span>EagleAudit</a><a href="#policy"><span>03</span>Policy Library</a><a href="#donor"><span>04</span>Donor Email</a><a href="#change"><span>05</span>Change Management Review</a><a href="#more"><span>06</span>More Tools</a></nav>
+      <div class="hero-stats"><div><b>7</b><span>tools shown up close</span></div><div><b>10,332</b><span>people in one load test</span></div><div><b>0</b><span>real records on this page</span></div></div>
+      </div>
+      <div class="collage" aria-hidden="true">
+        <img class="c1" src="assets/showcase/sis-1-principal-dashboard.jpg" alt="">
+        <img class="c2" src="assets/showcase/policy-1-dashboard.jpg" alt="">
+        <img class="c3" src="assets/showcase/donor-4-dashboard.jpg" alt="">
+        <img class="c4" src="assets/showcase/eagleaudit-one-sheet.jpg" alt="">
+      </div></div>
+      <nav class="jump" aria-label="Tools on this page"><a href="#sis"><img src="assets/showcase/sis-1-principal-dashboard.jpg" alt="" loading="lazy"><span>Featured</span><b>NextGen SIS</b></a><a href="#resume-builder"><img src="assets/showcase/resume-navy.jpg" alt="" loading="lazy"><span>01</span><b>Resume Builder</b></a><a href="#eagleaudit"><img src="assets/showcase/eagleaudit-one-sheet.jpg" alt="" loading="lazy"><span>02</span><b>EagleAudit</b></a><a href="#policy"><img src="assets/showcase/policy-1-dashboard.jpg" alt="" loading="lazy"><span>03</span><b>Policy Library</b></a><a href="#donor"><img src="assets/showcase/donor-4-dashboard.jpg" alt="" loading="lazy"><span>04</span><b>Donor Email</b></a><a href="#change"><img src="assets/showcase/change-2-process-map.jpg" alt="" loading="lazy"><span>05</span><b>Change Management Review</b></a><a href="#more"><i class="dots"></i><span>06</span><b>More Tools</b></a></nav>
     </div>
   </div>
   <section class="tool feature" id="sis"><div class="wrap">
