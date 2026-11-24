@@ -150,6 +150,7 @@
   .assets a span { display: grid; place-items: center; height: 120px; padding: 16px; } .assets a span.l { background: #f3f5f8; } .assets a span.d { background: #0c1a2e; } .assets img { max-width: 100%; max-height: 88px; } .assets a:hover { border-color: var(--ok); }
   .ask { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; } .ask .card ul li { padding-left: 26px; } .ask .card ul li::before { content: "?"; color: var(--amber); font-weight: 700; }
   @media (max-width: 900px) { .concept { grid-template-columns: 1fr; } } @media (prefers-reduced-motion: reduce) { .concept .stage img.m { animation: none; } }
+  @media (max-width: 380px) { header.hero h1, header.hero .lede { overflow-wrap: anywhere; } .prompt { max-width: 100%; white-space: normal; } }
 </style>
 <link rel="stylesheet" href="term.css">
 <script src="term.js" defer></script>

@@ -43,3 +43,23 @@
 .scheme-menu a.scheme-link:hover { background: #eef2f7; }
 .scheme-menu a.scheme-link b { font: 600 15px/1.2 "Public Sans", system-ui, sans-serif; letter-spacing: 0; text-transform: none; color: #1f5f9e; padding: 0; }
 .scheme-menu a.scheme-link span { font: 400 13px/1.3 "Public Sans", system-ui, sans-serif; color: #4d5b6e; }
+
+/* Phone menu */
+.nav-toggle { display: none; }
+@media (max-width: 900px) {
+  .nav-toggle { display: inline-flex; align-items: center; gap: 7px; margin-left: 8px; height: 42px; padding: 0 14px 0 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.08); color: #fff; font: 600 15px/1 "Public Sans", system-ui, sans-serif; cursor: pointer; }
+  .nav-toggle svg { width: 20px; height: 20px; } .nav-toggle .b { display: none; }
+  header.nav.nav-open .nav-toggle { background: var(--accent-fill); color: var(--on-accent); border-color: transparent; } header.nav.nav-open .nav-toggle .a { display: none; } header.nav.nav-open .nav-toggle .b { display: inline; }
+  header.nav .follow { margin-left: auto; padding: 8px 12px 8px 10px; font-size: 14px; } header.nav .follow i { display: none; }
+  header.nav .scheme { margin-left: 8px; }
+  header.nav.nav-open nav { display: flex; position: fixed; top: 68px; left: 0; right: 0; max-height: calc(100dvh - 68px); overflow-y: auto; flex-direction: column; align-items: stretch; gap: 6px; margin: 0; padding: 14px 18px 22px; background: var(--night); border-top: 1px solid rgba(255,255,255,.14); box-shadow: 0 24px 40px rgba(0,0,0,.45); z-index: 59; }
+  header.nav.nav-open nav .menu { position: static; }
+  header.nav.nav-open nav .menu summary { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 15px 16px; font-size: 18px; border-radius: 14px; background: rgba(255,255,255,.06); color: #fff; }
+  header.nav.nav-open nav .menu > div { position: static; min-width: 0; box-shadow: none; background: none; padding: 6px 0 4px 8px; }
+  header.nav.nav-open nav .menu > div a { color: #fff; padding: 11px 12px; } header.nav.nav-open nav .menu > div a b { color: #fff; } header.nav.nav-open nav .menu > div a span { color: #b4c4d8; }
+  header.nav.nav-open nav .menu > div a:hover { background: rgba(255,255,255,.08); }
+  header.nav.nav-open nav > a { padding: 15px 16px; font-size: 18px; border-radius: 14px; }
+  header.nav.nav-open nav > a.nav-cta { justify-content: center; text-align: center; margin: 8px 0 0; }
+}
+@media (max-width: 560px) { .nav-toggle span { display: none; } .nav-toggle { padding: 0; width: 42px; justify-content: center; margin-left: 6px; } header.nav .scheme { margin-left: 6px; } header.nav .wrap { padding-left: 14px; padding-right: 14px; } header.nav .mark { min-width: 0; gap: 8px; font-size: 17px; white-space: nowrap; } header.nav .mark .logo, header.nav .mark svg { flex: none; } header.nav .follow { padding: 8px 11px 8px 9px; gap: 5px; } }
+@media (max-width: 350px) { header.nav .follow span { display: none; } header.nav .follow { padding: 8px; } }

@@ -417,13 +417,15 @@
   .contact .wrap { position: relative; padding: 110px 0; }
   .contact h2 { font: 760 clamp(40px, 5.4vw, 76px)/1 var(--display); letter-spacing: -.035em; margin: 0 0 24px; max-width: 18ch; }
   .contact p { font-size: 20px; color: #c0cfe0; margin: 0; max-width: 46ch; }
+  .contact { overflow: clip; }
   .contact .glow { position: absolute; right: -120px; top: -120px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--amber) 28%, transparent), transparent 65%); }
   footer { background: var(--night); color: #8ea3bf; font-size: 14px; border-top: 1px solid rgba(255,255,255,.08); }
   footer .wrap { padding: 24px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
   @media (max-width: 960px) {
     .prod-cards { grid-template-columns: 1fr 1fr; }
-    .hero-grid, .cases, .lead-band { grid-template-columns: 1fr; }
+    .hero-grid, .cases, .lead-band { grid-template-columns: minmax(0, 1fr); }
+    .case { min-width: 0; padding: 24px; } .case .top { flex-wrap: wrap; } .case .top > :first-child { min-width: 0; flex: 1 1 200px; overflow-wrap: anywhere; }
     .portrait { justify-self: start; width: 180px; order: -1; margin: 0 0 8px; }
     .lead-band { padding: 36px 28px; }
     .posts li { grid-template-columns: 1fr; gap: 4px; }

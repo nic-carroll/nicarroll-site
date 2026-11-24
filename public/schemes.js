@@ -28,6 +28,20 @@
     document.addEventListener("click", e => { if (!box.contains(e.target)) close(); });
     document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
     bar.appendChild(box);
+    /* Phone menu: one button that opens every tab the wide layout shows. */
+    const head = bar.closest("header.nav"), nav = bar.querySelector("nav");
+    if (head && nav && !bar.querySelector(".nav-toggle")) {
+      if (!nav.id) nav.id = "site-menu";
+      const t = document.createElement("button"); t.type = "button"; t.className = "nav-toggle"; t.setAttribute("aria-controls", nav.id); t.setAttribute("aria-expanded", "false"); t.setAttribute("aria-label", "Open the menu");
+      t.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="a" d="M4 7h16M4 12h16M4 17h16"/><path class="b" d="M6 6l12 12M18 6L6 18"/></svg><span>Menu</span>';
+      const set = open => { head.classList.toggle("nav-open", open); t.setAttribute("aria-expanded", String(open)); t.setAttribute("aria-label", open ? "Close the menu" : "Open the menu"); if (!open) nav.querySelectorAll("details.menu").forEach(d => { d.open = false; }); };
+      t.addEventListener("click", e => { e.stopPropagation(); set(!head.classList.contains("nav-open")); });
+      nav.addEventListener("click", e => { if (e.target.closest("a")) set(false); });
+      document.addEventListener("click", e => { if (head.classList.contains("nav-open") && !head.contains(e.target)) set(false); });
+      document.addEventListener("keydown", e => { if (e.key === "Escape" && head.classList.contains("nav-open")) { set(false); t.focus(); } });
+      matchMedia("(min-width: 901px)").addEventListener("change", e => { if (e.matches) set(false); });
+      bar.appendChild(t);
+    }
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", build); else build();
 })();
