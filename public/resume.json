@@ -519,7 +519,8 @@
         "Adaptive learning"
       ],
       "url": "https://nic-carroll.github.io/milestone-compass-demo/",
-      "repo": "https://github.com/nic-carroll/milestone-compass-demo"
+      "repo": "https://github.com/nic-carroll/milestone-compass-demo",
+      "sub": "Adaptive Practice Matched to Georgia Standards"
     },
     {
       "title": "EduSite",
@@ -568,7 +569,8 @@
       "url": "/showcase.html#eagleaudit",
       "repo": "",
       "linkLabel": "See the Overview",
-      "image": "assets/showcase/eagleaudit-one-sheet.jpg"
+      "image": "assets/showcase/eagleaudit-one-sheet.jpg",
+      "sub": "Every Security and Identity Tool in One View"
     },
     {
       "title": "Policy Library",
@@ -582,7 +584,8 @@
       "url": "/showcase.html#policy",
       "repo": "",
       "linkLabel": "See Sample Screens",
-      "image": "assets/showcase/policy-1-dashboard.jpg"
+      "image": "assets/showcase/policy-1-dashboard.jpg",
+      "sub": "Every Policy, From Need to Next Review"
     },
     {
       "title": "Open Records Request Automation",
@@ -594,7 +597,8 @@
         "Internal"
       ],
       "url": "",
-      "repo": ""
+      "repo": "",
+      "sub": "Faster Releases With Private Data Protected"
     },
     {
       "title": "Donor Email",
@@ -608,7 +612,8 @@
       "url": "/showcase.html#donor",
       "repo": "",
       "linkLabel": "See Sample Screens",
-      "image": "assets/showcase/donor-4-dashboard.jpg"
+      "image": "assets/showcase/donor-4-dashboard.jpg",
+      "sub": "See When Donors Open Your Emails"
     },
     {
       "title": "Staff Feedback Survey System",
@@ -620,7 +625,8 @@
         "Custom built"
       ],
       "url": "",
-      "repo": ""
+      "repo": "",
+      "sub": "Feedback for Every Teacher and Leader"
     },
     {
       "title": "Georgia Educational Analytics",
@@ -631,7 +637,8 @@
         "Analytics"
       ],
       "url": "",
-      "repo": "https://github.com/nic-carroll/Georgia-School-Data"
+      "repo": "https://github.com/nic-carroll/Georgia-School-Data",
+      "sub": "Five Years of Georgia School Data in One Portal"
     },
     {
       "title": "This website",
@@ -642,7 +649,8 @@
         "Automation"
       ],
       "url": "/",
-      "repo": ""
+      "repo": "",
+      "sub": "A Resume Site That Deploys Itself"
     }
   ],
   "badge": "Innovative and visionary executive technology leader. Former CIO and CTO, currently CISO at Georgia Southern University.",
