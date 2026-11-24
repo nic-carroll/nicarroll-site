@@ -68,19 +68,21 @@ const R = {
   phone: "+1-(678)-232-8864",
   email: "carroll.nic@gmail.com",
   linkedin: "https://www.linkedin.com/in/nic-carroll/",
+  site: "https://nicarroll-site-388842205758.us-east1.run.app",
   location: "Augusta, Georgia",
   summary: "Visionary IT executive with over 15 years of leadership experience driving enterprise-wide transformation across P-20 institutions. Adept at translating complex business requirements into secure, scalable strategies that fuel operational excellence. Recognized for pioneering district-wide AI integration, building AI tools that are reimagining the Information Security department, and leading a research enclave to a perfect CMMC Level 2 assessment. A collaborative C-suite partner who builds high-performing teams, manages multi-million-dollar budgets, and navigates strict regulatory landscapes to reduce costs and maximize business value.",
   jobs: [
     { title: "Chief Information Security Officer", dates: "06/2026 - Present", org: "Georgia Southern University", place: "Statesboro, GA",
       blurb: "Protects the digital ecosystem to ensure data integrity and operational resilience for 33,500 students and nearly 4,000 faculty. Leads Information Security and the Identity and Access Management (IAM) group, spearheading strategic governance, fortifying critical assets, and empowering secure innovation across a global campus network.",
       bullets: [
-        "Led the GCC High research enclave, a segregated Microsoft 365 GCC High and Azure Government environment for CUI and export-controlled (ITAR/EAR) data, through its CMMC Level 2 assessment, achieving a perfect score.",
-        "Built a unified dashboard that brings all Information Security and IAM applications into one view, increasing visibility across the environment and accelerating the resolution of security threats and vulnerabilities to ensure a safe, secure, and reliable environment.",
-        "Build AI tools and resources to reimagine the Information Security department's processes, reporting, and daily operations.",
-        "Led the complete revision of the third-party application review process, strengthening vendor risk management and data privacy.",
-        "Lead enterprise cybersecurity strategies as an executive team member by aligning risk management, data protection, and threat mitigation with strategic goals.",
-        "Implement security controls across divisions. Establish cyber governance that balances digital innovation with strict regulatory compliance and business continuity.",
-        "Serve as the primary cybersecurity advisor for executives and partners, translating complex threat intelligence and compliance requirements into actionable strategies for secure enterprise growth."
+        "Co lead the AI vision for IT leadership and created Reimagine IT, where cross functional teams build a working draft with AI partners in a day.",
+        "Design and build in house AI tools for Information Security, IAM, and automation, including a unified security dashboard, a policy platform, and an open records system that automates the redaction of personal information.",
+        "Partner closely with Compliance and Governance to create policy and procedure; revamped IT policies, procedures, and processes end to end.",
+        "Created an internal audit process that keeps the team continuously aware of its environment.",
+        "Led the GCC High research enclave for CUI and export controlled (ITAR/EAR) data through its CMMC Level 2 assessment, achieving a perfect score.",
+        "Rearchitected the phishing and spam defense process in under three months, cutting phishing and spam reaching institutional email by 95%.",
+        "Reimagined the third party review process to integrate legal, procurement, and IT systems review; reviewed and approved more than 4,000 products in six months.",
+        "Lead enterprise cybersecurity strategy as an executive team member and serve as the primary cybersecurity advisor to executives and partners."
       ] },
     { title: "Executive Director of Technology (CIO/CTO/CISO)", dates: "09/2024 - 05/2026", org: "Aiken County Public Schools", place: "Aiken, SC",
       blurb: "Tech executive unifying IT, tech, and security as district CIO, CTO, CISO. Guided digital ecosystem for educational outcomes and excellence for 3,700+ staff, 24,000+ students. Lead visionary initiatives, safeguards data, and fosters innovation across all departments and schools.",
@@ -183,6 +185,7 @@ blocks.push(`<h1>${esc(R.name)}</h1><div class="tagline">${esc(R.tagline)}</div>
     <span>${line}<path stroke="#6b6b6b" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>${esc(R.phone)}</span>
     <span>${line}<circle stroke="#6b6b6b" cx="12" cy="12" r="4"/><path stroke="#6b6b6b" d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>${esc(R.email)}</span>
     <span>${line}<path stroke="#6b6b6b" d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><a href="${esc(R.linkedin)}">${esc(R.linkedin)}</a></span>
+    <span>${line}<path stroke="#6b6b6b" d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><a href="${esc(R.site)}">Portfolio: ${esc(R.site.replace("https://",""))}</a></span>
     <span>${line}<path stroke="#6b6b6b" d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle stroke="#6b6b6b" cx="12" cy="9" r="2.5"/></svg>${esc(R.location)}</span>
   </div>`);
 blocks.push(`<div class="sec">Summary</div><p class="body">${esc(R.summary)}</p>`);

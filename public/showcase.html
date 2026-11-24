@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tool Showcase · Nic Carroll</title>
+<meta name="description" content="Screens from tools Nic Carroll designed and built: EagleAudit, a policy library with tracked changes, a change management review, and a resume builder. All screens use sample data from a fictional university.">
+<style>
+  @font-face { font-family: "Public Sans"; src: url("fonts/public-sans-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
+  /* Material Design 3, light scheme */
+  :root {
+    --primary: #0b57d0; --on-primary: #ffffff; --primary-container: #d3e3fd; --on-primary-container: #041e49;
+    --surface: #f8fafd; --surface-container-lowest: #ffffff; --surface-container: #eef2f9; --surface-container-high: #e4e9f2;
+    --on-surface: #1b1c1f; --on-surface-variant: #44474e; --outline: #74777f; --outline-variant: #c4c7cf;
+    --tertiary-container: #ffdf9e; --on-tertiary-container: #261a00;
+    --shape-m: 12px; --shape-l: 16px; --shape-xl: 28px; --shape-full: 999px;
+    --elev-1: 0 1px 2px rgba(0,0,0,.3), 0 1px 3px 1px rgba(0,0,0,.15);
+    --elev-3: 0 1px 3px rgba(0,0,0,.3), 0 4px 8px 3px rgba(0,0,0,.15);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body { margin: 0; background: var(--surface); color: var(--on-surface); font: 400 16px/1.5 "Public Sans", system-ui, sans-serif; }
+  a { color: var(--primary); }
+  .bar { position: sticky; top: 0; z-index: 5; background: var(--surface-container); display: flex; align-items: center; gap: 8px; padding: 8px 16px; min-height: 64px; }
+  .bar .title { font-size: 22px; line-height: 28px; margin-right: auto; }
+  .bar nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  .text-btn { display: inline-flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: var(--shape-full); font: 500 14px/20px inherit; letter-spacing: .1px; text-decoration: none; color: var(--primary); }
+  .text-btn:hover { background: color-mix(in srgb, var(--primary) 8%, transparent); }
+  .filled { background: var(--primary); color: var(--on-primary); padding: 0 24px; }
+  .filled:hover { background: var(--primary); box-shadow: var(--elev-1); }
+  .tonal { background: var(--primary-container); color: var(--on-primary-container); padding: 0 24px; }
+  .tonal:hover { background: var(--primary-container); box-shadow: var(--elev-1); }
+  :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+  main { max-width: 1200px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font: 400 45px/52px inherit; margin: 24px 0 8px; }
+  h2 { font: 400 32px/40px inherit; margin: 0 0 4px; }
+  h3 { font: 500 16px/24px inherit; letter-spacing: .15px; margin: 0; }
+  .lede { font-size: 18px; line-height: 28px; color: var(--on-surface-variant); max-width: 68ch; margin: 0 0 16px; }
+  .notice { display: inline-flex; gap: 8px; align-items: center; background: var(--tertiary-container); color: var(--on-tertiary-container); border-radius: var(--shape-m); padding: 10px 16px; font: 500 14px/20px inherit; margin: 0 0 8px; }
+  section { margin-top: 56px; }
+  .sub { color: var(--on-surface-variant); max-width: 72ch; margin: 0 0 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; padding: 0; list-style: none; }
+  .chips li { border: 1px solid var(--outline-variant); border-radius: 8px; padding: 5px 12px; font: 500 14px/20px inherit; color: var(--on-surface-variant); }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
+  .grid.three { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .card { background: var(--surface-container-lowest); border: 1px solid var(--outline-variant); border-radius: var(--shape-m); overflow: hidden; display: flex; flex-direction: column; margin: 0; }
+  .card button { all: unset; display: block; cursor: zoom-in; background: var(--surface-container-high); }
+  .card button:focus-visible { outline: 3px solid var(--primary); outline-offset: -3px; }
+  .card img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
+  .tall img { aspect-ratio: 85 / 110; }
+  .card figcaption { padding: 12px 16px 16px; }
+  .card p { margin: 4px 0 0; font-size: 14px; line-height: 20px; color: var(--on-surface-variant); }
+  .card .text-btn { margin: 8px 0 0 -12px; }
+  .wide { display: grid; grid-template-columns: minmax(260px, 420px) 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 760px) { .wide { grid-template-columns: 1fr; } h1 { font-size: 36px; line-height: 44px; } }
+  dialog { border: 0; padding: 0; border-radius: var(--shape-xl); background: var(--surface-container-high); box-shadow: var(--elev-3); max-width: min(96vw, 1500px); }
+  dialog::backdrop { background: rgba(0,0,0,.5); }
+  dialog img { display: block; max-width: 100%; max-height: 82vh; margin: 0 auto; }
+  dialog .foot { display: flex; align-items: center; gap: 8px; padding: 8px 16px 8px 24px; }
+  dialog .foot span { margin-right: auto; font: 500 14px/20px inherit; }
+  dialog button { border: 0; background: none; cursor: pointer; }
+  footer { border-top: 1px solid var(--outline-variant); margin-top: 64px; padding-top: 16px; color: var(--on-surface-variant); font-size: 14px; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="text-btn" href="/" aria-label="Back to Nic Carroll's site">&larr; Nic Carroll</a>
+  <span class="title">Tool Showcase</span>
+  <nav aria-label="Sections">
+    <a class="text-btn" href="#resume-builder">Resume Builder</a>
+    <a class="text-btn" href="#eagleaudit">EagleAudit</a>
+    <a class="text-btn" href="#policy">Policy Library</a>
+    <a class="text-btn" href="#change">Change Management</a>
+  </nav>
+</header>
+<main>
+  <h1>Tools I Designed and Built</h1>
+  <p class="lede">I build working tools with AI partners so security, identity, and governance teams can see their environment and act on it. These are real screens from those tools.</p>
+  <p class="notice">Every university screen here uses sample data from a fictional university. No real systems, people, or records are shown.</p>
+
+  <section id="resume-builder">
+    <h2>Resume Builder</h2>
+    <p class="sub">A web app I built that turns one set of resume content into sharp, print ready PDFs. Pick a style and a color scheme, place a photo, and check the result against a job posting with the built in ATS check.</p>
+    <ul class="chips"><li>Three styles</li><li>Six color schemes</li><li>ATS check</li><li>Google sign in</li><li>Google Cloud Run</li></ul>
+    <div class="actions">
+      <a class="text-btn filled" href="https://resume-builder-388842205758.us-east1.run.app" target="_blank" rel="noopener">Open the Resume Builder</a>
+      <a class="text-btn tonal" href="Nic_Carroll_Resume.pdf" download>Download My Resume</a>
+    </div>
+    <p class="sub">The builder is in private beta, so sign in is by invitation for now. Below is my own resume in each of the three styles.</p>
+    <div class="grid three">
+      <figure class="card tall"><button type="button" data-full="assets/showcase/resume-navy.jpg"><img src="assets/showcase/resume-navy.jpg" alt="Navy resume style: two columns with a dark sidebar and photo" loading="lazy"></button>
+        <figcaption><h3>Navy</h3><p>Two columns with a dark sidebar for contact details, skills, and certifications.</p><a class="text-btn" href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" target="_blank" rel="noopener">Open the PDF</a></figcaption></figure>
+      <figure class="card tall"><button type="button" data-full="assets/showcase/resume-executive.jpg"><img src="assets/showcase/resume-executive.jpg" alt="Executive resume style: a single column with serif headings" loading="lazy"></button>
+        <figcaption><h3>Executive</h3><p>A single column with serif headings, built for the most traditional readers and applicant systems.</p><a class="text-btn" href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" target="_blank" rel="noopener">Open the PDF</a></figcaption></figure>
+      <figure class="card tall"><button type="button" data-full="assets/showcase/resume-modern.jpg"><img src="assets/showcase/resume-modern.jpg" alt="Modern resume style: a light layout with a color accent" loading="lazy"></button>
+        <figcaption><h3>Modern</h3><p>A light, open layout with a color accent and a side column for quick facts.</p><a class="text-btn" href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" target="_blank" rel="noopener">Open the PDF</a></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="eagleaudit">
+    <h2>EagleAudit</h2>
+    <div class="wide">
+      <figure class="card tall"><button type="button" data-full="assets/showcase/eagleaudit-one-sheet.jpg"><img src="assets/showcase/eagleaudit-one-sheet.jpg" alt="EagleAudit one page overview with sample data" loading="lazy"></button></figure>
+      <div>
+        <p class="sub">Every tool, one view. EagleAudit connects security systems with read only access, runs every check on a schedule, and puts the evidence in front of the people who decide. It covers devices and tenants, identity and access, activity and threats, AI oversight, and risk and compliance.</p>
+        <ul class="chips"><li>Built in house with AI</li><li>Nightly checks</li><li>Read only access</li><li>NIST 800-171</li><li>NIST CSF</li><li>CIS Controls</li></ul>
+        <p class="sub">AI speeds up the work. People still make every decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="policy">
+    <h2>Policy Library</h2>
+    <p class="sub">One place for every policy, from the first need to the next review. Leaders see policy health at a glance, reviewers work in the document itself with tracked changes, and every sign off is recorded.</p>
+    <ul class="chips"><li>Leadership dashboard</li><li>Review cycles</li><li>Tracked changes</li><li>Sign offs</li><li>Search and ask</li></ul>
+    <div class="grid">
+      <figure class="card"><button type="button" data-full="assets/showcase/policy-1-dashboard.jpg"><img src="assets/showcase/policy-1-dashboard.jpg" alt="Policy dashboard with policy health by area" loading="lazy"></button><figcaption><h3>Dashboard</h3><p>Policy health by area, how old the policies are, and what leadership needs to decide.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/policy-2-register.jpg"><img src="assets/showcase/policy-2-register.jpg" alt="Policy register table with review due dates" loading="lazy"></button><figcaption><h3>Policy Register</h3><p>Every policy with its owner, dates, review state, and stage.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/policy-3-reviews-and-revisions.jpg"><img src="assets/showcase/policy-3-reviews-and-revisions.jpg" alt="List of open reviews and revisions" loading="lazy"></button><figcaption><h3>Reviews and Revisions</h3><p>Open review cycles and every revision in progress, with status and due dates.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/policy-4-review-cycle.jpg"><img src="assets/showcase/policy-4-review-cycle.jpg" alt="A review cycle showing each policy and reviewer" loading="lazy"></button><figcaption><h3>A Review Cycle</h3><p>Each policy in the cycle, who is reviewing it, and what it needs.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/policy-5-tracked-changes-editor.jpg"><img src="assets/showcase/policy-5-tracked-changes-editor.jpg" alt="Policy editor with tracked changes, reviewers, and sign offs" loading="lazy"></button><figcaption><h3>Tracked Changes Editor</h3><p>Edit the policy as the document itself, with reviewer verdicts and sign offs alongside.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/policy-6-how-a-policy-moves.jpg"><img src="assets/showcase/policy-6-how-a-policy-moves.jpg" alt="The stages a policy moves through" loading="lazy"></button><figcaption><h3>How a Policy Moves</h3><p>The full path from drafting to published, and who acts at each stage.</p></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="change">
+    <h2>Change Management Review</h2>
+    <p class="sub">A review of how IT changes are requested, approved, and scheduled, built from two years of agendas and request records. Staff answer a short survey and post ideas on a shared board, and the results update as people respond.</p>
+    <ul class="chips"><li>Process map</li><li>Agenda analysis</li><li>Request records</li><li>Discussion board</li><li>Live survey results</li></ul>
+    <div class="grid">
+      <figure class="card"><button type="button" data-full="assets/showcase/change-1-start.jpg"><img src="assets/showcase/change-1-start.jpg" alt="Start page of the change management review" loading="lazy"></button><figcaption><h3>Start Here</h3><p>What the review asks of people, in two steps.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/change-2-process-map.jpg"><img src="assets/showcase/change-2-process-map.jpg" alt="Process map of how a change moves today" loading="lazy"></button><figcaption><h3>Process Map</h3><p>How a change moves today, with the numbers at each step.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/change-3-agenda-history.jpg"><img src="assets/showcase/change-3-agenda-history.jpg" alt="Charts of what two years of agendas show" loading="lazy"></button><figcaption><h3>Agenda History</h3><p>How soon changes happen after review and what the agendas say about safety.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/change-4-request-records.jpg"><img src="assets/showcase/change-4-request-records.jpg" alt="Change request records by type and year" loading="lazy"></button><figcaption><h3>Request Records</h3><p>Every request by type, year, and where it stands.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/change-5-discussion-board.jpg"><img src="assets/showcase/change-5-discussion-board.jpg" alt="Discussion board with ideas and agree counts" loading="lazy"></button><figcaption><h3>Discussion Board</h3><p>What to fix, add, or keep, ranked by how many people agree.</p></figcaption></figure>
+      <figure class="card"><button type="button" data-full="assets/showcase/change-6-survey-results.jpg"><img src="assets/showcase/change-6-survey-results.jpg" alt="Survey results summary" loading="lazy"></button><figcaption><h3>Survey Results</h3><p>What people are telling us, updated as answers come in.</p></figcaption></figure>
+    </div>
+  </section>
+
+  <footer>Designed and built by Nic Carroll. University screens show sample data from a fictional university. <a href="/">Back to the main site</a></footer>
+</main>
+
+<dialog id="viewer" aria-label="Larger view">
+  <img alt="">
+  <div class="foot"><span></span><button class="text-btn" type="button" id="close">Close</button></div>
+</dialog>
+<script>
+  const viewer = document.getElementById("viewer"), big = viewer.querySelector("img"), cap = viewer.querySelector("span");
+  document.querySelectorAll("button[data-full]").forEach(b => {
+    const small = b.querySelector("img");
+    b.setAttribute("aria-label", "View larger: " + small.alt);
+    b.addEventListener("click", () => { big.src = b.dataset.full; big.alt = small.alt; cap.textContent = small.alt; viewer.showModal(); });
+  });
+  document.getElementById("close").addEventListener("click", () => viewer.close());
+  viewer.addEventListener("click", e => { if (e.target === viewer) viewer.close(); });
+</script>
+</body>
+</html>

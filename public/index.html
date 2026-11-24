@@ -354,6 +354,7 @@
       <a href="#cases">Case Studies</a>
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
+      <a href="showcase.html">Showcase</a>
       <a href="security.html">Security</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -639,7 +640,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
       ${c.quote ? `<blockquote class="case-quote">“${esc(c.quote.text)}”<cite>${esc(c.quote.by)}</cite></blockquote>` : ""}
       ${c.credit ? `<p class="case-credit">${esc(c.credit)}</p>` : ""}
       <div class="tools">${(c.tools || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>
-      ${(c.links || []).length ? `<div class="case-links">${c.links.map(l => `<a class="case-link" href="${esc(l.url)}" ${l.url.startsWith("assets/") ? "" : 'target="_blank" rel="noopener"'}>${esc(l.label)}</a>`).join("")}</div>` : ""}
+      ${(c.links || []).length ? `<div class="case-links">${c.links.map(l => `<a class="case-link" href="${esc(l.url)}" ${(l.url.startsWith("assets/") || l.url.startsWith("/")) ? "" : 'target="_blank" rel="noopener"'}>${esc(l.label)}</a>`).join("")}</div>` : ""}
     </article>`;
   const GROUPS = [
     ["Georgia Southern University", "Georgia Southern University", "Chief Information Security Officer"],

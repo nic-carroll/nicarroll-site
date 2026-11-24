@@ -539,6 +539,23 @@
       "linkLabel": "Try the Beta Demo"
     },
     {
+      "title": "Resume Builder",
+      "status": "Beta",
+      "summary": "A web app I built that turns one set of resume content into sharp, print ready PDFs. Pick from three styles and six color schemes, place a photo, and run the built in ATS check against a job posting.",
+      "tags": [
+        "Three styles",
+        "ATS check",
+        "Google sign in",
+        "Google Cloud Run"
+      ],
+      "url": "/showcase.html#resume-builder",
+      "repo": "",
+      "sub": "One Resume, Three Sharp Styles",
+      "metric": "3",
+      "metricLabel": "resume styles, six color schemes",
+      "linkLabel": "See the Three Styles"
+    },
+    {
       "title": "Unified Security Dashboard",
       "status": "In use",
       "summary": "An internal tool that pulls Georgia Southern University's Information Security and IAM applications into one dashboard, giving the team visibility across the environment and a faster path from alert to fix.",
@@ -547,8 +564,9 @@
         "AI assisted",
         "Internal"
       ],
-      "url": "",
-      "repo": ""
+      "url": "/showcase.html#eagleaudit",
+      "repo": "",
+      "linkLabel": "See the Overview"
     },
     {
       "title": "Policy Library",
@@ -559,8 +577,9 @@
         "Workflow",
         "Internal"
       ],
-      "url": "",
-      "repo": ""
+      "url": "/showcase.html#policy",
+      "repo": "",
+      "linkLabel": "See Sample Screens"
     },
     {
       "title": "Open Records Request Automation",
@@ -696,7 +715,13 @@
       ],
       "result": "One place to find, revise, approve, and track every policy. Leadership sees what is overdue and what needs a decision, policies that only restate USG are flagged to retire, possible conflicts are flagged for revision, and every edit, comment, and sign off is logged for audits and open records requests.",
       "metric": "8 steps",
-      "metricLabel": "From draft to posted policy and its next review"
+      "metricLabel": "From draft to posted policy and its next review",
+      "links": [
+        {
+          "label": "See Sample Screens",
+          "url": "/showcase.html#policy"
+        }
+      ]
     },
     {
       "title": "Reimagine IT: A New Way to Run Projects",
@@ -749,7 +774,13 @@
       ],
       "result": "Greater visibility and faster resolution of threats and vulnerabilities, for a safe, secure, and reliable environment.",
       "metric": "1 view",
-      "metricLabel": "For all security and IAM tools"
+      "metricLabel": "For all security and IAM tools",
+      "links": [
+        {
+          "label": "See the Overview",
+          "url": "/showcase.html#eagleaudit"
+        }
+      ]
     },
     {
       "title": "Reorganized a 40 Person Technology Division",
