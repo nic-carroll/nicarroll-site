@@ -266,6 +266,22 @@
   .tool-strip { background: radial-gradient(700px 300px at 90% 0%, rgba(143,184,222,.22), transparent 60%), radial-gradient(500px 260px at 0% 100%, color-mix(in srgb, var(--amber) 14%, transparent), transparent 60%), var(--night); box-shadow: 0 20px 50px rgba(12,26,46,.25); }
   @media (prefers-reduced-motion: reduce) { .pcard, .pcard .art svg, .pcard .art img, .pcard::after { transition: none; } .pcard.rv { opacity: 1; transform: none; } }
   /* Agents and playbooks */
+  .k12-feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 34px; align-items: center; margin: 0 0 28px; padding: 38px; border-radius: 28px; text-decoration: none; color: #fff; background: radial-gradient(900px 420px at 88% 0%, var(--night-3), transparent 62%), linear-gradient(140deg, var(--night), var(--night-2)); box-shadow: 0 24px 60px rgba(12,26,46,.28); position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+  .k12-feature:hover { transform: translateY(-4px); box-shadow: 0 32px 70px rgba(12,26,46,.36); }
+  .k12-feature::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 34px 34px; pointer-events: none; }
+  .k12-feature > * { position: relative; }
+  .kf-eyebrow { display: inline-block; font: 700 12.5px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--on-accent); background: var(--accent-fill); padding: 7px 11px; border-radius: 999px; }
+  .k12-feature h3 { font: 760 clamp(28px, 3.4vw, 40px)/1.05 var(--display); letter-spacing: -.02em; margin: 16px 0 12px; color: #fff; }
+  .k12-feature p { color: #dbe7f5; font-size: 17.5px; line-height: 1.6; margin: 0 0 20px; }
+  .k12-feature ul { list-style: none; margin: 0 0 24px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .k12-feature li { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 12px; display: grid; gap: 4px; }
+  .k12-feature li b { font: 760 28px/1 var(--display); color: var(--amber); } .k12-feature li span { font-size: 13px; line-height: 1.3; color: #c5d3e4; }
+  .k12-feature .btn { display: inline-flex; padding: 14px 22px; border-radius: 999px; }
+  .kf-shots { position: relative; min-height: 330px; }
+  .kf-shots img { position: absolute; width: 82%; height: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,.22); box-shadow: 0 18px 44px rgba(0,0,0,.45); background: #fff; transition: transform .3s; }
+  .kf-shots img:first-child { left: 0; top: 0; transform: rotate(-2deg); } .kf-shots img:last-child { right: 0; bottom: 0; transform: rotate(2.5deg); }
+  .k12-feature:hover .kf-shots img:first-child { transform: rotate(-3deg) translateY(-6px); } .k12-feature:hover .kf-shots img:last-child { transform: rotate(3.5deg) translateY(6px); }
+  @media (max-width: 900px) { .k12-feature { grid-template-columns: 1fr; padding: 26px 22px; } .k12-feature ul { grid-template-columns: 1fr 1fr; } .kf-shots { min-height: 0; display: grid; gap: 12px; } .kf-shots img { position: static; width: 100%; transform: none !important; } }
   .ag-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
   .ag-stats div { background: var(--night); color: #fff; border-radius: 18px; padding: 20px 22px; }
   .ag-stats b { display: block; font: 700 40px/1 var(--display); color: var(--amber); letter-spacing: -.02em; }
@@ -508,6 +524,7 @@
         <a href="showcase.html"><b>Tool Showcase</b><span>Real screens from the tools I built</span></a>
         <a href="#building"><b>Things I'm Building</b><span>Every product and prototype</span></a>
         <a href="#agents"><b>AI Agents and Playbooks</b><span>The agents and rules behind the work</span></a>
+        <a href="k12-playbook.html"><b>K12 AI Playbook</b><span>School staff build their own tools in Gemini</span></a>
         <a href="#cases"><b>Case Studies</b><span>The challenge, what I did, what changed</span></a>
         <a href="security.html"><b>Security</b><span>How I protect what I build</span></a>
       </div></details>
@@ -571,6 +588,16 @@
       <h2>AI Agents and Playbooks</h2>
       <p>The agents, skills, and instruction files I wrote to build, test, secure, and document my tools every day.</p>
     </div>
+    <a class="k12-feature" href="k12-playbook.html">
+      <div class="kf-text">
+        <span class="kf-eyebrow">New for K12 Schools</span>
+        <h3>Gemini Tool Builder Playbook</h3>
+        <p>Stop chatting with AI. Start building with it. I wrote this playbook so a teacher, counselor, or principal can turn a school problem into a working dashboard, using only the Google tools the district already has.</p>
+        <ul><li><b>9</b><span>steps from problem to launch</span></li><li><b>3</b><span>live tools to try</span></li><li><b>10</b><span>copy and paste prompts</span></li><li><b>0</b><span>paid AI licenses required</span></li></ul>
+        <span class="btn amber">Open the Playbook</span>
+      </div>
+      <div class="kf-shots"><img src="assets/showcase/k12-flex.jpg" alt="A flex period scheduling dashboard built with the playbook, showing sample students and sessions" loading="lazy"><img src="assets/showcase/k12-team.jpg" alt="A grade level team dashboard built with the playbook" loading="lazy"></div>
+    </a>
     <div class="ag-stats" id="ag-stats"></div>
     <p class="ag-all"><a class="btn amber" href="agents/nic-carroll-agents-and-playbooks.zip" download>Download All as Markdown</a><span>Preview any file, download it, or copy a link to share it.</span></p>
     <div id="ag-list"></div>

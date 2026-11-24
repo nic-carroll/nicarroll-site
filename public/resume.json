@@ -511,6 +511,20 @@
       "image": "assets/showcase/sis-1-principal-dashboard.jpg"
     },
     {
+      "title": "Gemini Tool Builder Playbook",
+      "sub": "School Staff Build Their Own Tools With AI",
+      "status": "Live demo",
+      "summary": "A playbook that teaches K12 staff to turn a school problem into a working dashboard, tracker, or scheduler in Gemini, inside Google Workspace for Education. Nine steps, three live example tools, a prompt library, and sharing rules that keep the data owner in control.",
+      "tags": [
+        "K12",
+        "AI",
+        "Google Workspace"
+      ],
+      "url": "/k12-playbook.html",
+      "image": "assets/showcase/k12-playbook.jpg",
+      "repo": ""
+    },
+    {
       "title": "RosterEditor",
       "status": "Live demo",
       "summary": "Import a OneRoster 1.1 or 1.2 file, combine sections and courses, add or swap teachers, and export a clean file for ClassLink, in a dashboard or through a REST API. The combining rules are built in, so no AI is needed. The demo uses invented data on real Georgia state course codes.",
@@ -1238,6 +1252,47 @@
   ],
   "now": "Chief Information Security Officer, Georgia Southern University",
   "agents": [
+    {
+      "group": "K12 AI Builder Playbook",
+      "intro": "A playbook that shows school staff how to build their own tools in Gemini, using only the Google tools a district already has.",
+      "items": [
+        {
+          "name": "The Nine Step Workflow",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Nine steps from a school problem to a launched tool, with the one choice that matters at step 6.",
+          "file": "agents/k12-gemini-playbook-workflow.md"
+        },
+        {
+          "name": "Prompt Library",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Ten copy and paste prompts that plan, build, test, connect, and document a school tool in Gemini.",
+          "file": "agents/k12-gemini-playbook-prompt-library.md"
+        },
+        {
+          "name": "Data Owner Controlled Sharing",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Three layers of sharing with the Sheet owner in control, section by section edit rights, and a launch checklist.",
+          "file": "agents/k12-gemini-playbook-sharing.md"
+        },
+        {
+          "name": "Keep Tools Alive",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Five rules, a folder layout, and a handoff checklist so a staff built tool survives a job change.",
+          "file": "agents/k12-gemini-playbook-continuity.md"
+        },
+        {
+          "name": "Know Your Access",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "The same build at three Google license levels, so a district with no paid AI add on can still do it.",
+          "file": "agents/k12-gemini-playbook-access-versions.md"
+        }
+      ]
+    },
     {
       "group": "Agents That Work on a Schedule",
       "intro": "Each one runs by itself, checks its own work with tests, and hands me a pull request to review. None of them can release anything without my approval.",

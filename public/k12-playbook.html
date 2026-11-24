@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini Tool Builder Playbook · Nic Carroll</title>
+<meta name="description" content="A playbook by Nic Carroll that shows K12 staff how to build dashboards, trackers, and schedulers in Gemini inside Google Workspace for Education. Nine steps, three live example tools, a prompt library, and data owner controlled sharing.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nic Carroll">
+<meta property="og:title" content="Gemini Tool Builder Playbook for K12">
+<meta property="og:description" content="Stop chatting with AI. Start building with it. A playbook for school staff, by Nic Carroll.">
+<meta property="og:url" content="https://niccarroll.org/k12-playbook.html">
+<meta property="og:image" content="https://niccarroll.org/assets/og/k12-playbook.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://niccarroll.org/k12-playbook.html">
+<link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+<style>
+@font-face { font-family: "Public Sans"; src: url("fonts/public-sans-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 800; font-display: swap; }
+/* Material Design 3, light scheme: color roles, type scale, shape scale, top app bar, tabs, segmented buttons, outlined fields. Layout: sticky top bar, one scrolling column of sections, each a tonal surface with the working parts inside. */
+:root{
+  color-scheme: light;
+  --primary:#0B57D0; --on-primary:#FFFFFF;
+  --primary-container:#D3E3FD; --on-primary-container:#041E49;
+  --secondary-container:#DDE3EA; --on-secondary-container:#1A1C1E;
+  --tertiary:#146C2E; --tertiary-container:#C4EED0; --on-tertiary-container:#072711;
+  --warn:#8A5300; --warn-container:#FFE0B2;
+  --error:#B3261E; --error-container:#F9DEDC;
+  --surface:#F8FAFD; --surface-low:#F0F4F9; --surface-high:#E5EBF3; --card:#FFFFFF;
+  --on-surface:#1B1C1F; --on-surface-variant:#44474E;
+  --outline:#74777F; --outline-variant:#C4C6D0;
+  --font-display:"Public Sans",system-ui,sans-serif;
+  --field-bg:var(--card);
+  --font-body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r-s:8px; --r-m:12px; --r-l:16px; --r-xl:28px;
+  --e1:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--surface);color:var(--on-surface);font-family:var(--font-body);font-size:16px;line-height:1.5}
+h1,h2,h3{font-family:var(--font-display);font-weight:500;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.25rem,5vw,2.8125rem);line-height:1.16;font-weight:400;letter-spacing:0}
+h2{font-size:1.75rem;line-height:2.25rem;font-weight:400}
+h3{font-size:1rem;line-height:1.5rem;font-weight:500;letter-spacing:.009em}
+p{margin:0}
+a{color:var(--primary)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.label{font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--on-surface-variant)}
+.muted{color:var(--on-surface-variant)}
+
+/* top app bar */
+.bar{position:sticky;top:0;z-index:10;background:var(--surface-low);border-bottom:1px solid var(--outline-variant)}
+.bar .wrap{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.brand{font-family:var(--font-display);font-weight:600;font-size:1.125rem;display:flex;align-items:center;gap:10px;margin-right:auto}
+.mark{width:32px;height:32px;border-radius:10px;background:var(--primary);display:grid;place-items:center}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{text-decoration:none;color:var(--on-surface-variant);font-weight:500;font-size:.875rem;padding:8px 14px;border-radius:999px}
+.nav a:hover{background:var(--surface-high);color:var(--on-surface)}
+
+/* hero */
+.hero.wrap{padding:56px 20px 40px}
+.hero .label{margin-bottom:12px}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:32px;align-items:center}
+.hero p.lead{font-size:1.2rem;max-width:56ch;margin-top:16px;color:var(--on-surface-variant)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 24px;border-radius:999px;border:0;font-weight:500;font-size:.875rem;text-decoration:none}
+.btn.filled{background:var(--primary);color:var(--on-primary)}
+.btn.filled:hover{box-shadow:var(--e1)}
+.btn.tonal{background:var(--primary-container);color:var(--on-primary-container)}
+.btn.outlined{background:transparent;border:1px solid var(--outline);color:var(--primary)}
+.btn.small{height:32px;padding:0 14px;font-size:.8125rem}
+.rules{background:var(--card);border-radius:var(--r-xl);padding:24px;display:grid;gap:16px;border:1px solid var(--outline-variant)}
+.rule{display:flex;gap:14px;align-items:flex-start}
+.rule .n{flex:none;width:36px;height:36px;border-radius:50%;background:var(--tertiary-container);color:var(--on-tertiary-container);display:grid;place-items:center;font-weight:700}
+.rule b{display:block}
+
+section{padding:40px 0}
+.sec-head{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;max-width:70ch}
+.panel{background:var(--surface-low);border-radius:var(--r-xl);padding:24px}
+
+/* workflow */
+.flow{display:grid;grid-template-columns:300px 1fr;gap:20px}
+.steps{display:flex;flex-direction:column;gap:6px;list-style:none;margin:0;padding:0}
+.step{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:transparent;border:0;border-radius:var(--r-l);padding:10px 12px;color:var(--on-surface)}
+.step:hover{background:var(--surface-high)}
+.step .num{flex:none;width:32px;height:32px;border-radius:50%;border:2px solid var(--outline);display:grid;place-items:center;font-weight:700;font-size:.875rem;background:var(--card)}
+.step[aria-current="step"]{background:var(--primary-container);color:var(--on-primary-container)}
+.step[aria-current="step"] .num{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.step small{display:block;color:var(--on-surface-variant);font-size:.8125rem}
+.steps li{position:relative}
+.steps li+li::before{content:"";position:absolute;left:27px;top:-6px;height:6px;width:2px;background:var(--outline-variant)}
+.detail{background:var(--card);border-radius:var(--r-l);padding:28px;border:1px solid var(--outline-variant);display:flex;flex-direction:column;gap:16px;min-width:0}
+.detail ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.branch{background:var(--surface-low);border-radius:var(--r-m);padding:16px;display:grid;gap:12px}
+.seg{display:inline-flex;border:1px solid var(--outline);border-radius:999px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:8px 18px;font-weight:500;font-size:.875rem;color:var(--on-surface)}
+.seg button+button{border-left:1px solid var(--outline)}
+.seg button{display:inline-flex;align-items:center;gap:8px;height:40px}
+.seg button[aria-pressed="true"]{background:var(--primary-container);color:var(--on-primary-container)}
+.seg button[aria-pressed="true"]::before{content:"\2713";font-weight:700;font-size:15px;line-height:1}
+.chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:8px;font-size:.8125rem;font-weight:500;background:var(--secondary-container);color:var(--on-secondary-container)}
+.chip.file{font-family:var(--font-mono);font-weight:400}
+.rowgap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.stepnav{display:flex;gap:8px;justify-content:space-between;margin-top:auto;padding-top:8px}
+
+/* examples */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--outline-variant);margin-bottom:20px;overflow-x:auto}
+.tab{border:0;background:transparent;padding:14px 20px;font-weight:500;font-size:.875rem;color:var(--on-surface-variant);border-bottom:3px solid transparent;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--primary)}
+.demo{background:var(--card);border-radius:var(--r-l);border:1px solid var(--outline-variant);overflow:hidden}
+.demo-top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:16px 20px;background:var(--primary);color:var(--on-primary)}
+.demo-top h3{font-size:1.375rem;line-height:1.75rem;font-weight:400}
+.badge{font-size:.75rem;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.2)}
+.demo-body{padding:20px;display:grid;gap:20px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface-low);border-radius:var(--r-m);padding:14px 16px;border-left:4px solid var(--primary)}
+.kpi.good{border-left-color:var(--tertiary)} .kpi.warn{border-left-color:var(--warn)} .kpi.bad{border-left-color:var(--error)}
+.kpi .v{font-family:var(--font-display);font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi .k{font-size:.8125rem;color:var(--on-surface-variant)}
+.controls{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding-top:8px}
+.field{position:relative;display:flex;flex-direction:column;min-width:160px}
+.field>span{position:absolute;left:12px;top:-8px;padding:0 4px;background:var(--field-bg);font-size:.75rem;line-height:1rem;font-weight:400;letter-spacing:.033em;color:var(--on-surface-variant);z-index:1;pointer-events:none}
+.field.plain>span{position:static;padding:0 0 8px;background:none}
+.field input,.field select,.field textarea{height:56px;border:1px solid var(--outline);border-radius:4px;padding:0 16px;font-size:1rem;font-weight:400;color:var(--on-surface);background:transparent;width:100%}
+.field textarea{height:auto;min-height:112px;padding:16px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+.field:focus-within>span{color:var(--primary)}
+td select{height:32px;min-width:170px;border:1px solid var(--outline);border-radius:var(--r-s);padding:0 8px;font:inherit;font-size:.875rem;background:transparent;color:var(--on-surface)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:20px}
+.bars{display:grid;gap:10px}
+.barrow{display:grid;gap:4px}
+.barrow .t{display:flex;justify-content:space-between;gap:8px;font-size:.8125rem}
+.barrow .t span:last-child{font-variant-numeric:tabular-nums;color:var(--on-surface-variant);white-space:nowrap}
+.track{height:10px;border-radius:999px;background:var(--surface-high);overflow:hidden}
+.fill{height:100%;border-radius:999px;background:var(--primary)}
+.fill.near{background:var(--warn)} .fill.full{background:var(--error)}
+.tablebox{overflow:auto;max-height:420px;border:1px solid var(--outline-variant);border-radius:var(--r-m)}
+table{border-collapse:collapse;width:100%;font-size:.875rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--outline-variant);white-space:nowrap}
+th{position:sticky;top:0;background:var(--surface-low);font-weight:500;color:var(--on-surface-variant);font-size:.8125rem}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.75rem;font-weight:500}
+.pill.ok{background:var(--tertiary-container);color:var(--on-tertiary-container)}
+.pill.warn{background:var(--warn-container);color:#4A2C00}
+.pill.bad{background:var(--error-container);color:#601410}
+.pill.info{background:var(--primary-container);color:var(--on-primary-container)}
+.empty{padding:24px;text-align:center;color:var(--on-surface-variant)}
+.ideas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.idea{background:var(--card);border:1px solid var(--outline-variant);border-radius:var(--r-m);padding:16px;display:grid;gap:6px}
+.idea .who{font-size:.75rem;font-weight:500;color:var(--primary);letter-spacing:.04em;text-transform:uppercase}
+
+.tgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tcard{background:var(--surface-low);border-radius:var(--r-m);padding:16px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--outline-variant);min-width:0}
+.tcard.can{border-top-color:var(--tertiary);background:#F4FAF5}
+.tcard .th{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.tcard ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.9375rem}
+.tcard li{background:var(--card);border-radius:var(--r-s);padding:8px 10px;overflow-wrap:anywhere}
+.tcard li label{display:flex;gap:8px;align-items:flex-start}
+.tcard li input{margin-top:4px;accent-color:var(--primary)}
+.tcard li.done span{text-decoration:line-through;color:var(--on-surface-variant)}
+.tadd{display:flex;gap:8px;margin-top:auto}
+.tadd input{flex:1;min-width:0;height:36px;border:1px solid var(--outline);border-radius:var(--r-s);padding:0 10px;font:inherit;font-size:.875rem;background:var(--card);color:var(--on-surface)}
+.tlock{margin-top:auto;font-size:.8125rem;color:var(--on-surface-variant)}
+.matrix{overflow-x:auto;margin-top:12px;border:1px solid var(--outline-variant);border-radius:var(--r-m);background:var(--card)}
+.howto{margin-top:32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.howto ol{margin:0;padding-left:20px;display:grid;gap:8px}
+@media (max-width:860px){.tgrid,.howto{grid-template-columns:1fr}}
+
+/* versions */
+.vers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ver{background:var(--card);border:1px solid var(--outline-variant);border-radius:var(--r-l);padding:24px;display:flex;flex-direction:column;gap:12px}
+.ver.main{background:var(--primary-container);border-color:transparent;color:var(--on-primary-container)}
+.ver .tag{font-family:var(--font-display);font-size:2.25rem;line-height:1}
+.ver ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.9375rem}
+
+/* prompts */
+.plist{display:grid;gap:10px}
+details{background:var(--card);border:1px solid var(--outline-variant);border-radius:var(--r-m);overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;gap:14px;font-weight:500}
+summary::-webkit-details-marker{display:none}
+summary .pn{flex:none;width:28px;height:28px;border-radius:8px;background:var(--primary-container);color:var(--on-primary-container);display:grid;place-items:center;font-size:.8125rem;font-weight:700}
+summary .when{margin-left:auto;font-weight:400;font-size:.8125rem;color:var(--on-surface-variant)}
+details[open] summary{border-bottom:1px solid var(--outline-variant)}
+.pbody{padding:16px 20px;display:grid;gap:12px}
+pre{margin:0;background:var(--surface-low);border-radius:var(--r-s);padding:16px;font-family:var(--font-mono);font-size:.8125rem;line-height:1.6;white-space:pre-wrap;overflow-x:auto}
+
+/* sharing */
+.layers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;position:relative}
+.layer{background:var(--card);border:1px solid var(--outline-variant);border-radius:var(--r-l);padding:20px;display:grid;gap:10px;align-content:start}
+.layer.key{border:2px solid var(--primary);background:#F3F7FE}
+.layer ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.9375rem}
+.rulebar{margin-top:16px;background:var(--tertiary-container);color:var(--on-tertiary-container);border-radius:var(--r-m);padding:16px 20px;font-weight:500;text-align:center}
+.check{display:grid;gap:4px;margin-top:20px}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-s)}
+.check label:hover{background:var(--surface-high)}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:var(--primary);flex:none}
+.check input:checked+span{color:var(--on-surface-variant);text-decoration:line-through}
+.progress{font-size:.875rem;color:var(--on-surface-variant);margin-top:8px}
+
+footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
+.files{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+@media (max-width:860px){
+  .hero-grid,.flow,.two{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ideas,.vers,.layers{grid-template-columns:1fr !important}
+  .steps{flex-direction:row;overflow-x:auto;padding-bottom:6px}
+  .steps li+li::before{display:none}
+  .step{min-width:190px}
+  summary .when{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.byline{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;align-items:center;background:#0c1a2e;color:#dbe7f5;text-decoration:none;font-size:.875rem;padding:9px 16px}.byline em{font-style:normal}.byline b{color:#fff}.byline span{color:#f2b43c;font-weight:600}.byline:hover span{text-decoration:underline}
+.dl-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.dl-row a{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--outline);color:var(--primary);font-weight:500;font-size:.875rem;text-decoration:none;background:var(--card)}.dl-row a.fill{background:var(--primary);color:var(--on-primary);border-color:transparent}.dl-row a:hover{box-shadow:var(--e1)}
+.flow>*{min-width:0}@media (max-width:860px){.flow{grid-template-columns:minmax(0,1fr)}.steps{max-width:100%}}
+@media (max-width:900px){.ideas{grid-template-columns:1fr 1fr !important}}@media (max-width:520px){.ideas{grid-template-columns:1fr !important}}
+</style>
+</head>
+<body>
+
+<a class="byline" href="/"><em>A playbook by <b>Nic Carroll</b>, Ed.S., CISSP, CETL</em><span>Back to niccarroll.org</span></a>
+<header class="bar">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2c.6 5.4 4.6 9.400 10 10-5.400.600-9.400 4.600-10 10-.600-5.400-4.600-9.400-10-10 5.400-.600 9.400-4.600 10-10z" fill="#fff"/></svg></span>
+      Gemini Tool Builder Playbook
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#workflow">Workflow</a>
+      <a href="#examples">Examples</a>
+      <a href="#versions">Versions</a>
+      <a href="#prompts">Prompts</a>
+      <a href="#sharing">Sharing</a>
+      <a href="#continuity">Continuity</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <p class="label">For K12 staff using Google Workspace for Education</p>
+      <h1>Stop chatting with AI. Start building with it.</h1>
+      <p class="lead">Describe a school problem in plain words and Gemini builds the tool: a dashboard, a tracker, a scheduler. Everything stays inside the Google tools your district already has.</p>
+      <div class="cta">
+        <a class="btn filled" href="#workflow">See the 9 steps</a>
+        <a class="btn tonal" href="#examples">Try a working example</a>
+      </div>
+    </div>
+    <div class="rules" aria-label="Ground rules">
+      <div class="rule"><span class="n">1</span><div><b>Stay inside Workspace</b><span class="muted">Gemini, Sheets, Forms, Sites, Apps Script. No APIs, no connectors, no personal accounts.</span></div></div>
+      <div class="rule"><span class="n">2</span><div><b>Build with fake data</b><span class="muted">Real records go in only after the tool works and sharing is set.</span></div></div>
+      <div class="rule"><span class="n">3</span><div><b>The data owner decides</b><span class="muted">Whoever owns the Sheet controls who sees the data, at every layer.</span></div></div>
+    </div>
+  </div>
+</div>
+
+<section id="workflow">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">The workflow</p>
+      <h2>Nine steps from problem to launch</h2>
+      <p class="muted">Select a step to see what to do and which kit file to use. Step 6 has the one choice that matters.</p>
+    </div>
+    <div class="panel flow">
+      <ol class="steps" id="steps"></ol>
+      <div class="detail" id="detail" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="examples">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">What you can build</p>
+      <h2>Working examples, built the playbook way</h2>
+      <p class="muted">The three tools below are live. Filter, search, and change assignments. All names and records are invented sample data for Oakhaven High School, an imaginary school.</p>
+    </div>
+    <h3 style="margin-bottom:12px">Four tools built this way</h3>
+    <div class="ideas" style="grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 32px">
+      <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--primary)" href="#try" data-tab="tab-flex"><span class="who">Administrators</span><b>Flex Period Scheduling</b><span class="muted">Assign students, manage sessions and seats, place everyone left over in one click.</span><span class="chip file">04 and 05</span></a>
+      <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--on-primary-container)" href="#try" data-tab="tab-team"><span class="who">Teams</span><b>Grade Level Team Dashboard</b><span class="muted">One shared page where each role edits only its own sections.</span><span class="chip file">08_team_dashboard.md</span></a>
+      <div class="idea" style="text-decoration:none;color:inherit;border-top:5px solid #006A6A"><span class="who">Elementary teachers</span><b>My Classroom Hub</b><span class="muted">Links, weekly focus, to do lists, calendar stickers, meeting notes, and ideas.</span><span class="chip file">09_teacher_dashboard.md</span></div>
+      <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--tertiary)" href="#try" data-tab="tab-rep"><span class="who">Technology staff</span><b>Chromebook Repair Tracker</b><span class="muted">Tickets by building and status, with repairs open too long flagged.</span><span class="chip file">04 and 05</span></a>
+    </div>
+    <h3 id="try" style="margin-bottom:4px">Try three of them right here</h3>
+    <div class="tabs" role="tablist" aria-label="Example tools">
+      <button class="tab" role="tab" id="tab-flex" aria-selected="true" aria-controls="pane-flex">Flex period scheduling</button>
+      <button class="tab" role="tab" id="tab-team" aria-selected="false" aria-controls="pane-team">Team dashboard</button>
+      <button class="tab" role="tab" id="tab-rep" aria-selected="false" aria-controls="pane-rep">Device repair tracker</button>
+    </div>
+
+    <div class="demo" id="pane-flex" role="tabpanel" aria-labelledby="tab-flex">
+      <div class="demo-top"><h3>9th Period Flex Scheduling</h3><span class="badge">Sample data</span></div>
+      <div class="demo-body">
+        <div class="kpis" id="fx-kpis"></div>
+        <div class="controls">
+          <label class="field" for="fx-q"><span>Search student</span><input id="fx-q" type="search" placeholder="Name"></label>
+          <label class="field" for="fx-grade"><span>Grade</span><select id="fx-grade"><option value="">All grades</option><option>9</option><option>10</option><option>11</option><option>12</option></select></label>
+          <label class="field" for="fx-type"><span>Session type</span><select id="fx-type"><option value="">All types</option><option>Tutoring</option><option>Makeup</option><option>Enrichment</option><option>Study Hall</option></select></label>
+          <label class="field" for="fx-status"><span>Status</span><select id="fx-status"><option value="">All students</option><option value="u">Unassigned only</option><option value="a">Assigned only</option></select></label>
+          <button class="btn outlined" id="fx-reset" type="button">Reset</button>
+        </div>
+        <div class="two">
+          <div>
+            <h3 style="margin-bottom:12px">Seats by session</h3>
+            <div class="bars" id="fx-bars"></div>
+          </div>
+          <div>
+            <h3 style="margin-bottom:12px">Students <span class="muted" id="fx-count" style="font-weight:400;font-size:.875rem"></span></h3>
+            <div class="tablebox"><table><thead><tr><th>Student</th><th>Grade</th><th>Session</th><th>Status</th></tr></thead><tbody id="fx-rows"></tbody></table></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo" id="pane-rep" role="tabpanel" aria-labelledby="tab-rep" hidden>
+      <div class="demo-top" style="background:var(--tertiary)"><h3>Chromebook Repair Tracker</h3><span class="badge">Sample data</span></div>
+      <div class="demo-body">
+        <div class="kpis" id="rp-kpis"></div>
+        <div class="controls">
+          <label class="field" for="rp-b"><span>Building</span><select id="rp-b"><option value="">All buildings</option></select></label>
+          <label class="field" for="rp-s"><span>Status</span><select id="rp-s"><option value="">All statuses</option><option>New</option><option>In repair</option><option>Waiting on part</option><option>Ready for pickup</option></select></label>
+        </div>
+        <div class="tablebox"><table><thead><tr><th>Ticket</th><th>Asset tag</th><th>Building</th><th>Issue</th><th>Status</th><th>Days open</th></tr></thead><tbody id="rp-rows"></tbody></table></div>
+      </div>
+    </div>
+
+    <div class="demo" id="pane-team" role="tabpanel" aria-labelledby="tab-team" hidden>
+      <div class="demo-top" style="background:var(--on-primary-container)"><h3>Grade 9 Team Dashboard</h3><span class="badge">Sample data</span></div>
+      <div class="demo-body">
+        <div class="branch">
+          <b>View as</b>
+          <div class="seg" role="group" aria-label="Role" id="tm-roles"></div>
+          <p class="muted" id="tm-note" style="font-size:.875rem"></p>
+        </div>
+        <div class="tgrid" id="tm-grid"></div>
+        <p class="muted" style="font-size:.875rem">Each card reads one tab of the team's Google Sheet. The Sheet owner decides who may edit each tab, and the dashboard shows an Add box only where that person has edit rights.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px">More tools staff have asked for</h3>
+    <div class="ideas">
+      <div class="idea"><span class="who">Front office</span><b>Substitute coverage board</b><span class="muted">Who is out today, which periods need coverage, and who picked them up.</span></div>
+      <div class="idea"><span class="who">Counselors</span><b>Graduation credit checker</b><span class="muted">Credits earned by subject against the requirement, with gaps flagged.</span></div>
+      <div class="idea"><span class="who">Teachers</span><b>Tutoring sign up board</b><span class="muted">A Form feeds a Sheet. The page shows open slots by day and subject.</span></div>
+      <div class="idea"><span class="who">Administrators</span><b>Duty roster</b><span class="muted">Bus, lunch, and hall duty by week, searchable by staff member.</span></div>
+      <div class="idea"><span class="who">Media center</span><b>Room and cart booking view</b><span class="muted">Calendar style view of lab and cart reservations from a booking Form.</span></div>
+      <div class="idea"><span class="who">Athletics</span><b>Eligibility dashboard</b><span class="muted">Roster status by team with paperwork and grade checks at a glance.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="versions">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Know your access</p>
+      <h2>Same tool, three ways to get there</h2>
+      <p class="muted">Paid Gemini access removes manual steps. It does not unlock the pattern. Ask IT which version matches your account, and check again each semester because Google changes these often.</p>
+    </div>
+    <div class="vers">
+      <div class="ver main">
+        <span class="label" style="color:inherit">Most districts</span>
+        <span class="tag">Version A</span>
+        <h3>Gemini app only</h3>
+        <p>Education Fundamentals or Standard, no add on.</p>
+        <ul><li>Build in the Gemini app with Canvas</li><li>Clean the Sheet by hand with a check prompt</li><li>Copy Apps Script code into the Sheet yourself</li><li>Paste errors back into Gemini</li></ul>
+      </div>
+      <div class="ver">
+        <span class="label">Shortcuts in Sheets and Forms</span>
+        <span class="tag">Version B</span>
+        <h3>Education Plus or Teaching and Learning</h3>
+        <p>You see a Gemini icon inside Workspace apps.</p>
+        <ul><li>Everything in Version A</li><li>Gemini side panel cleans and summarizes the Sheet</li><li>Gemini drafts the intake Form</li></ul>
+      </div>
+      <div class="ver">
+        <span class="label">Shortcuts in the code editor</span>
+        <span class="tag">Version C</span>
+        <h3>Google AI Pro for Education</h3>
+        <p>An add on license, often for central office staff.</p>
+        <ul><li>Everything in Version B</li><li>Stronger models and higher limits</li><li>Gemini writes and fixes code inside Apps Script (beta)</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prompts">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Prompt library</p>
+      <h2>Copy, fill in the brackets, paste into Gemini</h2>
+      <p class="muted">Run them in order with Canvas turned on. Use fake data until step 8 is done.</p>
+    </div>
+    <div class="plist" id="plist"></div>
+  </div>
+</section>
+
+<section id="sharing">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Data owner controlled sharing</p>
+      <h2>Three layers, one control point</h2>
+      <p class="muted">On the live path the tool runs as the person viewing it, so it can never show more than the Sheet allows.</p>
+    </div>
+    <div class="layers">
+      <div class="layer key"><span class="label" style="color:var(--primary)">Layer 1, the control point</span><h3>The Google Sheet</h3><ul><li>Owner shares with named people or groups</li><li>General access stays Restricted</li><li>Viewers cannot download, print, or copy</li><li>Sensitive columns live on a separate tab</li></ul></div>
+      <div class="layer"><span class="label">Layer 2</span><h3>The tool</h3><ul><li>Apps Script web app attached to the Sheet</li><li>Execute as: User accessing the web app</li><li>Access: people in the district only</li><li>Never "Execute as me" for student data</li></ul></div>
+      <div class="layer"><span class="label">Layer 3</span><h3>The Google Site</h3><ul><li>Published to named people or the district</li><li>Never public on the web</li><li>A front door only. It grants no data access</li></ul></div>
+    </div>
+    <div class="rulebar">Remove a person from the Sheet and the tool shows them nothing.</div>
+
+    <div class="howto">
+      <div>
+        <h3>Let each group edit only its part</h3>
+        <p class="muted" style="margin:8px 0 12px">Use this for course teams, grade level teams, administrators, and school teams that share one dashboard. All of it is set with Google Sheets sharing, with no extra tools.</p>
+        <ol>
+          <li>Give each dashboard section its own tab in the Sheet.</li>
+          <li>Share the Sheet: people who only read get Viewer, people who add anything get Editor.</li>
+          <li>On each tab choose Data, then Protect sheets and ranges, then Restrict who can edit this range.</li>
+          <li>Pick the people or Google Groups allowed to edit that tab.</li>
+          <li>In Share settings, turn off "Editors can change permissions and share."</li>
+          <li>Deploy the tool to run as the user accessing it. It then follows those rules for every visitor.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Example access plan</h3>
+        <div class="matrix"><table>
+          <thead><tr><th>Sheet tab</th><th>Team lead</th><th>Team members</th><th>Administrators</th></tr></thead>
+          <tbody>
+            <tr><td>Links</td><td><span class="pill ok">Edit</span></td><td>View</td><td>View</td></tr>
+            <tr><td>Focus</td><td><span class="pill ok">Edit</span></td><td>View</td><td><span class="pill ok">Edit</span></td></tr>
+            <tr><td>Tasks</td><td><span class="pill ok">Edit</span></td><td><span class="pill ok">Edit</span></td><td>View</td></tr>
+            <tr><td>Dates</td><td><span class="pill ok">Edit</span></td><td>View</td><td><span class="pill ok">Edit</span></td></tr>
+            <tr><td>Notes</td><td><span class="pill ok">Edit</span></td><td><span class="pill ok">Edit</span></td><td>View</td></tr>
+            <tr><td>Ideas</td><td><span class="pill ok">Edit</span></td><td><span class="pill ok">Edit</span></td><td><span class="pill ok">Edit</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="muted" style="font-size:.875rem;margin-top:10px">Tab protection controls editing, not viewing. Anyone the Sheet is shared with can read every tab, so keep sensitive data in a separate Sheet.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px">Owner checklist before launch</h3>
+    <p class="progress" id="ck-progress"></p>
+    <div class="check" id="check"></div>
+  </div>
+</section>
+<section id="continuity">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Continuity</p>
+      <h2>Build it so it outlives the builder</h2>
+      <p class="muted">A tool in one person's account disappears when that person changes roles or leaves. These five rules make every tool belong to the school.</p>
+    </div>
+    <div class="ideas" style="grid-template-columns:repeat(5,minmax(0,1fr));margin-top:0">
+      <div class="idea"><span class="who">Rule 1</span><b>The organization owns it</b><span class="muted">Every file lives in a shared drive, never in My Drive.</span></div>
+      <div class="idea"><span class="who">Rule 2</span><b>Roles get access</b><span class="muted">Share with Google Groups so access follows the job, not the person.</span></div>
+      <div class="idea"><span class="who">Rule 3</span><b>Two people can fix it</b><span class="muted">An owner and a backup, both managers of the shared drive.</span></div>
+      <div class="idea"><span class="who">Rule 4</span><b>The build is written down</b><span class="muted">Prompts, code, and setup steps saved in a Build Notes Doc.</span></div>
+      <div class="idea"><span class="who">Rule 5</span><b>It is on the register</b><span class="muted">One district list of every tool, its location, and its owner.</span></div>
+    </div>
+    <div class="howto">
+      <div>
+        <h3>One folder per tool, in a shared drive</h3>
+        <pre style="margin-top:12px">Shared drive: Oakhaven HS Staff Tools
+  Flex Scheduling Dashboard
+    01 Data (Sheet, with the Apps Script attached)
+    02 Intake Form
+    03 Site
+    04 Build Notes (prompts, code copy, settings)
+    05 User Guide
+    06 Archive</pre>
+        <p class="muted" style="font-size:.875rem;margin-top:12px">Gemini chats, Canvas builds, and Gems stay in the builder's own account. Copy the final prompts and code into Build Notes so nothing depends on one person's history.</p>
+      </div>
+      <div>
+        <h3>Handoff checklist when the owner changes</h3>
+        <p class="progress" id="hk-progress"></p>
+        <div class="check" id="handoff" style="margin-top:4px"></div>
+      </div>
+    </div>
+    <p class="muted" style="font-size:.875rem;margin-top:16px">Full guidance, the tool register columns, and a prompt that has Gemini write the Build Notes are in kit file <span class="chip file">10_keep_tools_alive.md</span></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Take the playbook with you.</b> Every part of this page is also a markdown file you can read, share, or hand to an AI assistant.</p>
+    <div class="dl-row"><a class="fill" href="agents/k12-gemini-tool-builder-playbook.zip" download>Download All Five (zip)</a><a href="agents/k12-gemini-playbook-workflow.md" download>Workflow</a><a href="agents/k12-gemini-playbook-prompt-library.md" download>Prompt Library</a><a href="agents/k12-gemini-playbook-sharing.md" download>Sharing</a><a href="agents/k12-gemini-playbook-continuity.md" download>Keep Tools Alive</a><a href="agents/k12-gemini-playbook-access-versions.md" download>Know Your Access</a></div>
+    <p style="margin-top:20px">The steps on this page name the Builder Kit files they pair with.</p>
+    <div class="files">
+      <span class="chip file">00_START_HERE.md</span><span class="chip file">01_tool_brief.md</span><span class="chip file">02_data_sheet_setup.md</span><span class="chip file">03_gem_instructions.md</span><span class="chip file">04_build_prompts.md</span><span class="chip file">05_live_data_prompts.md</span><span class="chip file">06_publish_and_share.md</span><span class="chip file">07_version_notes.md</span><span class="chip file">08_team_dashboard.md</span><span class="chip file">09_teacher_dashboard.md</span><span class="chip file">10_keep_tools_alive.md</span>
+    </div>
+    <p style="margin-top:16px">Practical guidance, not legal advice. Your district privacy lead owns the final reading of FERPA and state law.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+/* ---------- workflow ---------- */
+var path="live";
+var STEPS=[
+ {t:"Define the problem",s:"Who uses it, and why",file:"01_tool_brief.md",
+  d:"Write one sentence that names the user and the decision the tool supports. Fill in the tool brief before you open Gemini.",
+  l:["Name the role, not a person","List what the user needs to see first","Write down what the tool must never show"]},
+ {t:"Set up the Sheet",s:"One owner, clean rows",file:"02_data_sheet_setup.md",
+  d:"The tool is only as good as the Sheet behind it. Ten minutes of cleanup here saves an hour later.",
+  l:["One header row, one record per row","One kind of information per column","Name the data owner on an About tab"]},
+ {t:"Make a practice copy",s:"Fake names only",file:"02_data_sheet_setup.md",
+  d:"Copy the Sheet and replace real names and IDs with invented ones. Gemini needs your columns and a few sample rows, never real students.",
+  l:["Keep the same columns and value types","10 to 30 rows is plenty","Gemini can generate the fake rows for you"]},
+ {t:"Prompt Gemini in Canvas",s:"Plan, then build",file:"04_build_prompts.md",
+  d:"Open the Gemini app with your district account and turn on Canvas. Ask for a plan first, then ask for the build.",
+  l:["Paste your tool brief and sample rows","Approve the plan before any code is written","Ask for one HTML file with no outside services"]},
+ {t:"Test and refine",s:"Ask in plain words",file:"04_build_prompts.md",
+  d:"Use the preview like a real user would. Ask for changes the way you would ask a colleague.",
+  l:["\"Add a filter for grade level\"","\"Show full sessions in red\"","Run the privacy check and the break it test"]},
+ {t:"Connect the data",s:"Snapshot or live",file:"05_live_data_prompts.md",branch:true},
+ {t:"Publish in Google Sites",s:"Full page embed",file:"06_publish_and_share.md",
+  d:"Add a Full page embed page in Google Sites and paste the web app address or the HTML. Staff reach the tool like any other district page.",
+  l:["No install and no new login","Publish as Restricted, never Public","Add the page to a staff site people already use"]},
+ {t:"Owner sets sharing and tests",s:"Sheet, tool, and page",file:"06_publish_and_share.md",
+  d:"The data owner sets sharing on all three layers, then proves it works by testing with an account that should be blocked.",
+  l:["Share the Sheet with named people or groups","Open the page as an outsider and confirm no data shows","If the test fails, fix sharing and test again"]},
+ {t:"Launch and maintain",s:"Owner and review date",file:"06_publish_and_share.md",
+  d:"Record the owner, a backup person, and a review date. Add the tool to the district tool register.",
+  l:["Keep every file in a shared drive, never My Drive","Save the final prompts and code in a Build Notes Doc","Review the sharing list each semester"]}
+];
+var BR={
+ snap:{h:"6a. Snapshot",d:"The data is pasted inside the tool. It is fast to set up and does not update. Everyone who can open the tool sees all of it.",
+   l:["Use for bell schedules, room lists, totals without names","Do not use for student or staff records","Skip to step 7"]},
+ live:{h:"6b. Live data",d:"Gemini converts the tool into an Apps Script web app attached to the Sheet. It reads the Sheet each time it opens and respects the Sheet's sharing.",
+   l:["Deploy with Execute as: User accessing the web app","Limit access to people in your district","If Apps Script is turned off, talk to IT before going further"]}
+};
+var cur=0;
+function drawSteps(){
+  $("steps").innerHTML=STEPS.map(function(s,i){
+    return '<li><button class="step" type="button" data-i="'+i+'"'+(i===cur?' aria-current="step"':'')+'><span class="num">'+(i+1)+'</span><span>'+esc(s.t)+'<small>'+esc(s.s)+'</small></span></button></li>';
+  }).join("");
+  var s=STEPS[cur],h='<p class="label">Step '+(cur+1)+' of 9</p><h3 style="font-size:1.5rem;font-weight:500">'+esc(s.t)+'</h3>';
+  if(s.branch){
+    var b=BR[path];
+    h+='<div class="branch"><b>Does the tool show student or staff records?</b><div class="seg" role="group" aria-label="Data path"><button type="button" data-p="live" aria-pressed="'+(path==="live")+'">Yes, it shows records</button><button type="button" data-p="snap" aria-pressed="'+(path==="snap")+'">No, nothing sensitive</button></div></div>';
+    h+='<h3>'+b.h+'</h3><p>'+esc(b.d)+'</p><ul>'+b.l.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ul>';
+  }else{
+    h+='<p>'+esc(s.d)+'</p><ul>'+s.l.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ul>';
+  }
+  h+='<div class="rowgap"><span class="muted" style="font-size:.875rem">Kit file</span><span class="chip file">'+s.file+'</span></div>';
+  h+='<div class="stepnav"><button class="btn outlined" type="button" data-go="-1"'+(cur===0?' disabled style="opacity:.4"':'')+'>Back</button><button class="btn filled" type="button" data-go="1"'+(cur===8?' disabled style="opacity:.4"':'')+'>Next step</button></div>';
+  $("detail").innerHTML=h;
+}
+$("steps").addEventListener("click",function(e){var b=e.target.closest(".step");if(b){cur=+b.dataset.i;drawSteps()}});
+$("detail").addEventListener("click",function(e){
+  var p=e.target.closest("[data-p]");if(p){path=p.dataset.p;drawSteps();return}
+  var g=e.target.closest("[data-go]");if(g&&!g.disabled){cur=Math.max(0,Math.min(8,cur+(+g.dataset.go)));drawSteps()}
+});
+drawSteps();
+
+/* ---------- flex scheduling demo ---------- */
+var SESS=[
+ {n:"Algebra Tutoring",t:"Tutoring",who:"Ms. Alvarez",cap:10},
+ {n:"Biology Lab Makeup",t:"Makeup",who:"Mr. Chen",cap:7},
+ {n:"Writing Center",t:"Tutoring",who:"Ms. Okafor",cap:8},
+ {n:"Robotics Club",t:"Enrichment",who:"Mr. Patel",cap:12},
+ {n:"SAT Prep",t:"Enrichment",who:"Ms. Brooks",cap:12},
+ {n:"Quiet Study Hall",t:"Study Hall",who:"Mr. Diaz",cap:18},
+ {n:"Spanish Conversation",t:"Enrichment",who:"Sra. Ruiz",cap:6},
+ {n:"Test Retakes",t:"Makeup",who:"Ms. Kim",cap:10}
+];
+var FN=["Avery","Jordan","Maya","Elijah","Sofia","Noah","Zoe","Liam","Aaliyah","Mateo","Harper","Isaiah"];
+var LN=["Bennett","Castillo","Nguyen","Holloway","Reyes","Whitaker"];
+var ORDER=[0,0,0,1,1,2,2,3,3,3,4,4,4,4,5,5,5,5,5,6,6,7,7,7];
+var STU=[];
+for(var i=0;i<72;i++){
+  STU.push({name:FN[i%12]+" "+LN[Math.floor(i/12)],grade:9+((i*3+Math.floor(i/5))%4),sess:(i%7===3)?-1:ORDER[(i*5)%24]});
+}
+function counts(){var c=SESS.map(function(){return 0});STU.forEach(function(s){if(s.sess>=0)c[s.sess]++});return c}
+function state(n,cap){return n>=cap?"full":(n/cap>=.85?"near":"ok")}
+function drawFlex(){
+  var c=counts(),un=STU.filter(function(s){return s.sess<0}).length;
+  var full=0,near=0,open=0;
+  SESS.forEach(function(s,i){var st=state(c[i],s.cap);if(st==="full")full++;else if(st==="near")near++;open+=Math.max(0,s.cap-c[i])});
+  $("fx-kpis").innerHTML=
+   '<div class="kpi"><div class="v">'+STU.length+'</div><div class="k">Students this period</div></div>'+
+   '<div class="kpi '+(un?"bad":"good")+'"><div class="v">'+un+'</div><div class="k">Unassigned</div></div>'+
+   '<div class="kpi good"><div class="v">'+open+'</div><div class="k">Open seats</div></div>'+
+   '<div class="kpi '+(full?"warn":"good")+'"><div class="v">'+full+'</div><div class="k">Sessions full</div></div>';
+  var ty=$("fx-type").value;
+  $("fx-bars").innerHTML=SESS.map(function(s,i){
+    if(ty&&s.t!==ty)return "";
+    var st=state(c[i],s.cap),pct=Math.min(100,Math.round(c[i]/s.cap*100));
+    return '<div class="barrow"><div class="t"><span><b>'+esc(s.n)+'</b> <span class="muted">'+esc(s.who)+'</span></span><span>'+c[i]+' of '+s.cap+(st==="full"?' <span class="pill bad">Full</span>':st==="near"?' <span class="pill warn">Nearly full</span>':'')+'</span></div><div class="track"><div class="fill '+(st==="ok"?"":st)+'" style="width:'+pct+'%"></div></div></div>';
+  }).join("")||'<div class="empty">No sessions of this type.</div>';
+  var q=$("fx-q").value.trim().toLowerCase(),g=$("fx-grade").value,stt=$("fx-status").value;
+  var rows=STU.map(function(s,idx){return {s:s,idx:idx}}).filter(function(r){
+    var s=r.s;
+    if(q&&s.name.toLowerCase().indexOf(q)<0)return false;
+    if(g&&String(s.grade)!==g)return false;
+    if(stt==="u"&&s.sess>=0)return false;
+    if(stt==="a"&&s.sess<0)return false;
+    if(ty&&(s.sess<0||SESS[s.sess].t!==ty))return false;
+    return true;
+  });
+  rows.sort(function(a,b){return (a.s.sess<0?0:1)-(b.s.sess<0?0:1)||a.s.name.localeCompare(b.s.name)});
+  $("fx-count").textContent="showing "+rows.length+" of "+STU.length;
+  $("fx-rows").innerHTML=rows.map(function(r){
+    var s=r.s,opts='<option value="-1"'+(s.sess<0?" selected":"")+'>Unassigned</option>'+SESS.map(function(x,i){
+      var isFull=c[i]>=x.cap&&s.sess!==i;
+      return '<option value="'+i+'"'+(s.sess===i?" selected":"")+(isFull?" disabled":"")+'>'+esc(x.n)+(isFull?" (full)":"")+'</option>';
+    }).join("");
+    return '<tr><td>'+esc(s.name)+'</td><td>'+s.grade+'</td><td><select aria-label="Session for '+esc(s.name)+'" data-idx="'+r.idx+'">'+opts+'</select></td><td>'+(s.sess<0?'<span class="pill bad">Needs a session</span>':'<span class="pill ok">Assigned</span>')+'</td></tr>';
+  }).join("")||'<tr><td colspan="4" class="empty">No students match these filters.</td></tr>';
+}
+["fx-q","fx-grade","fx-type","fx-status"].forEach(function(id){$(id).addEventListener("input",drawFlex)});
+$("fx-reset").addEventListener("click",function(){$("fx-q").value="";$("fx-grade").value="";$("fx-type").value="";$("fx-status").value="";drawFlex()});
+$("fx-rows").addEventListener("change",function(e){var t=e.target;if(t.dataset.idx!==undefined){STU[+t.dataset.idx].sess=+t.value;drawFlex()}});
+drawFlex();
+
+/* ---------- repair tracker demo ---------- */
+var BLD=["Oakhaven High","Oakhaven Middle","Cedar Elementary"];
+var ISS=["Cracked screen","Will not charge","Keyboard keys missing","No Wi Fi","Hinge broken","Trackpad stuck"];
+var STS=["New","In repair","Waiting on part","Ready for pickup"];
+var REP=[];
+for(var k=0;k<24;k++){REP.push({id:"R"+(1040+k),tag:"CB"+(20311+k*37),b:BLD[k%3],iss:ISS[(k*5)%6],st:STS[(k*3+Math.floor(k/4))%4],days:1+((k*7)%13)})}
+BLD.forEach(function(b){var o=document.createElement("option");o.textContent=b;$("rp-b").appendChild(o)});
+function drawRep(){
+  var b=$("rp-b").value,s=$("rp-s").value;
+  var rows=REP.filter(function(r){return(!b||r.b===b)&&(!s||r.st===s)});
+  var open=rows.filter(function(r){return r.st!=="Ready for pickup"}),late=open.filter(function(r){return r.days>7});
+  var wait=rows.filter(function(r){return r.st==="Waiting on part"}).length,ready=rows.length-open.length;
+  $("rp-kpis").innerHTML=
+   '<div class="kpi"><div class="v">'+open.length+'</div><div class="k">Open repairs</div></div>'+
+   '<div class="kpi '+(late.length?"bad":"good")+'"><div class="v">'+late.length+'</div><div class="k">Open over 7 days</div></div>'+
+   '<div class="kpi warn"><div class="v">'+wait+'</div><div class="k">Waiting on part</div></div>'+
+   '<div class="kpi good"><div class="v">'+ready+'</div><div class="k">Ready for pickup</div></div>';
+  rows.sort(function(x,y){return y.days-x.days});
+  var cls={"New":"info","In repair":"warn","Waiting on part":"bad","Ready for pickup":"ok"};
+  $("rp-rows").innerHTML=rows.map(function(r){
+    var lateRow=r.days>7&&r.st!=="Ready for pickup";
+    return '<tr><td>'+r.id+'</td><td>'+r.tag+'</td><td>'+esc(r.b)+'</td><td>'+esc(r.iss)+'</td><td><span class="pill '+cls[r.st]+'">'+r.st+'</span></td><td>'+(lateRow?'<b style="color:var(--error)">'+r.days+'</b>':r.days)+'</td></tr>';
+  }).join("")||'<tr><td colspan="6" class="empty">No tickets match these filters.</td></tr>';
+}
+$("rp-b").addEventListener("input",drawRep);$("rp-s").addEventListener("input",drawRep);drawRep();
+
+/* tabs */
+function pick(which){
+  ["flex","team","rep"].forEach(function(k){
+    $("tab-"+k).setAttribute("aria-selected",k===which);
+    $("pane-"+k).hidden=k!==which;
+  });
+}
+["flex","team","rep"].forEach(function(k){$("tab-"+k).addEventListener("click",function(){pick(k)})});
+
+/* ---------- team dashboard demo ---------- */
+var ROLES=[
+ {k:"lead",n:"Team lead",note:"Owns the Sheet. Can edit every section and decides who else can."},
+ {k:"member",n:"Team member",note:"Can add tasks, meeting notes, and ideas. Links, focus, and dates are locked."},
+ {k:"admin",n:"Administrator",note:"Can set the weekly focus and important dates, and add ideas. Team working sections are locked."},
+ {k:"view",n:"View only",note:"Can read everything the Sheet is shared for. Cannot change anything."}
+];
+var SECS=[
+ {k:"links",t:"Quick links",ph:"Add a link title"},
+ {k:"focus",t:"Weekly focus",ph:"Add a focus"},
+ {k:"tasks",t:"Team tasks",ph:"Add a task"},
+ {k:"dates",t:"Important dates",ph:"Add a date"},
+ {k:"notes",t:"Meeting notes and actions",ph:"Add a note"},
+ {k:"ideas",t:"Ideas parking lot",ph:"Add an idea"}
+];
+var PERM={lead:{links:1,focus:1,tasks:1,dates:1,notes:1,ideas:1},member:{tasks:1,notes:1,ideas:1},admin:{focus:1,dates:1,ideas:1},view:{}};
+var TEAM={
+ links:["Pacing guide","Common assessments folder","Team agenda template","Parent contact log"],
+ focus:["Unit 4 common assessment on Friday","Finalize flex session rosters by Wednesday"],
+ tasks:[{t:"Upload Unit 4 study guide (Bennett)",done:true},{t:"Enter progress report comments (all)",done:false},{t:"Book media center for Dec 3 (Reyes)",done:false}],
+ dates:["Dec 1: Progress reports due","Dec 3: Media center research day","Dec 11: Team data meeting","Dec 18: Semester exams begin"],
+ notes:["Nov 17: One retake policy for Unit 4. Action: Castillo drafts the parent letter.","Nov 10: Reviewed benchmark results by standard. Action: Nguyen shares the reteach plan."],
+ ideas:["Cross curricular project with science in spring","Student led conferences pilot"]
+};
+var role="member";
+function drawTeam(){
+  $("tm-roles").innerHTML=ROLES.map(function(r){return '<button type="button" data-r="'+r.k+'" aria-pressed="'+(r.k===role)+'">'+r.n+'</button>'}).join("");
+  $("tm-note").textContent=ROLES.filter(function(r){return r.k===role})[0].note;
+  $("tm-grid").innerHTML=SECS.map(function(s){
+    var can=!!PERM[role][s.k],items=TEAM[s.k];
+    var list=items.map(function(it,i){
+      if(s.k==="tasks")return '<li class="'+(it.done?"done":"")+'"><label><input type="checkbox" data-task="'+i+'"'+(it.done?" checked":"")+(can?"":" disabled")+'><span>'+esc(it.t)+'</span></label></li>';
+      return '<li>'+esc(it)+'</li>';
+    }).join("");
+    return '<div class="tcard'+(can?" can":"")+'"><div class="th"><h3>'+s.t+'</h3>'+(can?'<span class="pill ok">You can edit</span>':'<span class="pill info">View only</span>')+'</div><ul>'+list+'</ul>'+
+      (can?'<form class="tadd" data-sec="'+s.k+'"><input id="tm-in-'+s.k+'" type="text" aria-label="'+s.ph+'" placeholder="'+s.ph+'"><button class="btn tonal small" type="submit">Add</button></form>':'<div class="tlock">Locked for this role by the Sheet owner.</div>')+'</div>';
+  }).join("");
+}
+$("tm-roles").addEventListener("click",function(e){var b=e.target.closest("[data-r]");if(b){role=b.dataset.r;drawTeam()}});
+$("tm-grid").addEventListener("submit",function(e){
+  e.preventDefault();var f=e.target,k=f.dataset.sec,v=f.querySelector("input").value.trim();
+  if(!v)return;
+  TEAM[k].push(k==="tasks"?{t:v,done:false}:v);drawTeam();
+});
+$("tm-grid").addEventListener("change",function(e){var t=e.target;if(t.dataset.task!==undefined){TEAM.tasks[+t.dataset.task].done=t.checked;drawTeam()}});
+drawTeam();
+
+/* ---------- prompts ---------- */
+var PROMPTS=[
+ {t:"Plan before building",w:"Step 4",p:"I work at a school and I want to build a small interactive web tool. Here is my tool brief:\n\n[paste your completed tool brief]\n\nHere are my column headers and sample rows. This is fake data.\n\n[paste headers and 10 rows]\n\nDo not build anything yet. First give me:\n1. A plain language description of the page, top to bottom.\n2. The summary numbers you would show at the top.\n3. The filters and search you would include.\n4. One chart that fits this data.\n5. Any questions you need answered before building."},
+ {t:"Build the tool",w:"Step 4",p:"Build it in Canvas as a single HTML file with the CSS and JavaScript included in the same file.\n\nRequirements:\n* Use the fake sample rows as built in data for now.\n* Summary cards at the top for: [list].\n* Filters for: [list]. Filters work together.\n* A search box that searches: [fields].\n* A sortable table of the filtered rows.\n* One chart: [describe].\n* Highlight rows where [condition] so they stand out.\n* Readable on a Chromebook, high contrast, keyboard friendly.\n* No outside services. No libraries that need an account or a key.\n* Read only. The tool never changes data."},
+ {t:"Refine in plain words",w:"Step 5",p:"Keep everything as it is and make these changes only:\n1. [change]\n2. [change]\n3. [change]\nAfter the changes, tell me what you changed in two sentences."},
+ {t:"Privacy check",w:"Step 5",p:"Review this tool as a district data privacy officer.\nList every place student or staff information is displayed, stored, or could be copied or exported.\nFor each one, suggest how to show less and still support this decision: [decision from your brief].\nThen make the changes I approve."},
+ {t:"Break it on purpose",w:"Step 5",p:"Act as a tester. List ten ways a real user could confuse or break this tool, such as empty data, very long names, or every filter selected at once.\nFix the ones that matter and tell me which ones you fixed."},
+ {t:"Connect to the live Sheet",w:"Step 6b",p:"Convert this dashboard into a Google Apps Script web app that is attached to my Google Sheet.\n\nGive me exactly two files:\n1. Code.gs\n2. Index.html\n\nRequirements for Code.gs:\n* A doGet function that serves Index.html.\n* Allow the page to be embedded in Google Sites by setting the X Frame Options mode to ALLOWALL.\n* A function named getRows that reads the tab named \"[tab name]\" from the active spreadsheet, uses row 1 as headers, and returns the rows as a list of objects.\n* Read only. No function may write to the Sheet.\n\nRequirements for Index.html:\n* The same dashboard as now, with the built in sample data removed.\n* On load, call getRows with google.script.run, show a loading message, then draw the dashboard.\n* If the call fails, show this message: \"You do not have access to this data. Contact [owner role].\"\n\nAfter the code, give me numbered beginner steps to add the files and deploy, with Execute as set to \"User accessing the web app\" and access limited to people in my school domain."},
+ {t:"Fix an error",w:"Any step",p:"I followed the steps and got this error:\n\n[paste the exact message]\n\nIt happened at this step: [step]\nExplain the cause in one sentence, then give me the fix as numbered steps. Change as little as possible."},
+ {t:"Write the one page user guide",w:"Step 9",p:"Write a one page guide for the people who will use this tool.\nInclude: what it is for, how to filter and search, what the colors mean, who owns the data, and who to contact for help: [name or role].\nPlain language, short sentences, no technical terms."},
+ {t:"Build a team dashboard",w:"Team example",p:"Build a team dashboard in Canvas as a single HTML file with the CSS and JavaScript included.\n\nTeam: [course team, grade level team, administrators, or school team]\n\nSections, each in its own card:\n1. Quick links\n2. Weekly focus\n3. Team tasks with checkboxes\n4. Important dates\n5. Meeting notes and action items\n6. Ideas parking lot\n\nUse the fake sample content below. Put an Add box at the bottom of each section.\nReadable on a Chromebook, high contrast, keyboard friendly. No outside services.\n\n[paste a few fake items for each section]"},
+ {t:"Let people edit only their sections",w:"Team example",p:"Convert this team dashboard into a Google Apps Script web app attached to my Google Sheet.\nThe Sheet has one tab per section: Links, Focus, Tasks, Dates, Notes, Ideas. Row 1 of each tab is headers.\n\nCode.gs requirements:\n* doGet serves Index.html and allows embedding in Google Sites (X Frame Options mode ALLOWALL).\n* getAll reads every tab and returns the rows grouped by section.\n* addItem(section, values) appends one row to that section's tab. Only the six tab names above are allowed.\n* canEdit returns, for each tab, whether the current user may edit it, based on the tab's protection settings.\n* The code never changes sharing or protection.\n\nIndex.html requirements:\n* Show the Add box only on sections where canEdit is true. Show a lock label on the others.\n* If addItem fails, show: \"You do not have edit access to this section.\"\n\nThen give me numbered beginner steps to deploy with Execute as set to \"User accessing the web app\" and access limited to people in my school domain."}
+];
+$("plist").innerHTML=PROMPTS.map(function(p,i){
+  return '<details'+(i===0?" open":"")+'><summary><span class="pn">'+(i+1)+'</span>'+esc(p.t)+'<span class="when">'+p.w+'</span></summary><div class="pbody"><pre id="pr'+i+'">'+esc(p.p)+'</pre><div><button class="btn tonal small" type="button" data-copy="'+i+'">Copy prompt</button></div></div></details>';
+}).join("");
+$("plist").addEventListener("click",function(e){
+  var b=e.target.closest("[data-copy]");if(!b)return;
+  var text=PROMPTS[+b.dataset.copy].p;
+  function done(ok){b.textContent=ok?"Copied":"Select the text and copy";setTimeout(function(){b.textContent="Copy prompt"},1800)}
+  try{navigator.clipboard.writeText(text).then(function(){done(true)},function(){fallback()})}catch(err){fallback()}
+  function fallback(){
+    var pre=$("pr"+b.dataset.copy),r=document.createRange();r.selectNodeContents(pre);
+    var sel=window.getSelection();sel.removeAllRanges();sel.addRange(r);
+    var ok=false;try{ok=document.execCommand("copy")}catch(e2){}
+    done(ok);
+  }
+});
+
+/* ---------- checklist ---------- */
+var CK=["The Sheet is shared only with named people or Google Groups","General access on the Sheet is Restricted","Viewers and commenters cannot download, print, or copy","The web app runs as the user accessing it","Web app access is limited to people in the district","The published Site is restricted, not public","A person with access opened the page and saw the data","A person without access opened the page and saw no data","Owner, backup person, and review date are recorded"];
+var saved={};try{saved=JSON.parse(localStorage.getItem("gtb-check")||"{}")||{}}catch(e){}
+$("check").innerHTML=CK.map(function(c,i){return '<label for="ck'+i+'"><input type="checkbox" id="ck'+i+'" data-i="'+i+'"'+(saved[i]?" checked":"")+'><span>'+esc(c)+'</span></label>'}).join("");
+function prog(){var n=document.querySelectorAll("#check input:checked").length;$("ck-progress").textContent=n+" of "+CK.length+" done"+(n===CK.length?". Ready to launch.":"")}
+$("check").addEventListener("change",function(e){saved[e.target.dataset.i]=e.target.checked;try{localStorage.setItem("gtb-check",JSON.stringify(saved))}catch(err){}prog()});
+prog();
+/* ---------- handoff checklist ---------- */
+var HK=["New owner and backup are named in the tool register","New owner is a Manager on the shared drive","Every file is in the shared drive folder, with nothing left in My Drive","Build Notes are current, with the latest prompts and code","The departing person walked the new owner through one change and one redeploy","Sharing lists and tab protection are reviewed, and the departing person is removed","The tool was opened as a regular user and works","IT confirmed nothing depends on the departing account before closing it"];
+var hsaved={};try{hsaved=JSON.parse(localStorage.getItem("gtb-handoff")||"{}")||{}}catch(e){}
+$("handoff").innerHTML=HK.map(function(c,i){return '<label for="hk'+i+'"><input type="checkbox" id="hk'+i+'" data-i="'+i+'"'+(hsaved[i]?" checked":"")+'><span>'+esc(c)+'</span></label>'}).join("");
+function hprog(){var n=document.querySelectorAll("#handoff input:checked").length;$("hk-progress").textContent=n+" of "+HK.length+" done"+(n===HK.length?". Handoff complete.":"")}
+$("handoff").addEventListener("change",function(e){hsaved[e.target.dataset.i]=e.target.checked;try{localStorage.setItem("gtb-handoff",JSON.stringify(hsaved))}catch(err){}hprog()});
+hprog();
+})();
+</script>
+<script>
+document.addEventListener("click", function (e) { var a = e.target.closest && e.target.closest("a[data-tab]"); if (!a) return; var t = document.getElementById(a.dataset.tab); if (t) t.click(); });
+</script>
+</body>
+</html>
