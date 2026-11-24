@@ -483,6 +483,7 @@
         <a href="#approach"><b>How I Lead</b><span>The principles behind every team</span></a>
         <a href="#experience"><b>Experience</b><span>CIO, CTO, and CISO roles</span></a>
         <a href="#credentials"><b>Credentials</b><span>Education, certifications, boards</span></a>
+        <a href="brand.html"><b>Brand</b><span>Logos, colors, and downloads</span></a>
       </div></details>
       <details class="menu"><summary>Resume</summary><div>
         <a href="index.html?resume=navy" data-resume="navy"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span></a>
@@ -652,7 +653,7 @@
 <dialog id="doc-dlg" aria-labelledby="dd-title">
   <div class="rd-head"><div><p class="dd-meta" id="dd-meta"></p><h2 id="dd-title"></h2></div><button type="button" id="dd-close" aria-label="Close">Close</button></div>
   <div class="dd-body" id="dd-body" tabindex="0"></div>
-  <div class="dd-act"><a class="btn amber" id="dd-dl" href="#" download>Download Markdown</a><button type="button" class="dd-copy" id="dd-copy">Copy Link</button><input id="dd-link" readonly aria-label="Link to this preview"></div>
+  <div class="dd-act"><a class="btn amber" id="dd-dl" href="#" download>Download Markdown</a><button type="button" class="dd-copy" id="dd-copytext">Copy All Text</button><button type="button" class="dd-copy" id="dd-copy">Copy Link</button><input id="dd-link" readonly aria-label="Link to this preview"></div>
 </dialog>
 <dialog id="follow-dlg" aria-labelledby="fd-title">
   <p class="dd-meta">One Quick Ask</p>
@@ -1050,10 +1051,13 @@ function mdToHtml(src) {
     try { navigator.clipboard.writeText(text).then(() => done(true), () => done(false)); } catch (e) { done(false); } };
   const open = async (file, name, sub) => { $("dd-title").textContent = name || "Preview"; $("dd-meta").textContent = (sub ? sub + " / " : "") + file.split("/").pop();
     $("dd-dl").href = file; $("dd-link").value = share(file); $("dd-body").innerHTML = "<p>Loading the file.</p>"; if (!dlg.open) dlg.showModal();
-    try { const r = await fetch(file); if (!r.ok) throw 0; $("dd-body").innerHTML = mdToHtml(await r.text()); $("dd-body").scrollTop = 0; }
+    raw = ""; try { const r = await fetch(file); if (!r.ok) throw 0; raw = await r.text(); $("dd-body").innerHTML = mdToHtml(raw); $("dd-body").scrollTop = 0; }
     catch (e) { $("dd-body").innerHTML = "<p>The preview could not load. The download still works.</p>"; } };
   document.addEventListener("click", e => { const p = e.target.closest && e.target.closest("[data-doc]"); if (p) { open(p.dataset.doc, p.dataset.name, p.dataset.for); return; }
     const c = e.target.closest && e.target.closest("[data-copy]"); if (c) copy(share(c.dataset.copy), c); });
+  let raw = "";
+  $("dd-copytext").addEventListener("click", e => { const el = e.currentTarget, t = el.textContent, done = ok => { el.textContent = ok ? "Text Copied" : "Copy Failed"; setTimeout(() => el.textContent = t, 1600); };
+    if (!raw) return done(false); try { navigator.clipboard.writeText(raw).then(() => done(true), () => done(false)); } catch (x) { done(false); } });
   $("dd-copy").addEventListener("click", e => { $("dd-link").select(); copy($("dd-link").value, e.currentTarget); });
   $("dd-link").addEventListener("focus", e => e.target.select());
   $("dd-close").addEventListener("click", () => dlg.close());

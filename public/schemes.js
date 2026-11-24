@@ -21,6 +21,7 @@
       b.addEventListener("click", () => { apply(id); try { localStorage.setItem("nc.scheme", id); } catch (e) { /* kept for this visit only */ } mark(); close(); });
       menu.appendChild(b);
     });
+    const link = document.createElement("a"); link.href = "brand.html"; link.className = "scheme-link"; link.innerHTML = "<b>Brand Page</b><span>Logos, colors, and downloads</span>"; menu.appendChild(link);
     const mark = () => menu.querySelectorAll("button").forEach(b => b.setAttribute("aria-checked", String(b.dataset.id === root.dataset.scheme)));
     const close = () => { menu.hidden = true; btn.setAttribute("aria-expanded", "false"); };
     btn.addEventListener("click", e => { e.stopPropagation(); menu.hidden = !menu.hidden; btn.setAttribute("aria-expanded", String(!menu.hidden)); mark(); });

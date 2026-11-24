@@ -1,0 +1,26 @@
+/* Shared polish for the terminal style pages: security, reimagine, brand. */
+@property --fx-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.fx-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--ok), var(--amber)); z-index: 70; box-shadow: 0 0 12px var(--ok); }
+header.hero { overflow: hidden; }
+header.hero > .wrap { position: relative; z-index: 1; }
+canvas.fx-rain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .34; pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 55%), linear-gradient(180deg, #000 55%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0, #000 55%), linear-gradient(180deg, #000 55%, transparent); mask-composite: intersect; }
+header.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--ok), var(--amber), transparent); opacity: .7; }
+h1 em { background: linear-gradient(100deg, var(--amber) 25%, #fff 48%, var(--amber) 72%); background-size: 240% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: fx-sheen 7s linear infinite; }
+@keyframes fx-sheen { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+.prompt { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border: 1px solid color-mix(in srgb, var(--ok) 40%, transparent); border-radius: 999px; background: rgba(7,13,24,.6); }
+.prompt::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 var(--ok); animation: fx-pulse 2s infinite; }
+@keyframes fx-pulse { 70% { box-shadow: 0 0 0 9px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+.term, .hero-mark { position: relative; box-shadow: 0 30px 70px rgba(0,0,0,.5), 0 0 60px color-mix(in srgb, var(--ok) 12%, transparent); }
+.term::before, .hero-mark::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; background: conic-gradient(from var(--fx-a), transparent 0 68%, var(--ok) 84%, var(--amber) 96%, transparent); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: fx-spin 7s linear infinite; pointer-events: none; z-index: 2; }
+@keyframes fx-spin { to { --fx-a: 360deg; } }
+.term::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, rgba(255,255,255,.028) 0 1px, transparent 1px 3px); pointer-events: none; }
+.term-bar i:nth-child(1) { background: #ff6b6b; } .term-bar i:nth-child(2) { background: #f2b43c; } .term-bar i:nth-child(3) { background: #5fd38d; }
+.tag { display: inline-flex; align-items: center; gap: 10px; } .tag::before { content: ""; width: 26px; height: 2px; background: linear-gradient(90deg, var(--amber), var(--ok)); }
+main h2 { background: linear-gradient(180deg, #fff 40%, #b9cbe2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+main .card { overflow: hidden; }
+main .card::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--ok), var(--amber) 55%, transparent); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+main .card:hover::after { transform: scaleX(1); }
+main .card:hover { box-shadow: 0 18px 40px rgba(0,0,0,.4), 0 0 28px color-mix(in srgb, var(--ok) 14%, transparent); }
+.report { position: relative; overflow: hidden; } .report::before { content: ""; position: absolute; width: 420px; height: 420px; right: -140px; top: -200px; background: radial-gradient(circle, color-mix(in srgb, var(--amber) 26%, transparent), transparent 65%); pointer-events: none; }
+.fx-rv { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease !important; } .fx-rv.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { h1 em, .term::before, .hero-mark::before, .prompt::before { animation: none; } .fx-rv { opacity: 1; transform: none; } }

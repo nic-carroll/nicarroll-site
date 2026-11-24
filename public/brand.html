@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand · Nic Carroll</title>
+<meta name="description" content="The Nic Carroll brand: logos, colors, color schemes, type, and rules, with every file ready to download.">
+<link rel="icon" href="brand/favicon.ico" sizes="32x32"><link rel="icon" href="brand/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="brand/icon-180.png">
+<link rel="stylesheet" href="schemes.css">
+<script src="schemes.js"></script>
+<style>
+  @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 200 800; font-display: swap; }
+  @font-face { font-family: "Public Sans"; src: url("fonts/public-sans-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
+  :root { --surface: #fff; --ink: #0f1c2e; --ink-soft: #4d5b6e; --line: #d9e0e9; --ok: #5fd38d; --display: "Bricolage", "Arial Narrow", sans-serif; --body: "Public Sans", system-ui, sans-serif; --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--night); color: #dbe7f5; font: 400 17px/1.65 var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1180px, 100% - 48px); margin-inline: auto; }
+  .skip { position: absolute; left: -999px; } .skip:focus { left: 12px; top: 12px; z-index: 99; background: #fff; color: #000; padding: 8px 12px; border-radius: 8px; }
+  .nav { position: fixed; inset: 0 0 auto; z-index: 40; background: color-mix(in srgb, var(--night) 92%, transparent); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(255,255,255,.08); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .mark { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font: 700 18px var(--display); white-space: nowrap; }
+  .mark small { font: 500 15px var(--body); color: #b4c4d8; }
+  .nav nav { display: flex; }
+  .nav nav > a[aria-current] { color: #fff; box-shadow: inset 0 -2px 0 var(--amber); border-radius: 0; }
+  /* Top menu: two grouped menus, one link, one button */
+  .nav nav { gap: 4px; align-items: center; margin-left: auto; }
+  .nav nav > a, .menu > summary { color: #dbe7f5; text-decoration: none; font: 500 15px/1 var(--body); padding: 10px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; list-style: none; }
+  .menu > summary::-webkit-details-marker { display: none; }
+  .menu > summary::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-3px) rotate(45deg); transition: transform .15s; }
+  .menu[open] > summary::after { transform: translateY(1px) rotate(225deg); }
+  .nav nav > a:hover, .menu > summary:hover, .menu[open] > summary { color: #fff; background: rgba(255,255,255,.1); }
+  .menu { position: relative; }
+  .menu:nth-of-type(n+3) > div { left: auto; right: 0; }
+  .menu > div { position: absolute; top: 46px; left: 0; background: #fff; border-radius: 16px; padding: 8px; min-width: 300px; display: grid; gap: 2px; box-shadow: 0 2px 3px rgba(12,26,46,.2), 0 10px 28px 6px rgba(12,26,46,.16); z-index: 60; }
+  .menu > div a { display: grid; gap: 2px; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: #0f1c2e; background: none; }
+  .menu > div a:hover { background: var(--sky-soft); }
+  .menu > div b { font: 600 15.5px/1.2 var(--body); } .menu > div span { font-size: 13.5px; color: #4d5b6e; }
+  .follow { display: inline-flex; align-items: center; gap: 7px; margin-left: 8px; padding: 9px 15px 9px 12px; border-radius: 999px; border: 1.5px solid var(--amber); color: #fff; text-decoration: none; font: 600 15px/1 var(--body); white-space: nowrap; transition: background .15s, color .15s; }
+  .follow svg { width: 16px; height: 16px; color: var(--amber); } .follow i { font-style: normal; }
+  .follow:hover { background: var(--accent-fill); color: var(--on-accent); border-color: transparent; } .follow:hover svg { color: inherit; }
+  @media (max-width: 1120px) { .follow i { display: none; } } @media (max-width: 900px) { .follow { margin-left: auto; } .follow i { display: inline; } } @media (max-width: 420px) { .follow i { display: none; } }
+  .nav nav > a.nav-cta { background: var(--accent-fill); color: var(--on-accent); font-weight: 600; margin-left: 6px; }
+  .nav nav > a.nav-cta:hover { background: var(--accent-fill-hover); color: var(--on-accent); }
+  .mark .logo { width: 40px; height: 40px; flex: none; } .mark .logo .lp { stroke: var(--amber); } .mark .logo .nn { stroke: #fff; }
+
+  /* The page: a clean terminal look. Mono labels, a faint grid, green status marks. */
+  body::before { content: ""; position: fixed; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 75%); mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 75%); }
+  header.hero { position: relative; padding: 148px 0 72px; background: radial-gradient(800px 400px at 85% 0%, color-mix(in srgb, var(--sky) 22%, transparent), transparent 60%); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 56px; align-items: center; }
+  .prompt { font: 500 14px/1 var(--mono); color: var(--ok); letter-spacing: .02em; }
+  .prompt b { color: #8ea3bf; font-weight: 500; }
+  h1 { font: 700 clamp(40px, 5.6vw, 68px)/1.02 var(--display); letter-spacing: -.02em; color: #fff; margin: 18px 0; }
+  h1 em { font-style: normal; color: var(--amber); }
+  .lede { font-size: 19px; color: #c5d3e4; max-width: 56ch; margin: 0; }
+  .term { background: #070d18; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; box-shadow: 0 30px 70px rgba(0,0,0,.5), 0 0 0 1px rgba(95,211,141,.08); overflow: hidden; font: 400 14px/1.75 var(--mono); }
+  .term-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; background: #0d1626; border-bottom: 1px solid rgba(255,255,255,.08); color: #8ea3bf; font-size: 12.5px; }
+  .term-bar i { width: 10px; height: 10px; border-radius: 50%; background: #2a3a55; } .term-bar span { margin-left: 8px; }
+  .term pre { margin: 0; padding: 18px 20px 20px; white-space: pre-wrap; color: #c5d3e4; font: inherit; min-height: 290px; }
+  .term .c { color: #8ea3bf; } .term .ok { color: var(--ok); } .term .a { color: var(--amber); } .term .w { color: #fff; }
+  .cursor { display: inline-block; width: 9px; height: 17px; background: var(--ok); vertical-align: -3px; animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  main section { padding: 76px 0 0; position: relative; }
+  .tag { font: 500 13px/1 var(--mono); color: var(--ok); letter-spacing: .04em; }
+  h2 { font: 700 clamp(30px, 3.8vw, 44px)/1.08 var(--display); letter-spacing: -.02em; color: #fff; margin: 12px 0 8px; }
+  .intro { color: #b4c4d8; max-width: 66ch; margin: 0 0 28px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+  .card { position: relative; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 22px 22px 24px; transition: border-color .2s, transform .2s; }
+  .card:hover { border-color: color-mix(in srgb, var(--ok) 55%, transparent); transform: translateY(-3px); }
+  .card .k { display: block; font: 500 12.5px/1 var(--mono); color: var(--amber); letter-spacing: .06em; margin-bottom: 14px; }
+  .card h3 { font: 700 21px/1.2 var(--display); color: #fff; margin: 0 0 8px; }
+  .card p { margin: 0; color: #b4c4d8; font-size: 16px; }
+  .card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: 15.5px; color: #c5d3e4; }
+  .card li { padding-left: 62px; position: relative; line-height: 1.5; }
+  .card li::before { content: "[ ok ]"; position: absolute; left: 0; top: 1px; font: 500 13px/1.6 var(--mono); color: var(--ok); }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-left: 2px solid rgba(255,255,255,.14); margin-left: 8px; }
+  .steps li { position: relative; padding: 0 0 30px 34px; color: #b4c4d8; }
+  .steps li::before { content: ""; position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--night); border: 2px solid var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 14%, transparent); }
+  .steps .when { display: block; font: 500 13px/1 var(--mono); color: var(--ok); letter-spacing: .04em; margin-bottom: 8px; }
+  .steps strong { display: block; font: 700 21px/1.2 var(--display); color: #fff; margin-bottom: 6px; }
+  .report { background: #070d18; border: 1px solid color-mix(in srgb, var(--amber) 45%, transparent); border-radius: 18px; padding: 34px; margin-bottom: 84px; }
+  .report h2 { margin-top: 10px; } .report p { color: #c5d3e4; max-width: 74ch; } .report a { color: var(--amber); font-weight: 600; }
+  footer { border-top: 1px solid rgba(255,255,255,.1); color: #8ea3bf; font: 400 13.5px/1 var(--mono); }
+  footer .wrap { padding: 22px 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  @media (max-width: 900px) { .nav nav { display: none; } .mark small { display: none; } .hero-grid { grid-template-columns: 1fr; } header.hero { padding-top: 112px; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } .card { transition: none; } }
+
+  /* Brand page */
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .btn { display: inline-flex; align-items: center; padding: 13px 22px; border-radius: 999px; font: 600 16px/1 var(--body); text-decoration: none; border: 1px solid rgba(255,255,255,.28); color: #fff; }
+  .btn.fill { background: var(--accent-fill); color: var(--on-accent); border-color: transparent; } .btn.fill:hover { background: var(--accent-fill-hover); } .btn:hover { border-color: #fff; }
+  .hero-mark { display: grid; place-items: center; background: #070d18; border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 40px; }
+  .hero-mark svg { width: min(300px, 70%); height: auto; } .hero-mark .lp { stroke: var(--amber); } .hero-mark .nn { stroke: #fff; }
+  .hero-mark p { margin: 18px 0 0; font: 500 13px/1.5 var(--mono); color: #8ea3bf; text-align: center; }
+  h3.sub { font: 700 22px/1.2 var(--display); color: #fff; margin: 34px 0 6px; } h3.sub + .intro { margin-bottom: 16px; }
+  .logos { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+  .logo-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; overflow: hidden; display: grid; transition: transform .2s, border-color .2s; } .logo-card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--ok) 55%, transparent); }
+  .logo-card .pv { display: grid; place-items: center; height: 170px; padding: 22px; } .logo-card .pv img { max-width: 100%; max-height: 126px; }
+  .pv.dark { background: #0c1a2e; } .pv.light { background: #f3f5f8; } .pv.check { background: #fff; }
+  .logo-card .meta { padding: 14px 16px 16px; display: grid; gap: 10px; border-top: 1px solid rgba(255,255,255,.1); }
+  .logo-card b { font: 600 15.5px/1.3 var(--body); color: #fff; }
+  .dl { display: flex; flex-wrap: wrap; gap: 6px; } .dl a { font: 500 12.5px/1 var(--mono); color: var(--ok); text-decoration: none; border: 1px solid color-mix(in srgb, var(--ok) 45%, transparent); border-radius: 999px; padding: 7px 10px; }
+  .dl a:hover { background: var(--ok); color: #070d18; }
+  .sw { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+  .sw button { text-align: left; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; overflow: hidden; padding: 0; background: rgba(255,255,255,.04); color: #dbe7f5; cursor: pointer; display: grid; font: inherit; }
+  .sw button i { height: 74px; display: block; } .sw button span { padding: 10px 12px 2px; font: 600 15px/1.2 var(--body); color: #fff; } .sw button code { padding: 0 12px; font: 500 13px/1.5 var(--mono); color: var(--amber); } .sw button small { padding: 2px 12px 12px; font-size: 13px; line-height: 1.4; color: #8ea3bf; }
+  .sw button:hover { border-color: #fff; }
+  .schemes { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .sch { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); cursor: pointer; padding: 0; text-align: left; font: inherit; background: none; color: inherit; display: grid; }
+  .sch .top { padding: 20px; display: grid; gap: 12px; } .sch .top b { font: 700 20px/1.2 var(--display); color: #fff; } .sch .top em { font-style: normal; font: 700 26px/1 var(--display); }
+  .sch .top span { justify-self: start; font: 600 14px/1 var(--body); padding: 9px 14px; border-radius: 999px; }
+  .sch .bar { display: flex; height: 12px; } .sch .bar i { flex: 1; } .sch .use { padding: 12px 20px; font: 500 12.5px/1.4 var(--mono); color: #b4c4d8; background: #070d18; } .sch[aria-pressed="true"] { outline: 3px solid var(--ok); outline-offset: 2px; } .sch[aria-pressed="true"] .use::after { content: "  [ active ]"; color: var(--ok); }
+  .type { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; } .type .card .big { font: 700 44px/1.05 var(--display); letter-spacing: -.02em; color: #fff; margin: 0 0 10px; } .type .card .bodyfont { font: 400 19px/1.6 var(--body); color: #fff; margin: 0 0 10px; }
+  .files { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; } .files .card { display: grid; gap: 10px; align-content: start; }
+  .toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%); background: var(--ok); color: #070d18; font: 600 14px/1 var(--mono); padding: 12px 18px; border-radius: 999px; z-index: 80; margin: 0; } .toast[hidden] { display: none; }
+  .card ul.dont li::before { content: "[ no ]"; color: #ff8f8f; }
+  @media (max-width: 800px) { .type { grid-template-columns: 1fr; } }
+</style>
+<link rel="stylesheet" href="term.css">
+<script src="term.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="/"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><g transform="translate(8 12) scale(.86)" fill="none" stroke-linecap="round"><path class="lp" transform="translate(2 2)" stroke-width="5" d="M104 22 C70 6 22 40 14 88 C11 108 30 112 48 104 C66 96 80 84 90 70"/><path class="nn" transform="translate(6 8) scale(.9)" stroke-width="7" stroke-linejoin="miter" stroke-miterlimit="12" d="M20 88 C40 76 56 52 64 24 L58 94 C64 62 80 32 100 10"/></g></svg><span>Nic Carroll<small>, Ed.S., CISSP, CETL</small></span></a>
+    <nav aria-label="Site">
+      <details class="menu"><summary>Work</summary><div>
+        <a href="showcase.html"><b>Tool Showcase</b><span>Real screens from the tools I built</span></a>
+        <a href="/#building"><b>Things I'm Building</b><span>Every product and prototype</span></a>
+        <a href="/#agents"><b>AI Agents and Playbooks</b><span>The agents and rules behind the work</span></a>
+        <a href="/#cases"><b>Case Studies</b><span>The challenge, what I did, what changed</span></a>
+        <a href="reimagine.html"><b>Reimagine IT</b><span>A new way to build products and projects</span></a>
+      </div></details>
+      <details class="menu"><summary>About</summary><div>
+        <a href="/#approach"><b>How I Lead</b><span>The principles behind every team</span></a>
+        <a href="/#experience"><b>Experience</b><span>CIO, CTO, and CISO roles</span></a>
+        <a href="/#credentials"><b>Credentials</b><span>Education, certifications, boards</span></a>
+        <a href="brand.html"><b>Brand</b><span>Logos, colors, and downloads</span></a>
+      </div></details>
+      <details class="menu"><summary>Resume</summary><div>
+        <a href="index.html?resume=navy" data-resume="navy"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span></a>
+        <a href="index.html?resume=executive" data-resume="executive"><b>Executive</b><span>One column with serif headings. 3 pages.</span></a>
+        <a href="index.html?resume=modern" data-resume="modern"><b>Modern</b><span>A light layout with a color accent. 2 pages.</span></a>
+        <a href="index.html?resume=all" data-resume="all"><b>Compare All Three</b><span>Preview every page, then download</span></a>
+      </div></details>
+      <a href="security.html">Security</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+    <a class="follow" href="https://www.linkedin.com/in/nic-carroll/" target="_blank" rel="noopener me" aria-label="Follow Nic Carroll on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span>Follow <i>on LinkedIn</i></span></a>
+  </div>
+</header>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="prompt"><b>nic@carroll:~/brand$</b> ls --all</p>
+      <h1>The Nic Carroll <em>Brand</em></h1>
+      <p class="lede">Innovation that scales. Security that holds. Leadership that delivers. Every logo, color, font, and rule that carries my name is here, ready to preview and download.</p>
+      <div class="cta"><a class="btn fill" href="brand/Nic_Carroll_Brand_Package.zip" download>Download the Full Package</a><a class="btn" href="brand/kit/Brand_Guide.pdf">Open the Brand Guide (PDF)</a></div>
+    </div>
+    <div class="hero-mark"><svg role="img" aria-label="The Nic Carroll mark" viewBox="0 0 120 120"><g transform="translate(8 12) scale(.86)" fill="none" stroke-linecap="round"><path class="lp" transform="translate(2 2)" stroke-width="5" d="M104 22 C70 6 22 40 14 88 C11 108 30 112 48 104 C66 96 80 84 90 70"/><path class="nn" transform="translate(6 8) scale(.9)" stroke-width="7" stroke-linejoin="miter" stroke-miterlimit="12" d="M20 88 C40 76 56 52 64 24 L58 94 C64 62 80 32 100 10"/></g></svg><p>drawn from the way I sign my N<br>the loop around it is the C</p></div>
+  </div>
+</header>
+<main id="main" class="wrap">
+  <section id="logos"><span class="tag">01 // logos</span><h2>Logos, Ready to Download</h2><p class="intro">Every version comes as a scalable SVG and as PNG files. Pick the one that matches your background.</p><h3 class="sub">Primary Mark</h3><p class="intro">The default everywhere: site headers, profile pictures, and slide corners.</p><div class="logos"><div class="logo-card"><div class="pv check"><img src="brand/kit/logos/svg/nic-carroll-primary-loop-light-tile.svg" alt="Primary Mark, Light Tile"></div><div class="meta"><b>Primary Mark, Light Tile</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-primary-loop-light-tile.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-light-tile-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-light-tile-256.png" download>PNG 256</a></div></div></div><div class="logo-card"><div class="pv check"><img src="brand/kit/logos/svg/nic-carroll-primary-loop-navy-tile.svg" alt="Primary Mark, Navy Tile"></div><div class="meta"><b>Primary Mark, Navy Tile</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-primary-loop-navy-tile.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-navy-tile-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-navy-tile-256.png" download>PNG 256</a></div></div></div><div class="logo-card"><div class="pv dark"><img src="brand/kit/logos/svg/nic-carroll-primary-loop-on-dark.svg" alt="Primary Mark, On Dark"></div><div class="meta"><b>Primary Mark, On Dark</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-primary-loop-on-dark.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-on-dark-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-on-dark-256.png" download>PNG 256</a></div></div></div><div class="logo-card"><div class="pv light"><img src="brand/kit/logos/svg/nic-carroll-primary-loop-on-light.svg" alt="Primary Mark, On Light"></div><div class="meta"><b>Primary Mark, On Light</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-primary-loop-on-light.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-on-light-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-on-light-256.png" download>PNG 256</a></div></div></div><div class="logo-card"><div class="pv light"><img src="brand/kit/logos/svg/nic-carroll-primary-loop-one-color-navy.svg" alt="Primary Mark, One Color Navy"></div><div class="meta"><b>Primary Mark, One Color Navy</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-primary-loop-one-color-navy.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-one-color-navy-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-one-color-navy-256.png" download>PNG 256</a></div></div></div><div class="logo-card"><div class="pv dark"><img src="brand/kit/logos/svg/nic-carroll-primary-loop-one-color-white.svg" alt="Primary Mark, One Color White"></div><div class="meta"><b>Primary Mark, One Color White</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-primary-loop-one-color-white.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-one-color-white-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-primary-loop-one-color-white-256.png" download>PNG 256</a></div></div></div></div><h3 class="sub">Signature N</h3><p class="intro">For very small sizes where the loop would blur, such as a 16 pixel icon.</p><div class="logos"><div class="logo-card"><div class="pv check"><img src="brand/kit/logos/svg/nic-carroll-signature-n-amber-tile.svg" alt="Signature N, Amber Tile"></div><div class="meta"><b>Signature N, Amber Tile</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-signature-n-amber-tile.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-signature-n-amber-tile-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-signature-n-amber-tile-256.png" download>PNG 256</a></div></div></div><div class="logo-card"><div class="pv check"><img src="brand/kit/logos/svg/nic-carroll-signature-n-navy-tile.svg" alt="Signature N, Navy Tile"></div><div class="meta"><b>Signature N, Navy Tile</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-signature-n-navy-tile.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-signature-n-navy-tile-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-signature-n-navy-tile-256.png" download>PNG 256</a></div></div></div><div class="logo-card"><div class="pv dark"><img src="brand/kit/logos/svg/nic-carroll-signature-n-on-dark.svg" alt="Signature N, On Dark"></div><div class="meta"><b>Signature N, On Dark</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-signature-n-on-dark.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-signature-n-on-dark-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-signature-n-on-dark-256.png" download>PNG 256</a></div></div></div><div class="logo-card"><div class="pv light"><img src="brand/kit/logos/svg/nic-carroll-signature-n-on-light.svg" alt="Signature N, On Light"></div><div class="meta"><b>Signature N, On Light</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-signature-n-on-light.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-signature-n-on-light-1024.png" download>PNG 1024</a><a href="brand/kit/logos/png/nic-carroll-signature-n-on-light-256.png" download>PNG 256</a></div></div></div></div><h3 class="sub">Lockup</h3><p class="intro">When the name must appear with the mark: email signatures, letterhead, and title slides.</p><div class="logos"><div class="logo-card"><div class="pv check"><img src="brand/kit/logos/svg/nic-carroll-lockup-light.svg" alt="Lockup, Light"></div><div class="meta"><b>Lockup, Light</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-lockup-light.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-lockup-light-1680.png" download>PNG 1680</a></div></div></div><div class="logo-card"><div class="pv light"><img src="brand/kit/logos/svg/nic-carroll-lockup-name-only-navy.svg" alt="Lockup, Name Only Navy"></div><div class="meta"><b>Lockup, Name Only Navy</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-lockup-name-only-navy.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-lockup-name-only-navy-1680.png" download>PNG 1680</a></div></div></div><div class="logo-card"><div class="pv check"><img src="brand/kit/logos/svg/nic-carroll-lockup-navy.svg" alt="Lockup, Navy"></div><div class="meta"><b>Lockup, Navy</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-lockup-navy.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-lockup-navy-1680.png" download>PNG 1680</a></div></div></div><div class="logo-card"><div class="pv dark"><img src="brand/kit/logos/svg/nic-carroll-lockup-on-dark-transparent.svg" alt="Lockup, On Dark Transparent"></div><div class="meta"><b>Lockup, On Dark Transparent</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-lockup-on-dark-transparent.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-lockup-on-dark-transparent-1680.png" download>PNG 1680</a></div></div></div><div class="logo-card"><div class="pv light"><img src="brand/kit/logos/svg/nic-carroll-lockup-on-light-transparent.svg" alt="Lockup, On Light Transparent"></div><div class="meta"><b>Lockup, On Light Transparent</b><div class="dl"><a href="brand/kit/logos/svg/nic-carroll-lockup-on-light-transparent.svg" download>SVG</a><a href="brand/kit/logos/png/nic-carroll-lockup-on-light-transparent-1680.png" download>PNG 1680</a></div></div></div></div></section>
+  <section id="rules"><span class="tag">02 // logo rules</span><h2>How to Use the Mark</h2>
+    <div class="grid">
+      <div class="card"><span class="k">DO</span><ul><li>Keep clear space equal to one quarter of the width of the mark</li><li>Use the white N with the accent loop on navy or dark photos</li><li>Use the navy N with the accent loop on white or light backgrounds</li><li>Keep the primary mark at 24 pixels or larger, the Signature N at 16, and the lockup at 160 wide</li></ul></div>
+      <div class="card"><span class="k">DO NOT</span><ul class="dont"><li>Stretch, rotate, recolor, outline, or add shadows</li><li>Place the mark on a busy photo without a navy or white tile</li><li>Put the mark inside a circle or ring</li><li>Retype the N in a font or redraw the mark</li></ul></div>
+    </div></section>
+  <section id="colors"><span class="tag">03 // colors</span><h2>Colors</h2><p class="intro">Click a color to copy its hex value. The balance is about 60 percent navy or paper, 30 percent white surfaces, and 10 percent accent.</p><div class="sw" id="sw"><button type="button" data-hex="#0c1a2e" aria-label="Copy Navy, #0c1a2e"><i style="background:#0c1a2e"></i><span>Navy</span><code>#0c1a2e</code><small>Primary. Headers, hero areas, the logo tile</small></button><button type="button" data-hex="#13263f" aria-label="Copy Navy 2, #13263f"><i style="background:#13263f"></i><span>Navy 2</span><code>#13263f</code><small>Gradients and raised surfaces on navy</small></button><button type="button" data-hex="#1c3354" aria-label="Copy Navy 3, #1c3354"><i style="background:#1c3354"></i><span>Navy 3</span><code>#1c3354</code><small>Gradient ends and borders on navy</small></button><button type="button" data-hex="#f2b43c" aria-label="Copy Amber, #f2b43c"><i style="background:#f2b43c"></i><span>Amber</span><code>#f2b43c</code><small>Accent. The loop, primary buttons, key numbers</small></button><button type="button" data-hex="#8a5d00" aria-label="Copy Amber Ink, #8a5d00"><i style="background:#8a5d00"></i><span>Amber Ink</span><code>#8a5d00</code><small>Amber toned text on light backgrounds</small></button><button type="button" data-hex="#8fb8de" aria-label="Copy Sky, #8fb8de"><i style="background:#8fb8de"></i><span>Sky</span><code>#8fb8de</code><small>Secondary accent on navy</small></button><button type="button" data-hex="#e4eef8" aria-label="Copy Sky Soft, #e4eef8"><i style="background:#e4eef8"></i><span>Sky Soft</span><code>#e4eef8</code><small>Chips and quiet highlights on light</small></button><button type="button" data-hex="#1f5f9e" aria-label="Copy Link Blue, #1f5f9e"><i style="background:#1f5f9e"></i><span>Link Blue</span><code>#1f5f9e</code><small>Links and subtitles on light</small></button><button type="button" data-hex="#f3f5f8" aria-label="Copy Paper, #f3f5f8"><i style="background:#f3f5f8"></i><span>Paper</span><code>#f3f5f8</code><small>Page background</small></button><button type="button" data-hex="#ffffff" aria-label="Copy Surface, #ffffff"><i style="background:#ffffff"></i><span>Surface</span><code>#ffffff</code><small>Cards</small></button><button type="button" data-hex="#0f1c2e" aria-label="Copy Ink, #0f1c2e"><i style="background:#0f1c2e"></i><span>Ink</span><code>#0f1c2e</code><small>Body text</small></button><button type="button" data-hex="#4d5b6e" aria-label="Copy Ink Soft, #4d5b6e"><i style="background:#4d5b6e"></i><span>Ink Soft</span><code>#4d5b6e</code><small>Secondary text</small></button><button type="button" data-hex="#d9e0e9" aria-label="Copy Line, #d9e0e9"><i style="background:#d9e0e9"></i><span>Line</span><code>#d9e0e9</code><small>Borders and dividers</small></button></div></section>
+  <section id="schemes"><span class="tag">04 // color schemes</span><h2>Four Approved Schemes</h2><p class="intro">Navy and Amber is the default. Click one to switch this whole site. Every scheme has to pass the same measured contrast rules before it ships.</p><div class="schemes" id="schemes-list"><button type="button" class="sch" data-scheme-id="navy-amber" aria-pressed="false"><span class="top" style="background:#0c1a2e"><b>Navy and Amber</b><em style="color:#f2b43c">Innovation</em><span style="background:#f2b43c;color:#0c1a2e">Button</span></span><span class="bar"><i style="background:#0c1a2e"></i><i style="background:#f2b43c"></i><i style="background:#f2b43c"></i><i style="background:#8fb8de"></i></span><span class="use">default // click to apply</span></button><button type="button" class="sch" data-scheme-id="red-white-blue" aria-pressed="false"><span class="top" style="background:#0a2342"><b>Red, White, and Blue</b><em style="color:#ff6b6b">Innovation</em><span style="background:#c8102e;color:#ffffff">Button</span></span><span class="bar"><i style="background:#0a2342"></i><i style="background:#ff6b6b"></i><i style="background:#c8102e"></i><i style="background:#c8d0da"></i></span><span class="use">approved // click to apply</span></button><button type="button" class="sch" data-scheme-id="blue-silver" aria-pressed="false"><span class="top" style="background:#0b2a5b"><b>Blue and Silver</b><em style="color:#c8d0da">Innovation</em><span style="background:#c8d0da;color:#0b2a5b">Button</span></span><span class="bar"><i style="background:#0b2a5b"></i><i style="background:#c8d0da"></i><i style="background:#c8d0da"></i><i style="background:#93c5fd"></i></span><span class="use">approved // click to apply</span></button><button type="button" class="sch" data-scheme-id="graphite-red" aria-pressed="false"><span class="top" style="background:#111827"><b>Graphite, Red, and Silver</b><em style="color:#ff6b6b">Innovation</em><span style="background:#c8102e;color:#ffffff">Button</span></span><span class="bar"><i style="background:#111827"></i><i style="background:#ff6b6b"></i><i style="background:#c8102e"></i><i style="background:#c8d0da"></i></span><span class="use">approved // click to apply</span></button></div></section>
+  <section id="type"><span class="tag">05 // type</span><h2>Type</h2>
+    <div class="type">
+      <div class="card"><span class="k">HEADLINES AND NUMBERS</span><p class="big">Bricolage Grotesque</p><p>Weight 700 with tight letter spacing, about minus 2 percent.</p></div>
+      <div class="card"><span class="k">BODY AND LABELS</span><p class="bodyfont">Public Sans keeps long text calm and easy to read at any size.</p><p>Weights 400, 500, and 600. Body is 17 pixels with a 1.65 line height on the web.</p></div>
+    </div>
+    <p class="intro" style="margin-top:16px">Both fonts are open source under the SIL Open Font License and are included in the package.</p></section>
+  <section id="voice"><span class="tag">06 // voice</span><h2>Voice and Writing</h2>
+    <div class="grid">
+      <div class="card"><span class="k">HOW IT SOUNDS</span><ul><li>Plain words and short sentences that lead with the result</li><li>Title Case for headings and buttons</li><li>Commas, periods, or the word "to" in place of dashes</li><li>Outcomes a board cares about: leading, saving money, delivering at scale, and security</li></ul></div>
+      <div class="card"><span class="k">WHAT STAYS TRUE</span><ul><li>Every number is true and sourced</li><li>Planned work is never described as finished</li><li>Georgia Southern University is always named in full</li><li>Demo screens use the fictional Oakhaven name and invented data</li></ul></div>
+    </div></section>
+  <section id="files"><span class="tag">07 // files</span><h2>Guides, Tokens, and Icons</h2><p class="intro">For people and for AI agents. The brand guide and the skill hold the same rules in two forms.</p>
+    <div class="files">
+      <div class="card"><span class="k">GUIDES</span><h3>Brand Guide</h3><p>The full rules as a three page visual guide and as markdown.</p><div class="dl"><a href="brand/kit/Brand_Guide.pdf" download>Brand_Guide.pdf</a><a href="brand/kit/BRAND.md" download>BRAND.md</a></div></div>
+      <div class="card"><span class="k">AI SKILL</span><h3>Brand Skill</h3><p>The same rules written as a skill an AI agent loads before it builds anything with my name on it.</p><div class="dl"><a href="brand/kit/skill/nic-carroll-brand/SKILL.md" download="nic-carroll-brand-SKILL.md">SKILL.md</a></div></div>
+      <div class="card"><span class="k">DESIGN TOKENS</span><h3>Colors as Code</h3><p>CSS variables, the color list, the four schemes, and the contrast checker.</p><div class="dl"><a href="brand/kit/tokens/brand.css" download>brand.css</a><a href="brand/kit/tokens/colors.json" download>colors.json</a><a href="brand/kit/tokens/schemes.css" download>schemes.css</a><a href="brand/kit/tokens/check-schemes.py" download>check-schemes.py</a></div></div>
+      <div class="card"><span class="k">ICONS</span><h3>Favicons and App Icons</h3><p>Browser and app icons at every size a site needs.</p><div class="dl"><a href="brand/kit/favicon/favicon.svg" download>favicon.svg</a><a href="brand/kit/favicon/favicon.ico" download>favicon.ico</a><a href="brand/kit/favicon/icon-32.png" download>PNG 32</a><a href="brand/kit/favicon/icon-180.png" download>PNG 180</a><a href="brand/kit/favicon/icon-192.png" download>PNG 192</a><a href="brand/kit/favicon/icon-512.png" download>PNG 512</a></div></div>
+    </div></section>
+  <section><div class="report"><span class="tag">08 // everything in one file</span><h2>Take the Whole Package</h2><p>One zip with every logo, icon, font, token, and guide on this page.</p><p><a href="brand/Nic_Carroll_Brand_Package.zip" download>Download the Full Package</a> &nbsp; <a href="showcase.html#brand">See the Brand Kits I Build for Schools</a></p></div></section>
+</main>
+<p class="toast" id="toast" role="status" hidden></p>
+<footer><div class="wrap"><span>nic carroll // brand</span><a href="/">back to the main site</a><span>designed and updated by nic carroll</span></div></footer>
+<script>
+(() => {
+  const toast = document.getElementById("toast"); let t;
+  const say = m => { toast.textContent = m; toast.hidden = false; clearTimeout(t); t = setTimeout(() => toast.hidden = true, 1600); };
+  document.getElementById("sw").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
+    try { navigator.clipboard.writeText(b.dataset.hex).then(() => say("copied " + b.dataset.hex), () => say(b.dataset.hex)); } catch (x) { say(b.dataset.hex); } });
+  const root = document.documentElement, list = document.getElementById("schemes-list");
+  const mark = () => list.querySelectorAll(".sch").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.schemeId === (root.dataset.scheme || "navy-amber"))));
+  list.addEventListener("click", e => { const b = e.target.closest(".sch"); if (!b) return; root.dataset.scheme = b.dataset.schemeId; try { localStorage.setItem("nc.scheme", b.dataset.schemeId); } catch (x) {} mark(); });
+  new MutationObserver(mark).observe(root, { attributes: true, attributeFilter: ["data-scheme"] }); mark();
+})();
+</script>
+</body>
+</html>

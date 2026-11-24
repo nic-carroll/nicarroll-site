@@ -1,0 +1,27 @@
+{
+  "colors": {
+    "navy": "#0c1a2e",
+    "navy-2": "#13263f",
+    "navy-3": "#1c3354",
+    "amber": "#f2b43c",
+    "amber-ink": "#8a5d00",
+    "sky": "#8fb8de",
+    "sky-soft": "#e4eef8",
+    "link": "#1f5f9e",
+    "paper": "#f3f5f8",
+    "surface": "#ffffff",
+    "ink": "#0f1c2e",
+    "ink-soft": "#4d5b6e",
+    "line": "#d9e0e9"
+  },
+  "contrast": {
+    "white on navy": 17.5,
+    "amber on navy": 9.5,
+    "navy on amber": 9.5,
+    "ink on paper": 15.7,
+    "ink soft on white": 6.9,
+    "amber ink on white": 5.8,
+    "amber on white": 1.8,
+    "link on white": 6.6
+  }
+}
