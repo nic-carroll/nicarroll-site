@@ -1213,5 +1213,193 @@
     "Perfect CMMC Level 2 score and a $12M safety rollout across 44+ sites",
     "Building AI tools that reimagine how IT and security teams work"
   ],
-  "now": "Chief Information Security Officer, Georgia Southern University"
+  "now": "Chief Information Security Officer, Georgia Southern University",
+  "agents": [
+    {
+      "group": "Agents That Work on a Schedule",
+      "intro": "Each one runs by itself, checks its own work with tests, and hands me a pull request to review. None of them can release anything without my approval.",
+      "items": [
+        {
+          "name": "Daily Security Engineer",
+          "for": "NextGen SIS",
+          "when": "Nightly",
+          "text": "Patches dependencies, reviews the day's changes, and probes one deeper area each weekday, from sign in to data exposure."
+        },
+        {
+          "name": "Daily Improvement Engineer",
+          "for": "NextGen SIS",
+          "when": "Nightly",
+          "text": "Ships one finished, tested improvement a night, rotating between bugs, design, state reporting, and speed."
+        },
+        {
+          "name": "Directions Writer",
+          "for": "NextGen SIS",
+          "when": "Nightly",
+          "text": "Keeps step by step directions current for every tool and every user group, verified against the running app."
+        },
+        {
+          "name": "Walkthrough Deck Keeper",
+          "for": "NextGen SIS",
+          "when": "Nightly",
+          "text": "Updates the walkthrough slides and screenshots whenever a feature changes."
+        },
+        {
+          "name": "Cost Keeper",
+          "for": "NextGen SIS",
+          "when": "Nightly",
+          "text": "Rechecks cloud list prices and recalculates the hosting cost for small, medium, and large districts."
+        },
+        {
+          "name": "Project Manager",
+          "for": "NextGen SIS",
+          "when": "Nightly",
+          "text": "Runs last, tracks every bug and change, checks that each agent ran, and writes my morning brief."
+        },
+        {
+          "name": "Infrastructure Engineer",
+          "for": "NextGen SIS",
+          "when": "Monthly",
+          "text": "Reviews hosting, sizing, and cost, and runs one cloud load test a month to prove capacity before busy seasons."
+        },
+        {
+          "name": "Daily Improvement Engineer",
+          "for": "RosterEditor",
+          "when": "Nightly",
+          "text": "Reviews the app through six personas, picks the best value fix, builds it with tests, and opens one pull request."
+        },
+        {
+          "name": "Persona Tester",
+          "for": "RosterEditor and EduSite",
+          "when": "Daily",
+          "text": "Uses each product as a different invented person every day and fixes the most useful thing it finds."
+        },
+        {
+          "name": "Security Reviewer",
+          "for": "All my products",
+          "when": "Monthly",
+          "text": "A read only review of recent changes and scan results across every repository, reported by severity."
+        },
+        {
+          "name": "Data Update Checker",
+          "for": "Georgia Educational Analytics",
+          "when": "Weekly",
+          "text": "Checks the state's public data downloads for new files and records what changed."
+        }
+      ]
+    },
+    {
+      "group": "Specialist Agents",
+      "intro": "Reusable specialists I wrote as agent definition files. I call one in when a change touches its area.",
+      "items": [
+        {
+          "name": "Accessibility Auditor",
+          "for": "NextGen SIS",
+          "when": "On demand",
+          "text": "Audits pages for WCAG 2.2 AA in light and dark mode, on desktop and phone, and fixes failures."
+        },
+        {
+          "name": "Design Reviewer",
+          "for": "NextGen SIS",
+          "when": "On demand",
+          "text": "Reviews layout against Material Design 3 and the project style, then fixes what it finds."
+        },
+        {
+          "name": "Dashboard Designer",
+          "for": "NextGen SIS",
+          "when": "On demand",
+          "text": "Designs charts and dashboards so every number is clear and opens the records behind it."
+        },
+        {
+          "name": "UX Writer",
+          "for": "NextGen SIS",
+          "when": "On demand",
+          "text": "Rewrites page text, labels, and error messages so staff and families understand them at a glance."
+        },
+        {
+          "name": "Infrastructure Engineer",
+          "for": "NextGen SIS",
+          "when": "On demand",
+          "text": "The full role definition behind the monthly hosting and capacity review."
+        },
+        {
+          "name": "Code Reviewer",
+          "for": "Georgia Educational Analytics",
+          "when": "On demand",
+          "text": "An unbiased reviewer with no prior context, focused on security boundaries, correctness, and performance."
+        },
+        {
+          "name": "QA Agent",
+          "for": "Georgia Educational Analytics",
+          "when": "On demand",
+          "text": "Writes and runs adversarial tests for correctness, boundary safety, and error handling."
+        },
+        {
+          "name": "Deep Research Agent",
+          "for": "Georgia Educational Analytics",
+          "when": "On demand",
+          "text": "Investigates technical and security questions across the web and the codebase."
+        }
+      ]
+    },
+    {
+      "group": "Playbooks and Rules",
+      "intro": "The instruction files that keep every agent, and me, working the same way in each project.",
+      "items": [
+        {
+          "name": "Project Instructions",
+          "for": "NextGen SIS",
+          "when": "Always on",
+          "text": "Ground rules: one source of truth for outside connections, never call planned work finished, database changes only add."
+        },
+        {
+          "name": "Project Instructions",
+          "for": "Milestone Compass",
+          "when": "Always on",
+          "text": "The planning document and working rules for the practice platform."
+        },
+        {
+          "name": "Project Instructions",
+          "for": "Georgia Educational Analytics",
+          "when": "Always on",
+          "text": "How the data portal is organized and how work on it is done."
+        },
+        {
+          "name": "Security Rules",
+          "for": "Georgia Educational Analytics",
+          "when": "Always on",
+          "text": "Security best practices every change must follow."
+        },
+        {
+          "name": "Testing Rules",
+          "for": "Georgia Educational Analytics",
+          "when": "Always on",
+          "text": "What must be tested and how before anything ships."
+        },
+        {
+          "name": "Code Style Rules",
+          "for": "Georgia Educational Analytics",
+          "when": "Always on",
+          "text": "Naming and code style conventions."
+        },
+        {
+          "name": "React Rules",
+          "for": "Georgia Educational Analytics",
+          "when": "Always on",
+          "text": "Best practices for interactive screens."
+        },
+        {
+          "name": "Style System Rules",
+          "for": "Georgia Educational Analytics",
+          "when": "Always on",
+          "text": "Modern CSS guidelines for a multi brand design system."
+        },
+        {
+          "name": "Branding Rules",
+          "for": "Georgia Educational Analytics",
+          "when": "Always on",
+          "text": "How one portal takes on each district's colors, name, and logo."
+        }
+      ]
+    }
+  ]
 }

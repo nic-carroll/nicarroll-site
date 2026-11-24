@@ -230,6 +230,25 @@
   .pcard.rv { opacity: 0; transform: translateY(22px); } .pcard.rv.in { opacity: 1; transform: none; }
   .tool-strip { background: radial-gradient(700px 300px at 90% 0%, rgba(143,184,222,.22), transparent 60%), radial-gradient(500px 260px at 0% 100%, rgba(242,180,60,.14), transparent 60%), var(--night); box-shadow: 0 20px 50px rgba(12,26,46,.25); }
   @media (prefers-reduced-motion: reduce) { .pcard, .pcard .art svg, .pcard .art img, .pcard::after { transition: none; } .pcard.rv { opacity: 1; transform: none; } }
+  /* Agents and playbooks */
+  .ag-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .ag-stats div { background: var(--night); color: #fff; border-radius: 18px; padding: 20px 22px; }
+  .ag-stats b { display: block; font: 700 40px/1 var(--display); color: var(--amber); letter-spacing: -.02em; }
+  .ag-stats span { display: block; margin-top: 8px; font-size: 15px; color: #c5d3e4; }
+  .ag-group { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; margin-bottom: 16px; overflow: hidden; }
+  .ag-group summary { cursor: pointer; list-style: none; padding: 22px 26px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; }
+  .ag-group summary::-webkit-details-marker { display: none; }
+  .ag-group summary h3 { font: 700 24px/1.15 var(--display); letter-spacing: -.02em; margin: 0; }
+  .ag-group summary p { margin: 0; color: var(--ink-soft); font-size: 15.5px; grid-column: 1; max-width: 80ch; }
+  .ag-group summary .n { grid-row: 1 / span 2; grid-column: 2; font: 700 15px/1 var(--body); background: var(--sky-soft); color: #163f66; border-radius: 999px; padding: 9px 14px; white-space: nowrap; }
+  .ag-group summary .n::after { content: " \25BE"; } .ag-group[open] summary .n::after { content: " \25B4"; }
+  .ag-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; padding: 0 26px 26px; }
+  .ag { border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; background: var(--paper); }
+  .ag .top { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; font-weight: 600; }
+  .ag .top span { border-radius: 999px; padding: 3px 10px; background: var(--night); color: #fff; }
+  .ag .top span + span { background: #fff; color: var(--ink-soft); border: 1px solid var(--line); }
+  .ag b { font: 700 18px/1.2 var(--display); } .ag p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+  .nav nav { gap: 2px; } .nav nav a { white-space: nowrap; padding: 8px 10px; font-size: 14.5px; } .mark { white-space: nowrap; } @media (max-width: 1360px) { .mark small { display: none; } }
   section.block { padding: 112px 0 0; }
   .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 44px; flex-wrap: wrap; }
   .head h2 { font: 760 clamp(36px, 4.6vw, 60px)/1 var(--display); letter-spacing: -.035em; margin: 0; }
@@ -411,6 +430,7 @@
     <nav aria-label="Sections">
       <a href="#approach">How I Lead</a>
       <a href="#building">Building</a>
+      <a href="#agents">AI Agents</a>
       <a href="#cases">Case Studies</a>
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
@@ -468,6 +488,15 @@
     </div>
     <div id="featured"></div>
     <div class="cards light" id="cards"></div>
+  </section>
+
+  <section class="block" id="agents">
+    <div class="head">
+      <h2>AI Agents and Playbooks</h2>
+      <p>The agents, skills, and instruction files I wrote to build, test, secure, and document my tools every day.</p>
+    </div>
+    <div class="ag-stats" id="ag-stats"></div>
+    <div id="ag-list"></div>
   </section>
 
   <section class="block" id="cases">
@@ -758,6 +787,11 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
     b.setAttribute("aria-expanded", String(!box.hidden));
     b.textContent = box.hidden ? "Show More" : "Show Less";
   }));
+  if ((d.agents || []).length) {
+    const total = d.agents.reduce((n, g) => n + g.items.length, 0), sched = d.agents[0].items.length, nightly = d.agents[0].items.filter(i => /night|daily/i.test(i.when)).length;
+    $("ag-stats").innerHTML = [[total, "agents, skills, and playbooks written"], [sched, "agents working on a schedule"], [nightly, "run every day, each ending in a pull request for me"], ["0", "can release without my approval"]].map(([b, t]) => `<div><b>${b}</b><span>${esc(t)}</span></div>`).join("");
+    $("ag-list").innerHTML = d.agents.map((g, gi) => `<details class="ag-group" ${gi === 0 ? "open" : ""}><summary><h3>${esc(g.group)}</h3><span class="n">${g.items.length}</span><p>${esc(g.intro)}</p></summary><div class="ag-items">${g.items.map(i => `<div class="ag"><div class="top"><span>${esc(i.for)}</span><span>${esc(i.when)}</span></div><b>${esc(i.name)}</b><p>${esc(i.text)}</p></div>`).join("")}</div></details>`).join("");
+  } else { $("agents").hidden = true; }
   $("approach-list").innerHTML = (d.approach || []).map(a => `<div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>`).join("");
   if ((d.testimonials || []).length) {
     $("voices").hidden = false;
