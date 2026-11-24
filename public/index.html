@@ -28,7 +28,7 @@
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto; }
   body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.65 var(--body); -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
   :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
@@ -947,16 +947,21 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   new MutationObserver(arm).observe(document.getElementById("cards"), { childList: true }); arm();
 })();
 
-/* A link to a section (from this page or another) lands on that section once the content has been drawn. */
-(() => { const go = () => { if (location.hash.length < 2) return; let el = null; try { el = document.querySelector(location.hash); } catch (e) {} if (el) el.scrollIntoView(); };
-  let tries = 0; const t = setInterval(() => { if (document.getElementById("cards").children.length || ++tries > 40) { clearInterval(t); go(); setTimeout(go, 400); } }, 100);
-  window.addEventListener("load", () => setTimeout(go, 150));
+/* Going to a section: one rule, used for menu clicks, links from other pages, and Back. Always an instant jump that puts the
+   section heading just under the top bar, so it never half scrolls or lands in two places. */
+(() => {
+  const land = id => { const el = id && document.getElementById(id); if (!el) return false;
+    const pad = parseFloat(getComputedStyle(el).paddingTop) || 0, bar = document.getElementById("nav").offsetHeight || 68;
+    const gap = id === "top" ? 0 : Math.max(0, pad - bar - 36);
+    window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY + gap), behavior: "instant" }); return true; };
+  document.addEventListener("click", e => { const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    const id = a.getAttribute("href").slice(1); if (!id || !document.getElementById(id)) return;
+    e.preventDefault(); if (location.hash !== "#" + id) history.pushState(null, "", "#" + id); land(id); });
+  window.addEventListener("popstate", () => land(location.hash.slice(1) || "top"));
+  /* Arriving with a #section in the address: wait until the page content is drawn, then land once. */
+  if (location.hash.length > 1) { let n = 0; const t = setInterval(() => { if (document.getElementById("cards").children.length || ++n > 50) { clearInterval(t); land(location.hash.slice(1)); (document.fonts && document.fonts.ready || Promise.resolve()).then(() => land(location.hash.slice(1))); } }, 80); }
 })();
 
-/* Menu and in page links: jump to the section and make sure the page stays there while pictures finish loading. */
-(() => { const land = id => { const el = document.getElementById(id); if (!el) return; const y = () => window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "instant" }); y(); [150, 500, 1100].forEach(ms => setTimeout(() => { if (Math.abs(el.getBoundingClientRect().top) > 4) y(); }, ms)); };
-  document.addEventListener("click", e => { const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; const id = a.getAttribute("href").slice(1); if (!id || !document.getElementById(id)) return; e.preventDefault(); history.pushState(null, "", "#" + id); land(id); });
-})();
 </script>
 </body>
 </html>
