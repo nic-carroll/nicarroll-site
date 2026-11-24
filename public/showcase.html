@@ -83,6 +83,10 @@
   .menu > div a { display: grid; gap: 2px; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: #0f1c2e; background: none; }
   .menu > div a:hover { background: var(--sky-soft); }
   .menu > div b { font: 600 15.5px/1.2 var(--body); } .menu > div span { font-size: 13.5px; color: #4d5b6e; }
+  .follow { display: inline-flex; align-items: center; gap: 7px; margin-left: 8px; padding: 9px 15px 9px 12px; border-radius: 999px; border: 1.5px solid var(--amber); color: #fff; text-decoration: none; font: 600 15px/1 var(--body); white-space: nowrap; transition: background .15s, color .15s; }
+  .follow svg { width: 16px; height: 16px; color: var(--amber); } .follow i { font-style: normal; }
+  .follow:hover { background: var(--accent-fill); color: var(--on-accent); border-color: transparent; } .follow:hover svg { color: inherit; }
+  @media (max-width: 1120px) { .follow i { display: none; } } @media (max-width: 900px) { .follow { margin-left: auto; } .follow i { display: inline; } } @media (max-width: 420px) { .follow i { display: none; } }
   .nav nav > a.nav-cta { background: var(--accent-fill); color: var(--on-accent); font-weight: 600; margin-left: 6px; }
   .nav nav > a.nav-cta:hover { background: var(--accent-fill-hover); color: var(--on-accent); }
   .mark .logo { width: 40px; height: 40px; flex: none; } .mark .logo .lp { stroke: var(--amber); } .mark .logo .nn { stroke: #fff; }
@@ -189,6 +193,7 @@
       <a href="security.html">Security</a>
       <a class="nav-cta" href="/#contact">Contact</a>
     </nav>
+    <a class="follow" href="https://www.linkedin.com/in/nic-carroll/" target="_blank" rel="noopener me" aria-label="Follow Nic Carroll on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span>Follow <i>on LinkedIn</i></span></a>
   </div>
 </header>
 <main id="main">
