@@ -493,6 +493,24 @@
   "intro": "Innovation that scales. Security that holds. Leadership that delivers.",
   "projects": [
     {
+      "title": "NextGen SIS",
+      "status": "In progress",
+      "summary": "A full student information system for K12 districts: records, enrollment, classes, attendance, gradebook, scheduling, student support, and family access, with updates from one hub. Districts run it in their own cloud. Load tested with 10,332 people at once and backed by 116 automated tests.",
+      "tags": [
+        "K12",
+        "Student information system",
+        "Load tested",
+        "OneRoster"
+      ],
+      "url": "/showcase.html#sis",
+      "repo": "",
+      "sub": "A Full K12 Student Information System",
+      "metric": "10,332",
+      "metricLabel": "people at once in a load test",
+      "linkLabel": "See What It Can Do",
+      "image": "assets/showcase/sis-1-principal-dashboard.jpg"
+    },
+    {
       "title": "RosterEditor",
       "status": "Live demo",
       "summary": "Import a OneRoster 1.1 or 1.2 file, combine sections and courses, add or swap teachers, and export a clean file for ClassLink, in a dashboard or through a REST API. The combining rules are built in, so no AI is needed. The demo uses invented data on real Georgia state course codes.",
