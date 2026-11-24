@@ -1242,67 +1242,78 @@
           "name": "Daily Security Engineer",
           "for": "NextGen SIS",
           "when": "Nightly",
-          "text": "Patches dependencies, reviews the day's changes, and probes one deeper area each weekday, from sign in to data exposure."
+          "text": "Patches dependencies, reviews the day's changes, and probes one deeper area each weekday, from sign in to data exposure.",
+          "file": "agents/nextgen-sis-daily-security-engineer.md"
         },
         {
           "name": "Daily Improvement Engineer",
           "for": "NextGen SIS",
           "when": "Nightly",
-          "text": "Ships one finished, tested improvement a night, rotating between bugs, design, state reporting, and speed."
+          "text": "Ships one finished, tested improvement a night, rotating between bugs, design, state reporting, and speed.",
+          "file": "agents/nextgen-sis-daily-improvement-engineer.md"
         },
         {
           "name": "Directions Writer",
           "for": "NextGen SIS",
           "when": "Nightly",
-          "text": "Keeps step by step directions current for every tool and every user group, verified against the running app."
+          "text": "Keeps step by step directions current for every tool and every user group, verified against the running app.",
+          "file": "agents/nextgen-sis-directions-writer.md"
         },
         {
           "name": "Walkthrough Deck Keeper",
           "for": "NextGen SIS",
           "when": "Nightly",
-          "text": "Updates the walkthrough slides and screenshots whenever a feature changes."
+          "text": "Updates the walkthrough slides and screenshots whenever a feature changes.",
+          "file": "agents/nextgen-sis-walkthrough-deck-keeper.md"
         },
         {
           "name": "Cost Keeper",
           "for": "NextGen SIS",
           "when": "Nightly",
-          "text": "Rechecks cloud list prices and recalculates the hosting cost for small, medium, and large districts."
+          "text": "Rechecks cloud list prices and recalculates the hosting cost for small, medium, and large districts.",
+          "file": "agents/nextgen-sis-cost-keeper.md"
         },
         {
           "name": "Project Manager",
           "for": "NextGen SIS",
           "when": "Nightly",
-          "text": "Runs last, tracks every bug and change, checks that each agent ran, and writes my morning brief."
+          "text": "Runs last, tracks every bug and change, checks that each agent ran, and writes my morning brief.",
+          "file": "agents/nextgen-sis-project-manager.md"
         },
         {
           "name": "Infrastructure Engineer",
           "for": "NextGen SIS",
           "when": "Monthly",
-          "text": "Reviews hosting, sizing, and cost, and runs one cloud load test a month to prove capacity before busy seasons."
+          "text": "Reviews hosting, sizing, and cost, and runs one cloud load test a month to prove capacity before busy seasons.",
+          "file": "agents/nextgen-sis-monthly-infrastructure-run.md"
         },
         {
           "name": "Daily Improvement Engineer",
           "for": "RosterEditor",
           "when": "Nightly",
-          "text": "Reviews the app through six personas, picks the best value fix, builds it with tests, and opens one pull request."
+          "text": "Reviews the app through six personas, picks the best value fix, builds it with tests, and opens one pull request.",
+          "file": "agents/rostereditor-daily-improvement-engineer.md"
         },
         {
           "name": "Persona Tester",
           "for": "RosterEditor and EduSite",
           "when": "Daily",
-          "text": "Uses each product as a different invented person every day and fixes the most useful thing it finds."
+          "text": "Uses each product as a different invented person every day and fixes the most useful thing it finds.",
+          "file": "agents/rostereditor-edusite-persona-tester.md"
         },
         {
           "name": "Security Reviewer",
           "for": "All my products",
           "when": "Monthly",
-          "text": "A read only review of recent changes and scan results across every repository, reported by severity."
+          "text": "A read only review of recent changes and scan results across every repository, reported by severity.",
+          "file": "agents/all-products-monthly-security-reviewer.md"
         },
         {
           "name": "Data Update Checker",
           "for": "Georgia Educational Analytics",
           "when": "Weekly",
-          "text": "Checks the state's public data downloads for new files and records what changed."
+          "text": "Checks the state's public data downloads for new files and records what changed.",
+          "file": "agents/analytics-weekly-data-update-checker.md"
         }
       ]
     },
@@ -1314,49 +1325,57 @@
           "name": "Accessibility Auditor",
           "for": "NextGen SIS",
           "when": "On demand",
-          "text": "Audits pages for WCAG 2.2 AA in light and dark mode, on desktop and phone, and fixes failures."
+          "text": "Audits pages for WCAG 2.2 AA in light and dark mode, on desktop and phone, and fixes failures.",
+          "file": "agents/nextgen-sis-accessibility-auditor.md"
         },
         {
           "name": "Design Reviewer",
           "for": "NextGen SIS",
           "when": "On demand",
-          "text": "Reviews layout against Material Design 3 and the project style, then fixes what it finds."
+          "text": "Reviews layout against Material Design 3 and the project style, then fixes what it finds.",
+          "file": "agents/nextgen-sis-design-reviewer.md"
         },
         {
           "name": "Dashboard Designer",
           "for": "NextGen SIS",
           "when": "On demand",
-          "text": "Designs charts and dashboards so every number is clear and opens the records behind it."
+          "text": "Designs charts and dashboards so every number is clear and opens the records behind it.",
+          "file": "agents/nextgen-sis-dashboard-designer.md"
         },
         {
           "name": "UX Writer",
           "for": "NextGen SIS",
           "when": "On demand",
-          "text": "Rewrites page text, labels, and error messages so staff and families understand them at a glance."
+          "text": "Rewrites page text, labels, and error messages so staff and families understand them at a glance.",
+          "file": "agents/nextgen-sis-ux-writer.md"
         },
         {
           "name": "Infrastructure Engineer",
           "for": "NextGen SIS",
           "when": "On demand",
-          "text": "The full role definition behind the monthly hosting and capacity review."
+          "text": "The full role definition behind the monthly hosting and capacity review.",
+          "file": "agents/nextgen-sis-infrastructure-engineer.md"
         },
         {
           "name": "Code Reviewer",
           "for": "Georgia Educational Analytics",
           "when": "On demand",
-          "text": "An unbiased reviewer with no prior context, focused on security boundaries, correctness, and performance."
+          "text": "An unbiased reviewer with no prior context, focused on security boundaries, correctness, and performance.",
+          "file": "agents/analytics-code-reviewer.md"
         },
         {
           "name": "QA Agent",
           "for": "Georgia Educational Analytics",
           "when": "On demand",
-          "text": "Writes and runs adversarial tests for correctness, boundary safety, and error handling."
+          "text": "Writes and runs adversarial tests for correctness, boundary safety, and error handling.",
+          "file": "agents/analytics-qa-agent.md"
         },
         {
           "name": "Deep Research Agent",
           "for": "Georgia Educational Analytics",
           "when": "On demand",
-          "text": "Investigates technical and security questions across the web and the codebase."
+          "text": "Investigates technical and security questions across the web and the codebase.",
+          "file": "agents/analytics-deep-research-agent.md"
         }
       ]
     },
@@ -1368,55 +1387,78 @@
           "name": "Project Instructions",
           "for": "NextGen SIS",
           "when": "Always on",
-          "text": "Ground rules: one source of truth for outside connections, never call planned work finished, database changes only add."
+          "text": "Ground rules: one source of truth for outside connections, never call planned work finished, database changes only add.",
+          "file": "agents/nextgen-sis-project-instructions.md"
         },
         {
           "name": "Project Instructions",
           "for": "Milestone Compass",
           "when": "Always on",
-          "text": "The planning document and working rules for the practice platform."
+          "text": "The planning document and working rules for the practice platform.",
+          "link": "https://github.com/nic-carroll/milestone-compass-demo/blob/main/CLAUDE.md"
         },
         {
           "name": "Project Instructions",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
-          "text": "How the data portal is organized and how work on it is done."
+          "text": "How the data portal is organized and how work on it is done.",
+          "link": "https://github.com/nic-carroll/Georgia-School-Data/blob/main/.claude/CLAUDE.md"
         },
         {
           "name": "Security Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
-          "text": "Security best practices every change must follow."
+          "text": "Security best practices every change must follow.",
+          "file": "agents/analytics-security-rules.md"
         },
         {
           "name": "Testing Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
-          "text": "What must be tested and how before anything ships."
+          "text": "What must be tested and how before anything ships.",
+          "file": "agents/analytics-testing-rules.md"
         },
         {
           "name": "Code Style Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
-          "text": "Naming and code style conventions."
+          "text": "Naming and code style conventions.",
+          "file": "agents/analytics-code-style-rules.md"
         },
         {
           "name": "React Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
-          "text": "Best practices for interactive screens."
+          "text": "Best practices for interactive screens.",
+          "file": "agents/analytics-react-rules.md"
         },
         {
           "name": "Style System Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
-          "text": "Modern CSS guidelines for a multi brand design system."
+          "text": "Modern CSS guidelines for a multi brand design system.",
+          "file": "agents/analytics-style-system-rules.md"
         },
         {
           "name": "Branding Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
-          "text": "How one portal takes on each district's colors, name, and logo."
+          "text": "How one portal takes on each district's colors, name, and logo.",
+          "file": "agents/analytics-branding-rules.md"
+        },
+        {
+          "name": "Brand Guide",
+          "for": "Nic Carroll brand",
+          "when": "Always on",
+          "text": "Logo, color, schemes, type, and voice rules for anything that carries my name.",
+          "file": "agents/nic-carroll-brand-guide.md"
+        },
+        {
+          "name": "Brand Skill",
+          "for": "Nic Carroll brand",
+          "when": "Always on",
+          "text": "The same brand rules written as a skill an AI agent loads before it builds.",
+          "file": "agents/nic-carroll-brand-skill.md"
         }
       ]
     }

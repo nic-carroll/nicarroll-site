@@ -239,6 +239,8 @@
   .ag-group summary .n::after { content: " \25BE"; } .ag-group[open] summary .n::after { content: " \25B4"; }
   .ag-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; padding: 0 26px 26px; }
   .ag { border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; background: var(--paper); }
+  .ag-dl { justify-self: start; margin-top: 6px; font: 600 14px/1 var(--body); color: var(--link); text-decoration: none; background: var(--sky-soft); padding: 8px 14px; border-radius: 999px; } .ag-dl:hover { background: var(--night); color: #fff; }
+  .ag-all { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin: 0 0 22px; } .ag-all span { color: var(--ink-soft); font-size: 15.5px; } .ag-all .btn { padding: 12px 20px; border-radius: 999px; }
   .ag .top { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; font-weight: 600; }
   .ag .top span { border-radius: 999px; padding: 3px 10px; background: var(--night); color: #fff; }
   .ag .top span + span { background: #fff; color: var(--ink-soft); border: 1px solid var(--line); }
@@ -252,6 +254,7 @@
   .menu[open] > summary::after { transform: translateY(1px) rotate(225deg); }
   .nav nav > a:hover, .menu > summary:hover, .menu[open] > summary { color: #fff; background: rgba(255,255,255,.1); }
   .menu { position: relative; }
+  .menu:nth-of-type(n+3) > div { left: auto; right: 0; }
   .menu > div { position: absolute; top: 46px; left: 0; background: #fff; border-radius: 16px; padding: 8px; min-width: 300px; display: grid; gap: 2px; box-shadow: 0 2px 3px rgba(12,26,46,.2), 0 10px 28px 6px rgba(12,26,46,.16); z-index: 60; }
   .menu > div a { display: grid; gap: 2px; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: #0f1c2e; background: none; }
   .menu > div a:hover { background: var(--sky-soft); }
@@ -449,6 +452,12 @@
         <a href="#experience"><b>Experience</b><span>CIO, CTO, and CISO roles</span></a>
         <a href="#credentials"><b>Credentials</b><span>Education, certifications, boards</span></a>
       </div></details>
+      <details class="menu"><summary>Resume</summary><div>
+        <a href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" download="Nic_Carroll_Resume_Navy.pdf"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span></a>
+        <a href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" download="Nic_Carroll_Resume_Executive.pdf"><b>Executive</b><span>One column with serif headings. 3 pages.</span></a>
+        <a href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" download="Nic_Carroll_Resume_Modern.pdf"><b>Modern</b><span>A light layout with a color accent. 2 pages.</span></a>
+        <a href="#resume-preview"><b>Preview All Three</b><span>See each style before you download</span></a>
+      </div></details>
       <a href="security.html">Security</a>
       <a class="nav-cta" href="#contact">Contact</a>
     </nav>
@@ -510,6 +519,7 @@
       <p>The agents, skills, and instruction files I wrote to build, test, secure, and document my tools every day.</p>
     </div>
     <div class="ag-stats" id="ag-stats"></div>
+    <p class="ag-all"><a class="btn amber" href="agents/nic-carroll-agents-and-playbooks.zip" download>Download All as Markdown</a><span>Every file is plain markdown you can read, reuse, or adapt.</span></p>
     <div id="ag-list"></div>
   </section>
 
@@ -803,8 +813,8 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   }));
   if ((d.agents || []).length) {
     const total = d.agents.reduce((n, g) => n + g.items.length, 0), sched = d.agents[0].items.length, nightly = d.agents[0].items.filter(i => /night|daily/i.test(i.when)).length;
-    $("ag-stats").innerHTML = [[total, "agents, skills, and playbooks written"], [sched, "agents working on a schedule"], [nightly, "run every day, each ending in a pull request for me"], ["0", "can release without my approval"]].map(([b, t]) => `<div><b>${b}</b><span>${esc(t)}</span></div>`).join("");
-    $("ag-list").innerHTML = d.agents.map((g, gi) => `<details class="ag-group" ${gi === 0 ? "open" : ""}><summary><h3>${esc(g.group)}</h3><span class="n">${g.items.length}</span><p>${esc(g.intro)}</p></summary><div class="ag-items">${g.items.map(i => `<div class="ag"><div class="top"><span>${esc(i.for)}</span><span>${esc(i.when)}</span></div><b>${esc(i.name)}</b><p>${esc(i.text)}</p></div>`).join("")}</div></details>`).join("");
+    $("ag-stats").innerHTML = [[total, "agents, skills, and playbooks, all downloadable"], [sched, "agents working on a schedule"], [nightly, "run every day, each ending in a pull request for me"], ["0", "can release without my approval"]].map(([b, t]) => `<div><b>${b}</b><span>${esc(t)}</span></div>`).join("");
+    $("ag-list").innerHTML = d.agents.map((g, gi) => `<details class="ag-group" ${gi === 0 ? "open" : ""}><summary><h3>${esc(g.group)}</h3><span class="n">${g.items.length}</span><p>${esc(g.intro)}</p></summary><div class="ag-items">${g.items.map(i => `<div class="ag"><div class="top"><span>${esc(i.for)}</span><span>${esc(i.when)}</span></div><b>${esc(i.name)}</b><p>${esc(i.text)}</p>${i.file ? `<a class="ag-dl" href="${esc(i.file)}" download>Download Markdown</a>` : i.link ? `<a class="ag-dl" href="${esc(i.link)}" target="_blank" rel="noopener">View on GitHub</a>` : ""}</div>`).join("")}</div></details>`).join("");
   } else { $("agents").hidden = true; }
   $("approach-list").innerHTML = (d.approach || []).map(a => `<div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>`).join("");
   if ((d.testimonials || []).length) {
@@ -936,6 +946,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
 (() => { const btn = document.getElementById("resume-btn"), dlg = document.getElementById("resume-dlg");
   if (!btn || !dlg || !dlg.showModal) return;
   btn.addEventListener("click", e => { e.preventDefault(); dlg.showModal(); });
+  document.addEventListener("click", e => { const a = e.target.closest && e.target.closest('a[href="#resume-preview"]'); if (a) { e.preventDefault(); e.stopPropagation(); dlg.showModal(); } }, true);
   document.getElementById("rd-close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 })();

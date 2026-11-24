@@ -78,6 +78,7 @@
   .menu[open] > summary::after { transform: translateY(1px) rotate(225deg); }
   .nav nav > a:hover, .menu > summary:hover, .menu[open] > summary { color: #fff; background: rgba(255,255,255,.1); }
   .menu { position: relative; }
+  .menu:nth-of-type(n+3) > div { left: auto; right: 0; }
   .menu > div { position: absolute; top: 46px; left: 0; background: #fff; border-radius: 16px; padding: 8px; min-width: 300px; display: grid; gap: 2px; box-shadow: 0 2px 3px rgba(12,26,46,.2), 0 10px 28px 6px rgba(12,26,46,.16); z-index: 60; }
   .menu > div a { display: grid; gap: 2px; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: #0f1c2e; background: none; }
   .menu > div a:hover { background: var(--sky-soft); }
@@ -177,6 +178,12 @@
         <a href="/#approach"><b>How I Lead</b><span>The principles behind every team</span></a>
         <a href="/#experience"><b>Experience</b><span>CIO, CTO, and CISO roles</span></a>
         <a href="/#credentials"><b>Credentials</b><span>Education, certifications, boards</span></a>
+      </div></details>
+      <details class="menu"><summary>Resume</summary><div>
+        <a href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" download="Nic_Carroll_Resume_Navy.pdf"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span></a>
+        <a href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" download="Nic_Carroll_Resume_Executive.pdf"><b>Executive</b><span>One column with serif headings. 3 pages.</span></a>
+        <a href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" download="Nic_Carroll_Resume_Modern.pdf"><b>Modern</b><span>A light layout with a color accent. 2 pages.</span></a>
+        <a href="#resume-styles"><b>Preview All Three</b><span>See each style before you download</span></a>
       </div></details>
       <a href="security.html">Security</a>
       <a class="nav-cta" href="/#contact">Contact</a>
