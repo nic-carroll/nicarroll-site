@@ -214,7 +214,8 @@
   .rd-head { display: flex; justify-content: space-between; gap: 16px; align-items: start; margin-bottom: 18px; }
   .rd-head h2 { font: 700 28px/1.1 var(--display); margin: 0 0 4px; } .rd-head p { margin: 0; color: var(--ink-soft); font-size: 15.5px; }
   #rd-close { border: 0; background: var(--sky-soft); color: var(--ink); font: 600 15px var(--body); border-radius: 999px; padding: 10px 16px; cursor: pointer; }
-  .rd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; }
+  .rd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+  #resume-dlg { width: min(1180px, 94vw); max-height: 92vh; overflow: auto; }
   .rd-grid figure { margin: 0; display: grid; gap: 10px; align-content: start; }
   .rd-grid img { display: block; width: 100%; aspect-ratio: 85 / 110; object-fit: cover; object-position: top; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 2px 8px rgba(12,26,46,.14); }
   .rd-grid figcaption { display: grid; gap: 6px; justify-items: start; }
@@ -497,7 +498,11 @@
         <a href="index.html?resume=navy" data-resume="navy"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span></a>
         <a href="index.html?resume=executive" data-resume="executive"><b>Executive</b><span>One column with serif headings. 3 pages.</span></a>
         <a href="index.html?resume=modern" data-resume="modern"><b>Modern</b><span>A light layout with a color accent. 2 pages.</span></a>
-        <a href="index.html?resume=all" data-resume="all"><b>Compare All Three</b><span>Preview every page, then download</span></a>
+        <a href="index.html?resume=terminal" data-resume="terminal"><b>Terminal</b><span>A dark command line header with monospace labels. 4 pages.</span></a>
+        <a href="index.html?resume=graphite" data-resume="graphite"><b>Graphite</b><span>A graphite header with a red edge and silver bars. 4 pages.</span></a>
+        <a href="index.html?resume=patriot" data-resume="patriot"><b>Patriot</b><span>Red, white, and blue with a deep blue sidebar. 3 pages.</span></a>
+        <a href="index.html?resume=plain" data-resume="plain"><b>ATS Plain</b><span>One column of plain text for applicant tracking systems. 4 pages.</span></a>
+        <a href="index.html?resume=all" data-resume="all"><b>Compare All Styles</b><span>Preview every page, then download</span></a>
       </div></details>
       <details class="menu"><summary>Work</summary><div>
         <a href="showcase.html"><b>Tool Showcase</b><span>Real screens from the tools I built</span></a>
@@ -652,14 +657,18 @@
   </div>
 </section>
 <dialog id="resume-dlg" aria-labelledby="rd-title">
-  <div class="rd-head"><div><h2 id="rd-title">Choose a Resume Style</h2><p>Same content, three looks. Preview every page before you download or print.</p></div><button type="button" id="rd-close" aria-label="Close">Close</button></div>
+  <div class="rd-head"><div><h2 id="rd-title">Choose a Resume Style</h2><p>One career, seven looks. Preview every page before you download or print.</p></div><button type="button" id="rd-close" aria-label="Close">Close</button></div>
   <div class="rd-grid">
     <figure><a href="index.html?resume=navy" data-resume="navy" title="Preview Every Page"><img src="assets/showcase/resume-navy.jpg" alt="First page of the Navy resume" loading="lazy"></a><figcaption data-s="navy"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" download="Nic_Carroll_Resume_Navy.pdf">Download</a><a class="rd-open" href="index.html?resume=navy" data-resume="navy">Preview Every Page</a></figcaption></figure>
     <figure><a href="index.html?resume=executive" data-resume="executive" title="Preview Every Page"><img src="assets/showcase/resume-executive.jpg" alt="First page of the Executive resume" loading="lazy"></a><figcaption data-s="executive"><b>Executive</b><span>One column with serif headings. 3 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" download="Nic_Carroll_Resume_Executive.pdf">Download</a><a class="rd-open" href="index.html?resume=executive" data-resume="executive">Preview Every Page</a></figcaption></figure>
     <figure><a href="index.html?resume=modern" data-resume="modern" title="Preview Every Page"><img src="assets/showcase/resume-modern.jpg" alt="First page of the Modern resume" loading="lazy"></a><figcaption data-s="modern"><b>Modern</b><span>A light layout with a color accent. 2 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" download="Nic_Carroll_Resume_Modern.pdf">Download</a><a class="rd-open" href="index.html?resume=modern" data-resume="modern">Preview Every Page</a></figcaption></figure>
+    <figure><a href="index.html?resume=terminal" data-resume="terminal" title="Preview Every Page"><img src="assets/showcase/resume-terminal.jpg" alt="First page of the Terminal resume" loading="lazy"></a><figcaption data-s="terminal"><b>Terminal</b><span>A dark command line header with monospace labels. 4 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Terminal.pdf" download="Nic_Carroll_Resume_Terminal.pdf">Download</a><a class="rd-open" href="index.html?resume=terminal" data-resume="terminal">Preview Every Page</a></figcaption></figure>
+    <figure><a href="index.html?resume=graphite" data-resume="graphite" title="Preview Every Page"><img src="assets/showcase/resume-graphite.jpg" alt="First page of the Graphite resume" loading="lazy"></a><figcaption data-s="graphite"><b>Graphite</b><span>A graphite header with a red edge and silver bars. 4 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Graphite.pdf" download="Nic_Carroll_Resume_Graphite.pdf">Download</a><a class="rd-open" href="index.html?resume=graphite" data-resume="graphite">Preview Every Page</a></figcaption></figure>
+    <figure><a href="index.html?resume=patriot" data-resume="patriot" title="Preview Every Page"><img src="assets/showcase/resume-patriot.jpg" alt="First page of the Patriot resume" loading="lazy"></a><figcaption data-s="patriot"><b>Patriot</b><span>Red, white, and blue with a deep blue sidebar. 3 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Patriot.pdf" download="Nic_Carroll_Resume_Patriot.pdf">Download</a><a class="rd-open" href="index.html?resume=patriot" data-resume="patriot">Preview Every Page</a></figcaption></figure>
+    <figure><a href="index.html?resume=plain" data-resume="plain" title="Preview Every Page"><img src="assets/showcase/resume-plain.jpg" alt="First page of the ATS Plain resume" loading="lazy"></a><figcaption data-s="plain"><b>ATS Plain</b><span>One column of plain text for applicant tracking systems. 4 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_ATS_Plain.pdf" download="Nic_Carroll_Resume_ATS_Plain.pdf">Download</a><a class="rd-open" href="index.html?resume=plain" data-resume="plain">Preview Every Page</a></figcaption></figure>
   </div>
   <div class="rd-full" id="rd-full" hidden>
-    <div class="rd-tabs" role="tablist" aria-label="Resume style"><button type="button" role="tab" data-s="navy">Navy</button><button type="button" role="tab" data-s="executive">Executive</button><button type="button" role="tab" data-s="modern">Modern</button><button type="button" id="rd-back">Compare All Three</button></div>
+    <div class="rd-tabs" role="tablist" aria-label="Resume style"><button type="button" role="tab" data-s="navy">Navy</button><button type="button" role="tab" data-s="executive">Executive</button><button type="button" role="tab" data-s="modern">Modern</button><button type="button" role="tab" data-s="terminal">Terminal</button><button type="button" role="tab" data-s="graphite">Graphite</button><button type="button" role="tab" data-s="patriot">Patriot</button><button type="button" role="tab" data-s="plain">ATS Plain</button><button type="button" id="rd-back">Compare All Styles</button></div>
     <div class="rd-pages" id="rd-pages" tabindex="0" aria-label="Every page of this resume"></div>
     <div class="rd-act"><span id="rd-note"></span><a class="btn amber" id="rd-dl" href="#" download>Download PDF</a><a class="rd-open" id="rd-print" href="#" target="_blank" rel="noopener">Open to Print</a></div>
   </div>
@@ -1009,12 +1018,12 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
 /* Resume chooser: compare three styles, then preview every page of one before downloading. */
 (() => { const btn = document.getElementById("resume-btn"), dlg = document.getElementById("resume-dlg");
   if (!btn || !dlg || !dlg.showModal) return;
-  const R = { navy: ["Navy", 2], executive: ["Executive", 3], modern: ["Modern", 2] };
+  const R = { navy: ["Navy", 2], executive: ["Executive", 3], modern: ["Modern", 2], terminal: ["Terminal", 4, "Terminal"], graphite: ["Graphite", 4, "Graphite"], patriot: ["Patriot", 3, "Patriot"], plain: ["ATS Plain", 4, "ATS_Plain"] };
   const grid = dlg.querySelector(".rd-grid"), full = $("rd-full"), pages = $("rd-pages");
   const show = k => { const r = R[k]; grid.hidden = !!r; full.hidden = !r; $("rd-title").textContent = r ? r[0] + " Resume Preview" : "Choose a Resume Style";
-    if (r) { const pdf = `assets/resumes/Nic_Carroll_Resume_${r[0]}.pdf`;
+    if (r) { const file = r[2] || r[0], pdf = `assets/resumes/Nic_Carroll_Resume_${file}.pdf`;
       pages.innerHTML = Array.from({ length: r[1] }, (_, n) => `<img src="assets/resumes/preview/${k}-${n + 1}.jpg" alt="${r[0]} resume, page ${n + 1} of ${r[1]}" width="850" height="1100">`).join(""); pages.scrollTop = 0;
-      $("rd-note").textContent = `${r[1]} pages, exactly as they download and print`; $("rd-dl").href = pdf; $("rd-dl").setAttribute("download", `Nic_Carroll_Resume_${r[0]}.pdf`); $("rd-print").href = pdf;
+      $("rd-note").textContent = `${r[1]} pages, exactly as they download and print`; $("rd-dl").href = pdf; $("rd-dl").setAttribute("download", `Nic_Carroll_Resume_${file}.pdf`); $("rd-print").href = pdf;
       full.querySelectorAll("[role=tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.s === k)); }
     if (!dlg.open) dlg.showModal(); };
   btn.addEventListener("click", e => { e.preventDefault(); show("all"); });
