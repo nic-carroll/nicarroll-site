@@ -209,6 +209,27 @@
   .proof span { max-width: none; color: #c5d3e4; }
   @media (max-width: 900px) { .portrait::before { display: none; } .portrait { aspect-ratio: auto; width: auto !important; } .portrait img { width: 180px; height: auto; aspect-ratio: 4 / 5; } .portrait .now { position: static; margin-top: 12px; max-width: none; width: fit-content; } .hero h1 small { display: block; margin: 12px 0 0; } .proof { grid-template-columns: 1fr 1fr; } }
   .pcard .art { overflow: hidden; }
+  /* Things I'm Building, second pass */
+  #building .head h2 { background: linear-gradient(90deg, var(--ink) 55%, #1f5f9e); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #building .head { position: relative; padding-bottom: 22px; }
+  #building .head::after { content: ""; position: absolute; left: 0; bottom: 0; width: 72px; height: 5px; border-radius: 3px; background: var(--amber); }
+  .pcard { position: relative; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; box-shadow: 0 1px 2px rgba(12,26,46,.06); }
+  .pcard:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(12,26,46,.16); border-color: #b9c7d8; }
+  .pcard::after { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: linear-gradient(90deg, var(--amber), #8fb8de); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+  .pcard:hover::after { transform: scaleX(1); }
+  .pcard .art { height: 172px; position: relative; }
+  .pcard .art svg, .pcard .art img { transition: transform .5s ease; }
+  .pcard:hover .art svg, .pcard:hover .art img { transform: scale(1.045); }
+  .pcard .art.shot { background: var(--night); padding: 14px 14px 0; }
+  .pcard .art.shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 10px 10px 0 0; box-shadow: 0 8px 24px rgba(0,0,0,.35); transform-origin: top; }
+  .pcard .links a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; background: var(--sky-soft); color: #163f66; padding: 9px 16px; border-radius: 999px; transition: background .15s, color .15s; }
+  .pcard .links a:first-child { background: var(--night); color: #fff; }
+  .pcard .links a:first-child::after { content: "\2192"; transition: transform .15s; }
+  .pcard .links a:hover { background: var(--amber); color: var(--night); } .pcard .links a:hover::after { transform: translateX(3px); }
+  .pcard .links { gap: 10px; }
+  .pcard.rv { opacity: 0; transform: translateY(22px); } .pcard.rv.in { opacity: 1; transform: none; }
+  .tool-strip { background: radial-gradient(700px 300px at 90% 0%, rgba(143,184,222,.22), transparent 60%), radial-gradient(500px 260px at 0% 100%, rgba(242,180,60,.14), transparent 60%), var(--night); box-shadow: 0 20px 50px rgba(12,26,46,.25); }
+  @media (prefers-reduced-motion: reduce) { .pcard, .pcard .art svg, .pcard .art img, .pcard::after { transition: none; } .pcard.rv { opacity: 1; transform: none; } }
   section.block { padding: 112px 0 0; }
   .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 44px; flex-wrap: wrap; }
   .head h2 { font: 760 clamp(36px, 4.6vw, 60px)/1 var(--display); letter-spacing: -.035em; margin: 0; }
@@ -670,8 +691,8 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   const chips = p => `<div class="pchips">${(p.tags || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>`;
   $("featured").innerHTML = "";
   $("cards").innerHTML = rest.map((p, i) => `
-    <article class="pcard">
-      <div class="art" aria-hidden="true">${art(p, i)}</div>
+    <article class="pcard${p.url || p.repo ? " has-link" : ""}">
+      <div class="art${p.image ? " shot" : ""}" aria-hidden="true">${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy">` : art(p, i)}</div>
       <div class="body">
         <div class="card-top"><span class="pill ${statusClass(p.status)}">${esc(p.status)}</span>${metricBox(p, false)}</div>
         <h3>${esc(p.title)}</h3>
@@ -869,6 +890,13 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   btn.addEventListener("click", e => { e.preventDefault(); dlg.showModal(); });
   document.getElementById("rd-close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+})();
+
+/* Project cards rise in as they come into view. */
+(() => { if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" });
+  const arm = () => document.querySelectorAll("#cards .pcard:not(.rv)").forEach((c, i) => { c.classList.add("rv"); c.style.transitionDelay = (i % 3) * 70 + "ms"; io.observe(c); });
+  new MutationObserver(arm).observe(document.getElementById("cards"), { childList: true }); arm();
 })();
 </script>
 </body>

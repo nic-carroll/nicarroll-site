@@ -23,20 +23,20 @@
   ],
   "stats": [
     {
-      "value": "100%",
-      "label": "Security: Perfect CMMC Level 2 score, with all 110 controls met"
-    },
-    {
-      "value": "5",
-      "label": "AI: tools built in house with AI partners and in daily use"
+      "value": "$1.5M",
+      "label": "Savings: 30% of technology spending saved in year one"
     },
     {
       "value": "$12M",
-      "label": "Operations: school safety systems delivered across 44+ sites"
+      "label": "Delivery: safety systems delivered across 44+ sites"
     },
     {
-      "value": "$1.5M",
-      "label": "Savings: 30% of technology spending saved in year one"
+      "value": "4,000+",
+      "label": "Efficiency: products reviewed in six months with a rebuilt process"
+    },
+    {
+      "value": "100%",
+      "label": "Security: perfect CMMC Level 2 score, all 110 controls met"
     }
   ],
   "experience": [
@@ -553,7 +553,8 @@
       "sub": "One Resume, Three Sharp Styles",
       "metric": "3",
       "metricLabel": "resume styles, six color schemes",
-      "linkLabel": "See the Three Styles"
+      "linkLabel": "See the Three Styles",
+      "image": "assets/showcase/resume-navy.jpg"
     },
     {
       "title": "Unified Security Dashboard",
@@ -566,7 +567,8 @@
       ],
       "url": "/showcase.html#eagleaudit",
       "repo": "",
-      "linkLabel": "See the Overview"
+      "linkLabel": "See the Overview",
+      "image": "assets/showcase/eagleaudit-one-sheet.jpg"
     },
     {
       "title": "Policy Library",
@@ -579,7 +581,8 @@
       ],
       "url": "/showcase.html#policy",
       "repo": "",
-      "linkLabel": "See Sample Screens"
+      "linkLabel": "See Sample Screens",
+      "image": "assets/showcase/policy-1-dashboard.jpg"
     },
     {
       "title": "Open Records Request Automation",
@@ -604,7 +607,8 @@
       ],
       "url": "/showcase.html#donor",
       "repo": "",
-      "linkLabel": "See Sample Screens"
+      "linkLabel": "See Sample Screens",
+      "image": "assets/showcase/donor-4-dashboard.jpg"
     },
     {
       "title": "Staff Feedback Survey System",
