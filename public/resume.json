@@ -24,19 +24,19 @@
   "stats": [
     {
       "value": "100%",
-      "label": "CMMC Level 2: all 110 NIST SP 800-171 controls met, zero deficiencies"
+      "label": "Security: CMMC Level 2 with all 110 NIST SP 800-171 controls met, zero deficiencies"
+    },
+    {
+      "value": "1 day",
+      "label": "AI: from idea to a working first draft, built with AI partners"
     },
     {
       "value": "$12M",
-      "label": "School safety systems delivered across 44+ sites"
+      "label": "Operations: school safety systems delivered across 44+ sites"
     },
     {
-      "value": "95%",
-      "label": "Less phishing and spam reaching inboxes, in under three months"
-    },
-    {
-      "value": "37,000+",
-      "label": "Students, faculty, and staff protected at Georgia Southern University"
+      "value": "30%",
+      "label": "Leadership: technology spending saved in year one, more than $1.5M"
     }
   ],
   "experience": [
