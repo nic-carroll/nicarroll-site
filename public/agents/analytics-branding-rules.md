@@ -6,12 +6,12 @@ This repository supports multi-organization web development, allowing applicatio
 ## Core Rules for Multi-Branding
 
 ### 1. Brand Asset & Style Isolation
-- The live dashboard (`client/index.html`) defines both brands inline in one `<style>` block — there is no `theme.css` per brand and no `src/brands/<organization-id>/` isolation in the running app. (That directory exists as unwired React scaffolding — see `CLAUDE.md` Architecture Quirks. Don't theme through it.)
+- The live dashboard (`client/index.html`) defines both brands inline in one `<style>` block, there is no `theme.css` per brand and no `src/brands/<organization-id>/` isolation in the running app. (That directory exists as unwired React scaffolding, see `CLAUDE.md` Architecture Quirks. Don't theme through it.)
 - Never hardcode brand-specific colors (e.g. `#00025D` or `#001344`) outside the `:root[data-brand="..."]` blocks.
 - Always consume colors and fonts via the CSS custom properties below.
 
 ### 2. Actual Brand Token Schema (as shipped in `client/index.html`)
-Each brand block currently defines exactly these properties — nothing more:
+Each brand block currently defines exactly these properties, nothing more:
 
 ```css
 :root[data-brand="<brand-id>"] {
@@ -29,7 +29,7 @@ Each brand block currently defines exactly these properties — nothing more:
 }
 ```
 
-There is no `--brand-primary-hover`, `--brand-font-family`, `--brand-border-radius`, `--brand-header-bg`, or `--brand-header-text` — those were aspirational names from an earlier draft of this doc and don't exist in the code. If a new component genuinely needs a hover-state color or a header-specific override, add it to **both** `:root[data-brand="..."]` blocks in `index.html` using this same `--brand-*` naming convention, and update this table.
+There is no `--brand-primary-hover`, `--brand-font-family`, `--brand-border-radius`, `--brand-header-bg`, or `--brand-header-text`, those were aspirational names from an earlier draft of this doc and don't exist in the code. If a new component genuinely needs a hover-state color or a header-specific override, add it to **both** `:root[data-brand="..."]` blocks in `index.html` using this same `--brand-*` naming convention, and update this table.
 
 ### 3. Pre-Configured Official Organizations
 
@@ -39,7 +39,7 @@ There is no `--brand-primary-hover`, `--brand-font-family`, `--brand-border-radi
 | `georgia-southern` | **Georgia Southern University** *(Official Brand Guidelines)* | **GS Navy** (`#001344` / PMS 282) | **Accessible Gold** (`#B9832D`), Logo Gold (`#9A8348`) | Athletic Grey (`#A5ACAF`), Sky Blue (`#68CAEB`), Fonts: *Merriweather / Barlow* |
 | `default` | Generic Default | Slate (`#1E293B`) | Indigo (`#6366F1`) | Blue (`#3B82F6`), Font: *Inter* |
 
-### 4. Brand Switcher (actual mechanism — vanilla JS, not React)
+### 4. Brand Switcher (actual mechanism: vanilla JS, not React)
 The live dashboard swaps brands by setting the `data-brand` attribute directly and updating a couple of header text nodes. This is the `switchTheme()` function already in `client/index.html`:
 
 ```js
@@ -55,6 +55,6 @@ function switchTheme(brandId) {
 }
 ```
 
-A `<select class="theme-selector">` in the header calls this on change. Adding a third brand means: add a `:root[data-brand="new-id"]` block with the token schema above, add an `<option>`, and extend this `if/else` (or refactor it to a lookup table if a third brand is added — a 3-way if/else is the point to switch).
+A `<select class="theme-selector">` in the header calls this on change. Adding a third brand means: add a `:root[data-brand="new-id"]` block with the token schema above, add an `<option>`, and extend this `if/else` (or refactor it to a lookup table if a third brand is added, a 3-way if/else is the point to switch).
 
-The `BrandProvider`/`useBrand` React context in `src/brands/` is unused scaffolding — do not wire new theming work through it unless the project has actually migrated to the React SPA (see `CLAUDE.md`).
+The `BrandProvider`/`useBrand` React context in `src/brands/` is unused scaffolding, do not wire new theming work through it unless the project has actually migrated to the React SPA (see `CLAUDE.md`).

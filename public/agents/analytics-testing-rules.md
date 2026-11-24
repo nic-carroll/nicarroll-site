@@ -3,7 +3,7 @@
 ## Overview
 Comprehensive testing ensures reliability for interactive web apps across client interactions and API services.
 
-**Current status: aspirational.** No test runner is installed in this repo yet (`client/package.json` and `server/package.json` have no `test` script, and no Vitest/Jest/Playwright config exists). Treat this file as the target setup to adopt when tests are introduced, not as a description of what's already running — don't assume `npm run test` works until a runner is actually wired in.
+**Current status: aspirational.** No test runner is installed in this repo yet (`client/package.json` and `server/package.json` have no `test` script, and no Vitest/Jest/Playwright config exists). Treat this file as the target setup to adopt when tests are introduced, not as a description of what's already running, don't assume `npm run test` works until a runner is actually wired in.
 
 ## Testing Layers
 

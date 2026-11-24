@@ -171,6 +171,30 @@
   .ts-row img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); transition: transform .15s; }
   .ts-row a:hover img { transform: translateY(-3px); }
   #resume-dlg { border: 0; padding: 24px; border-radius: 28px; background: var(--surface); color: var(--ink); width: min(980px, 94vw); box-shadow: 0 10px 40px rgba(12,26,46,.4); }
+  .rd-full[hidden], .rd-grid[hidden] { display: none; }
+  .rd-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .rd-tabs button, .dd-copy { border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 600 15px var(--body); border-radius: 999px; padding: 9px 16px; cursor: pointer; }
+  .rd-tabs button[aria-selected="true"] { background: var(--night); color: #fff; border-color: var(--night); }
+  .rd-tabs #rd-back { margin-left: auto; background: var(--sky-soft); border-color: transparent; }
+  .rd-pages { max-height: min(62vh, 760px); overflow: auto; background: #dfe4ea; border-radius: 14px; padding: 18px; display: grid; gap: 18px; justify-items: center; }
+  .rd-pages img { width: min(100%, 720px); height: auto; background: #fff; box-shadow: 0 3px 14px rgba(12,26,46,.25); }
+  .rd-act, .dd-act { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; } .rd-act span { margin-right: auto; color: var(--ink-soft); font-size: 15px; }
+  .rd-act .btn, .dd-act .btn { padding: 12px 20px; border-radius: 999px; }
+  #doc-dlg { border: 0; padding: 24px; border-radius: 28px; background: var(--surface); color: var(--ink); width: min(900px, 94vw); box-shadow: 0 10px 40px rgba(12,26,46,.4); }
+  #doc-dlg::backdrop { background: rgba(12,26,46,.72); }
+  #dd-close { border: 0; background: var(--sky-soft); color: var(--ink); font: 600 15px var(--body); border-radius: 999px; padding: 10px 16px; cursor: pointer; }
+  .dd-meta { font: 600 13px/1 ui-monospace, Menlo, Consolas, monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--link); margin: 0 0 8px !important; }
+  .dd-body { max-height: min(58vh, 680px); overflow: auto; border: 1px solid var(--line); border-radius: 14px; padding: 6px 24px 18px; font-size: 16px; line-height: 1.6; overflow-wrap: anywhere; }
+  .dd-body h3 { font: 700 24px/1.2 var(--display); margin: 22px 0 8px; } .dd-body h4 { font: 700 19px/1.25 var(--display); margin: 22px 0 6px; } .dd-body h5, .dd-body h6 { font: 700 16px/1.3 var(--body); margin: 18px 0 4px; }
+  .dd-body p { margin: 10px 0; } .dd-body ul, .dd-body ol { margin: 8px 0; padding-left: 24px; } .dd-body li { margin: 4px 0; }
+  .dd-body code { font: 14px ui-monospace, Menlo, Consolas, monospace; background: var(--sky-soft); padding: 1px 5px; border-radius: 5px; }
+  .dd-body pre { background: var(--night); color: #e8eef6; padding: 14px 16px; border-radius: 10px; overflow: auto; } .dd-body pre code { background: none; padding: 0; color: inherit; }
+  .dd-body blockquote { margin: 12px 0; padding: 4px 16px; border-left: 4px solid var(--amber); color: var(--ink-soft); }
+  .dd-body table { border-collapse: collapse; display: block; overflow: auto; margin: 12px 0; font-size: 14.5px; } .dd-body th, .dd-body td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  .dd-body hr { border: 0; border-top: 1px solid var(--line); margin: 18px 0; }
+  .dd-body dl.fm { margin: 16px 0 4px; padding: 12px 16px; background: var(--sky-soft); border-radius: 10px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 14.5px; } .dd-body dl.fm dt { font-weight: 700; } .dd-body dl.fm dd { margin: 0; }
+  #dd-link { flex: 1 1 220px; min-width: 0; border: 1px solid var(--line); border-radius: 999px; padding: 10px 14px; font: 14px ui-monospace, Menlo, Consolas, monospace; color: var(--ink-soft); background: transparent; }
+  .ag-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; } .ag-acts .ag-dl { margin-top: 0; border: 0; cursor: pointer; } .ag-acts .ag-pv { background: var(--night); color: #fff; } .ag-acts .ag-pv:hover { background: var(--link); }
   #resume-dlg::backdrop { background: rgba(12,26,46,.72); }
   .rd-head { display: flex; justify-content: space-between; gap: 16px; align-items: start; margin-bottom: 18px; }
   .rd-head h2 { font: 700 28px/1.1 var(--display); margin: 0 0 4px; } .rd-head p { margin: 0; color: var(--ink-soft); font-size: 15.5px; }
@@ -453,10 +477,10 @@
         <a href="#credentials"><b>Credentials</b><span>Education, certifications, boards</span></a>
       </div></details>
       <details class="menu"><summary>Resume</summary><div>
-        <a href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" download="Nic_Carroll_Resume_Navy.pdf"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span></a>
-        <a href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" download="Nic_Carroll_Resume_Executive.pdf"><b>Executive</b><span>One column with serif headings. 3 pages.</span></a>
-        <a href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" download="Nic_Carroll_Resume_Modern.pdf"><b>Modern</b><span>A light layout with a color accent. 2 pages.</span></a>
-        <a href="#resume-preview"><b>Preview All Three</b><span>See each style before you download</span></a>
+        <a href="index.html?resume=navy" data-resume="navy"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span></a>
+        <a href="index.html?resume=executive" data-resume="executive"><b>Executive</b><span>One column with serif headings. 3 pages.</span></a>
+        <a href="index.html?resume=modern" data-resume="modern"><b>Modern</b><span>A light layout with a color accent. 2 pages.</span></a>
+        <a href="index.html?resume=all" data-resume="all"><b>Compare All Three</b><span>Preview every page, then download</span></a>
       </div></details>
       <a href="security.html">Security</a>
       <a class="nav-cta" href="#contact">Contact</a>
@@ -519,7 +543,7 @@
       <p>The agents, skills, and instruction files I wrote to build, test, secure, and document my tools every day.</p>
     </div>
     <div class="ag-stats" id="ag-stats"></div>
-    <p class="ag-all"><a class="btn amber" href="agents/nic-carroll-agents-and-playbooks.zip" download>Download All as Markdown</a><span>Every file is plain markdown you can read, reuse, or adapt.</span></p>
+    <p class="ag-all"><a class="btn amber" href="agents/nic-carroll-agents-and-playbooks.zip" download>Download All as Markdown</a><span>Preview any file, download it, or copy a link to share it.</span></p>
     <div id="ag-list"></div>
   </section>
 
@@ -604,12 +628,22 @@
   </div>
 </section>
 <dialog id="resume-dlg" aria-labelledby="rd-title">
-  <div class="rd-head"><div><h2 id="rd-title">Choose a Resume Style</h2><p>Same content, three looks. The picture shows the first page of what you will download or print.</p></div><button type="button" id="rd-close" aria-label="Close">Close</button></div>
+  <div class="rd-head"><div><h2 id="rd-title">Choose a Resume Style</h2><p>Same content, three looks. Preview every page before you download or print.</p></div><button type="button" id="rd-close" aria-label="Close">Close</button></div>
   <div class="rd-grid">
-    <figure><a href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" target="_blank" rel="noopener"><img src="assets/showcase/resume-navy.jpg" alt="First page of the Navy resume" loading="lazy"></a><figcaption><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" download="Nic_Carroll_Resume_Navy.pdf">Download</a><a class="rd-open" href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" target="_blank" rel="noopener">Open to print</a></figcaption></figure>
-    <figure><a href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" target="_blank" rel="noopener"><img src="assets/showcase/resume-executive.jpg" alt="First page of the Executive resume" loading="lazy"></a><figcaption><b>Executive</b><span>One column with serif headings. 3 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" download="Nic_Carroll_Resume_Executive.pdf">Download</a><a class="rd-open" href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" target="_blank" rel="noopener">Open to print</a></figcaption></figure>
-    <figure><a href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" target="_blank" rel="noopener"><img src="assets/showcase/resume-modern.jpg" alt="First page of the Modern resume" loading="lazy"></a><figcaption><b>Modern</b><span>A light layout with a color accent. 2 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" download="Nic_Carroll_Resume_Modern.pdf">Download</a><a class="rd-open" href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" target="_blank" rel="noopener">Open to print</a></figcaption></figure>
+    <figure><a href="index.html?resume=navy" data-resume="navy" title="Preview Every Page"><img src="assets/showcase/resume-navy.jpg" alt="First page of the Navy resume" loading="lazy"></a><figcaption data-s="navy"><b>Navy</b><span>Two columns with a dark sidebar. 2 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Navy.pdf" download="Nic_Carroll_Resume_Navy.pdf">Download</a><a class="rd-open" href="index.html?resume=navy" data-resume="navy">Preview Every Page</a></figcaption></figure>
+    <figure><a href="index.html?resume=executive" data-resume="executive" title="Preview Every Page"><img src="assets/showcase/resume-executive.jpg" alt="First page of the Executive resume" loading="lazy"></a><figcaption data-s="executive"><b>Executive</b><span>One column with serif headings. 3 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Executive.pdf" download="Nic_Carroll_Resume_Executive.pdf">Download</a><a class="rd-open" href="index.html?resume=executive" data-resume="executive">Preview Every Page</a></figcaption></figure>
+    <figure><a href="index.html?resume=modern" data-resume="modern" title="Preview Every Page"><img src="assets/showcase/resume-modern.jpg" alt="First page of the Modern resume" loading="lazy"></a><figcaption data-s="modern"><b>Modern</b><span>A light layout with a color accent. 2 pages.</span><a class="btn amber" href="assets/resumes/Nic_Carroll_Resume_Modern.pdf" download="Nic_Carroll_Resume_Modern.pdf">Download</a><a class="rd-open" href="index.html?resume=modern" data-resume="modern">Preview Every Page</a></figcaption></figure>
   </div>
+  <div class="rd-full" id="rd-full" hidden>
+    <div class="rd-tabs" role="tablist" aria-label="Resume style"><button type="button" role="tab" data-s="navy">Navy</button><button type="button" role="tab" data-s="executive">Executive</button><button type="button" role="tab" data-s="modern">Modern</button><button type="button" id="rd-back">Compare All Three</button></div>
+    <div class="rd-pages" id="rd-pages" tabindex="0" aria-label="Every page of this resume"></div>
+    <div class="rd-act"><span id="rd-note"></span><a class="btn amber" id="rd-dl" href="#" download>Download PDF</a><a class="rd-open" id="rd-print" href="#" target="_blank" rel="noopener">Open to Print</a></div>
+  </div>
+</dialog>
+<dialog id="doc-dlg" aria-labelledby="dd-title">
+  <div class="rd-head"><div><p class="dd-meta" id="dd-meta"></p><h2 id="dd-title"></h2></div><button type="button" id="dd-close" aria-label="Close">Close</button></div>
+  <div class="dd-body" id="dd-body" tabindex="0"></div>
+  <div class="dd-act"><a class="btn amber" id="dd-dl" href="#" download>Download Markdown</a><button type="button" class="dd-copy" id="dd-copy">Copy Link</button><input id="dd-link" readonly aria-label="Link to this preview"></div>
 </dialog>
 <footer><div class="wrap"><span id="foot-left"></span><a href="security.html" style="color:inherit">Security</a><span>Designed and updated by Nic Carroll<span id="updated"></span></span></div></footer>
 
@@ -814,7 +848,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   if ((d.agents || []).length) {
     const total = d.agents.reduce((n, g) => n + g.items.length, 0), sched = d.agents[0].items.length, nightly = d.agents[0].items.filter(i => /night|daily/i.test(i.when)).length;
     $("ag-stats").innerHTML = [[total, "agents, skills, and playbooks, all downloadable"], [sched, "agents working on a schedule"], [nightly, "run every day, each ending in a pull request for me"], ["0", "can release without my approval"]].map(([b, t]) => `<div><b>${b}</b><span>${esc(t)}</span></div>`).join("");
-    $("ag-list").innerHTML = d.agents.map((g, gi) => `<details class="ag-group" ${gi === 0 ? "open" : ""}><summary><h3>${esc(g.group)}</h3><span class="n">${g.items.length}</span><p>${esc(g.intro)}</p></summary><div class="ag-items">${g.items.map(i => `<div class="ag"><div class="top"><span>${esc(i.for)}</span><span>${esc(i.when)}</span></div><b>${esc(i.name)}</b><p>${esc(i.text)}</p>${i.file ? `<a class="ag-dl" href="${esc(i.file)}" download>Download Markdown</a>` : i.link ? `<a class="ag-dl" href="${esc(i.link)}" target="_blank" rel="noopener">View on GitHub</a>` : ""}</div>`).join("")}</div></details>`).join("");
+    $("ag-list").innerHTML = d.agents.map((g, gi) => `<details class="ag-group" ${gi === 0 ? "open" : ""}><summary><h3>${esc(g.group)}</h3><span class="n">${g.items.length}</span><p>${esc(g.intro)}</p></summary><div class="ag-items">${g.items.map(i => `<div class="ag"><div class="top"><span>${esc(i.for)}</span><span>${esc(i.when)}</span></div><b>${esc(i.name)}</b><p>${esc(i.text)}</p>${i.file ? `<div class="ag-acts"><button type="button" class="ag-dl ag-pv" data-doc="${esc(i.file)}" data-name="${esc(i.name)}" data-for="${esc(i.for)}">Preview</button><a class="ag-dl" href="${esc(i.file)}" download>Download</a><button type="button" class="ag-dl" data-copy="${esc(i.file)}">Copy Link</button></div>` : ""}</div>`).join("")}</div></details>`).join("");
   } else { $("agents").hidden = true; }
   $("approach-list").innerHTML = (d.approach || []).map(a => `<div><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></div>`).join("");
   if ((d.testimonials || []).length) {
@@ -942,13 +976,76 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => { size(); if (reduce) frame(); }, 150); });
 })();
 
-/* Resume chooser: the button still downloads the Navy PDF if dialogs are not supported. */
+/* Resume chooser: compare three styles, then preview every page of one before downloading. */
 (() => { const btn = document.getElementById("resume-btn"), dlg = document.getElementById("resume-dlg");
   if (!btn || !dlg || !dlg.showModal) return;
-  btn.addEventListener("click", e => { e.preventDefault(); dlg.showModal(); });
-  document.addEventListener("click", e => { const a = e.target.closest && e.target.closest('a[href="#resume-preview"]'); if (a) { e.preventDefault(); e.stopPropagation(); dlg.showModal(); } }, true);
+  const R = { navy: ["Navy", 2], executive: ["Executive", 3], modern: ["Modern", 2] };
+  const grid = dlg.querySelector(".rd-grid"), full = $("rd-full"), pages = $("rd-pages");
+  const show = k => { const r = R[k]; grid.hidden = !!r; full.hidden = !r; $("rd-title").textContent = r ? r[0] + " Resume Preview" : "Choose a Resume Style";
+    if (r) { const pdf = `assets/resumes/Nic_Carroll_Resume_${r[0]}.pdf`;
+      pages.innerHTML = Array.from({ length: r[1] }, (_, n) => `<img src="assets/resumes/preview/${k}-${n + 1}.jpg" alt="${r[0]} resume, page ${n + 1} of ${r[1]}" width="850" height="1100">`).join(""); pages.scrollTop = 0;
+      $("rd-note").textContent = `${r[1]} pages, exactly as they download and print`; $("rd-dl").href = pdf; $("rd-dl").setAttribute("download", `Nic_Carroll_Resume_${r[0]}.pdf`); $("rd-print").href = pdf;
+      full.querySelectorAll("[role=tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.s === k)); }
+    if (!dlg.open) dlg.showModal(); };
+  btn.addEventListener("click", e => { e.preventDefault(); show("all"); });
+  document.addEventListener("click", e => { const a = e.target.closest && e.target.closest("[data-resume]"); if (!a) return; e.preventDefault(); e.stopPropagation();
+    document.querySelectorAll("details.menu[open]").forEach(m => m.open = false); show(a.dataset.resume); }, true);
+  full.querySelectorAll("[role=tab]").forEach(b => b.addEventListener("click", () => show(b.dataset.s)));
+  $("rd-back").addEventListener("click", () => show("all"));
   document.getElementById("rd-close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  const q = new URLSearchParams(location.search).get("resume"); if (q && (R[q] || q === "all")) { show(q); history.replaceState(null, "", location.pathname + location.hash); }
+})();
+
+/* Agent and playbook files: preview the markdown, download it, or copy a link that opens the preview. */
+function mdToHtml(src) {
+  const inl = t => t.split("`").map((p, i) => i % 2 ? `<code>${esc(p)}</code>` : esc(p).replace(/\[([^\]]+)\]\(([^)\s]*)\)/g, "$1").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").replace(/(^|[\s(])\*([^*\s][^*]*)\*(?=[\s).,;:!?]|$)/g, "$1<em>$2</em>")).join("");
+  const out = [], stack = []; let para = [];
+  const flush = () => { if (para.length) { out.push("<p>" + inl(para.join("\n")).replace(/ {2,}\n/g, "<br>").replace(/\n/g, " ") + "</p>"); para = []; } };
+  const closeAll = () => { while (stack.length) out.push(`</li></${stack.pop().t}>`); };
+  src = src.replace(/\r/g, "");
+  const fm = src.match(/^---\n([\s\S]*?)\n---\n?/);
+  if (fm) { src = src.slice(fm[0].length); const rows = [];
+    fm[1].split("\n").forEach(l => { const m = l.match(/^([A-Za-z_-]+):\s*(.*)$/); if (m) rows.push([m[1], m[2]]); else if (rows.length) rows[rows.length - 1][1] += " " + l.trim(); });
+    out.push('<dl class="fm">' + rows.map(r => `<dt>${esc(r[0])}</dt><dd>${esc(r[1])}</dd>`).join("") + "</dl>"); }
+  const L = src.split("\n"), LI = /^(\s*)([-*+]|\d+[.)])\s+(.*)$/;
+  for (let i = 0; i < L.length; i++) { const ln = L[i]; let m;
+    if (/^\s*```/.test(ln)) { flush(); if (!(stack.length && /^\s/.test(ln))) closeAll(); const b = []; i++; while (i < L.length && !/^\s*```/.test(L[i])) b.push(L[i++]); out.push("<pre><code>" + esc(b.join("\n")) + "</code></pre>"); continue; }
+    if (!ln.trim()) { flush(); if (stack.length) { let j = i + 1; while (j < L.length && !L[j].trim()) j++; if (j >= L.length || !(LI.test(L[j]) || /^\s+\S/.test(L[j]))) closeAll(); } continue; }
+    if ((m = ln.match(LI))) { flush(); const ind = m[1].length, t = /\d/.test(m[2]) ? "ol" : "ul";
+      while (stack.length && ind < stack[stack.length - 1].ind) out.push(`</li></${stack.pop().t}>`);
+      const top = stack[stack.length - 1];
+      if (top && ind === top.ind && top.t === t) out.push("</li>");
+      else { if (top && ind === top.ind) out.push(`</li></${stack.pop().t}>`); out.push(`<${t}>`); stack.push({ t, ind }); }
+      out.push("<li>" + inl(m[3])); continue; }
+    if (stack.length && /^\s+\S/.test(ln)) { out.push(" " + inl(ln.trim())); continue; }
+    if ((m = ln.match(/^(#{1,6})\s+(.*?)\s*#*$/))) { flush(); closeAll(); out.push(`<h${Math.min(6, m[1].length + 2)}>${inl(m[2])}</h${Math.min(6, m[1].length + 2)}>`); continue; }
+    if (/^\s*(-{3,}|\*{3,}|_{3,})\s*$/.test(ln)) { flush(); closeAll(); out.push("<hr>"); continue; }
+    if (/^>/.test(ln)) { flush(); closeAll(); const b = []; while (i < L.length && /^>/.test(L[i])) b.push(L[i++].replace(/^>\s?/, "")); i--; out.push("<blockquote><p>" + inl(b.join(" ")) + "</p></blockquote>"); continue; }
+    if (/^\s*\|/.test(ln) && i + 1 < L.length && /^\s*\|?[\s:|-]+\|[\s:|-]*$/.test(L[i + 1])) { flush(); closeAll();
+      const cells = r => r.trim().replace(/^\||\|$/g, "").split("|").map(c => inl(c.trim())); const head = cells(ln); i += 2; const rows = [];
+      while (i < L.length && /^\s*\|/.test(L[i])) rows.push(cells(L[i++])); i--;
+      out.push("<table><thead><tr>" + head.map(c => `<th>${c}</th>`).join("") + "</tr></thead><tbody>" + rows.map(r => "<tr>" + r.map(c => `<td>${c}</td>`).join("") + "</tr>").join("") + "</tbody></table>"); continue; }
+    closeAll(); para.push(ln); }
+  flush(); closeAll(); return out.join("\n");
+}
+(() => { const dlg = $("doc-dlg"); if (!dlg || !dlg.showModal) return;
+  const share = f => location.origin + location.pathname + "?doc=" + encodeURIComponent(f.replace(/^agents\/|\.md$/g, "")) + "#agents";
+  const copy = (text, el) => { const done = ok => { const t = el.textContent; el.textContent = ok ? "Link Copied" : "Copy Failed"; setTimeout(() => el.textContent = t, 1600); };
+    try { navigator.clipboard.writeText(text).then(() => done(true), () => done(false)); } catch (e) { done(false); } };
+  const open = async (file, name, sub) => { $("dd-title").textContent = name || "Preview"; $("dd-meta").textContent = (sub ? sub + " / " : "") + file.split("/").pop();
+    $("dd-dl").href = file; $("dd-link").value = share(file); $("dd-body").innerHTML = "<p>Loading the file.</p>"; if (!dlg.open) dlg.showModal();
+    try { const r = await fetch(file); if (!r.ok) throw 0; $("dd-body").innerHTML = mdToHtml(await r.text()); $("dd-body").scrollTop = 0; }
+    catch (e) { $("dd-body").innerHTML = "<p>The preview could not load. The download still works.</p>"; } };
+  document.addEventListener("click", e => { const p = e.target.closest && e.target.closest("[data-doc]"); if (p) { open(p.dataset.doc, p.dataset.name, p.dataset.for); return; }
+    const c = e.target.closest && e.target.closest("[data-copy]"); if (c) copy(share(c.dataset.copy), c); });
+  $("dd-copy").addEventListener("click", e => { $("dd-link").select(); copy($("dd-link").value, e.currentTarget); });
+  $("dd-link").addEventListener("focus", e => e.target.select());
+  $("dd-close").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  const q = new URLSearchParams(location.search).get("doc");
+  if (q && /^[a-z0-9-]+$/.test(q)) { let n = 0; const t = setInterval(() => { const b = document.querySelector(`[data-doc="agents/${q}.md"]`);
+    if (b || ++n > 60) { clearInterval(t); if (b) { const g = b.closest("details"); if (g) g.open = true; open(b.dataset.doc, b.dataset.name, b.dataset.for); } } }, 100); }
 })();
 
 /* Project cards rise in as they come into view. */

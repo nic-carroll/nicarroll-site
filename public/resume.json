@@ -1395,14 +1395,14 @@
           "for": "Milestone Compass",
           "when": "Always on",
           "text": "The planning document and working rules for the practice platform.",
-          "link": "https://github.com/nic-carroll/milestone-compass-demo/blob/main/CLAUDE.md"
+          "file": "agents/milestone-compass-project-instructions.md"
         },
         {
           "name": "Project Instructions",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
           "text": "How the data portal is organized and how work on it is done.",
-          "link": "https://github.com/nic-carroll/Georgia-School-Data/blob/main/.claude/CLAUDE.md"
+          "file": "agents/analytics-project-instructions.md"
         },
         {
           "name": "Security Rules",
