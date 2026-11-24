@@ -24,19 +24,19 @@
   "stats": [
     {
       "value": "100%",
-      "label": "Security: CMMC Level 2 with all 110 NIST SP 800-171 controls met, zero deficiencies"
+      "label": "Security: Perfect CMMC Level 2 score, with all 110 controls met"
     },
     {
-      "value": "1 day",
-      "label": "AI: from idea to a working first draft, built with AI partners"
+      "value": "5",
+      "label": "AI: tools built in house with AI partners and in daily use"
     },
     {
       "value": "$12M",
       "label": "Operations: school safety systems delivered across 44+ sites"
     },
     {
-      "value": "30%",
-      "label": "Leadership: technology spending saved in year one, more than $1.5M"
+      "value": "$1.5M",
+      "label": "Savings: 30% of technology spending saved in year one"
     }
   ],
   "experience": [
@@ -57,7 +57,7 @@
         },
         {
           "h": "Reimagine IT Project Methodology",
-          "t": "Reimagined project management at Georgia Southern University with Reimagine IT: Frame it, Build it, Loop it, Launch it, Tend it. Cross functional teams build a working draft with AI partners in a day and launch in days or weeks, with security and IAM built in, not bolted on."
+          "t": "Created Reimagine IT to rethink how products and projects are developed and run across their whole life cycle: Frame it, Build it, Loop it, Launch it, Tend it. Teams plan and build together with AI as a partner, refine in short loops, and keep improving after launch, with security and IAM built in, not bolted on."
         },
         {
           "h": "95% Less Phishing and Spam",
@@ -737,7 +737,7 @@
       ]
     },
     {
-      "title": "Reimagine IT: A New Way to Run Projects",
+      "title": "Reimagine IT: Rethinking How Products and Projects Are Built",
       "org": "Georgia Southern University",
       "tag": "Leadership",
       "challenge": "Projects followed the old way: scope for weeks, build behind closed doors, deliver once, and hope it fits. Every change pulled the whole team back together, and staff were tied to old habits, processes, and tools.",
@@ -748,9 +748,9 @@
         "Change management",
         "Security by design"
       ],
-      "result": "A methodology for any project, an app, a process, or anything else, that runs at the pace of a day, a week, or a month. Teams leave Build it with a working first draft instead of a plan, and launch in days or weeks instead of months.",
-      "metric": "1 day",
-      "metricLabel": "From idea to a working first draft",
+      "result": "A new life cycle for any product or project, an app, a process, or anything else. Teams frame the end game, plan and build together with AI as a partner, refine in short loops, launch to a test group or to everyone, and keep improving after launch.",
+      "metric": "5 moves",
+      "metricLabel": "one continuous life cycle",
       "links": [
         {
           "label": "Read the Reimagine IT Guide (PDF)",
