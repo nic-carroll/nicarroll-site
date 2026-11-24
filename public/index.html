@@ -495,6 +495,7 @@
     .contact p { color: var(--ink); font-size: 11pt; }
   }
 </style>
+<script src="titlecase.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -912,7 +913,7 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
     b.textContent = box.hidden ? "Show More" : "Show Less";
   }));
   if ((d.agents || []).length) {
-    const total = d.agents.reduce((n, g) => n + g.items.length, 0), sched = d.agents[0].items.length, nightly = d.agents[0].items.filter(i => /night|daily/i.test(i.when)).length;
+    const total = d.agents.reduce((n, g) => n + g.items.length, 0), sg = d.agents.find(g => /schedule/i.test(g.group)) || { items: [] }, sched = sg.items.length, nightly = sg.items.filter(i => /night|daily/i.test(i.when)).length;
     $("ag-stats").innerHTML = [[total, "agents, skills, and playbooks, all downloadable"], [sched, "agents working on a schedule"], [nightly, "run every day, each ending in a pull request for me"], ["0", "can release without my approval"]].map(([b, t]) => `<div><b>${b}</b><span>${esc(t)}</span></div>`).join("");
     $("ag-list").innerHTML = d.agents.map((g, gi) => `<details class="ag-group" ${gi === 0 ? "open" : ""}><summary><h3>${esc(g.group)}</h3><span class="n">${g.items.length}</span><p>${esc(g.intro)}</p></summary><div class="ag-items">${g.items.map(i => `<div class="ag"><div class="top"><span>${esc(i.for)}</span><span>${esc(i.when)}</span></div><b>${esc(i.name)}</b><p>${esc(i.text)}</p>${i.file ? `<div class="ag-acts"><button type="button" class="ag-dl ag-pv" data-doc="${esc(i.file)}" data-name="${esc(i.name)}" data-for="${esc(i.for)}">Preview</button><a class="ag-dl" href="${esc(i.file)}" download>Download</a><button type="button" class="ag-dl" data-copy="${esc(i.file)}">Copy Link</button></div>` : ""}</div>`).join("")}</div></details>`).join("");
   } else { $("agents").hidden = true; }
