@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tool Showcase · Nic Carroll</title>
 <meta name="description" content="Screens from tools Nic Carroll designed and built: NextGen SIS, a resume builder, EagleAudit, a policy library with tracked changes, a donor email tracker, and a change management review. University screens use sample data from a fictional university.">
+<link rel="icon" href="brand/favicon.ico" sizes="32x32"><link rel="icon" href="brand/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="brand/icon-180.png">
+<link rel="stylesheet" href="schemes.css">
+<script src="schemes.js"></script>
 <style>
   @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 200 800; font-display: swap; }
   @font-face { font-family: "Public Sans"; src: url("fonts/public-sans-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
   /* Same palette and type as the main site, used through Material Design 3 roles and shapes */
-  :root { --night: #0c1a2e; --night-2: #13263f; --night-3: #1c3354; --paper: #f3f5f8; --surface: #ffffff; --ink: #0f1c2e; --ink-soft: #4d5b6e; --line: #d9e0e9; --amber: #f2b43c; --sky: #8fb8de; --sky-soft: #e4eef8;
-    --display: "Bricolage", "Arial Narrow", sans-serif; --body: "Public Sans", system-ui, sans-serif; --shape-m: 12px; --shape-l: 16px; --shape-xl: 28px;
+  :root { --surface: #ffffff; --ink: #0f1c2e; --ink-soft: #4d5b6e; --line: #d9e0e9; --display: "Bricolage", "Arial Narrow", sans-serif; --body: "Public Sans", system-ui, sans-serif; --shape-m: 12px; --shape-l: 16px; --shape-xl: 28px;
     --elev-2: 0 1px 2px rgba(12,26,46,.18), 0 2px 6px 2px rgba(12,26,46,.10); --elev-4: 0 2px 3px rgba(12,26,46,.2), 0 10px 28px 6px rgba(12,26,46,.16); }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 84px; }
@@ -19,7 +21,7 @@
   :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
   .wrap { width: min(1180px, 100% - 48px); margin-inline: auto; }
   .skip { position: absolute; left: -999px; } .skip:focus { left: 12px; top: 12px; z-index: 99; background: #fff; padding: 8px 12px; border-radius: 8px; }
-  .nav { position: fixed; inset: 0 0 auto; z-index: 40; background: rgba(12,26,46,.92); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+  .nav { position: fixed; inset: 0 0 auto; z-index: 40; background: color-mix(in srgb, var(--night) 92%, transparent); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
   .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
   .mark { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font: 700 18px var(--display); }
   .mark small { font: 500 15px var(--body); color: #b4c4d8; }
@@ -28,22 +30,22 @@
   .nav nav a { color: #c5d3e4; text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 12px; border-radius: 8px; }
   .nav nav a:hover, .nav nav a[aria-current] { color: #fff; background: rgba(255,255,255,.07); }
   .nav nav a[aria-current] { box-shadow: inset 0 -2px 0 var(--amber); }
-  .hero { background: radial-gradient(900px 420px at 85% -10%, rgba(143,184,222,.22), transparent 60%), radial-gradient(700px 380px at 5% 110%, rgba(242,180,60,.16), transparent 60%), var(--night); color: #fff; padding: 148px 0 0; }
+  .hero { background: radial-gradient(900px 420px at 85% -10%, rgba(143,184,222,.22), transparent 60%), radial-gradient(700px 380px at 5% 110%, color-mix(in srgb, var(--amber) 16%, transparent), transparent 60%), var(--night); color: #fff; padding: 148px 0 0; }
   .eyebrow { font: 600 13px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
   h1 { font: 700 clamp(40px, 6vw, 72px)/1.02 var(--display); letter-spacing: -.02em; margin: 14px 0 18px; max-width: 14ch; }
   .hero p.lede { font-size: 19px; color: #c5d3e4; max-width: 60ch; margin: 0; }
-  .notice { display: inline-flex; gap: 10px; align-items: center; margin-top: 22px; background: rgba(242,180,60,.12); border: 1px solid rgba(242,180,60,.45); color: #ffe2a6; border-radius: 999px; padding: 8px 16px; font-size: 14.5px; font-weight: 500; }
+  .notice { display: inline-flex; gap: 10px; align-items: center; margin-top: 22px; background: color-mix(in srgb, var(--amber) 12%, transparent); border: 1px solid color-mix(in srgb, var(--amber) 45%, transparent); color: #ffe2a6; border-radius: 999px; padding: 8px 16px; font-size: 14.5px; font-weight: 500; }
   .notice::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex: none; }
   .jump { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-top: 44px; transform: translateY(50%); }
   .jump a { background: var(--surface); color: var(--ink); text-decoration: none; border-radius: var(--shape-l); padding: 16px 18px; font: 700 17px/1.2 var(--display); box-shadow: var(--elev-2); display: grid; gap: 6px; transition: transform .15s, box-shadow .15s; }
   .jump a:hover { transform: translateY(-3px); box-shadow: var(--elev-4); }
-  .jump span { font: 600 12px/1 var(--body); letter-spacing: .1em; color: #9a6b00; }
+  .jump span { font: 600 12px/1 var(--body); letter-spacing: .1em; color: var(--accent-ink); }
   /* Hero, second pass */
-  .hero { position: relative; overflow: visible; background: radial-gradient(900px 480px at 88% 0%, rgba(143,184,222,.30), transparent 62%), radial-gradient(700px 420px at 0% 100%, rgba(242,180,60,.18), transparent 60%), linear-gradient(160deg, #0c1a2e 0%, #13263f 60%, #1c3354 100%); padding-top: 132px; }
+  .hero { position: relative; overflow: visible; background: radial-gradient(900px 480px at 88% 0%, rgba(143,184,222,.30), transparent 62%), radial-gradient(700px 420px at 0% 100%, color-mix(in srgb, var(--amber) 18%, transparent), transparent 60%), linear-gradient(160deg, var(--night) 0%, var(--night-2) 60%, var(--night-3) 100%); padding-top: 132px; }
   .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 44px 44px; -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 70%); mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 70%); pointer-events: none; }
   .hero .wrap { position: relative; }
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 48px; align-items: center; }
-  h1 { background: linear-gradient(92deg, #fff 55%, #f2b43c); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .08em; }
+  h1 { background: linear-gradient(92deg, #fff 55%, var(--amber)); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .08em; }
   .hero-stats { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 30px; }
   .hero-stats div { display: grid; gap: 2px; padding-left: 14px; border-left: 3px solid var(--amber); }
   .hero-stats b { font: 700 30px/1 var(--display); letter-spacing: -.02em; } .hero-stats span { font-size: 14px; color: #b4c4d8; }
@@ -65,20 +67,35 @@
   @media (max-width: 1100px) { .jump { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .collage { display: none; } .jump { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (prefers-reduced-motion: reduce) { .collage img { animation: none; } }
-  .nav nav { gap: 2px; } .nav nav a { white-space: nowrap; padding: 8px 10px; font-size: 14.5px; } .mark { white-space: nowrap; } @media (max-width: 1360px) { .mark small { display: none; } }
+  .mark { white-space: nowrap; }
+  /* Top menu: two grouped menus, one link, one button */
+  .nav nav { gap: 4px; align-items: center; margin-left: auto; }
+  .nav nav > a, .menu > summary { color: #dbe7f5; text-decoration: none; font: 500 15px/1 var(--body); padding: 10px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; list-style: none; }
+  .menu > summary::-webkit-details-marker { display: none; }
+  .menu > summary::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-3px) rotate(45deg); transition: transform .15s; }
+  .menu[open] > summary::after { transform: translateY(1px) rotate(225deg); }
+  .nav nav > a:hover, .menu > summary:hover, .menu[open] > summary { color: #fff; background: rgba(255,255,255,.1); }
+  .menu { position: relative; }
+  .menu > div { position: absolute; top: 46px; left: 0; background: #fff; border-radius: 16px; padding: 8px; min-width: 300px; display: grid; gap: 2px; box-shadow: 0 2px 3px rgba(12,26,46,.2), 0 10px 28px 6px rgba(12,26,46,.16); z-index: 60; }
+  .menu > div a { display: grid; gap: 2px; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: #0f1c2e; background: none; }
+  .menu > div a:hover { background: var(--sky-soft); }
+  .menu > div b { font: 600 15.5px/1.2 var(--body); } .menu > div span { font-size: 13.5px; color: #4d5b6e; }
+  .nav nav > a.nav-cta { background: var(--accent-fill); color: var(--on-accent); font-weight: 600; margin-left: 6px; }
+  .nav nav > a.nav-cta:hover { background: var(--accent-fill-hover); color: var(--on-accent); }
+  .mark .logo { width: 40px; height: 40px; flex: none; } .mark .logo .lp { stroke: var(--amber); } .mark .logo .nn { stroke: #fff; }
   .tool { padding: 104px 0 0; }
   .tool:first-of-type { padding-top: 132px; }
   .tool.alt .wrap, .tool.dark { position: relative; }
   .tool.dark { background: var(--night); color: #fff; margin-top: 104px; padding: 88px 0; }
   .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 440px); gap: 56px; align-items: center; }
   .tool-head { max-width: 760px; margin-bottom: 30px; }
-  .num { font: 700 15px/1 var(--display); color: #9a6b00; margin-right: 12px; letter-spacing: .06em; }
+  .num { font: 700 15px/1 var(--display); color: var(--accent-ink); margin-right: 12px; letter-spacing: .06em; }
   .dark .num { color: var(--amber); }
   .pill { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; border-radius: 999px; padding: 4px 12px; background: var(--sky-soft); color: #1d4266; }
   .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #2e9e6b; }
   .dark .pill { background: rgba(255,255,255,.1); color: #dbe7f5; }
   h2 { font: 700 clamp(32px, 4.4vw, 52px)/1.05 var(--display); letter-spacing: -.02em; margin: 14px 0 6px; }
-  .tagline { font: 600 20px/1.3 var(--display); color: #1f5f9e; margin: 0 0 12px; }
+  .tagline { font: 600 20px/1.3 var(--display); color: var(--link); margin: 0 0 12px; }
   .dark .tagline { color: var(--sky); }
   .text { color: var(--ink-soft); margin: 0 0 16px; max-width: 66ch; }
   .dark .text { color: #c5d3e4; }
@@ -88,7 +105,7 @@
   blockquote { margin: 26px 0 0; padding-left: 18px; border-left: 3px solid var(--amber); font: 600 22px/1.35 var(--display); }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
   .btn { display: inline-flex; align-items: center; font: 600 16px/1 var(--body); padding: 14px 22px; border-radius: 999px; border: 1.5px solid transparent; text-decoration: none; }
-  .btn.amber { background: var(--amber); color: var(--night); } .btn.amber:hover { background: #ffc552; }
+  .btn.amber { background: var(--accent-fill); color: var(--on-accent); } .btn.amber:hover { background: var(--accent-fill-hover); }
   .btn.line { border-color: #9fb0c5; } .btn.line:hover { background: var(--surface); }
   .fine { font-size: 14px; color: var(--ink-soft); margin: 10px 0 0; }
   .shot { all: unset; display: block; cursor: zoom-in; background: var(--surface); border: 1px solid var(--line); border-radius: var(--shape-m); overflow: hidden; box-shadow: var(--elev-2); transition: transform .18s, box-shadow .18s; width: 100%; }
@@ -104,7 +121,7 @@
   figcaption { display: grid; gap: 2px; padding: 12px 4px 0; }
   figcaption b { font: 700 17px/1.2 var(--display); }
   figcaption span { font-size: 14.5px; line-height: 1.45; color: var(--ink-soft); }
-  figcaption a { font-size: 14.5px; font-weight: 600; color: #1f5f9e; margin-top: 4px; }
+  figcaption a { font-size: 14.5px; font-weight: 600; color: var(--link); margin-top: 4px; }
   .lead { margin-bottom: 26px; }
   .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 22px 18px; }
   .styles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; max-width: 980px; }
@@ -113,7 +130,7 @@
   .more-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
   .mcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--shape-l); padding: 22px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--elev-2); }
   .mcard { overflow: hidden; } .mshot { display: block; width: calc(100% + 44px); margin: -22px -22px 6px; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
-  .mcard h3 { font: 700 22px/1.15 var(--display); margin: 4px 0 0; } .mcard .sub { font-weight: 600; color: #1f5f9e; margin: 0; font-size: 15.5px; }
+  .mcard h3 { font: 700 22px/1.15 var(--display); margin: 4px 0 0; } .mcard .sub { font-weight: 600; color: var(--link); margin: 0; font-size: 15.5px; }
   .mcard p { margin: 0; color: var(--ink-soft); font-size: 15.5px; line-height: 1.55; } .mcard .chips li { font-size: 13px; padding: 3px 10px; }
   .mcard .links { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; } .mcard .btn { padding: 10px 18px; font-size: 15px; }
   .tool.feature { padding-top: 132px; } .tool.feature + .tool { padding-top: 104px !important; }
@@ -131,7 +148,7 @@
   dialog img { display: block; max-width: 100%; max-height: 82vh; margin: 0 auto; }
   dialog .foot { display: flex; align-items: center; gap: 8px; padding: 10px 16px 10px 24px; font-size: 15px; font-weight: 600; }
   dialog .foot span { margin-right: auto; }
-  dialog button { border: 0; background: none; cursor: pointer; font: 600 15px var(--body); color: #1f5f9e; padding: 10px 14px; border-radius: 999px; }
+  dialog button { border: 0; background: none; cursor: pointer; font: 600 15px var(--body); color: var(--link); padding: 10px 14px; border-radius: 999px; }
   dialog button:hover { background: var(--sky-soft); }
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.in { opacity: 1; transform: none; }
@@ -143,17 +160,21 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav">
   <div class="wrap">
-    <a class="mark" href="/"><b>NC</b><span>Nic Carroll<small>, Ed.S., CISSP, CETL</small></span></a>
+    <a class="mark" href="/"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><g transform="translate(8 12) scale(.86)" fill="none" stroke-linecap="round"><path class="lp" transform="translate(2 2)" stroke-width="5" d="M104 22 C70 6 22 40 14 88 C11 108 30 112 48 104 C66 96 80 84 90 70"/><path class="nn" transform="translate(6 8) scale(.9)" stroke-width="7" stroke-linejoin="miter" stroke-miterlimit="12" d="M20 88 C40 76 56 52 64 24 L58 94 C64 62 80 32 100 10"/></g></svg><span>Nic Carroll<small>, Ed.S., CISSP, CETL</small></span></a>
     <nav aria-label="Site">
-      <a href="/#approach">How I Lead</a>
-      <a href="/#building">Building</a>
-      <a href="/#agents">AI Agents</a>
-      <a href="/#cases">Case Studies</a>
-      <a href="/#experience">Experience</a>
-      <a href="/#credentials">Credentials</a>
-      <a href="showcase.html" aria-current="page">Showcase</a>
+      <details class="menu"><summary>Work</summary><div>
+        <a href="showcase.html"><b>Tool Showcase</b><span>Real screens from the tools I built</span></a>
+        <a href="/#building"><b>Things I'm Building</b><span>Every product and prototype</span></a>
+        <a href="/#agents"><b>AI Agents and Playbooks</b><span>The agents and rules behind the work</span></a>
+        <a href="/#cases"><b>Case Studies</b><span>The challenge, what I did, what changed</span></a>
+      </div></details>
+      <details class="menu"><summary>About</summary><div>
+        <a href="/#approach"><b>How I Lead</b><span>The principles behind every team</span></a>
+        <a href="/#experience"><b>Experience</b><span>CIO, CTO, and CISO roles</span></a>
+        <a href="/#credentials"><b>Credentials</b><span>Education, certifications, boards</span></a>
+      </div></details>
       <a href="security.html">Security</a>
-      <a href="/#contact">Contact</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
     </nav>
   </div>
 </header>

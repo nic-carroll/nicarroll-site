@@ -1,0 +1,21 @@
+/* Nic Carroll brand tokens. Copy into any site. */
+@font-face { font-family: "Bricolage Grotesque"; src: url("../fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: "Public Sans"; src: url("../fonts/public-sans-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
+:root {
+  --nc-navy: #0c1a2e;
+  --nc-navy-2: #13263f;
+  --nc-navy-3: #1c3354;
+  --nc-amber: #f2b43c;
+  --nc-amber-ink: #8a5d00;
+  --nc-sky: #8fb8de;
+  --nc-sky-soft: #e4eef8;
+  --nc-link: #1f5f9e;
+  --nc-paper: #f3f5f8;
+  --nc-surface: #ffffff;
+  --nc-ink: #0f1c2e;
+  --nc-ink-soft: #4d5b6e;
+  --nc-line: #d9e0e9;
+  --nc-display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+  --nc-body: "Public Sans", system-ui, sans-serif;
+  --nc-radius-s: 8px; --nc-radius-m: 12px; --nc-radius-l: 16px; --nc-radius-xl: 28px; --nc-radius-pill: 999px;
+}

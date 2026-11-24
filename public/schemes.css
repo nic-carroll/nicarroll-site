@@ -1,0 +1,39 @@
+/* Color schemes for nicarroll-site. One scheme is active at a time through data-scheme on <html>.
+   Every scheme must pass scripts/check-schemes.py before it ships:
+     accent on night at least 4.5 to 1, text on the accent fill at least 4.5 to 1,
+     white on night at least 7 to 1, link and accent ink on paper at least 4.5 to 1,
+     the secondary tone on night at least 4.5 to 1. */
+:root, :root[data-scheme="navy-amber"] {
+  --night: #0c1a2e; --night-2: #13263f; --night-3: #1c3354;
+  --amber: #f2b43c; --accent-fill: #f2b43c; --accent-fill-hover: #ffc552; --on-accent: #0c1a2e; --accent-ink: #8a5d00;
+  --sky: #8fb8de; --sky-soft: #e4eef8; --link: #1f5f9e; --paper: #f3f5f8;
+}
+:root[data-scheme="red-white-blue"] {
+  --night: #0a2342; --night-2: #12315a; --night-3: #1b4079;
+  --amber: #ff6b6b; --accent-fill: #c8102e; --accent-fill-hover: #e01735; --on-accent: #ffffff; --accent-ink: #b3202e;
+  --sky: #c8d0da; --sky-soft: #e8ecf1; --link: #1d4ed8; --paper: #f5f7fa;
+}
+:root[data-scheme="blue-silver"] {
+  --night: #0b2a5b; --night-2: #123a78; --night-3: #1a4a94;
+  --amber: #c8d0da; --accent-fill: #c8d0da; --accent-fill-hover: #e2e7ee; --on-accent: #0b2a5b; --accent-ink: #475569;
+  --sky: #93c5fd; --sky-soft: #e6efff; --link: #1d4ed8; --paper: #f4f6f9;
+}
+:root[data-scheme="graphite-red"] {
+  --night: #111827; --night-2: #1f2937; --night-3: #374151;
+  --amber: #ff6b6b; --accent-fill: #c8102e; --accent-fill-hover: #e01735; --on-accent: #ffffff; --accent-ink: #b3202e;
+  --sky: #c8d0da; --sky-soft: #eceff3; --link: #b3202e; --paper: #f4f5f7;
+}
+/* Scheme picker in the top bar */
+.scheme { position: relative; margin-left: 6px; }
+.scheme > button { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: #fff; cursor: pointer; }
+.scheme > button:hover { background: rgba(255,255,255,.14); }
+.scheme > button svg { width: 18px; height: 18px; }
+.scheme-menu { position: absolute; right: 0; top: 44px; background: #fff; color: #0f1c2e; border-radius: 16px; padding: 8px; box-shadow: 0 2px 3px rgba(12,26,46,.2), 0 10px 28px 6px rgba(12,26,46,.16); min-width: 230px; display: grid; gap: 2px; z-index: 60; }
+.scheme-menu[hidden] { display: none; }
+.scheme-menu b { font: 600 12px/1 "Public Sans", system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #4d5b6e; padding: 8px 10px 6px; }
+.scheme-menu button { display: flex; align-items: center; gap: 10px; border: 0; background: none; padding: 9px 10px; border-radius: 10px; font: 500 15px/1.2 "Public Sans", system-ui, sans-serif; color: inherit; cursor: pointer; text-align: left; }
+.scheme-menu button:hover { background: #eef2f7; }
+.scheme-menu button[aria-checked="true"] { background: #e4eef8; font-weight: 600; }
+.scheme-menu i { display: inline-flex; border-radius: 6px; overflow: hidden; border: 1px solid rgba(12,26,46,.18); flex: none; }
+.scheme-menu i span { width: 14px; height: 22px; display: block; }
+@media (max-width: 900px) { .scheme { margin-left: auto; } }
