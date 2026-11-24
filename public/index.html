@@ -168,6 +168,13 @@
   .proof span { display: block; margin-top: 10px; font-size: 15px; color: #9fb3cc; max-width: 22ch; }
 
   /* Sections */
+  .tool-strip { margin-top: 28px; background: var(--night); color: #fff; border-radius: 20px; padding: 28px; }
+  .ts-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .ts-head h3 { font: 700 28px/1.1 var(--display); margin: 0 0 4px; } .ts-head p { margin: 0; color: #c5d3e4; }
+  .ts-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+  .ts-row a { display: grid; gap: 8px; text-decoration: none; color: #fff; font: 600 15px/1.2 var(--body); }
+  .ts-row img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); transition: transform .15s; }
+  .ts-row a:hover img { transform: translateY(-3px); }
   section.block { padding: 112px 0 0; }
   .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 44px; flex-wrap: wrap; }
   .head h2 { font: 760 clamp(36px, 4.6vw, 60px)/1 var(--display); letter-spacing: -.035em; margin: 0; }
@@ -402,6 +409,10 @@
     </div>
     <div id="featured"></div>
     <div class="cards light" id="cards"></div>
+    <div class="tool-strip">
+      <div class="ts-head"><div><h3>See the Tools Up Close</h3><p>Real screens from five tools I built, shown with sample data.</p></div><a class="btn amber" href="showcase.html">Open the Tool Showcase</a></div>
+      <div class="ts-row"><a href="showcase.html#resume-builder"><img src="assets/showcase/resume-navy.jpg" alt="" loading="lazy"><b>Resume Builder</b></a><a href="showcase.html#eagleaudit"><img src="assets/showcase/eagleaudit-one-sheet.jpg" alt="" loading="lazy"><b>EagleAudit</b></a><a href="showcase.html#policy"><img src="assets/showcase/policy-1-dashboard.jpg" alt="" loading="lazy"><b>Policy Library</b></a><a href="showcase.html#donor"><img src="assets/showcase/donor-4-dashboard.jpg" alt="" loading="lazy"><b>Donor Email</b></a><a href="showcase.html#change"><img src="assets/showcase/change-2-process-map.jpg" alt="" loading="lazy"><b>Change Management Review</b></a></div>
+    </div>
   </section>
 
   <section class="block" id="cases">
@@ -477,7 +488,7 @@
   <div class="glow"></div>
   <div class="wrap">
     <h2>Leading, Innovating, and Building for the Future.</h2>
-    <p>I'm glad to talk about technology leadership, cybersecurity, AI, or new tools for schools and universities.</p>
+    <p>I'm glad to talk about technology leadership, cybersecurity, AI, or new or integrated tools for legacy and modern systems.</p>
     <div class="cta">
       <a class="btn amber" id="mail" href="#">Email Me</a>
       <a class="btn glass" id="li" href="#" target="_blank" rel="noopener">Connect on LinkedIn</a>
