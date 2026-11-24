@@ -904,6 +904,11 @@ fetch("resume.json", { cache: "no-cache" }).then(r => { lastMod = r.headers.get(
   let tries = 0; const t = setInterval(() => { if (document.getElementById("cards").children.length || ++tries > 40) { clearInterval(t); go(); setTimeout(go, 400); } }, 100);
   window.addEventListener("load", () => setTimeout(go, 150));
 })();
+
+/* Menu and in page links: jump to the section and make sure the page stays there while pictures finish loading. */
+(() => { const land = id => { const el = document.getElementById(id); if (!el) return; const y = () => window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "instant" }); y(); [150, 500, 1100].forEach(ms => setTimeout(() => { if (Math.abs(el.getBoundingClientRect().top) > 4) y(); }, ms)); };
+  document.addEventListener("click", e => { const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; const id = a.getAttribute("href").slice(1); if (!id || !document.getElementById(id)) return; e.preventDefault(); history.pushState(null, "", "#" + id); land(id); });
+})();
 </script>
 </body>
 </html>

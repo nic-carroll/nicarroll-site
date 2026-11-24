@@ -526,7 +526,8 @@
       "sub": "Fix OneRoster Files Without the Wait",
       "metric": "1.1 + 1.2",
       "metricLabel": "OneRoster versions, in and out",
-      "linkLabel": "Try the Live Demo"
+      "linkLabel": "Try the Live Demo",
+      "image": "assets/showcase/more-rostereditor.jpg"
     },
     {
       "title": "Milestone Compass",
@@ -538,7 +539,8 @@
       ],
       "url": "https://nic-carroll.github.io/milestone-compass-demo/",
       "repo": "https://github.com/nic-carroll/milestone-compass-demo",
-      "sub": "Adaptive Practice Matched to Georgia Standards"
+      "sub": "Adaptive Practice Matched to Georgia Standards",
+      "image": "assets/showcase/more-milestone-compass.jpg"
     },
     {
       "title": "EduSite",
@@ -656,7 +658,8 @@
       ],
       "url": "",
       "repo": "https://github.com/nic-carroll/Georgia-School-Data",
-      "sub": "Five Years of Georgia School Data in One Portal"
+      "sub": "Five Years of Georgia School Data in One Portal",
+      "image": "assets/showcase/more-georgia-analytics.jpg"
     },
     {
       "title": "This website",
@@ -668,7 +671,8 @@
       ],
       "url": "/",
       "repo": "",
-      "sub": "A Resume Site That Deploys Itself"
+      "sub": "A Resume Site That Deploys Itself",
+      "image": "assets/showcase/more-this-website.jpg"
     }
   ],
   "badge": "Innovative and visionary executive technology leader. Former CIO and CTO, currently CISO at Georgia Southern University.",

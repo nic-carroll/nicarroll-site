@@ -111,6 +111,7 @@
   .sheet .shot:hover { transform: rotate(0) translateY(-4px); }
   .more-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
   .mcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--shape-l); padding: 22px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--elev-2); }
+  .mcard { overflow: hidden; } .mshot { display: block; width: calc(100% + 44px); margin: -22px -22px 6px; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
   .mcard h3 { font: 700 22px/1.15 var(--display); margin: 4px 0 0; } .mcard .sub { font-weight: 600; color: #1f5f9e; margin: 0; font-size: 15.5px; }
   .mcard p { margin: 0; color: var(--ink-soft); font-size: 15.5px; line-height: 1.55; } .mcard .chips li { font-size: 13px; padding: 3px 10px; }
   .mcard .links { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; } .mcard .btn { padding: 10px 18px; font-size: 15px; }
@@ -216,7 +217,7 @@
   const esc = t => String(t ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   fetch("resume.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
     const rest = (d.projects || []).filter(p => !String(p.url || "").startsWith("/showcase.html") && p.title !== "This website");
-    document.getElementById("more-grid").innerHTML = rest.map(p => `<article class="mcard"><span class="pill" style="align-self:flex-start">${esc(p.status)}</span><h3>${esc(p.title)}</h3>${p.sub ? `<p class="sub">${esc(p.sub)}</p>` : ""}<p>${esc(p.summary)}</p><ul class="chips">${(p.tags || []).map(t => `<li>${esc(t)}</li>`).join("")}</ul><div class="links">${p.url ? `<a class="btn amber" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.linkLabel || "Open It")}</a>` : ""}${p.repo ? `<a class="btn line" href="${esc(p.repo)}" target="_blank" rel="noopener">View Code</a>` : ""}</div></article>`).join("");
+    document.getElementById("more-grid").innerHTML = rest.map(p => `<article class="mcard">${p.image ? `<img class="mshot" src="${esc(p.image)}" alt="" loading="lazy">` : ""}<span class="pill" style="align-self:flex-start">${esc(p.status)}</span><h3>${esc(p.title)}</h3>${p.sub ? `<p class="sub">${esc(p.sub)}</p>` : ""}<p>${esc(p.summary)}</p><ul class="chips">${(p.tags || []).map(t => `<li>${esc(t)}</li>`).join("")}</ul><div class="links">${p.url ? `<a class="btn amber" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.linkLabel || "Open It")}</a>` : ""}${p.repo ? `<a class="btn line" href="${esc(p.repo)}" target="_blank" rel="noopener">View Code</a>` : ""}</div></article>`).join("");
   }).catch(() => { document.getElementById("more").hidden = true; });
 </script>
 </body>
