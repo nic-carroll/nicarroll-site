@@ -282,6 +282,13 @@
   .kf-shots img:first-child { left: 0; top: 0; transform: rotate(-2deg); } .kf-shots img:last-child { right: 0; bottom: 0; transform: rotate(2.5deg); }
   .k12-feature:hover .kf-shots img:first-child { transform: rotate(-3deg) translateY(-6px); } .k12-feature:hover .kf-shots img:last-child { transform: rotate(3.5deg) translateY(6px); }
   @media (max-width: 900px) { .k12-feature { grid-template-columns: 1fr; padding: 26px 22px; } .k12-feature ul { grid-template-columns: 1fr 1fr; } .kf-shots { min-height: 0; display: grid; gap: 12px; } .kf-shots img { position: static; width: 100%; transform: none !important; } }
+  .k12-tools { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin: 0 0 30px; }
+  .k12-tools a { display: grid; gap: 4px; align-content: start; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; padding-bottom: 14px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .k12-tools a:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(12,26,46,.16); border-color: var(--link); }
+  .k12-tools img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+  .k12-tools span { padding: 0 14px; font: 700 11.5px/1.2 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--link); }
+  .k12-tools b { padding: 0 14px; font: 700 17px/1.2 var(--display); } .k12-tools i { padding: 2px 14px 0; font: 600 13.5px/1 var(--body); font-style: normal; color: var(--ink-soft); }
+  @media (max-width: 1000px) { .k12-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .ag-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
   .ag-stats div { background: var(--night); color: #fff; border-radius: 18px; padding: 20px 22px; }
   .ag-stats b { display: block; font: 700 40px/1 var(--display); color: var(--amber); letter-spacing: -.02em; }
@@ -578,11 +585,12 @@
         <span class="kf-eyebrow">New for K12 Schools</span>
         <h3>Gemini Tool Builder Playbook</h3>
         <p>Stop chatting with AI. Start building with it. I wrote this playbook so a teacher, counselor, or principal can turn a school problem into a working dashboard, using only the Google tools the district already has.</p>
-        <ul><li><b>9</b><span>steps from problem to launch</span></li><li><b>3</b><span>live tools to try</span></li><li><b>10</b><span>copy and paste prompts</span></li><li><b>0</b><span>paid AI licenses required</span></li></ul>
+        <ul><li><b>9</b><span>steps from problem to launch</span></li><li><b>5</b><span>live tools to try</span></li><li><b>10</b><span>copy and paste prompts</span></li><li><b>0</b><span>paid AI licenses required</span></li></ul>
         <span class="btn amber">Open the Playbook</span>
       </div>
-      <div class="kf-shots"><img src="assets/showcase/k12-flex.jpg" alt="A flex period scheduling dashboard built with the playbook, showing sample students and sessions" loading="lazy"><img src="assets/showcase/k12-team.jpg" alt="A grade level team dashboard built with the playbook" loading="lazy"></div>
+      <div class="kf-shots"><img src="assets/showcase/k12-quiz.jpg" alt="Classroom Quiz Show teacher view, where a teacher builds quiz questions with Gemini" loading="lazy"><img src="assets/showcase/k12-quiz-question.jpg" alt="Classroom Quiz Show student view with a multiple choice math question" loading="lazy"></div>
     </a>
+    <div class="k12-tools"><a href="k12/quiz/"><img src="assets/showcase/k12-quiz-student.jpg" alt="" loading="lazy"><span>Teachers and Students</span><b>Classroom Quiz Show</b><i>Open the Live Tool</i></a><a href="k12/flex/"><img src="assets/showcase/k12-flex.jpg" alt="" loading="lazy"><span>Administrators</span><b>Flex Period Scheduling</b><i>Open the Live Tool</i></a><a href="k12/team/"><img src="assets/showcase/k12-team.jpg" alt="" loading="lazy"><span>Teams</span><b>Grade Level Team Dashboard</b><i>Open the Live Tool</i></a><a href="k12/hub/"><img src="assets/showcase/k12-hub.jpg" alt="" loading="lazy"><span>Elementary Teachers</span><b>My Classroom Hub</b><i>Open the Live Tool</i></a><a href="k12/repair/"><img src="assets/showcase/k12-repair.jpg" alt="" loading="lazy"><span>Technology Staff</span><b>Chromebook Repair Tracker</b><i>Open the Live Tool</i></a></div>
     <div class="ag-stats" id="ag-stats"></div>
     <p class="ag-all"><a class="btn amber" href="agents/nic-carroll-agents-and-playbooks.zip" download>Download All as Markdown</a><span>Preview any file, download it, or copy a link to share it.</span></p>
     <div id="ag-list"></div>

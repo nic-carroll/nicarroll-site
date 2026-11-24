@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flex Period Scheduling Dashboard · Nic Carroll</title>
+<meta name="description" content="Flex Period Scheduling Dashboard: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Flex Period Scheduling Dashboard">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-flex.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Playbook</a>
+  <span class="lead"><span class="material-symbols-outlined" aria-hidden="true">event_available</span></span>
+  <div><h1>9th Period Flex Scheduling</h1><div class="sub">Oakhaven High School, an imaginary school</div></div>
+  <span class="badge">Sample data</span><span class="sp"></span>
+  <button class="btn outlined sm" id="reset" type="button">Restore sample data</button>
+</div></header>
+<main class="wrap">
+  <div class="kpis" id="kpis"></div>
+  <div class="panel">
+    <div class="controls">
+      <label class="field" for="q"><span>Search student</span><input id="q" type="search" placeholder="Name"></label>
+      <label class="field" for="grade"><span>Grade</span><select id="grade"><option value="">All grades</option><option>9</option><option>10</option><option>11</option><option>12</option></select></label>
+      <label class="field" for="type"><span>Session type</span><select id="type"></select></label>
+      <label class="field" for="status"><span>Status</span><select id="status"><option value="">All students</option><option value="u">Unassigned only</option><option value="a">Assigned only</option></select></label>
+      <button class="btn outlined" id="clear" type="button">Reset filters</button>
+    </div>
+  </div>
+  <div class="two">
+    <div class="panel">
+      <div class="ph"><h2>Sessions</h2><button class="btn tonal sm" id="add-sess" type="button">Add session</button></div>
+      <div class="bars" id="bars"></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><h2>Students</h2><span class="muted small" id="count"></span><span class="sp"></span><button class="btn tonal sm" id="auto" type="button">Place unassigned students</button></div>
+      <div class="tablebox scroll"><table><thead><tr><th>Student</th><th>Grade</th><th>Session</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </div>
+  </div>
+  <div class="built"><b>How this was built</b><span>Described to Gemini in plain words, built in Canvas, then connected to a Google Sheet with two tabs: <code>Sessions</code> and <code>Roster</code>. Prompts are in kit files <code>04_build_prompts.md</code> and <code>05_live_data_prompts.md</code>. Changes on this demo save in your browser only.</span></div>
+</main>
+<script src="js/kit.js"></script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-flex-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+var TYPES=["Tutoring","Makeup","Enrichment","Study Hall"];
+function sample(){
+  var sess=[["Algebra Tutoring","Tutoring","Ms. Alvarez",10],["Biology Lab Makeup","Makeup","Mr. Chen",7],["Writing Center","Tutoring","Ms. Okafor",8],["Robotics Club","Enrichment","Mr. Patel",12],["SAT Prep","Enrichment","Ms. Brooks",12],["Quiet Study Hall","Study Hall","Mr. Diaz",18],["Spanish Conversation","Enrichment","Sra. Ruiz",6],["Test Retakes","Makeup","Ms. Kim",10]]
+    .map(function(s,i){return {id:"s"+i,n:s[0],t:s[1],who:s[2],cap:s[3]}});
+  var FN=["Avery","Jordan","Maya","Elijah","Sofia","Noah","Zoe","Liam","Aaliyah","Mateo","Harper","Isaiah"],LN=["Bennett","Castillo","Nguyen","Holloway","Reyes","Whitaker"];
+  var ORDER=[0,0,0,1,1,2,2,3,3,3,4,4,4,4,5,5,5,5,5,6,6,7,7,7],stu=[];
+  for(var i=0;i<72;i++)stu.push({id:"p"+i,name:FN[i%12]+" "+LN[Math.floor(i/12)],grade:9+((i*3+Math.floor(i/5))%4),sess:(i%7===3)?"":"s"+ORDER[(i*5)%24]});
+  return {sess:sess,stu:stu};
+}
+var S=K.load(KEY,sample);
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();draw()}
+function counts(){var c={};S.sess.forEach(function(s){c[s.id]=0});S.stu.forEach(function(x){if(x.sess&&c[x.sess]!==undefined)c[x.sess]++});return c}
+function state(n,cap){return n>=cap?"full":(n/cap>=.85?"near":"ok")}
+$("type").innerHTML='<option value="">All types</option>'+TYPES.map(function(t){return '<option>'+t+'</option>'}).join("");
+
+function draw(){
+  var c=counts(),byId={};S.sess.forEach(function(s){byId[s.id]=s});
+  var un=S.stu.filter(function(x){return !byId[x.sess]}).length,full=0,open=0;
+  S.sess.forEach(function(s){if(c[s.id]>=s.cap)full++;open+=Math.max(0,s.cap-c[s.id])});
+  $("kpis").innerHTML=
+    '<div class="kpi"><div class="v">'+S.stu.length+'</div><div class="k">Students this period</div></div>'+
+    '<div class="kpi '+(un?"bad":"good")+'"><div class="v">'+un+'</div><div class="k">Unassigned</div></div>'+
+    '<div class="kpi good"><div class="v">'+open+'</div><div class="k">Open seats</div></div>'+
+    '<div class="kpi '+(full?"warn":"good")+'"><div class="v">'+full+'</div><div class="k">Sessions full</div></div>';
+  var ty=$("type").value;
+  $("bars").innerHTML=S.sess.filter(function(s){return !ty||s.t===ty}).map(function(s){
+    var n=c[s.id],st=state(n,s.cap),pct=Math.min(100,Math.round(n/s.cap*100));
+    return '<div class="barrow"><div class="t"><span><b>'+esc(s.n)+'</b> <span class="muted">'+esc(s.who)+'</span></span><span class="r">'+n+' of '+s.cap+(st==="full"?' <span class="pill bad">Full</span>':st==="near"?' <span class="pill warn">Nearly full</span>':'')+'<button class="iconb" type="button" data-edit="'+s.id+'" aria-label="Edit '+esc(s.n)+'">'+K.ICON.edit+'</button></span></div><div class="track"><div class="fill '+(st==="ok"?"":st)+'" style="width:'+pct+'%"></div></div></div>';
+  }).join("")||'<div class="empty">No sessions of this type.</div>';
+  var q=$("q").value.trim().toLowerCase(),g=$("grade").value,stt=$("status").value;
+  var rows=S.stu.filter(function(x){
+    var s=byId[x.sess];
+    if(q&&x.name.toLowerCase().indexOf(q)<0)return false;
+    if(g&&String(x.grade)!==g)return false;
+    if(stt==="u"&&s)return false;
+    if(stt==="a"&&!s)return false;
+    if(ty&&(!s||s.t!==ty))return false;
+    return true;
+  }).sort(function(a,b){return (byId[a.sess]?1:0)-(byId[b.sess]?1:0)||a.name.localeCompare(b.name)});
+  $("count").textContent="showing "+rows.length+" of "+S.stu.length;
+  $("rows").innerHTML=rows.map(function(x){
+    var has=!!byId[x.sess];
+    var opts='<option value=""'+(has?"":" selected")+'>Unassigned</option>'+S.sess.map(function(s){
+      var isFull=c[s.id]>=s.cap&&x.sess!==s.id;
+      return '<option value="'+s.id+'"'+(x.sess===s.id?" selected":"")+(isFull?" disabled":"")+'>'+esc(s.n)+(isFull?" (full)":"")+'</option>';
+    }).join("");
+    return '<tr><td>'+esc(x.name)+'</td><td>'+x.grade+'</td><td><select aria-label="Session for '+esc(x.name)+'" data-stu="'+x.id+'">'+opts+'</select></td><td>'+(has?'<span class="pill ok">Assigned</span>':'<span class="pill bad">Needs a session</span>')+'</td></tr>';
+  }).join("")||'<tr><td colspan="4" class="empty">No students match these filters.</td></tr>';
+}
+["q","grade","type","status"].forEach(function(id){$(id).addEventListener("input",draw)});
+$("clear").addEventListener("click",function(){["q","grade","type","status"].forEach(function(id){$(id).value=""});draw()});
+$("rows").addEventListener("change",function(e){
+  var id=e.target.dataset.stu;if(!id)return;
+  S.stu.filter(function(x){return x.id===id})[0].sess=e.target.value;save();draw();
+});
+var FIELDS=[{k:"n",l:"Session name"},{k:"who",l:"Teacher"},{k:"t",l:"Type",type:"select",options:TYPES},{k:"cap",l:"Seats",type:"number"}];
+$("add-sess").addEventListener("click",function(){
+  K.form({title:"Add session",fields:FIELDS,values:{t:TYPES[0],cap:15},onSave:function(v){v.id=K.uid();S.sess.push(v);save();draw()}});
+});
+$("bars").addEventListener("click",function(e){
+  var b=e.target.closest("[data-edit]");if(!b)return;
+  var s=S.sess.filter(function(x){return x.id===b.dataset.edit})[0];
+  K.form({title:"Edit session",fields:FIELDS,values:s,
+    onSave:function(v){s.n=v.n;s.who=v.who;s.t=v.t;s.cap=v.cap;save();draw()},
+    onDelete:function(){var before=snap();S.sess=S.sess.filter(function(x){return x.id!==s.id});S.stu.forEach(function(x){if(x.sess===s.id)x.sess=""});save();draw();K.toast("Session deleted. Its students are now unassigned.",function(){restore(before)})}});
+});
+$("auto").addEventListener("click",function(){
+  var before=snap(),c=counts(),byId={},placed=0;S.sess.forEach(function(s){byId[s.id]=s});
+  S.stu.forEach(function(x){
+    if(byId[x.sess])return;
+    var best=null;S.sess.forEach(function(s){var free=s.cap-c[s.id];if(free>0&&(!best||free>best.cap-c[best.id]))best=s});
+    if(best){x.sess=best.id;c[best.id]++;placed++}
+  });
+  save();draw();
+  K.toast(placed?placed+" students placed in sessions with the most open seats.":"No open seats to place students in.",placed?function(){restore(before)}:null);
+});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();save();draw();K.toast("Sample data restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>

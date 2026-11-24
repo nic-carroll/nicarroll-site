@@ -1,7 +1,7 @@
 /* Phone layout helpers. On screens up to 700px wide: card stacks become swipe rows with a counter, long blocks fold behind Show More, and long write ups start closed. */
 (() => {
   const mq = matchMedia("(max-width: 700px)"); if (!mq.matches) return;
-  const SWIPE = ".rd-grid, #building .cards, .ts-row, .cases.more, #impact .impact, #beyond .impact, .pillars, .quotes, .posts, .lead-band, .thumbs, .styles, .more-grid, .flow, .roles, .ask, main .facts, .vs, .logos, .schemes, .files, .type, .timeline, #case-list .cases.lead-row + .cases";
+  const SWIPE = ".rd-grid, .k12-tools, #building .cards, .ts-row, .cases.more, #impact .impact, #beyond .impact, .pillars, .quotes, .posts, .lead-band, .thumbs, .styles, .more-grid, .flow, .roles, .ask, main .facts, .vs, .logos, .schemes, .files, .type, .timeline, #case-list .cases.lead-row + .cases";
   const SMALL = ".sw, .assets";
   const CLAMP = [[".tool-head p.text", 84], [".tool-head ul.chips", 88], ["#credentials .creds", 300], ["#credentials .comp", 132], ["#credentials .chips", 132], [".timeline > *", 330], [".icard", 260], ["#building .cards > *", 520], [".more-grid > *", 480], [".case", 440], [".quotes > *", 330], [".posts > *", 300], [".lead-band > *", 300], [".node", 400]];
   const bg = el => { for (let n = el; n && n !== document.documentElement; n = n.parentElement) { const c = getComputedStyle(n).backgroundColor; if (c && c !== "rgba(0, 0, 0, 0)" && c !== "transparent") return c; } return "#f3f5f8"; };

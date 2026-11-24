@@ -514,7 +514,7 @@
       "title": "Gemini Tool Builder Playbook",
       "sub": "School Staff Build Their Own Tools With AI",
       "status": "Live demo",
-      "summary": "A playbook that teaches K12 staff to turn a school problem into a working dashboard, tracker, or scheduler in Gemini, inside Google Workspace for Education. Nine steps, three live example tools, a prompt library, and sharing rules that keep the data owner in control.",
+      "summary": "A playbook that teaches K12 staff to turn a school problem into a working dashboard, tracker, or scheduler in Gemini, inside Google Workspace for Education. Nine steps, five live example tools, a prompt library, and sharing rules that keep the data owner in control.",
       "tags": [
         "K12",
         "AI",
@@ -523,6 +523,21 @@
       "url": "/k12-playbook.html",
       "image": "assets/showcase/k12-playbook.jpg",
       "repo": ""
+    },
+    {
+      "title": "Classroom Quiz Show",
+      "sub": "A Quiz Game Teachers Build With AI",
+      "status": "Live demo",
+      "summary": "A quiz game for the classroom. The teacher picks a Georgia standard, Gemini drafts questions in six Georgia Milestones item types, and students play for points with an explanation after every answer. Built with the Gemini Tool Builder Playbook on invented sample questions.",
+      "tags": [
+        "K12",
+        "AI",
+        "Georgia standards",
+        "Assessment"
+      ],
+      "url": "/k12/quiz/",
+      "repo": "",
+      "image": "assets/showcase/k12-quiz-question.jpg"
     },
     {
       "title": "RosterEditor",

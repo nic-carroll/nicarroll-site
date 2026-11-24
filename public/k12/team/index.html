@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grade Level Team Dashboard · Nic Carroll</title>
+<meta name="description" content="Grade Level Team Dashboard: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Grade Level Team Dashboard">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-team.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Playbook</a>
+  <span class="lead"><span class="material-symbols-outlined" aria-hidden="true">groups</span></span>
+  <div><h1>Grade 9 Team Dashboard</h1><div class="sub">Oakhaven High School, an imaginary school</div></div>
+  <span class="badge">Sample data</span><span class="sp"></span>
+  <button class="btn outlined sm" id="reset" type="button">Restore sample data</button>
+</div></header>
+<main class="wrap">
+  <div class="panel">
+    <div class="ph"><div><h2>View as</h2><p class="muted small" id="note"></p></div><div class="seg" role="group" aria-label="Role" id="roles"></div></div>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="tgrid" id="grid"></div>
+  <div class="panel">
+    <h2>Who can edit what</h2>
+    <div class="tablebox" style="max-height:none"><table><thead id="mhead"></thead><tbody id="mbody"></tbody></table></div>
+    <p class="muted small">In the real tool these rules are not stored in the page. Each section is a tab in the team's Google Sheet, and the Sheet owner protects each tab for chosen people or groups. The page shows editing controls only where the person viewing it has edit rights.</p>
+  </div>
+  <div class="built"><b>How this was built</b><span>Built in Gemini Canvas, then connected to a Google Sheet with one tab per section. The full walkthrough and prompts are in kit file <code>08_team_dashboard.md</code>. Changes on this demo save in your browser only.</span></div>
+</main>
+<script src="js/kit.js"></script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-team-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+var ROLES=[
+ {k:"lead",n:"Team lead",note:"Owns the Sheet. Can edit every section and decides who else can."},
+ {k:"member",n:"Team member",note:"Can add, edit, and delete tasks, meeting notes, and ideas."},
+ {k:"admin",n:"Administrator",note:"Can set the weekly focus and important dates, and add ideas."},
+ {k:"view",n:"View only",note:"Can read everything. Cannot change anything."}
+];
+var SECS=[
+ {k:"links",t:"Quick links",tab:"Links",one:"link"},
+ {k:"focus",t:"Weekly focus",tab:"Focus",one:"focus"},
+ {k:"tasks",t:"Team tasks",tab:"Tasks",one:"task"},
+ {k:"dates",t:"Important dates",tab:"Dates",one:"date"},
+ {k:"notes",t:"Meeting notes and actions",tab:"Notes",one:"note"},
+ {k:"ideas",t:"Ideas parking lot",tab:"Ideas",one:"idea"}
+];
+var PERM={lead:{links:1,focus:1,tasks:1,dates:1,notes:1,ideas:1},member:{tasks:1,notes:1,ideas:1},admin:{focus:1,dates:1,ideas:1},view:{}};
+function mk(t,done){var o={id:K.uid(),t:t};if(done!==undefined)o.done=done;return o}
+function sample(){return {
+ links:["Pacing guide","Common assessments folder","Team agenda template","Parent contact log"].map(function(t){return mk(t)}),
+ focus:["Unit 4 common assessment on Friday","Finalize flex session rosters by Wednesday"].map(function(t){return mk(t)}),
+ tasks:[mk("Upload Unit 4 study guide (Bennett)",true),mk("Enter progress report comments (all)",false),mk("Book media center for Dec 3 (Reyes)",false),mk("Share retake policy draft (Castillo)",false)],
+ dates:["Dec 1: Progress reports due","Dec 3: Media center research day","Dec 11: Team data meeting","Dec 18: Semester exams begin"].map(function(t){return mk(t)}),
+ notes:["Nov 17: One retake policy for Unit 4. Action: Castillo drafts the parent letter.","Nov 10: Reviewed benchmark results by standard. Action: Nguyen shares the reteach plan."].map(function(t){return mk(t)}),
+ ideas:["Cross curricular project with science in spring","Student led conferences pilot"].map(function(t){return mk(t)})
+}}
+var S=K.load(KEY,sample),role="member";
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();draw()}
+
+function draw(){
+  $("roles").innerHTML=ROLES.map(function(r){return '<button type="button" data-r="'+r.k+'" aria-pressed="'+(r.k===role)+'">'+r.n+'</button>'}).join("");
+  $("note").textContent=ROLES.filter(function(r){return r.k===role})[0].note;
+  var open=S.tasks.filter(function(t){return !t.done}).length,can=SECS.filter(function(s){return PERM[role][s.k]}).length;
+  $("kpis").innerHTML=
+   '<div class="kpi '+(open?"warn":"good")+'"><div class="v">'+open+'</div><div class="k">Open team tasks</div></div>'+
+   '<div class="kpi"><div class="v">'+S.dates.length+'</div><div class="k">Important dates</div></div>'+
+   '<div class="kpi"><div class="v">'+S.ideas.length+'</div><div class="k">Ideas saved</div></div>'+
+   '<div class="kpi '+(can?"good":"")+'"><div class="v">'+can+' of 6</div><div class="k">Sections you can edit</div></div>';
+  $("grid").innerHTML=SECS.map(function(s){
+    var ok=!!PERM[role][s.k];
+    var list=S[s.k].map(function(it){
+      var chk=s.k==="tasks"?'<input type="checkbox" data-task="'+it.id+'"'+(it.done?" checked":"")+(ok?"":" disabled")+' aria-label="Done: '+esc(it.t)+'">':'';
+      var tools=ok?'<button class="iconb" type="button" data-edit="'+it.id+'" data-sec="'+s.k+'" aria-label="Edit '+esc(it.t)+'">'+K.ICON.edit+'</button><button class="iconb" type="button" data-del="'+it.id+'" data-sec="'+s.k+'" aria-label="Delete '+esc(it.t)+'">'+K.ICON.x+'</button>':'';
+      return '<li class="row'+(it.done?" done":"")+'">'+chk+'<span class="grow">'+esc(it.t)+'</span>'+tools+'</li>';
+    }).join("")||'<li class="muted small">Nothing here yet.</li>';
+    return '<div class="tcard'+(ok?" can":"")+'"><div class="ph"><h3>'+s.t+'</h3>'+(ok?'<span class="pill ok">You can edit</span>':'<span class="pill info">View only</span>')+'</div><ul class="list">'+list+'</ul>'+
+      (ok?'<form class="quick" data-sec="'+s.k+'"><input type="text" aria-label="Add a '+s.one+'" placeholder="Add a '+s.one+'"><button class="btn tonal sm" type="submit" style="height:36px">Add</button></form>':'<div class="lock">Locked for this role by the Sheet owner. Sheet tab: '+s.tab+'</div>')+'</div>';
+  }).join("");
+  $("mhead").innerHTML='<tr><th>Section and Sheet tab</th>'+ROLES.map(function(r){return '<th>'+r.n+'</th>'}).join("")+'</tr>';
+  $("mbody").innerHTML=SECS.map(function(s){return '<tr><td>'+s.t+' <span class="muted">('+s.tab+')</span></td>'+ROLES.map(function(r){return '<td>'+(PERM[r.k][s.k]?'<span class="pill ok">Edit</span>':'View')+'</td>'}).join("")+'</tr>'}).join("");
+}
+function find(sec,id){return S[sec].filter(function(x){return x.id===id})[0]}
+$("roles").addEventListener("click",function(e){var b=e.target.closest("[data-r]");if(b){role=b.dataset.r;draw()}});
+$("grid").addEventListener("submit",function(e){
+  e.preventDefault();var f=e.target,k=f.dataset.sec,v=f.querySelector("input").value.trim();
+  if(!v||!PERM[role][k])return;
+  S[k].push(k==="tasks"?mk(v,false):mk(v));save();draw();
+  var i=document.querySelector('.quick[data-sec="'+k+'"] input');if(i)i.focus();
+});
+$("grid").addEventListener("change",function(e){var id=e.target.dataset.task;if(id&&PERM[role].tasks){find("tasks",id).done=e.target.checked;save();draw()}});
+$("grid").addEventListener("click",function(e){
+  var ed=e.target.closest("[data-edit]"),dl=e.target.closest("[data-del]"),b=ed||dl;if(!b)return;
+  var sec=b.dataset.sec;if(!PERM[role][sec])return;
+  var it=find(sec,ed?ed.dataset.edit:dl.dataset.del),name=SECS.filter(function(s){return s.k===sec})[0].one;
+  function del(){var before=snap();S[sec]=S[sec].filter(function(x){return x.id!==it.id});save();draw();K.toast("Deleted "+name+".",function(){restore(before)})}
+  if(dl){del();return}
+  K.form({title:"Edit "+name,fields:[{k:"t",l:"Text",type:"textarea"}],values:it,onSave:function(v){it.t=v.t;save();draw()},onDelete:del});
+});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();save();draw();K.toast("Sample data restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>

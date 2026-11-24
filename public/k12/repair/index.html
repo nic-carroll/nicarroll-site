@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chromebook Repair Tracker · Nic Carroll</title>
+<meta name="description" content="Chromebook Repair Tracker: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Chromebook Repair Tracker">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-repair.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Playbook</a>
+  <span class="lead"><span class="material-symbols-outlined" aria-hidden="true">build</span></span>
+  <div><h1>Chromebook Repair Tracker</h1><div class="sub">Oakhaven County School District, an imaginary district</div></div>
+  <span class="badge">Sample data</span><span class="sp"></span>
+  <button class="btn outlined sm" id="reset" type="button">Restore sample data</button>
+</div></header>
+<main class="wrap">
+  <div class="kpis" id="kpis"></div>
+  <div class="panel"><h2>Open repairs by building</h2><div class="bars cols4" id="bars"></div></div>
+  <div class="panel">
+      <div class="controls">
+        <label class="field" for="q"><span>Search</span><input id="q" type="search" placeholder="Ticket, tag, or issue"></label>
+        <label class="field" for="fb"><span>Building</span><select id="fb"></select></label>
+        <label class="field" for="fs"><span>Status</span><select id="fs"></select></label>
+      </div>
+      <div class="tablebox"><table><thead><tr><th>Ticket</th><th>Asset tag</th><th>Building</th><th>Issue</th><th>Status</th><th>Days open</th><th>Edit</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <p class="muted small" id="count"></p>
+  </div>
+  <div class="built"><b>How this was built</b><span>A Google Form collects repair requests into a Sheet tab named <code>Tickets</code>. Gemini built this page in Canvas and converted it to an Apps Script web app that reads and updates that tab. Technicians have edit rights on the Sheet. School staff have view rights. Changes on this demo save in your browser only.</span></div>
+</main>
+<button class="fab" id="add" type="button"><span class="material-symbols-outlined" aria-hidden="true">add</span>Add ticket</button>
+<script src="js/kit.js"></script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-repair-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+var BLD=["Oakhaven High","Oakhaven Middle","Cedar Elementary","Maple Elementary"];
+var STS=["New","In repair","Waiting on part","Ready for pickup","Closed"];
+var CLS={"New":"info","In repair":"warn","Waiting on part":"bad","Ready for pickup":"ok","Closed":"ok"};
+var ISS=["Cracked screen","Will not charge","Keyboard keys missing","No Wi Fi","Hinge broken","Trackpad stuck","Will not power on"];
+function pad(n){return n<10?"0"+n:""+n}
+function iso(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function ago(n){var d=new Date();d.setDate(d.getDate()-n);return iso(d)}
+function days(s){var p=s.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]),t=new Date();t.setHours(0,0,0,0);return Math.max(0,Math.round((t-d)/864e5))}
+function sample(){
+  var t=[];
+  for(var k=0;k<28;k++)t.push({id:K.uid(),no:"R"+(1040+k),tag:"CB"+(20311+k*37),b:BLD[k%4],iss:ISS[(k*5)%7],st:STS[(k*3+Math.floor(k/4))%5],opened:ago(1+((k*7)%15)),note:""});
+  return {tickets:t,next:1068};
+}
+var S=K.load(KEY,sample);
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();draw()}
+function isOpen(t){return t.st!=="Ready for pickup"&&t.st!=="Closed"}
+$("fb").innerHTML='<option value="">All buildings</option>'+BLD.map(function(b){return '<option>'+b+'</option>'}).join("");
+$("fs").innerHTML='<option value="">All statuses</option><option value="open">All open</option>'+STS.map(function(s){return '<option>'+s+'</option>'}).join("");
+
+function draw(){
+  var open=S.tickets.filter(isOpen),late=open.filter(function(t){return days(t.opened)>7});
+  var wait=S.tickets.filter(function(t){return t.st==="Waiting on part"}).length,ready=S.tickets.filter(function(t){return t.st==="Ready for pickup"}).length;
+  $("kpis").innerHTML=
+    '<div class="kpi"><div class="v">'+open.length+'</div><div class="k">Open repairs</div></div>'+
+    '<div class="kpi '+(late.length?"bad":"good")+'"><div class="v">'+late.length+'</div><div class="k">Open more than 7 days</div></div>'+
+    '<div class="kpi warn"><div class="v">'+wait+'</div><div class="k">Waiting on part</div></div>'+
+    '<div class="kpi good"><div class="v">'+ready+'</div><div class="k">Ready for pickup</div></div>';
+  var max=1,per=BLD.map(function(b){var n=open.filter(function(t){return t.b===b}).length;if(n>max)max=n;return [b,n]});
+  $("bars").innerHTML=per.map(function(p){return '<div class="barrow"><div class="t"><span><b>'+esc(p[0])+'</b></span><span class="r">'+p[1]+'</span></div><div class="track"><div class="fill" style="width:'+Math.round(p[1]/max*100)+'%"></div></div></div>'}).join("");
+  var q=$("q").value.trim().toLowerCase(),b=$("fb").value,s=$("fs").value;
+  var rows=S.tickets.filter(function(t){
+    if(b&&t.b!==b)return false;
+    if(s==="open"?!isOpen(t):(s&&t.st!==s))return false;
+    if(q&&(t.no+" "+t.tag+" "+t.iss).toLowerCase().indexOf(q)<0)return false;
+    return true;
+  }).sort(function(x,y){return (isOpen(y)-isOpen(x))||days(y.opened)-days(x.opened)});
+  $("count").textContent="Showing "+rows.length+" of "+S.tickets.length+" tickets. Oldest open tickets first.";
+  $("rows").innerHTML=rows.map(function(t){
+    var d=days(t.opened),lateRow=d>7&&isOpen(t);
+    return '<tr><td class="nw">'+esc(t.no)+'</td><td class="nw">'+esc(t.tag)+'</td><td>'+esc(t.b)+'</td><td>'+esc(t.iss)+'</td><td><span class="st"><span class="dot '+CLS[t.st]+'"></span><select data-st="'+t.id+'" aria-label="Status for '+esc(t.no)+'">'+STS.map(function(x){return '<option'+(x===t.st?" selected":"")+'>'+x+'</option>'}).join("")+'</select></span></td><td class="nw">'+(lateRow?'<span class="pill bad">'+d+' days</span>':d+' days')+'</td><td class="nw"><button class="iconb" type="button" data-edit="'+t.id+'" aria-label="Edit '+esc(t.no)+'">'+K.ICON.edit+'</button></td></tr>';
+  }).join("")||'<tr><td colspan="7" class="empty">No tickets match these filters.</td></tr>';
+}
+["q","fb","fs"].forEach(function(id){$(id).addEventListener("input",draw)});
+var FIELDS=[{k:"tag",l:"Asset tag",ph:"CB20311"},{k:"b",l:"Building",type:"select",options:BLD},{k:"iss",l:"Issue"},{k:"st",l:"Status",type:"select",options:STS},{k:"opened",l:"Date opened",type:"date"},{k:"note",l:"Technician notes",type:"textarea"}];
+$("add").addEventListener("click",function(){
+  K.form({title:"Add ticket",fields:FIELDS,values:{b:BLD[0],st:"New",opened:iso(new Date())},onSave:function(v){v.id=K.uid();v.no="R"+(S.next++);if(!v.opened)v.opened=iso(new Date());S.tickets.push(v);save();draw();K.toast("Ticket "+v.no+" added.")}});
+});
+$("rows").addEventListener("change",function(e){
+  var id=e.target.dataset.st;if(!id)return;
+  S.tickets.filter(function(t){return t.id===id})[0].st=e.target.value;save();draw();
+});
+$("rows").addEventListener("click",function(e){
+  var b=e.target.closest("[data-edit]");if(!b)return;
+  var t=S.tickets.filter(function(x){return x.id===b.dataset.edit})[0];
+  K.form({title:"Edit ticket "+t.no,fields:FIELDS,values:t,
+    onSave:function(v){for(var k in v)t[k]=v[k];if(!t.opened)t.opened=iso(new Date());save();draw()},
+    onDelete:function(){var before=snap();S.tickets=S.tickets.filter(function(x){return x.id!==t.id});save();draw();K.toast("Ticket "+t.no+" deleted.",function(){restore(before)})}});
+});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();save();draw();K.toast("Sample data restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>
