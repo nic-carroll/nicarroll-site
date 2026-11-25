@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Click by Click Directions for Gemini · Nic Carroll</title>
+<meta name="description" content="What to click, in order, to build an agent, a dashboard, and a live tool with the free Gemini app in Google Workspace for Education.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Click by Click Directions for Building With Gemini">
+<meta property="og:description" content="Build an agent, a dashboard, and a live tool with the free Gemini app in Google Workspace for Education. Every click, in order.">
+<meta property="og:url" content="https://niccarroll.org/k12-directions.html">
+<meta property="og:image" content="https://niccarroll.org/assets/og/k12-directions.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="schemes.css">
+<style>
+  @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 200 800; font-display: swap; }
+  @font-face { font-family: "Public Sans"; src: url("fonts/public-sans-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
+  :root { --display: "Bricolage", "Arial Narrow", sans-serif; --body: "Public Sans", system-ui, sans-serif; --code: "JetBrains Mono", ui-monospace, monospace; --ink: #14233a; --soft: #4a5b72; --line: #d5dde8; --card: #ffffff; }
+  * { box-sizing: border-box; } html { scroll-behavior: smooth; }
+  body { margin: 0; font: 400 18px/1.6 var(--body); color: var(--ink); background: var(--paper); }
+  a { color: var(--link); }
+  .bar { position: sticky; top: 0; z-index: 20; background: var(--night); color: #fff; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding: 12px clamp(16px, 4vw, 40px); }
+  .bar a { color: #fff; text-decoration: none; font: 600 15px/1 var(--body); padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); }
+  .bar a:hover { border-color: #fff; } .bar a.home { border: 0; padding: 0; font: 700 19px/1 var(--display); margin-right: auto; }
+  .bar a.fill { background: var(--accent-fill); color: var(--on-accent); border-color: transparent; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px) 80px; }
+  .hero { background: var(--night); color: #fff; padding: clamp(36px, 7vw, 72px) clamp(16px, 4vw, 40px) clamp(70px, 9vw, 96px); }
+  .hero > div { max-width: 980px; margin: 0 auto; }
+  .eyebrow { font: 700 14px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--amber); margin: 0 0 14px; }
+  h1 { font: 800 clamp(36px, 6.4vw, 64px)/1.02 var(--display); letter-spacing: -.03em; margin: 0 0 16px; }
+  .hero p.lead { font-size: clamp(18px, 2.2vw, 21px); max-width: 62ch; margin: 0 0 22px; color: #dbe6f3; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 16px; color: #dbe6f3; }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .key { font: 700 .92em/1 var(--body); background: var(--sky-soft); color: var(--ink); border: 1px solid var(--line); border-bottom-width: 3px; border-radius: 8px; padding: 4px 9px; white-space: nowrap; display: inline-block; }
+  code { font: 500 .9em/1.3 var(--code); background: color-mix(in srgb, var(--amber) 18%, #fff); color: var(--ink); border: 1px dashed var(--accent-ink); border-radius: 6px; padding: 2px 7px; }
+  .tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: -44px; position: relative; }
+  .tab { text-align: left; cursor: pointer; font: inherit; color: var(--ink); background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 4px; box-shadow: 0 6px 18px rgba(12,26,46,.1); }
+  .tab b { font: 700 18px/1.2 var(--display); } .tab span { font-size: 14px; color: var(--soft); }
+  .tab[aria-selected="true"] { border-color: var(--link); box-shadow: 0 0 0 3px var(--sky-soft), 0 6px 18px rgba(12,26,46,.1); }
+  .tab.fin b::after { content: "  \2713"; color: var(--link); }
+  .phead { margin: 34px 0 20px; } h2 { font: 800 clamp(28px, 4.4vw, 40px)/1.08 var(--display); letter-spacing: -.02em; margin: 0 0 8px; }
+  .phead p { margin: 0 0 14px; color: var(--soft); max-width: 70ch; }
+  .prog { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; } .prog i { display: block; height: 100%; width: 0; background: var(--link); border-radius: 999px; transition: width .3s; }
+  .pcount { font: 600 14px/1 var(--body); margin: 8px 0 0 !important; }
+  .step { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px; margin-bottom: 14px; scroll-margin-top: 80px; }
+  .step.ok { border-color: var(--link); background: var(--sky-soft); } .step.ok .num { background: var(--link); }
+  .num { width: 56px; height: 56px; border-radius: 50%; background: var(--night); color: #fff; display: grid; place-items: center; font: 800 24px/1 var(--display); }
+  h3 { font: 700 23px/1.2 var(--display); letter-spacing: -.01em; margin: 4px 0 10px; }
+  .lab, .see span, .tip span { display: block; font: 700 12.5px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin: 0 0 6px; }
+  ol { margin: 0 0 14px; padding-left: 24px; } li { margin: 0 0 8px; padding-left: 4px; } li::marker { font-weight: 700; color: var(--link); }
+  .see, .tip { margin: 0 0 12px; padding: 12px 14px; border-radius: 12px; font-size: 16.5px; }
+  .see { background: var(--paper); border-left: 4px solid var(--link); } .tip { background: color-mix(in srgb, var(--amber) 18%, #fff); border-left: 4px solid var(--accent-ink); }
+  .step.ok .see { background: #fff; }
+  .body { min-width: 0; } .copy { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 0 0 14px; }
+  .ch { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--night); color: #fff; padding: 8px 8px 8px 14px; font: 600 14px/1.2 var(--body); }
+  .cbtn { cursor: pointer; font: 700 14px/1 var(--body); background: var(--accent-fill); color: var(--on-accent); border: 0; border-radius: 999px; padding: 9px 16px; }
+  pre { margin: 0; padding: 14px; max-height: 260px; overflow: auto; font: 400 13.5px/1.55 var(--code); background: #fbfcfe; white-space: pre; tab-size: 4; }
+  .done { display: inline-flex; align-items: center; gap: 10px; font: 700 16px/1 var(--body); cursor: pointer; padding: 10px 16px; border: 2px solid var(--line); border-radius: 999px; background: #fff; }
+  .done input { width: 20px; height: 20px; accent-color: var(--link); }
+  .next { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+  .btn { cursor: pointer; display: inline-flex; align-items: center; font: 700 16px/1 var(--body); padding: 14px 22px; border-radius: 999px; border: 2px solid var(--night); background: #fff; color: var(--ink); text-decoration: none; }
+  .btn.fill { background: var(--night); color: #fff; }
+  .rules { margin-top: 44px; background: var(--night); color: #fff; border-radius: 22px; padding: clamp(22px, 4vw, 34px); }
+  .rules h2 { font-size: clamp(24px, 3.6vw, 32px); } .rules ul { margin: 12px 0 0; padding-left: 22px; } .rules li::marker { color: var(--amber); }
+  .foot { margin-top: 26px; color: var(--soft); font-size: 15.5px; }
+  @media (max-width: 720px) { body { font-size: 17px; } .key { white-space: normal; } li, .see, .tip { overflow-wrap: anywhere; } .tabs { grid-template-columns: 1fr 1fr; } .step { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 18px; } .num { width: 44px; height: 44px; font-size: 20px; } .bar a:not(.home):not(.fill) { display: none; } }
+  @media print { .bar, .tabs, .done, .cbtn, .next, .prog, .pcount { display: none !important; } .part[hidden] { display: block !important; } .hero { background: none; color: #000; padding: 0 0 12px; } .hero p.lead, .legend { color: #000; } .step { break-inside: avoid; border-color: #999; } pre { max-height: none; white-space: pre-wrap; } body { background: #fff; font-size: 12pt; } }
+</style>
+</head>
+<body>
+<nav class="bar" aria-label="Site"><a class="home" href="/">Nic Carroll</a><a href="k12-playbook.html">The Playbook</a><a href="showcase.html#k12">Live Example Tools</a><a href="/#agents">AI Library</a><a class="fill" href="agents/k12-gemini-click-by-click-directions.md" download>Download Directions</a></nav>
+<header class="hero"><div>
+  <p class="eyebrow">Gemini Tool Builder Playbook · For K12 Staff</p>
+  <h1>Click by Click Directions</h1>
+  <p class="lead">Build an agent, a dashboard, and a live tool with the free Gemini app in Google Workspace for Education. Every click, in order, with what you should see after each one.</p>
+  <div class="legend"><span><b class="key">Like This</b> is a thing to click</span><span><code>like this</code> is a thing to type</span></div>
+</div></header>
+<main class="wrap">
+  <div class="tabs" role="tablist" aria-label="Builds"><button type="button" class="tab" role="tab" data-part="ready" aria-selected="true"><b>Get Ready</b><span>3 Steps · 5 minutes</span></button><button type="button" class="tab" role="tab" data-part="agent" aria-selected="false"><b>Build 1: Agent</b><span>8 Steps · 10 minutes</span></button><button type="button" class="tab" role="tab" data-part="dashboard" aria-selected="false"><b>Build 2: Dashboard</b><span>8 Steps · 15 minutes</span></button><button type="button" class="tab" role="tab" data-part="live" aria-selected="false"><b>Build 3: Live Tool</b><span>14 Steps · 30 minutes</span></button></div>
+  <section class="part" data-part="ready" ><div class="phead"><h2>Before You Start</h2><p>Three quick checks. Everything here uses the free Gemini app that comes with Google Workspace for Education. No paid license, no API key, no outside account.</p><div class="prog"><i></i></div><p class="pcount"></p></div><article class="step" id="ready-1"><div class="num">1</div><div class="body"><h3>Sign In With Your School Account</h3><p class="lab">Do This</p><ol><li>Open Chrome and go to <code>gemini.google.com</code>.</li><li>Look at the round picture or letter at the <b class="key">top right</b>. Click it.</li><li>Check that the email shown is your <b class="key">school email</b>. If it is a personal account, click <b class="key">Switch account</b> and pick your school account.</li></ol><p class="see"><span>You Should See</span>The Gemini home screen with a text box at the bottom that says something like Ask Gemini.</p><p class="tip"><span>Good to Know</span>If you see a message that Gemini is not available for your account, your IT department has to turn on the Gemini app. Send them this page.</p><label class="done"><input type="checkbox" data-key="ready-1"> Done</label></div></article><article class="step" id="ready-2"><div class="num">2</div><div class="body"><h3>Check That You Have Canvas</h3><p class="lab">Do This</p><ol><li>Look just <b class="key">below the text box</b> at the bottom of the screen.</li><li>Find a button labeled <b class="key">Canvas</b>. On some screens it is inside <b class="key">Tools</b> or behind the <b class="key">plus</b> button next to the text box.</li></ol><p class="see"><span>You Should See</span>A Canvas choice you can click. You will use it in Build 2.</p><p class="tip"><span>Good to Know</span>Google moves this button from time to time. If you cannot find it, type <code>open a canvas</code> in the text box and press Enter.</p><label class="done"><input type="checkbox" data-key="ready-2"> Done</label></div></article><article class="step" id="ready-3"><div class="num">3</div><div class="body"><h3>Check That You Have Gems</h3><p class="lab">Do This</p><ol><li>Look at the <b class="key">left side</b> of the screen. If the menu is closed, click the <b class="key">three lines</b> at the top left to open it.</li><li>Find <b class="key">Explore Gems</b>. On some screens it says <b class="key">Gems</b> or <b class="key">Gem manager</b>.</li></ol><p class="see"><span>You Should See</span>A page listing Gems made by Google, with a <b class="key">New Gem</b> button.</p><p class="tip"><span>Good to Know</span>No Gems choice means your district has it turned off. You can still do Build 2 and Build 3.</p><label class="done"><input type="checkbox" data-key="ready-3"> Done</label></div></article><div class="next"></div></section><section class="part" data-part="agent" hidden><div class="phead"><h2>Build 1: An Agent (a Gem)</h2><p>In Gemini, an agent you build is called a Gem. It is a helper with standing instructions, so you never retype them. You will build Family Message Helper, which turns rough notes into a clear message for families.</p><div class="prog"><i></i></div><p class="pcount"></p></div><article class="step" id="agent-1"><div class="num">1</div><div class="body"><h3>Open the Gem Builder</h3><p class="lab">Do This</p><ol><li>Go to <code>gemini.google.com</code>.</li><li>On the left, click <b class="key">Explore Gems</b>.</li><li>Click <b class="key">New Gem</b>.</li></ol><p class="see"><span>You Should See</span>A builder page with a <b class="key">Name</b> box and an <b class="key">Instructions</b> box on the left, and a <b class="key">Preview</b> chat on the right.</p><label class="done"><input type="checkbox" data-key="agent-1"> Done</label></div></article><article class="step" id="agent-2"><div class="num">2</div><div class="body"><h3>Name Your Gem</h3><p class="lab">Do This</p><ol><li>Click the <b class="key">Name</b> box.</li><li>Type <code>Family Message Helper</code>.</li></ol><p class="see"><span>You Should See</span>The name shows at the top of the page.</p><label class="done"><input type="checkbox" data-key="agent-2"> Done</label></div></article><article class="step" id="agent-3"><div class="num">3</div><div class="body"><h3>Give It Instructions</h3><p class="lab">Do This</p><ol><li>Click the <b class="key">Copy</b> button on the block below.</li><li>Click inside the <b class="key">Instructions</b> box.</li><li>Press <b class="key">Ctrl + V</b> to paste. On a Mac press <b class="key">Command + V</b>.</li></ol><div class="copy"><div class="ch"><span>Instructions to Paste</span><button type="button" class="cbtn">Copy</button></div><pre>You are Family Message Helper, a writing partner for school staff.
+
+YOUR JOB
+Turn my rough notes into a clear, warm message for families.
+
+HOW YOU WORK
+1. Ask me who the message is for and what families need to do, if I did not say.
+2. Write the message at a 6th grade reading level, under 150 words.
+3. Put the date, time, place, and the action families must take near the top.
+4. Give me two versions: an email and a short text message.
+5. Offer a Spanish version after the English one.
+
+RULES YOU ALWAYS FOLLOW
+* Never include a student&#x27;s name, grades, health, or discipline details. If my notes contain them, remove them and tell me you did.
+* Never invent a date, time, cost, or policy. If one is missing, ask me.
+* Keep the tone respectful and plain. No jargon, no slang.</pre></div><p class="see"><span>You Should See</span>The full instructions in the box, starting with You are Family Message Helper.</p><p class="tip"><span>Good to Know</span>Want Gemini to polish your own instructions? Click the <b class="key">magic wand</b> at the bottom of the Instructions box.</p><label class="done"><input type="checkbox" data-key="agent-3"> Done</label></div></article><article class="step" id="agent-4"><div class="num">4</div><div class="body"><h3>Add Knowledge (Optional)</h3><p class="lab">Do This</p><ol><li>Under <b class="key">Knowledge</b>, click <b class="key">Add files</b>.</li><li>Pick a public file, such as your school calendar or family handbook.</li><li>Click <b class="key">Open</b>.</li></ol><p class="see"><span>You Should See</span>The file name listed under Knowledge.</p><p class="tip"><span>Good to Know</span>Never upload student records, rosters, or anything with names and grades. Only add files you would hand to any parent.</p><label class="done"><input type="checkbox" data-key="agent-4"> Done</label></div></article><article class="step" id="agent-5"><div class="num">5</div><div class="body"><h3>Test It Before You Save</h3><p class="lab">Do This</p><ol><li>On the right, click the <b class="key">Preview</b> text box.</li><li>Copy the test note below, paste it, and press <b class="key">Enter</b>.</li><li>Read the answer. Did it ask for anything missing? Did it give an email and a text version?</li></ol><div class="copy"><div class="ch"><span>Test Note to Paste</span><button type="button" class="cbtn">Copy</button></div><pre>picture day moved to thurs nov 19 bc of the assembly. same times. forms due wed. retakes in january</pre></div><p class="see"><span>You Should See</span>A short email and a short text message for families. It should ask about anything you left out instead of making it up.</p><p class="tip"><span>Good to Know</span>If the answer is not right, change the words in the Instructions box and test again. The preview does not save your Gem.</p><label class="done"><input type="checkbox" data-key="agent-5"> Done</label></div></article><article class="step" id="agent-6"><div class="num">6</div><div class="body"><h3>Save Your Gem</h3><p class="lab">Do This</p><ol><li>At the top right, click <b class="key">Save</b>.</li></ol><p class="see"><span>You Should See</span>A message that your Gem was saved, and the Gem listed under <b class="key">Your Gems</b>.</p><label class="done"><input type="checkbox" data-key="agent-6"> Done</label></div></article><article class="step" id="agent-7"><div class="num">7</div><div class="body"><h3>Use Your Gem</h3><p class="lab">Do This</p><ol><li>On the left, click <b class="key">Explore Gems</b>.</li><li>Under <b class="key">Your Gems</b>, click <b class="key">Family Message Helper</b>.</li><li>Type your rough notes and press <b class="key">Enter</b>.</li></ol><p class="see"><span>You Should See</span>A new chat with your Gem&#x27;s name at the top.</p><label class="done"><input type="checkbox" data-key="agent-7"> Done</label></div></article><article class="step" id="agent-8"><div class="num">8</div><div class="body"><h3>Share It With Your Team</h3><p class="lab">Do This</p><ol><li>On the left, click <b class="key">Explore Gems</b>.</li><li>Next to your Gem, click <b class="key">Share</b>.</li><li>Type a coworker&#x27;s school email, or a staff group.</li><li>Choose <b class="key">Viewer</b> so they can use it, or <b class="key">Editor</b> so they can change it.</li><li>Click <b class="key">Send</b> or <b class="key">Done</b>.</li></ol><p class="see"><span>You Should See</span>Your coworker gets the Gem in their own Gem list.</p><p class="tip"><span>Good to Know</span>No Share button means your district has Gem sharing turned off. Send coworkers the instructions block and they can build their own in two minutes.</p><label class="done"><input type="checkbox" data-key="agent-8"> Done</label></div></article><div class="next"></div></section><section class="part" data-part="dashboard" hidden><div class="phead"><h2>Build 2: A Dashboard in Canvas</h2><p>Canvas is where Gemini builds a working page while you watch. You will build a Chromebook Repair Tracker with made up data. This is your practice copy. No real records go in here.</p><div class="prog"><i></i></div><p class="pcount"></p></div><article class="step" id="dashboard-1"><div class="num">1</div><div class="body"><h3>Start a New Chat With Canvas</h3><p class="lab">Do This</p><ol><li>Go to <code>gemini.google.com</code>.</li><li>At the top left, click <b class="key">New chat</b>.</li><li>Below the text box, click <b class="key">Canvas</b>. It may be inside <b class="key">Tools</b> or behind the <b class="key">plus</b> button.</li></ol><p class="see"><span>You Should See</span>The word Canvas highlighted near the text box.</p><label class="done"><input type="checkbox" data-key="dashboard-1"> Done</label></div></article><article class="step" id="dashboard-2"><div class="num">2</div><div class="body"><h3>Paste the Build Prompt</h3><p class="lab">Do This</p><ol><li>Click the <b class="key">Copy</b> button on the block below.</li><li>Click the text box in Gemini and paste.</li><li>Press <b class="key">Enter</b>, or click the <b class="key">arrow</b> button to send.</li></ol><div class="copy"><div class="ch"><span>Build Prompt to Paste</span><button type="button" class="cbtn">Copy</button></div><pre>Build a one page dashboard called Chromebook Repair Tracker as a single HTML file with its CSS and JavaScript included. Do not use any outside libraries, accounts, or keys.
+
+Use this sample data. The first row is the column headers.
+
+Ticket | Date In | Building | Asset Tag | Issue | Status | Tech
+1001 | 11/02/2026 | Oakhaven Elementary | OCS20417 | Cracked screen | Waiting on part | Rivera
+1002 | 11/03/2026 | Oakhaven Middle | OCS20988 | Will not charge | In repair | Chen
+1003 | 11/03/2026 | Oakhaven High | OCS21544 | Missing keys | Ready for pickup | Rivera
+1004 | 11/05/2026 | Oakhaven Elementary | OCS20102 | Will not turn on | New | 
+1005 | 11/06/2026 | Oakhaven High | OCS21730 | Cracked screen | In repair | Patel
+1006 | 11/09/2026 | Oakhaven Middle | OCS20655 | Trackpad not working | Waiting on part | Chen
+1007 | 11/10/2026 | Oakhaven High | OCS21203 | Wi Fi drops | New | 
+1008 | 11/12/2026 | Oakhaven Elementary | OCS20319 | Hinge broken | Ready for pickup | Patel
+
+The page must show, top to bottom:
+1. A title and a row of four number tiles: Total Open, New, Waiting on Part, Ready for Pickup.
+2. A Building filter, a Status filter, and a search box that searches every column.
+3. A table of the matching rows, sorted by Date In with the oldest first.
+4. A small bar chart of tickets by Status.
+
+Make it easy to read on a phone and a laptop, with large text and strong color contrast.</pre></div><p class="see"><span>You Should See</span>Gemini starts writing. A panel opens on the right side. This takes about a minute.</p><label class="done"><input type="checkbox" data-key="dashboard-2"> Done</label></div></article><article class="step" id="dashboard-3"><div class="num">3</div><div class="body"><h3>Open the Preview</h3><p class="lab">Do This</p><ol><li>Wait until Gemini stops writing.</li><li>At the top of the right panel, click <b class="key">Preview</b>. If you see lines of code, you are on the Code view. Preview is next to it.</li></ol><p class="see"><span>You Should See</span>A working dashboard with four number tiles, two filters, a search box, a table, and a chart.</p><label class="done"><input type="checkbox" data-key="dashboard-3"> Done</label></div></article><article class="step" id="dashboard-4"><div class="num">4</div><div class="body"><h3>Try Every Control</h3><p class="lab">Do This</p><ol><li>Click the <b class="key">Building</b> filter and pick <code>Oakhaven High</code>.</li><li>Click the <b class="key">Status</b> filter and pick <code>New</code>.</li><li>Type <code>screen</code> in the search box.</li><li>Check that the number tiles match what you count in the table.</li></ol><p class="see"><span>You Should See</span>The table changes each time. With Oakhaven High and New picked, you should see one row, ticket 1007.</p><p class="tip"><span>Good to Know</span>If a number looks wrong, tell Gemini exactly what you saw and what you expected.</p><label class="done"><input type="checkbox" data-key="dashboard-4"> Done</label></div></article><article class="step" id="dashboard-5"><div class="num">5</div><div class="body"><h3>Ask for Changes, One at a Time</h3><p class="lab">Do This</p><ol><li>Click the text box on the left side.</li><li>Type one change and press <b class="key">Enter</b>. Wait for it to finish. Then ask for the next one.</li><li>Try: <code>Make tickets older than 7 days stand out with a red label.</code></li><li>Try: <code>Add a button that prints the current table.</code></li></ol><p class="see"><span>You Should See</span>The preview rebuilds after each request.</p><p class="tip"><span>Good to Know</span>Ask for one thing at a time. Five changes in one message is how tools break.</p><label class="done"><input type="checkbox" data-key="dashboard-5"> Done</label></div></article><article class="step" id="dashboard-6"><div class="num">6</div><div class="body"><h3>If Something Breaks</h3><p class="lab">Do This</p><ol><li>Type <code>The preview shows an error. Find the cause and fix it.</code> and press <b class="key">Enter</b>.</li><li>Still broken? Type <code>Go back to the last version that worked.</code></li></ol><p class="see"><span>You Should See</span>A working preview again.</p><label class="done"><input type="checkbox" data-key="dashboard-6"> Done</label></div></article><article class="step" id="dashboard-7"><div class="num">7</div><div class="body"><h3>Get the Code</h3><p class="lab">Do This</p><ol><li>At the top of the right panel, click <b class="key">Code</b>.</li><li>Click the <b class="key">Copy</b> icon at the top right of the panel.</li><li>Open a new Google Doc, paste, and name it <code>Repair Tracker Build Notes</code>. You need this in Build 3.</li></ol><p class="see"><span>You Should See</span>The whole page as code, starting with a line that says DOCTYPE html.</p><label class="done"><input type="checkbox" data-key="dashboard-7"> Done</label></div></article><article class="step" id="dashboard-8"><div class="num">8</div><div class="body"><h3>Stop Here Before You Share</h3><p class="lab">Do This</p><ol><li>Find the <b class="key">Share</b> button at the top right of Canvas. Do not use it for real data.</li><li>For a practice copy with made up data, sharing the link is fine.</li><li>For anything with real records, go to <b class="key">Build 3</b>. That path lets the owner of the data decide who sees it.</li></ol><p class="see"><span>You Should See</span>You understand the rule: Canvas for practice, Build 3 for real.</p><p class="tip"><span>Good to Know</span>A Canvas link carries the data inside the page. Anyone with the link sees all of it. That is why real records never go in Canvas.</p><label class="done"><input type="checkbox" data-key="dashboard-8"> Done</label></div></article><div class="next"></div></section><section class="part" data-part="live" hidden><div class="phead"><h2>Build 3: A Live Tool on a Google Sheet</h2><p>Now make it real. The data lives in a Google Sheet. The tool reads the Sheet as the person looking at it, so anyone who cannot open the Sheet sees nothing. Then you put it on a Google Site.</p><div class="prog"><i></i></div><p class="pcount"></p></div><article class="step" id="live-1"><div class="num">1</div><div class="body"><h3>Make the Sheet</h3><p class="lab">Do This</p><ol><li>In a new tab, go to <code>sheets.new</code>.</li><li>Click <b class="key">Untitled spreadsheet</b> at the top left and type <code>Chromebook Repairs</code>.</li><li>At the bottom, double click the tab named <b class="key">Sheet1</b>, type <code>Repairs</code>, and press <b class="key">Enter</b>.</li></ol><p class="see"><span>You Should See</span>A blank Sheet named Chromebook Repairs with one tab named Repairs.</p><p class="tip"><span>Good to Know</span>The tab name must be exactly Repairs. The tool looks for that name.</p><label class="done"><input type="checkbox" data-key="live-1"> Done</label></div></article><article class="step" id="live-2"><div class="num">2</div><div class="body"><h3>Paste the Practice Data</h3><p class="lab">Do This</p><ol><li>Click the <b class="key">Copy</b> button on the block below.</li><li>In the Sheet, click cell <b class="key">A1</b>.</li><li>Press <b class="key">Ctrl + V</b> to paste.</li></ol><div class="copy"><div class="ch"><span>Practice Data to Paste</span><button type="button" class="cbtn">Copy</button></div><pre>Ticket	Date In	Building	Asset Tag	Issue	Status	Tech
+1001	11/02/2026	Oakhaven Elementary	OCS20417	Cracked screen	Waiting on part	Rivera
+1002	11/03/2026	Oakhaven Middle	OCS20988	Will not charge	In repair	Chen
+1003	11/03/2026	Oakhaven High	OCS21544	Missing keys	Ready for pickup	Rivera
+1004	11/05/2026	Oakhaven Elementary	OCS20102	Will not turn on	New	
+1005	11/06/2026	Oakhaven High	OCS21730	Cracked screen	In repair	Patel
+1006	11/09/2026	Oakhaven Middle	OCS20655	Trackpad not working	Waiting on part	Chen
+1007	11/10/2026	Oakhaven High	OCS21203	Wi Fi drops	New	
+1008	11/12/2026	Oakhaven Elementary	OCS20319	Hinge broken	Ready for pickup	Patel</pre></div><p class="see"><span>You Should See</span>Seven column headers in row 1 and eight repairs under them, each value in its own cell.</p><p class="tip"><span>Good to Know</span>If everything landed in column A, click <b class="key">Data</b>, then <b class="key">Split text to columns</b>.</p><label class="done"><input type="checkbox" data-key="live-2"> Done</label></div></article><article class="step" id="live-3"><div class="num">3</div><div class="body"><h3>Open Apps Script</h3><p class="lab">Do This</p><ol><li>In the Sheet menu, click <b class="key">Extensions</b>.</li><li>Click <b class="key">Apps Script</b>. A new tab opens.</li><li>Click <b class="key">Untitled project</b> at the top, type <code>Repair Tracker</code>, and click <b class="key">Rename</b>.</li></ol><p class="see"><span>You Should See</span>A code editor with a file named <b class="key">Code.gs</b> on the left.</p><p class="tip"><span>Good to Know</span>No Apps Script in the menu means your district has it turned off. Ask IT to allow Apps Script for staff.</p><label class="done"><input type="checkbox" data-key="live-3"> Done</label></div></article><article class="step" id="live-4"><div class="num">4</div><div class="body"><h3>Paste the Sheet Reader</h3><p class="lab">Do This</p><ol><li>Click inside the code area.</li><li>Press <b class="key">Ctrl + A</b> to select everything, then <b class="key">Delete</b>.</li><li>Click the <b class="key">Copy</b> button on the block below and paste it in.</li></ol><div class="copy"><div class="ch"><span>Code.gs to Paste</span><button type="button" class="cbtn">Copy</button></div><pre>function doGet() {
+  return HtmlService.createHtmlOutputFromFile(&#x27;Index&#x27;)
+    .setTitle(&#x27;Chromebook Repair Tracker&#x27;)
+    .addMetaTag(&#x27;viewport&#x27;, &#x27;width=device-width, initial-scale=1&#x27;);
+}
+
+// Reads the Repairs tab as the person who is looking at the tool.
+// If that person cannot open the Sheet, they get nothing.
+function getRows() {
+  var sheet = SpreadsheetApp.getActive().getSheetByName(&#x27;Repairs&#x27;);
+  var values = sheet.getDataRange().getDisplayValues();
+  var headers = values.shift();
+  return values
+    .filter(function (row) { return row.join(&#x27;&#x27;) !== &#x27;&#x27;; })
+    .map(function (row) {
+      var item = {};
+      headers.forEach(function (h, i) { item[h] = row[i]; });
+      return item;
+    });
+}</pre></div><p class="see"><span>You Should See</span>Two functions in Code.gs: doGet and getRows.</p><label class="done"><input type="checkbox" data-key="live-4"> Done</label></div></article><article class="step" id="live-5"><div class="num">5</div><div class="body"><h3>Add the Page</h3><p class="lab">Do This</p><ol><li>On the left, next to <b class="key">Files</b>, click the <b class="key">plus</b> button.</li><li>Click <b class="key">HTML</b>.</li><li>Type <code>Index</code> and press <b class="key">Enter</b>. Do not type .html.</li><li>Press <b class="key">Ctrl + A</b>, then <b class="key">Delete</b>.</li><li>Click the <b class="key">Copy</b> button on the block below and paste it in.</li><li>Click the <b class="key">Save</b> icon at the top, or press <b class="key">Ctrl + S</b>.</li></ol><div class="copy"><div class="ch"><span>Index.html to Paste</span><button type="button" class="cbtn">Copy</button></div><pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;base target=&quot;_top&quot;&gt;
+&lt;style&gt;
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f6f9; color: #14233a; }
+  h1 { margin: 0 0 16px; font-size: 26px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .tile { background: #14233a; color: #fff; border-radius: 14px; padding: 16px; }
+  .tile b { display: block; font-size: 34px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+  select, input { font-size: 16px; padding: 10px 12px; border: 1px solid #9aa7b8; border-radius: 10px; background: #fff; }
+  input { flex: 1 1 220px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e1e6ee; font-size: 15px; }
+  th { background: #e4eef8; }
+  .wrap { overflow-x: auto; }
+  #msg { padding: 12px 0; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Chromebook Repair Tracker&lt;/h1&gt;
+&lt;div class=&quot;tiles&quot; id=&quot;tiles&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;bar&quot;&gt;
+  &lt;select id=&quot;building&quot; aria-label=&quot;Building&quot;&gt;&lt;/select&gt;
+  &lt;select id=&quot;status&quot; aria-label=&quot;Status&quot;&gt;&lt;/select&gt;
+  &lt;input id=&quot;search&quot; type=&quot;search&quot; placeholder=&quot;Search every column&quot; aria-label=&quot;Search&quot;&gt;
+&lt;/div&gt;
+&lt;p id=&quot;msg&quot;&gt;Loading the repairs.&lt;/p&gt;
+&lt;div class=&quot;wrap&quot;&gt;&lt;table id=&quot;table&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;script&gt;
+  var rows = [];
+  var COLS = [&#x27;Ticket&#x27;, &#x27;Date In&#x27;, &#x27;Building&#x27;, &#x27;Asset Tag&#x27;, &#x27;Issue&#x27;, &#x27;Status&#x27;, &#x27;Tech&#x27;];
+  function esc(s) { return String(s).replace(/[&amp;&lt;&gt;&quot;]/g, function (c) { return { &#x27;&amp;&#x27;: &#x27;&amp;amp;&#x27;, &#x27;&lt;&#x27;: &#x27;&amp;lt;&#x27;, &#x27;&gt;&#x27;: &#x27;&amp;gt;&#x27;, &#x27;&quot;&#x27;: &#x27;&amp;quot;&#x27; }[c]; }); }
+  function fill(id, label, key) {
+    var seen = {}, list = [];
+    rows.forEach(function (r) { if (r[key] &amp;&amp; !seen[r[key]]) { seen[r[key]] = 1; list.push(r[key]); } });
+    document.getElementById(id).innerHTML = &#x27;&lt;option value=&quot;&quot;&gt;&#x27; + label + &#x27;&lt;/option&gt;&#x27; +
+      list.sort().map(function (v) { return &#x27;&lt;option&gt;&#x27; + esc(v) + &#x27;&lt;/option&gt;&#x27;; }).join(&#x27;&#x27;);
+  }
+  function count(status) { return rows.filter(function (r) { return r.Status === status; }).length; }
+  function draw() {
+    var b = document.getElementById(&#x27;building&#x27;).value, s = document.getElementById(&#x27;status&#x27;).value;
+    var q = document.getElementById(&#x27;search&#x27;).value.toLowerCase();
+    var shown = rows.filter(function (r) {
+      return (!b || r.Building === b) &amp;&amp; (!s || r.Status === s) &amp;&amp;
+        (!q || COLS.map(function (c) { return r[c]; }).join(&#x27; &#x27;).toLowerCase().indexOf(q) &gt; -1);
+    });
+    var open = rows.filter(function (r) { return r.Status !== &#x27;Ready for pickup&#x27;; }).length;
+    document.getElementById(&#x27;tiles&#x27;).innerHTML =
+      [[open, &#x27;Total Open&#x27;], [count(&#x27;New&#x27;), &#x27;New&#x27;], [count(&#x27;Waiting on part&#x27;), &#x27;Waiting on Part&#x27;], [count(&#x27;Ready for pickup&#x27;), &#x27;Ready for Pickup&#x27;]]
+        .map(function (t) { return &#x27;&lt;div class=&quot;tile&quot;&gt;&lt;b&gt;&#x27; + t[0] + &#x27;&lt;/b&gt;&#x27; + t[1] + &#x27;&lt;/div&gt;&#x27;; }).join(&#x27;&#x27;);
+    document.getElementById(&#x27;table&#x27;).innerHTML =
+      &#x27;&lt;tr&gt;&#x27; + COLS.map(function (c) { return &#x27;&lt;th&gt;&#x27; + c + &#x27;&lt;/th&gt;&#x27;; }).join(&#x27;&#x27;) + &#x27;&lt;/tr&gt;&#x27; +
+      shown.map(function (r) { return &#x27;&lt;tr&gt;&#x27; + COLS.map(function (c) { return &#x27;&lt;td&gt;&#x27; + esc(r[c] || &#x27;&#x27;) + &#x27;&lt;/td&gt;&#x27;; }).join(&#x27;&#x27;) + &#x27;&lt;/tr&gt;&#x27;; }).join(&#x27;&#x27;);
+    document.getElementById(&#x27;msg&#x27;).textContent = shown.length + &#x27; of &#x27; + rows.length + &#x27; repairs shown.&#x27;;
+  }
+  function start(data) {
+    rows = data;
+    fill(&#x27;building&#x27;, &#x27;All Buildings&#x27;, &#x27;Building&#x27;);
+    fill(&#x27;status&#x27;, &#x27;All Statuses&#x27;, &#x27;Status&#x27;);
+    draw();
+  }
+  [&#x27;building&#x27;, &#x27;status&#x27;, &#x27;search&#x27;].forEach(function (id) { document.getElementById(id).addEventListener(&#x27;input&#x27;, draw); });
+  google.script.run
+    .withSuccessHandler(start)
+    .withFailureHandler(function () { document.getElementById(&#x27;msg&#x27;).textContent = &#x27;You do not have access to this data. Ask the owner of the Sheet.&#x27;; })
+    .getRows();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre></div><p class="see"><span>You Should See</span>Two files on the left: Code.gs and Index.html.</p><p class="tip"><span>Good to Know</span>Want your own Canvas design from Build 2 instead? Use the convert prompt in the next step.</p><label class="done"><input type="checkbox" data-key="live-5"> Done</label></div></article><article class="step" id="live-6"><div class="num">6</div><div class="body"><h3>Use Your Own Design (Optional)</h3><p class="lab">Do This</p><ol><li>Go back to your Gemini chat from Build 2.</li><li>Copy the prompt below, paste it, and press <b class="key">Enter</b>.</li><li>Click <b class="key">Code</b>, copy the result, and paste it over everything in <b class="key">Index.html</b>.</li><li>Click <b class="key">Save</b>.</li></ol><div class="copy"><div class="ch"><span>Convert Prompt to Paste</span><button type="button" class="cbtn">Copy</button></div><pre>Here is my dashboard code from Canvas. Rewrite it for Google Apps Script as one file named Index.html.
+Remove the built in sample data. Load the rows by calling google.script.run.withSuccessHandler(start).getRows() and draw the page inside start.
+The rows arrive as a list of objects whose keys are my column headers: Ticket, Date In, Building, Asset Tag, Issue, Status, Tech.
+If the call fails, show the message: You do not have access to this data. Ask the owner of the Sheet.
+Do not use any outside libraries, accounts, or keys.</pre></div><p class="see"><span>You Should See</span>Your own dashboard design, now reading from the Sheet.</p><label class="done"><input type="checkbox" data-key="live-6"> Done</label></div></article><article class="step" id="live-7"><div class="num">7</div><div class="body"><h3>Deploy the Tool</h3><p class="lab">Do This</p><ol><li>At the top right, click <b class="key">Deploy</b>.</li><li>Click <b class="key">New deployment</b>.</li><li>Next to <b class="key">Select type</b>, click the <b class="key">gear</b>, then click <b class="key">Web app</b>.</li><li>In <b class="key">Description</b>, type <code>First version</code>.</li><li>Under <b class="key">Execute as</b>, pick <b class="key">User accessing the web app</b>.</li><li>Under <b class="key">Who has access</b>, pick <b class="key">Anyone within</b> your school or district.</li><li>Click <b class="key">Deploy</b>.</li></ol><p class="see"><span>You Should See</span>A box asking you to authorize access.</p><p class="tip"><span>Good to Know</span>Never pick Execute as Me for student or staff records. That setting shows your data to everyone who opens the tool.</p><label class="done"><input type="checkbox" data-key="live-7"> Done</label></div></article><article class="step" id="live-8"><div class="num">8</div><div class="body"><h3>Allow Access and Copy the Link</h3><p class="lab">Do This</p><ol><li>Click <b class="key">Authorize access</b>.</li><li>Pick your school account.</li><li>Click <b class="key">Allow</b>.</li><li>Under <b class="key">Web app</b>, click <b class="key">Copy</b> next to the URL.</li><li>Click <b class="key">Done</b>.</li></ol><p class="see"><span>You Should See</span>A long link that ends in /exec.</p><label class="done"><input type="checkbox" data-key="live-8"> Done</label></div></article><article class="step" id="live-9"><div class="num">9</div><div class="body"><h3>Test the Tool</h3><p class="lab">Do This</p><ol><li>Open a new tab, paste the link, and press <b class="key">Enter</b>.</li><li>Try the filters and the search box.</li><li>Go to the Sheet, change the Status on ticket 1004 to <code>In repair</code>, then reload the tool.</li></ol><p class="see"><span>You Should See</span>The tool shows the change you just made in the Sheet.</p><p class="tip"><span>Good to Know</span>Stuck on Loading the repairs? Check that the tab is named Repairs and that both files are saved, then deploy a new version (last step on this page).</p><label class="done"><input type="checkbox" data-key="live-9"> Done</label></div></article><article class="step" id="live-10"><div class="num">10</div><div class="body"><h3>Set Who Can See the Data</h3><p class="lab">Do This</p><ol><li>Go back to the Sheet.</li><li>At the top right, click <b class="key">Share</b>.</li><li>Type the people or the staff group who should see the tool. Set each to <b class="key">Viewer</b>.</li><li>Under <b class="key">General access</b>, keep <b class="key">Restricted</b>.</li><li>Click the <b class="key">gear</b> at the top of the Share box and uncheck <b class="key">Viewers and commenters can see the option to download, print, and copy</b>.</li><li>Click <b class="key">Done</b>.</li></ol><p class="see"><span>You Should See</span>Only the people you named are listed.</p><p class="tip"><span>Good to Know</span>This is the control point. Remove a person from the Sheet and the tool shows them nothing.</p><label class="done"><input type="checkbox" data-key="live-10"> Done</label></div></article><article class="step" id="live-11"><div class="num">11</div><div class="body"><h3>Put It on a Google Site</h3><p class="lab">Do This</p><ol><li>In a new tab, go to <code>sites.new</code>.</li><li>Click <b class="key">Untitled site</b> and type a name, such as <code>Technology Tools</code>.</li><li>On the right, click <b class="key">Insert</b>, then <b class="key">Embed</b>.</li><li>Click <b class="key">By URL</b>, paste your tool link, and click <b class="key">Insert</b>.</li><li>Drag the blue corners to make the box as wide and tall as the page.</li></ol><p class="see"><span>You Should See</span>Your tool inside the Site page.</p><p class="tip"><span>Good to Know</span>For a tool that fills the whole page: click <b class="key">Pages</b>, hover over the <b class="key">plus</b> button, click <b class="key">New full page embed</b>, and paste the link.</p><label class="done"><input type="checkbox" data-key="live-11"> Done</label></div></article><article class="step" id="live-12"><div class="num">12</div><div class="body"><h3>Publish the Site</h3><p class="lab">Do This</p><ol><li>At the top right, click <b class="key">Publish</b>.</li><li>Type a short web address, such as <code>techtools</code>.</li><li>Next to <b class="key">Who can view my site</b>, click <b class="key">Manage</b>.</li><li>Under <b class="key">Published site</b>, pick your school or <b class="key">Restricted</b>. Never pick Public.</li><li>Click <b class="key">Done</b>, then <b class="key">Publish</b>.</li></ol><p class="see"><span>You Should See</span>A link to your live Site.</p><p class="tip"><span>Good to Know</span>The Site is only a front door. It gives no one access to the data. The Sheet does that.</p><label class="done"><input type="checkbox" data-key="live-12"> Done</label></div></article><article class="step" id="live-13"><div class="num">13</div><div class="body"><h3>Test as Someone Who Should Be Blocked</h3><p class="lab">Do This</p><ol><li>Ask a coworker who is <b class="key">not</b> on the Sheet to open the Site.</li><li>Ask a coworker who <b class="key">is</b> on the Sheet to open it too.</li></ol><p class="see"><span>You Should See</span>The first person sees the no access message. The second sees the tool. If so, you are ready for real data.</p><p class="tip"><span>Good to Know</span>The first time, each person is asked to allow access. If the box on the Site stays blank, have them open the tool link in its own tab once and click <b class="key">Allow</b>.</p><label class="done"><input type="checkbox" data-key="live-13"> Done</label></div></article><article class="step" id="live-14"><div class="num">14</div><div class="body"><h3>Change the Tool Later</h3><p class="lab">Do This</p><ol><li>Edit <b class="key">Index.html</b> or <b class="key">Code.gs</b> and click <b class="key">Save</b>.</li><li>Click <b class="key">Deploy</b>, then <b class="key">Manage deployments</b>.</li><li>Click the <b class="key">pencil</b> to edit.</li><li>Under <b class="key">Version</b>, pick <b class="key">New version</b>.</li><li>Click <b class="key">Deploy</b>.</li></ol><p class="see"><span>You Should See</span>The same link now shows your changes, so the Site keeps working.</p><p class="tip"><span>Good to Know</span>If you click New deployment instead, you get a new link and must update the Site.</p><label class="done"><input type="checkbox" data-key="live-14"> Done</label></div></article><div class="next"></div></section>
+  <section class="rules"><h2>Three Rules That Never Change</h2><ul><li>Use your school Google account, never a personal one.</li><li>Build with made up data. Real records go in only after the tool works and sharing is set.</li><li>The person who owns the Sheet decides who sees the data.</li></ul></section>
+  <p class="foot">Button names were checked against Google's help pages in November 2026. Google moves buttons from time to time, so every step also says what you should see. This is practical guidance, not legal advice. Your district privacy lead owns the final reading of FERPA and state law. <button type="button" class="btn" id="print" style="margin-left:8px">Print All Directions</button></p>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "nc.k12dir", done = {};
+  try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+  var parts = [].slice.call(document.querySelectorAll(".part")), tabs = [].slice.call(document.querySelectorAll(".tab"));
+  function show(id, top) {
+    parts.forEach(function (p) { p.hidden = p.dataset.part !== id; });
+    tabs.forEach(function (t) { t.setAttribute("aria-selected", t.dataset.part === id); });
+    try { history.replaceState(null, "", "#" + id); } catch (e) {}
+    if (top) document.querySelector(".tabs").scrollIntoView();
+  }
+  function tally() {
+    parts.forEach(function (p, i) {
+      var boxes = p.querySelectorAll("input[data-key]"), n = 0;
+      [].forEach.call(boxes, function (b) { b.checked = !!done[b.dataset.key]; b.closest(".step").classList.toggle("ok", b.checked); if (b.checked) n++; });
+      p.querySelector(".prog i").style.width = (100 * n / boxes.length) + "%";
+      p.querySelector(".pcount").textContent = n + " of " + boxes.length + " Steps Done";
+      tabs[i].classList.toggle("fin", n === boxes.length);
+    });
+  }
+  parts.forEach(function (p, i) {
+    var nx = parts[i + 1], box = p.querySelector(".next");
+    box.innerHTML = (nx ? '<button type="button" class="btn fill" data-go="' + nx.dataset.part + '">Next: ' + tabs[i + 1].querySelector("b").textContent + '</button>' : '<a class="btn fill" href="showcase.html#k12">See Finished Example Tools</a>') +
+      '<button type="button" class="btn" data-reset="' + p.dataset.part + '">Clear My Checkmarks</button>';
+  });
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest(".tab"), g = e.target.closest("[data-go]"), r = e.target.closest("[data-reset]"), c = e.target.closest(".cbtn");
+    if (t) show(t.dataset.part);
+    if (g) show(g.dataset.go, true);
+    if (r) { Object.keys(done).forEach(function (k) { if (k.indexOf(r.dataset.reset + "-") === 0) delete done[k]; }); save(); tally(); }
+    if (c) { var text = c.closest(".copy").querySelector("pre").textContent, old = c.textContent, fin = function (ok) { c.textContent = ok ? "Copied" : "Copy Failed"; setTimeout(function () { c.textContent = old; }, 1500); };
+      try { navigator.clipboard.writeText(text).then(function () { fin(true); }, function () { fin(false); }); } catch (x) { fin(false); } }
+  });
+  document.addEventListener("change", function (e) { var b = e.target; if (b.dataset && b.dataset.key) { done[b.dataset.key] = b.checked; save(); tally(); } });
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
+  var h = location.hash.slice(1), st = h && document.getElementById(h);
+  if (st && st.closest(".part")) { show(st.closest(".part").dataset.part); st.scrollIntoView(); }
+  else if (parts.some(function (p) { return p.dataset.part === h; })) show(h);
+  tally();
+})();
+</script>
+</body>
+</html>

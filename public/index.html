@@ -293,6 +293,8 @@
   .ag-stats div { background: var(--night); color: #fff; border-radius: 18px; padding: 20px 22px; }
   .ag-stats b { display: block; font: 700 40px/1 var(--display); color: var(--amber); letter-spacing: -.02em; }
   .ag-stats span { display: block; margin-top: 8px; font-size: 15px; color: #c5d3e4; }
+  .k12-dir { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; margin: 16px 0; padding: 18px 22px; border-radius: 18px; background: var(--accent-fill); color: var(--on-accent); text-decoration: none; transition: transform .15s; } .k12-dir:hover { transform: translateY(-2px); }
+  .k12-dir b { font: 700 22px/1.2 var(--display); } .k12-dir span { flex: 1 1 320px; font-size: 16px; } .k12-dir i { font: 700 15px/1 var(--body); font-style: normal; background: var(--night); color: #fff; padding: 11px 18px; border-radius: 999px; }
   .lib-head { margin: 34px 0 16px; } .lib-head h3 { font: 700 30px/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 6px; } .lib-head p { margin: 0; color: var(--ink-soft); font-size: 16.5px; max-width: 70ch; }
   .lib-tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
   .lib-tab { text-align: left; cursor: pointer; border: 2px solid var(--line); background: var(--surface); color: inherit; border-radius: 18px; padding: 16px 18px; display: grid; gap: 4px; font: inherit; transition: transform .15s, border-color .15s; }
@@ -546,6 +548,7 @@
       </div></details>
       <details class="menu"><summary>Work</summary><div>
         <a href="#agents"><b>AI Agents, Jobs, and Skills</b><span>The library behind the work</span></a>
+        <a href="k12-directions.html"><b>K12 Click by Click Directions</b><span>Build with free Gemini, step by step</span></a>
         <a href="k12-playbook.html"><b>K12 AI Playbook</b><span>School staff build their own tools in Gemini</span></a>
         <a href="showcase.html"><b>Tool Showcase</b><span>Real screens from the tools I built</span></a>
         <a href="#building"><b>Things I'm Building</b><span>Every product and prototype</span></a>
@@ -606,6 +609,7 @@
       </div>
       <div class="kf-shots"><img src="assets/showcase/k12-quiz.jpg" alt="Classroom Quiz Show teacher view, where a teacher builds quiz questions with Gemini" loading="lazy"><img src="assets/showcase/k12-quiz-question.jpg" alt="Classroom Quiz Show student view with a multiple choice math question" loading="lazy"></div>
     </a>
+    <a class="k12-dir" href="k12-directions.html"><b>Click by Click Directions</b><span>Every click, in order, to build an agent, a dashboard, and a live tool with the free Gemini app. 33 steps.</span><i>Open the Directions</i></a>
     <div class="k12-tools"><a href="k12/quiz/"><img src="assets/showcase/k12-quiz-student.jpg" alt="" loading="lazy"><span>Teachers and Students</span><b>Classroom Quiz Show</b><i>Open the Live Tool</i></a><a href="k12/flex/"><img src="assets/showcase/k12-flex.jpg" alt="" loading="lazy"><span>Administrators</span><b>Flex Period Scheduling</b><i>Open the Live Tool</i></a><a href="k12/team/"><img src="assets/showcase/k12-team.jpg" alt="" loading="lazy"><span>Teams</span><b>Grade Level Team Dashboard</b><i>Open the Live Tool</i></a><a href="k12/hub/"><img src="assets/showcase/k12-hub.jpg" alt="" loading="lazy"><span>Elementary Teachers</span><b>My Classroom Hub</b><i>Open the Live Tool</i></a><a href="k12/repair/"><img src="assets/showcase/k12-repair.jpg" alt="" loading="lazy"><span>Technology Staff</span><b>Chromebook Repair Tracker</b><i>Open the Live Tool</i></a></div>
     <div class="lib-head" id="library"><h3>The Library</h3><p>Every file is plain markdown that works in any AI tool. Preview it, download it, or copy a link to share it.</p></div>
     <div class="lib-tabs" id="lib-tabs" role="tablist" aria-label="Library Shelves"></div>

@@ -2846,6 +2846,14 @@
       "intro": "A playbook that shows school staff how to build their own tools in Gemini, using only the Google tools a district already has.",
       "items": [
         {
+          "name": "Click by Click Directions",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "What to click, in order, to build an agent, a dashboard, and a live tool with the free Gemini app. 33 steps, with what you should see after each one.",
+          "file": "agents/k12-gemini-click-by-click-directions.md",
+          "type": "Playbook"
+        },
+        {
           "name": "The Nine Step Workflow",
           "for": "Gemini Tool Builder Playbook",
           "when": "K12",
