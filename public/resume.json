@@ -1454,6 +1454,221 @@
       ]
     },
     {
+      "group": "IT Department Agent Team",
+      "intro": "Job descriptions turned into AI agents. Each one has a persona, core tasks, the other agents it calls on for help, and measures for process, efficiency, and effectiveness. This first set covers cybersecurity and identity and access management.",
+      "items": [
+        {
+          "name": "Start Here",
+          "for": "IT Team",
+          "when": "Read first",
+          "text": "What the set is, how to load an agent into any AI tool, and how the agents hand work to each other.",
+          "file": "agents/it-team-start-here.md"
+        },
+        {
+          "name": "Agent Roster",
+          "for": "IT Team",
+          "when": "Reference",
+          "text": "Every agent and skill in the set, with each agent's mission and the agents it calls on.",
+          "file": "agents/it-team-roster.md"
+        },
+        {
+          "name": "Cybersecurity Lead Agent",
+          "for": "IT Team: Cybersecurity",
+          "when": "Front door",
+          "text": "Takes Cybersecurity requests, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-cybersecurity-lead.md"
+        },
+        {
+          "name": "IAM Lead Agent",
+          "for": "IT Team: IAM",
+          "when": "Front door",
+          "text": "Takes Identity and Access Management requests, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-iam-lead.md"
+        },
+        {
+          "name": "Security Analyst, SOC Analyst",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Detect, investigate, and escalate suspicious activity quickly and accurately so real threats are contained early and noise does not bury them.",
+          "file": "agents/it-team-soc-analyst.md"
+        },
+        {
+          "name": "Security Engineer",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Build, tune, and maintain the security tooling and detections the team depends on, and remove toil from the people who use them.",
+          "file": "agents/it-team-security-engineer.md"
+        },
+        {
+          "name": "Security Architect",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Make sure security is designed into systems and projects from the start, with clear standards that teams can follow without asking permission each time.",
+          "file": "agents/it-team-security-architect.md"
+        },
+        {
+          "name": "Incident Responder",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Contain, eradicate, and recover from security incidents with the least harm, and make sure each incident leaves the organization stronger.",
+          "file": "agents/it-team-incident-responder.md"
+        },
+        {
+          "name": "Threat Hunter, Threat Intelligence Analyst",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Find threats the automated tools missed and turn outside intelligence into detections and decisions the team can use.",
+          "file": "agents/it-team-threat-hunter.md"
+        },
+        {
+          "name": "Penetration Tester, Red Team Operator",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Find exploitable weaknesses before real attackers do, and give owners findings they can reproduce and fix.",
+          "file": "agents/it-team-penetration-tester.md"
+        },
+        {
+          "name": "Vulnerability Management Analyst",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Keep the organization's exposure low by finding vulnerabilities, ranking them by real risk, and driving them to closure.",
+          "file": "agents/it-team-vulnerability-analyst.md"
+        },
+        {
+          "name": "Digital Forensics Examiner",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Collect and analyze digital evidence in a way that is accurate, repeatable, and defensible.",
+          "file": "agents/it-team-forensics-examiner.md"
+        },
+        {
+          "name": "Governance, Risk and Compliance (GRC) Analyst",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Give leadership an accurate picture of risk and compliance, and make meeting requirements as light as possible for the teams doing the work.",
+          "file": "agents/it-team-grc-analyst.md"
+        },
+        {
+          "name": "Security Awareness Coordinator",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Help every person in the organization recognize and report threats, and prove that behavior is improving.",
+          "file": "agents/it-team-awareness-coordinator.md"
+        },
+        {
+          "name": "Application Security Engineer",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Reduce security defects in the software the organization builds and buys by building security into the development process.",
+          "file": "agents/it-team-appsec-engineer.md"
+        },
+        {
+          "name": "Cloud Security Engineer",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Keep cloud environments secure by default through guardrails, continuous posture monitoring, and fast correction of drift.",
+          "file": "agents/it-team-cloud-security-engineer.md"
+        },
+        {
+          "name": "SOC Manager",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Run a SOC that detects and responds reliably every day, with a team that is trained, staffed, and getting better.",
+          "file": "agents/it-team-soc-manager.md"
+        },
+        {
+          "name": "Deputy CISO",
+          "for": "IT Team: Cybersecurity",
+          "when": "On demand",
+          "text": "Run the security program day to day so it delivers on strategy, on budget, and with a clear line of sight from work to risk reduced.",
+          "file": "agents/it-team-deputy-ciso.md"
+        },
+        {
+          "name": "IAM Analyst",
+          "for": "IT Team: IAM",
+          "when": "On demand",
+          "text": "Make sure the right people have the right access at the right time, and that access is removed when it is no longer needed.",
+          "file": "agents/it-team-iam-analyst.md"
+        },
+        {
+          "name": "IAM Engineer",
+          "for": "IT Team: IAM",
+          "when": "On demand",
+          "text": "Build and run the systems that create, change, and remove accounts and that sign people in securely and simply.",
+          "file": "agents/it-team-iam-engineer.md"
+        },
+        {
+          "name": "IAM Architect",
+          "for": "IT Team: IAM",
+          "when": "On demand",
+          "text": "Define the identity model, standards, and roadmap that let every system trust who a person is and what they should reach.",
+          "file": "agents/it-team-iam-architect.md"
+        },
+        {
+          "name": "Director of IAM",
+          "for": "IT Team: IAM",
+          "when": "On demand",
+          "text": "Lead the IAM program so that access is secure, fast, and well governed, with a team that has clear scope and priorities.",
+          "file": "agents/it-team-iam-director.md"
+        },
+        {
+          "name": "Privileged Access Management (PAM) Administrator",
+          "for": "IT Team: IAM",
+          "when": "On demand",
+          "text": "Protect the most powerful accounts by vaulting credentials, limiting standing privilege, and keeping a record of privileged use.",
+          "file": "agents/it-team-pam-administrator.md"
+        }
+      ]
+    },
+    {
+      "group": "IT Team Skills",
+      "intro": "Shared skills every IT team agent uses to hand off work and to make the work better over time.",
+      "items": [
+        {
+          "name": "Process Improvement Review",
+          "for": "IT Team",
+          "when": "Shared skill",
+          "text": "Use when a task is slow, error prone, or done differently each time and you want a better way to do it.",
+          "file": "agents/it-team-skill-process-improvement-review.md"
+        },
+        {
+          "name": "Efficiency Audit",
+          "for": "IT Team",
+          "when": "Shared skill",
+          "text": "Use when you want to find where time, money, or effort is being spent without a matching result.",
+          "file": "agents/it-team-skill-efficiency-audit.md"
+        },
+        {
+          "name": "Effectiveness Scorecard",
+          "for": "IT Team",
+          "when": "Shared skill",
+          "text": "Use when you need to show whether the work is achieving its purpose, not just getting done.",
+          "file": "agents/it-team-skill-effectiveness-scorecard.md"
+        },
+        {
+          "name": "Agent Handoff",
+          "for": "IT Team",
+          "when": "Shared skill",
+          "text": "Use every time one agent asks another agent for help or passes work on.",
+          "file": "agents/it-team-skill-agent-handoff.md"
+        },
+        {
+          "name": "Automation Finder",
+          "for": "IT Team",
+          "when": "Shared skill",
+          "text": "Use when a task or a handoff repeats and you want to know whether to automate it.",
+          "file": "agents/it-team-skill-automation-finder.md"
+        },
+        {
+          "name": "After Action Review",
+          "for": "IT Team",
+          "when": "Shared skill",
+          "text": "Use after any incident, project, exercise, or task that did not go as planned, or that went unusually well.",
+          "file": "agents/it-team-skill-after-action-review.md"
+        }
+      ]
+    },
+    {
       "group": "Playbooks and Rules",
       "intro": "The instruction files that keep every agent, and me, working the same way in each project.",
       "items": [
