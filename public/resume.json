@@ -1268,47 +1268,7 @@
   "now": "Chief Information Security Officer, Georgia Southern University",
   "agents": [
     {
-      "group": "K12 AI Builder Playbook",
-      "intro": "A playbook that shows school staff how to build their own tools in Gemini, using only the Google tools a district already has.",
-      "items": [
-        {
-          "name": "The Nine Step Workflow",
-          "for": "Gemini Tool Builder Playbook",
-          "when": "K12",
-          "text": "Nine steps from a school problem to a launched tool, with the one choice that matters at step 6.",
-          "file": "agents/k12-gemini-playbook-workflow.md"
-        },
-        {
-          "name": "Prompt Library",
-          "for": "Gemini Tool Builder Playbook",
-          "when": "K12",
-          "text": "Ten copy and paste prompts that plan, build, test, connect, and document a school tool in Gemini.",
-          "file": "agents/k12-gemini-playbook-prompt-library.md"
-        },
-        {
-          "name": "Data Owner Controlled Sharing",
-          "for": "Gemini Tool Builder Playbook",
-          "when": "K12",
-          "text": "Three layers of sharing with the Sheet owner in control, section by section edit rights, and a launch checklist.",
-          "file": "agents/k12-gemini-playbook-sharing.md"
-        },
-        {
-          "name": "Keep Tools Alive",
-          "for": "Gemini Tool Builder Playbook",
-          "when": "K12",
-          "text": "Five rules, a folder layout, and a handoff checklist so a staff built tool survives a job change.",
-          "file": "agents/k12-gemini-playbook-continuity.md"
-        },
-        {
-          "name": "Know Your Access",
-          "for": "Gemini Tool Builder Playbook",
-          "when": "K12",
-          "text": "The same build at three Google license levels, so a district with no paid AI add on can still do it.",
-          "file": "agents/k12-gemini-playbook-access-versions.md"
-        }
-      ]
-    },
-    {
+      "section": "run",
       "group": "Agents That Work on a Schedule",
       "intro": "Each one runs by itself, checks its own work with tests, and hands me a pull request to review. None of them can release anything without my approval.",
       "items": [
@@ -1317,81 +1277,93 @@
           "for": "NextGen SIS",
           "when": "Nightly",
           "text": "Patches dependencies, reviews the day's changes, and probes one deeper area each weekday, from sign in to data exposure.",
-          "file": "agents/nextgen-sis-daily-security-engineer.md"
+          "file": "agents/nextgen-sis-daily-security-engineer.md",
+          "type": "Agent"
         },
         {
           "name": "Daily Improvement Engineer",
           "for": "NextGen SIS",
           "when": "Nightly",
           "text": "Ships one finished, tested improvement a night, rotating between bugs, design, state reporting, and speed.",
-          "file": "agents/nextgen-sis-daily-improvement-engineer.md"
+          "file": "agents/nextgen-sis-daily-improvement-engineer.md",
+          "type": "Agent"
         },
         {
           "name": "Directions Writer",
           "for": "NextGen SIS",
           "when": "Nightly",
           "text": "Keeps step by step directions current for every tool and every user group, verified against the running app.",
-          "file": "agents/nextgen-sis-directions-writer.md"
+          "file": "agents/nextgen-sis-directions-writer.md",
+          "type": "Agent"
         },
         {
           "name": "Walkthrough Deck Keeper",
           "for": "NextGen SIS",
           "when": "Nightly",
           "text": "Updates the walkthrough slides and screenshots whenever a feature changes.",
-          "file": "agents/nextgen-sis-walkthrough-deck-keeper.md"
+          "file": "agents/nextgen-sis-walkthrough-deck-keeper.md",
+          "type": "Agent"
         },
         {
           "name": "Cost Keeper",
           "for": "NextGen SIS",
           "when": "Nightly",
           "text": "Rechecks cloud list prices and recalculates the hosting cost for small, medium, and large districts.",
-          "file": "agents/nextgen-sis-cost-keeper.md"
+          "file": "agents/nextgen-sis-cost-keeper.md",
+          "type": "Agent"
         },
         {
           "name": "Project Manager",
           "for": "NextGen SIS",
           "when": "Nightly",
           "text": "Runs last, tracks every bug and change, checks that each agent ran, and writes my morning brief.",
-          "file": "agents/nextgen-sis-project-manager.md"
+          "file": "agents/nextgen-sis-project-manager.md",
+          "type": "Agent"
         },
         {
           "name": "Infrastructure Engineer",
           "for": "NextGen SIS",
           "when": "Monthly",
           "text": "Reviews hosting, sizing, and cost, and runs one cloud load test a month to prove capacity before busy seasons.",
-          "file": "agents/nextgen-sis-monthly-infrastructure-run.md"
+          "file": "agents/nextgen-sis-monthly-infrastructure-run.md",
+          "type": "Agent"
         },
         {
           "name": "Daily Improvement Engineer",
           "for": "RosterEditor",
           "when": "Nightly",
           "text": "Reviews the app through six personas, picks the best value fix, builds it with tests, and opens one pull request.",
-          "file": "agents/rostereditor-daily-improvement-engineer.md"
+          "file": "agents/rostereditor-daily-improvement-engineer.md",
+          "type": "Agent"
         },
         {
           "name": "Persona Tester",
           "for": "RosterEditor and EduSite",
           "when": "Daily",
           "text": "Uses each product as a different invented person every day and fixes the most useful thing it finds.",
-          "file": "agents/rostereditor-edusite-persona-tester.md"
+          "file": "agents/rostereditor-edusite-persona-tester.md",
+          "type": "Agent"
         },
         {
           "name": "Security Reviewer",
           "for": "All my products",
           "when": "Monthly",
           "text": "A read only review of recent changes and scan results across every repository, reported by severity.",
-          "file": "agents/all-products-monthly-security-reviewer.md"
+          "file": "agents/all-products-monthly-security-reviewer.md",
+          "type": "Agent"
         },
         {
           "name": "Data Update Checker",
           "for": "Georgia Educational Analytics",
           "when": "Weekly",
           "text": "Checks the state's public data downloads for new files and records what changed.",
-          "file": "agents/analytics-weekly-data-update-checker.md"
+          "file": "agents/analytics-weekly-data-update-checker.md",
+          "type": "Agent"
         }
       ]
     },
     {
+      "section": "run",
       "group": "Specialist Agents",
       "intro": "Reusable specialists I wrote as agent definition files. I call one in when a change touches its area.",
       "items": [
@@ -1400,1297 +1372,1641 @@
           "for": "NextGen SIS",
           "when": "On demand",
           "text": "Audits pages for WCAG 2.2 AA in light and dark mode, on desktop and phone, and fixes failures.",
-          "file": "agents/nextgen-sis-accessibility-auditor.md"
+          "file": "agents/nextgen-sis-accessibility-auditor.md",
+          "type": "Agent"
         },
         {
           "name": "Design Reviewer",
           "for": "NextGen SIS",
           "when": "On demand",
           "text": "Reviews layout against Material Design 3 and the project style, then fixes what it finds.",
-          "file": "agents/nextgen-sis-design-reviewer.md"
+          "file": "agents/nextgen-sis-design-reviewer.md",
+          "type": "Agent"
         },
         {
           "name": "Dashboard Designer",
           "for": "NextGen SIS",
           "when": "On demand",
           "text": "Designs charts and dashboards so every number is clear and opens the records behind it.",
-          "file": "agents/nextgen-sis-dashboard-designer.md"
+          "file": "agents/nextgen-sis-dashboard-designer.md",
+          "type": "Agent"
         },
         {
           "name": "UX Writer",
           "for": "NextGen SIS",
           "when": "On demand",
           "text": "Rewrites page text, labels, and error messages so staff and families understand them at a glance.",
-          "file": "agents/nextgen-sis-ux-writer.md"
+          "file": "agents/nextgen-sis-ux-writer.md",
+          "type": "Agent"
         },
         {
           "name": "Infrastructure Engineer",
           "for": "NextGen SIS",
           "when": "On demand",
           "text": "The full role definition behind the monthly hosting and capacity review.",
-          "file": "agents/nextgen-sis-infrastructure-engineer.md"
+          "file": "agents/nextgen-sis-infrastructure-engineer.md",
+          "type": "Agent"
         },
         {
           "name": "Code Reviewer",
           "for": "Georgia Educational Analytics",
           "when": "On demand",
           "text": "An unbiased reviewer with no prior context, focused on security boundaries, correctness, and performance.",
-          "file": "agents/analytics-code-reviewer.md"
+          "file": "agents/analytics-code-reviewer.md",
+          "type": "Agent"
         },
         {
           "name": "QA Agent",
           "for": "Georgia Educational Analytics",
           "when": "On demand",
           "text": "Writes and runs adversarial tests for correctness, boundary safety, and error handling.",
-          "file": "agents/analytics-qa-agent.md"
+          "file": "agents/analytics-qa-agent.md",
+          "type": "Agent"
         },
         {
           "name": "Deep Research Agent",
           "for": "Georgia Educational Analytics",
           "when": "On demand",
           "text": "Investigates technical and security questions across the web and the codebase.",
-          "file": "agents/analytics-deep-research-agent.md"
+          "file": "agents/analytics-deep-research-agent.md",
+          "type": "Agent"
         }
       ]
     },
     {
-      "group": "IT Department Agent Team",
-      "intro": "A whole IT department as AI agents, built from job descriptions, plus teaching and learning packs for K12, higher education, and adult learning. Start with the front door, which routes any request to a lead, which routes it to the right role.",
+      "section": "it",
+      "group": "Start Here",
+      "intro": "Read these first. The front door agent takes any IT request and routes it to the right department.",
       "items": [
         {
           "name": "Start Here",
           "for": "IT Team",
           "when": "Read first",
           "text": "What the set is, how the core IT set and the three sector packs fit together, how to load an agent into any AI tool, and how the agents hand work to each other.",
-          "file": "agents/it-team-start-here.md"
+          "file": "agents/it-team-start-here.md",
+          "type": "Guide"
         },
         {
           "name": "Agent Roster",
           "for": "IT Team",
           "when": "Reference",
           "text": "Every agent and skill in the set, with each agent's mission and the agents it calls on.",
-          "file": "agents/it-team-roster.md"
+          "file": "agents/it-team-roster.md",
+          "type": "Guide"
         },
         {
           "name": "IT Front Door Agent",
           "for": "IT Team",
           "when": "Front door",
           "text": "The single starting point for any request. Sends it to the right category or sector lead and coordinates work that crosses them.",
-          "file": "agents/it-team-front-door.md"
-        },
+          "file": "agents/it-team-front-door.md",
+          "type": "Lead Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Executive Leadership",
+      "intro": "The chief roles and the leaders who set direction, budget, and priorities.",
+      "items": [
         {
           "name": "Executive Leadership Lead Agent",
           "for": "IT Team: Executive",
           "when": "Category lead",
           "text": "Takes requests about strategy, budget, governance, and leadership decisions, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-executive-lead.md"
+          "file": "agents/it-team-executive-lead.md",
+          "type": "Lead Agent"
         },
-        {
-          "name": "Service Desk and End User Support Lead Agent",
-          "for": "IT Team: Service Desk",
-          "when": "Category lead",
-          "text": "Takes requests about tickets, devices, classrooms, assets, and training, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-service-desk-lead.md"
-        },
-        {
-          "name": "Infrastructure and Operations Lead Agent",
-          "for": "IT Team: Infrastructure",
-          "when": "Category lead",
-          "text": "Takes requests about servers, network, cloud, storage, voice, and data centers, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-infrastructure-lead.md"
-        },
-        {
-          "name": "Cybersecurity Lead Agent",
-          "for": "IT Team: Cybersecurity",
-          "when": "Category lead",
-          "text": "Takes requests about threats, incidents, vulnerabilities, risk, and security design, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-cybersecurity-lead.md"
-        },
-        {
-          "name": "IAM Lead Agent",
-          "for": "IT Team: IAM",
-          "when": "Category lead",
-          "text": "Takes requests about accounts, access, sign on, and privileged access, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-iam-lead.md"
-        },
-        {
-          "name": "Software Development and Engineering Lead Agent",
-          "for": "IT Team: Software",
-          "when": "Category lead",
-          "text": "Takes requests about building, testing, and releasing software, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-software-lead.md"
-        },
-        {
-          "name": "Data and Analytics Lead Agent",
-          "for": "IT Team: Data",
-          "when": "Category lead",
-          "text": "Takes requests about databases, pipelines, reporting, analytics, and AI models, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-data-lead.md"
-        },
-        {
-          "name": "Enterprise Applications Lead Agent",
-          "for": "IT Team: Applications",
-          "when": "Category lead",
-          "text": "Takes requests about ERP, SIS, LMS, CRM, collaboration, and web platforms, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-applications-lead.md"
-        },
-        {
-          "name": "Architecture, Projects, and Business Alignment Lead Agent",
-          "for": "IT Team: Architecture and Projects",
-          "when": "Category lead",
-          "text": "Takes requests about architecture, projects, products, change, and service processes, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-architecture-projects-lead.md"
-        },
-        {
-          "name": "Governance, Policy, and Administration Lead Agent",
-          "for": "IT Team: Governance",
-          "when": "Category lead",
-          "text": "Takes requests about policy, audit, compliance, privacy, accessibility, vendors, and budget, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-governance-lead.md"
-        },
-        {
-          "name": "K12 Education Lead Agent",
-          "for": "K12 Pack",
-          "when": "Category lead",
-          "text": "Takes requests about K12 curriculum and instruction, coaching, digital learning, media, student data, and school programs, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-k12-lead.md"
-        },
-        {
-          "name": "Higher Education Lead Agent",
-          "for": "Higher Education Pack",
-          "when": "Category lead",
-          "text": "Takes requests about college and university teaching, online programs, faculty development, assessment, and research computing, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-higher-ed-lead.md"
-        },
-        {
-          "name": "Adult and Professional Learning Lead Agent",
-          "for": "Adult Learning Pack",
-          "when": "Category lead",
-          "text": "Takes requests about workforce training, professional learning for employees, required training, and adult education programs, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-adult-learning-lead.md"
-        }
-      ]
-    },
-    {
-      "group": "IT Team Role Agents",
-      "intro": "The core set every organization shares: one agent for each of 98 IT job titles. Each has a persona, core tasks, the other agents it calls on for help, and measures for process, efficiency, and effectiveness.",
-      "items": [
         {
           "name": "Chief Information Officer (CIO)",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Make technology advance the institution's goals, with a budget, team, and portfolio that leadership can trust.",
-          "file": "agents/it-team-cio.md"
+          "file": "agents/it-team-cio.md",
+          "type": "Job Agent"
         },
         {
           "name": "Chief Technology Officer (CTO)",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Give the institution a technology foundation that is reliable, secure, affordable, and ready for what comes next.",
-          "file": "agents/it-team-cto.md"
+          "file": "agents/it-team-cto.md",
+          "type": "Job Agent"
         },
         {
           "name": "Chief Information Security Officer (CISO)",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Protect the institution's people, data, and operations by running a security program matched to its real risks.",
-          "file": "agents/it-team-ciso.md"
+          "file": "agents/it-team-ciso.md",
+          "type": "Job Agent"
         },
         {
           "name": "Chief Data Officer (CDO)",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Make the institution's data trusted, well governed, and used for better decisions.",
-          "file": "agents/it-team-chief-data-officer.md"
+          "file": "agents/it-team-chief-data-officer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Chief AI Officer",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Help the institution use AI to improve work and learning in ways that are safe, fair, and worth the cost.",
-          "file": "agents/it-team-chief-ai-officer.md"
+          "file": "agents/it-team-chief-ai-officer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Chief Digital Officer",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Make the institution's services simple to find and use on any device.",
-          "file": "agents/it-team-chief-digital-officer.md"
+          "file": "agents/it-team-chief-digital-officer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Deputy or Associate CIO",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Run IT day to day so the CIO's strategy is delivered on time and on budget.",
-          "file": "agents/it-team-deputy-cio.md"
+          "file": "agents/it-team-deputy-cio.md",
+          "type": "Job Agent"
         },
         {
           "name": "Vice President of IT",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Lead multiple IT divisions so they act as one organization with shared goals and wise use of money.",
-          "file": "agents/it-team-vp-it.md"
+          "file": "agents/it-team-vp-it.md",
+          "type": "Job Agent"
         },
         {
           "name": "IT Director, Executive Director, IT Manager",
           "for": "IT Team: Executive",
           "when": "On demand",
           "text": "Lead a team or functional area so it delivers reliable service and its people grow.",
-          "file": "agents/it-team-it-director.md"
+          "file": "agents/it-team-it-director.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Service Desk and Support",
+      "intro": "The people users reach first: help desk, desktop, field, and training support.",
+      "items": [
+        {
+          "name": "Service Desk and End User Support Lead Agent",
+          "for": "IT Team: Service Desk",
+          "when": "Category lead",
+          "text": "Takes requests about tickets, devices, classrooms, assets, and training, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-service-desk-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "Help Desk Technician (Tier 1, 2, 3)",
           "for": "IT Team: Service Desk",
           "when": "On demand",
           "text": "Get people back to work quickly and leave a record that helps prevent the next problem.",
-          "file": "agents/it-team-help-desk-technician.md"
+          "file": "agents/it-team-help-desk-technician.md",
+          "type": "Job Agent"
         },
         {
           "name": "Desktop Support Specialist",
           "for": "IT Team: Service Desk",
           "when": "On demand",
           "text": "Keep people's computers and devices working through fast, in person repair and clean deployment.",
-          "file": "agents/it-team-desktop-support-specialist.md"
+          "file": "agents/it-team-desktop-support-specialist.md",
+          "type": "Job Agent"
         },
         {
           "name": "Field Technician",
           "for": "IT Team: Service Desk",
           "when": "On demand",
           "text": "Deliver hands on repair and installation at remote sites safely and in as few trips as possible.",
-          "file": "agents/it-team-field-technician.md"
+          "file": "agents/it-team-field-technician.md",
+          "type": "Job Agent"
         },
         {
           "name": "Service Desk Manager",
           "for": "IT Team: Service Desk",
           "when": "On demand",
           "text": "Run a service desk that answers quickly, resolves well, and learns from every ticket.",
-          "file": "agents/it-team-service-desk-manager.md"
+          "file": "agents/it-team-service-desk-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "Endpoint or Client Systems Administrator",
           "for": "IT Team: Service Desk",
           "when": "On demand",
           "text": "Keep every managed device configured, patched, and secure with as little hands on work as possible.",
-          "file": "agents/it-team-endpoint-administrator.md"
+          "file": "agents/it-team-endpoint-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Audiovisual and Classroom Technology Specialist",
           "for": "IT Team: Service Desk",
           "when": "On demand",
           "text": "Make classrooms and meeting spaces work every time, for every instructor and presenter.",
-          "file": "agents/it-team-av-classroom-specialist.md"
+          "file": "agents/it-team-av-classroom-specialist.md",
+          "type": "Job Agent"
         },
         {
           "name": "IT Asset Manager",
           "for": "IT Team: Service Desk",
           "when": "On demand",
           "text": "Know what hardware and software the institution owns, where it is, who has it, and what it costs.",
-          "file": "agents/it-team-it-asset-manager.md"
+          "file": "agents/it-team-it-asset-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "IT Trainer",
           "for": "IT Team: Service Desk",
           "when": "On demand",
           "text": "Help people use the institution's technology with confidence, so they need less support.",
-          "file": "agents/it-team-it-trainer.md"
+          "file": "agents/it-team-it-trainer.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Infrastructure and Operations",
+      "intro": "Networks, servers, cloud, storage, voice, and the operations center that keeps them running.",
+      "items": [
+        {
+          "name": "Infrastructure and Operations Lead Agent",
+          "for": "IT Team: Infrastructure",
+          "when": "Category lead",
+          "text": "Takes requests about servers, network, cloud, storage, voice, and data centers, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-infrastructure-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "Systems Administrator (Windows, Linux)",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Keep servers and core services available, patched, and secure.",
-          "file": "agents/it-team-systems-administrator.md"
+          "file": "agents/it-team-systems-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Systems Engineer",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Design and automate server and platform solutions that are reliable and simple to run.",
-          "file": "agents/it-team-systems-engineer.md"
+          "file": "agents/it-team-systems-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Network Administrator",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Keep the network running and people connected day to day.",
-          "file": "agents/it-team-network-administrator.md"
+          "file": "agents/it-team-network-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Network Engineer",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Design and deliver network changes that improve performance and reliability without disruption.",
-          "file": "agents/it-team-network-engineer.md"
+          "file": "agents/it-team-network-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Network Architect",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Set a network design and roadmap that will meet the institution's needs for years.",
-          "file": "agents/it-team-network-architect.md"
+          "file": "agents/it-team-network-architect.md",
+          "type": "Job Agent"
         },
         {
           "name": "Wireless Engineer",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Deliver wireless that works everywhere people learn, live, and work.",
-          "file": "agents/it-team-wireless-engineer.md"
+          "file": "agents/it-team-wireless-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Cloud Engineer",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Build and run cloud resources that are reliable, secure, and cost aware.",
-          "file": "agents/it-team-cloud-engineer.md"
+          "file": "agents/it-team-cloud-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Cloud Architect",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Design cloud environments and patterns that teams can use without reinventing them.",
-          "file": "agents/it-team-cloud-architect.md"
+          "file": "agents/it-team-cloud-architect.md",
+          "type": "Job Agent"
         },
         {
           "name": "Storage and Backup Administrator",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Make sure data is stored reliably and can be recovered when needed.",
-          "file": "agents/it-team-storage-backup-administrator.md"
+          "file": "agents/it-team-storage-backup-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Virtualization Engineer",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Run a virtualization platform that is stable, efficient, and has room to grow.",
-          "file": "agents/it-team-virtualization-engineer.md"
+          "file": "agents/it-team-virtualization-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Data Center Technician",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Keep data center equipment installed, connected, and running safely.",
-          "file": "agents/it-team-data-center-technician.md"
+          "file": "agents/it-team-data-center-technician.md",
+          "type": "Job Agent"
         },
         {
           "name": "Data Center Manager",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Run data center facilities that are safe, efficient, and never the cause of an outage.",
-          "file": "agents/it-team-data-center-manager.md"
+          "file": "agents/it-team-data-center-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "Telecommunications or Voice Engineer",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Deliver voice and contact center services that are clear, reliable, and safe.",
-          "file": "agents/it-team-voice-engineer.md"
+          "file": "agents/it-team-voice-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Site Reliability Engineer (SRE)",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Make services measurably reliable and reduce the manual work of running them.",
-          "file": "agents/it-team-site-reliability-engineer.md"
+          "file": "agents/it-team-site-reliability-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Network Operations Center (NOC) Technician",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Watch the environment around the clock and get every incident to the right team fast.",
-          "file": "agents/it-team-noc-technician.md"
+          "file": "agents/it-team-noc-technician.md",
+          "type": "Job Agent"
         },
         {
           "name": "Infrastructure Manager",
           "for": "IT Team: Infrastructure",
           "when": "On demand",
           "text": "Lead the infrastructure teams so services stay reliable and the platform keeps up with need.",
-          "file": "agents/it-team-infrastructure-manager.md"
+          "file": "agents/it-team-infrastructure-manager.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Cybersecurity",
+      "intro": "Security operations, engineering, risk, response, and awareness.",
+      "items": [
+        {
+          "name": "Cybersecurity Lead Agent",
+          "for": "IT Team: Cybersecurity",
+          "when": "Category lead",
+          "text": "Takes requests about threats, incidents, vulnerabilities, risk, and security design, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-cybersecurity-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "Security Analyst, SOC Analyst",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Detect, investigate, and escalate suspicious activity quickly and accurately so real threats are contained early and noise does not bury them.",
-          "file": "agents/it-team-soc-analyst.md"
+          "file": "agents/it-team-soc-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Security Engineer",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Build, tune, and maintain the security tooling and detections the team depends on, and remove toil from the people who use them.",
-          "file": "agents/it-team-security-engineer.md"
+          "file": "agents/it-team-security-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Security Architect",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Make sure security is designed into systems and projects from the start, with clear standards that teams can follow without asking permission each time.",
-          "file": "agents/it-team-security-architect.md"
+          "file": "agents/it-team-security-architect.md",
+          "type": "Job Agent"
         },
         {
           "name": "Incident Responder",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Contain, eradicate, and recover from security incidents with the least harm, and make sure each incident leaves the organization stronger.",
-          "file": "agents/it-team-incident-responder.md"
+          "file": "agents/it-team-incident-responder.md",
+          "type": "Job Agent"
         },
         {
           "name": "Threat Hunter, Threat Intelligence Analyst",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Find threats the automated tools missed and turn outside intelligence into detections and decisions the team can use.",
-          "file": "agents/it-team-threat-hunter.md"
+          "file": "agents/it-team-threat-hunter.md",
+          "type": "Job Agent"
         },
         {
           "name": "Penetration Tester, Red Team Operator",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Find exploitable weaknesses before real attackers do, and give owners findings they can reproduce and fix.",
-          "file": "agents/it-team-penetration-tester.md"
+          "file": "agents/it-team-penetration-tester.md",
+          "type": "Job Agent"
         },
         {
           "name": "Vulnerability Management Analyst",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Keep the organization's exposure low by finding vulnerabilities, ranking them by real risk, and driving them to closure.",
-          "file": "agents/it-team-vulnerability-analyst.md"
+          "file": "agents/it-team-vulnerability-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Digital Forensics Examiner",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Collect and analyze digital evidence in a way that is accurate, repeatable, and defensible.",
-          "file": "agents/it-team-forensics-examiner.md"
+          "file": "agents/it-team-forensics-examiner.md",
+          "type": "Job Agent"
         },
         {
           "name": "Governance, Risk and Compliance (GRC) Analyst",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Give leadership an accurate picture of risk and compliance, and make meeting requirements as light as possible for the teams doing the work.",
-          "file": "agents/it-team-grc-analyst.md"
+          "file": "agents/it-team-grc-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Security Awareness Coordinator",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Help every person in the organization recognize and report threats, and prove that behavior is improving.",
-          "file": "agents/it-team-awareness-coordinator.md"
+          "file": "agents/it-team-awareness-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Application Security Engineer",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Reduce security defects in the software the organization builds and buys by building security into the development process.",
-          "file": "agents/it-team-appsec-engineer.md"
+          "file": "agents/it-team-appsec-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Cloud Security Engineer",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Keep cloud environments secure by default through guardrails, continuous posture monitoring, and fast correction of drift.",
-          "file": "agents/it-team-cloud-security-engineer.md"
+          "file": "agents/it-team-cloud-security-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "SOC Manager",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Run a SOC that detects and responds reliably every day, with a team that is trained, staffed, and getting better.",
-          "file": "agents/it-team-soc-manager.md"
+          "file": "agents/it-team-soc-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "Deputy CISO",
           "for": "IT Team: Cybersecurity",
           "when": "On demand",
           "text": "Run the security program day to day so it delivers on strategy, on budget, and with a clear line of sight from work to risk reduced.",
-          "file": "agents/it-team-deputy-ciso.md"
+          "file": "agents/it-team-deputy-ciso.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Identity and Access Management",
+      "intro": "Accounts, sign in, access reviews, and privileged access.",
+      "items": [
+        {
+          "name": "IAM Lead Agent",
+          "for": "IT Team: IAM",
+          "when": "Category lead",
+          "text": "Takes requests about accounts, access, sign on, and privileged access, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-iam-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "IAM Analyst",
           "for": "IT Team: IAM",
           "when": "On demand",
           "text": "Make sure the right people have the right access at the right time, and that access is removed when it is no longer needed.",
-          "file": "agents/it-team-iam-analyst.md"
+          "file": "agents/it-team-iam-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "IAM Engineer",
           "for": "IT Team: IAM",
           "when": "On demand",
           "text": "Build and run the systems that create, change, and remove accounts and that sign people in securely and simply.",
-          "file": "agents/it-team-iam-engineer.md"
+          "file": "agents/it-team-iam-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "IAM Architect",
           "for": "IT Team: IAM",
           "when": "On demand",
           "text": "Define the identity model, standards, and roadmap that let every system trust who a person is and what they should reach.",
-          "file": "agents/it-team-iam-architect.md"
+          "file": "agents/it-team-iam-architect.md",
+          "type": "Job Agent"
         },
         {
           "name": "Director of IAM",
           "for": "IT Team: IAM",
           "when": "On demand",
           "text": "Lead the IAM program so that access is secure, fast, and well governed, with a team that has clear scope and priorities.",
-          "file": "agents/it-team-iam-director.md"
+          "file": "agents/it-team-iam-director.md",
+          "type": "Job Agent"
         },
         {
           "name": "Privileged Access Management (PAM) Administrator",
           "for": "IT Team: IAM",
           "when": "On demand",
           "text": "Protect the most powerful accounts by vaulting credentials, limiting standing privilege, and keeping a record of privileged use.",
-          "file": "agents/it-team-pam-administrator.md"
+          "file": "agents/it-team-pam-administrator.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Software Development",
+      "intro": "Developers, testers, release, and the engineers who ship and run code.",
+      "items": [
+        {
+          "name": "Software Development and Engineering Lead Agent",
+          "for": "IT Team: Software",
+          "when": "Category lead",
+          "text": "Takes requests about building, testing, and releasing software, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-software-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "Software Developer or Engineer",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Deliver working, maintainable software that solves the real problem.",
-          "file": "agents/it-team-software-developer.md"
+          "file": "agents/it-team-software-developer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Web Developer",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Build websites that are fast, accessible, and easy to keep current.",
-          "file": "agents/it-team-web-developer.md"
+          "file": "agents/it-team-web-developer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Mobile Developer",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Deliver mobile apps people can rely on and want to use.",
-          "file": "agents/it-team-mobile-developer.md"
+          "file": "agents/it-team-mobile-developer.md",
+          "type": "Job Agent"
         },
         {
           "name": "DevOps Engineer, Platform Engineer",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Make shipping software fast, safe, and repeatable.",
-          "file": "agents/it-team-devops-engineer.md"
+          "file": "agents/it-team-devops-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Release Manager",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Get changes into production predictably, with no surprises for users or support.",
-          "file": "agents/it-team-release-manager.md"
+          "file": "agents/it-team-release-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "Quality Assurance (QA) Analyst, Test Engineer",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Find problems before users do and give the team confidence to release.",
-          "file": "agents/it-team-qa-analyst.md"
+          "file": "agents/it-team-qa-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Software Architect",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Give applications a structure that stays simple to change, run, and secure.",
-          "file": "agents/it-team-software-architect.md"
+          "file": "agents/it-team-software-architect.md",
+          "type": "Job Agent"
         },
         {
           "name": "Integration Developer",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Move data between systems accurately, securely, and with clear ownership.",
-          "file": "agents/it-team-integration-developer.md"
+          "file": "agents/it-team-integration-developer.md",
+          "type": "Job Agent"
         },
         {
           "name": "UX/UI Designer",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Make software easy and pleasant to use for everyone.",
-          "file": "agents/it-team-ux-ui-designer.md"
+          "file": "agents/it-team-ux-ui-designer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Engineering Manager",
           "for": "IT Team: Software",
           "when": "On demand",
           "text": "Lead developers so they deliver valuable software at a pace they can sustain.",
-          "file": "agents/it-team-engineering-manager.md"
+          "file": "agents/it-team-engineering-manager.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Data and Analytics",
+      "intro": "Databases, reporting, data engineering, governance, and AI work.",
+      "items": [
+        {
+          "name": "Data and Analytics Lead Agent",
+          "for": "IT Team: Data",
+          "when": "Category lead",
+          "text": "Takes requests about databases, pipelines, reporting, analytics, and AI models, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-data-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "Database Administrator (DBA)",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Keep databases available, fast, secure, and recoverable.",
-          "file": "agents/it-team-database-administrator.md"
+          "file": "agents/it-team-database-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Data Engineer",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Deliver data to the people and tools that need it, on time and correct.",
-          "file": "agents/it-team-data-engineer.md"
+          "file": "agents/it-team-data-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Data Analyst",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Turn data into clear answers that people can act on.",
-          "file": "agents/it-team-data-analyst.md"
+          "file": "agents/it-team-data-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Business Intelligence (BI) Developer",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Give decision makers dashboards they trust and use.",
-          "file": "agents/it-team-bi-developer.md"
+          "file": "agents/it-team-bi-developer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Data Scientist",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Use statistics and models to answer questions that simple reports cannot.",
-          "file": "agents/it-team-data-scientist.md"
+          "file": "agents/it-team-data-scientist.md",
+          "type": "Job Agent"
         },
         {
           "name": "Data Architect",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Design data structures and platforms so data is consistent and reusable across the institution.",
-          "file": "agents/it-team-data-architect.md"
+          "file": "agents/it-team-data-architect.md",
+          "type": "Job Agent"
         },
         {
           "name": "Data Governance Analyst",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Make data understood, owned, and handled correctly.",
-          "file": "agents/it-team-data-governance-analyst.md"
+          "file": "agents/it-team-data-governance-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Machine Learning or AI Engineer",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Put AI and machine learning to work in real applications safely and reliably.",
-          "file": "agents/it-team-ai-engineer.md"
+          "file": "agents/it-team-ai-engineer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Institutional Research or Reporting Analyst",
           "for": "IT Team: Data",
           "when": "On demand",
           "text": "Provide accurate official data for reporting, accreditation, and planning.",
-          "file": "agents/it-team-institutional-research-analyst.md"
+          "file": "agents/it-team-institutional-research-analyst.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Enterprise Applications",
+      "intro": "The business systems: ERP, CRM, student systems, integrations, and collaboration tools.",
+      "items": [
+        {
+          "name": "Enterprise Applications Lead Agent",
+          "for": "IT Team: Applications",
+          "when": "Category lead",
+          "text": "Takes requests about ERP, SIS, LMS, CRM, collaboration, and web platforms, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-applications-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "ERP Administrator or Analyst (Banner, PeopleSoft, Workday)",
           "for": "IT Team: Applications",
           "when": "On demand",
           "text": "Keep the core finance, HR, and student system accurate, current, and supported.",
-          "file": "agents/it-team-erp-administrator.md"
+          "file": "agents/it-team-erp-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Application Administrator",
           "for": "IT Team: Applications",
           "when": "On demand",
           "text": "Keep an application available, current, and useful to the people who rely on it.",
-          "file": "agents/it-team-application-administrator.md"
+          "file": "agents/it-team-application-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Application Analyst",
           "for": "IT Team: Applications",
           "when": "On demand",
           "text": "Make applications fit the way departments need to work.",
-          "file": "agents/it-team-application-analyst.md"
+          "file": "agents/it-team-application-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "SIS or LMS Administrator",
           "for": "IT Team: Applications",
           "when": "On demand",
           "text": "Keep the student information and learning systems ready for every term.",
-          "file": "agents/it-team-sis-lms-administrator.md"
+          "file": "agents/it-team-sis-lms-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "CRM Administrator (Salesforce, Slate)",
           "for": "IT Team: Applications",
           "when": "On demand",
           "text": "Help recruitment, advancement, and service teams manage relationships with accurate data and simple workflows.",
-          "file": "agents/it-team-crm-administrator.md"
+          "file": "agents/it-team-crm-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Collaboration Administrator (Google Workspace, Microsoft 365)",
           "for": "IT Team: Applications",
           "when": "On demand",
           "text": "Keep email, storage, and meeting tools reliable, secure, and well used.",
-          "file": "agents/it-team-collaboration-administrator.md"
+          "file": "agents/it-team-collaboration-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Web Content or CMS Administrator",
           "for": "IT Team: Applications",
           "when": "On demand",
           "text": "Keep the website platform healthy and help content editors publish well.",
-          "file": "agents/it-team-cms-administrator.md"
+          "file": "agents/it-team-cms-administrator.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Architecture and Project Delivery",
+      "intro": "Architects, project and product managers, analysts, and change leaders.",
+      "items": [
+        {
+          "name": "Architecture, Projects, and Business Alignment Lead Agent",
+          "for": "IT Team: Architecture and Projects",
+          "when": "Category lead",
+          "text": "Takes requests about architecture, projects, products, change, and service processes, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-architecture-projects-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "Enterprise Architect",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Give the institution a clear map of its systems and a roadmap that reduces cost and complexity.",
-          "file": "agents/it-team-enterprise-architect.md"
+          "file": "agents/it-team-enterprise-architect.md",
+          "type": "Job Agent"
         },
         {
           "name": "Solutions Architect",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Design the technical solution for a project so it meets the need and fits the standards.",
-          "file": "agents/it-team-solutions-architect.md"
+          "file": "agents/it-team-solutions-architect.md",
+          "type": "Job Agent"
         },
         {
           "name": "Business Analyst",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Make sure IT builds the right thing by understanding how the work is really done.",
-          "file": "agents/it-team-business-analyst.md"
+          "file": "agents/it-team-business-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Business Relationship Manager",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Keep IT and each department working as partners.",
-          "file": "agents/it-team-business-relationship-manager.md"
+          "file": "agents/it-team-business-relationship-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "IT Project Manager, Program Manager",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Deliver projects on scope, on time, and on budget, with no surprises.",
-          "file": "agents/it-team-project-manager.md"
+          "file": "agents/it-team-project-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "PMO Director",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Make sure IT works on the right projects and delivers them well.",
-          "file": "agents/it-team-pmo-director.md"
+          "file": "agents/it-team-pmo-director.md",
+          "type": "Job Agent"
         },
         {
           "name": "Product Manager, Product Owner",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Make sure a product or service keeps delivering value to the people who use it.",
-          "file": "agents/it-team-product-manager.md"
+          "file": "agents/it-team-product-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "Scrum Master",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Help the team deliver steadily and get better every sprint.",
-          "file": "agents/it-team-scrum-master.md"
+          "file": "agents/it-team-scrum-master.md",
+          "type": "Job Agent"
         },
         {
           "name": "Change Manager",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Make changes to IT services succeed, technically and with the people affected.",
-          "file": "agents/it-team-change-manager.md"
+          "file": "agents/it-team-change-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "ITSM Process Owner",
           "for": "IT Team: Architecture and Projects",
           "when": "On demand",
           "text": "Make IT's service processes simple, consistent, and measured.",
-          "file": "agents/it-team-itsm-process-owner.md"
+          "file": "agents/it-team-itsm-process-owner.md",
+          "type": "Job Agent"
+        }
+      ]
+    },
+    {
+      "section": "it",
+      "group": "Governance, Risk, and Vendor Management",
+      "intro": "Policy, compliance, privacy, continuity, procurement, and vendor oversight.",
+      "items": [
+        {
+          "name": "Governance, Policy, and Administration Lead Agent",
+          "for": "IT Team: Governance",
+          "when": "Category lead",
+          "text": "Takes requests about policy, audit, compliance, privacy, accessibility, vendors, and budget, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-governance-lead.md",
+          "type": "Lead Agent"
         },
         {
           "name": "IT Policy Analyst",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Keep IT policies clear, current, approved, and followed.",
-          "file": "agents/it-team-it-policy-analyst.md"
+          "file": "agents/it-team-it-policy-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "IT Auditor",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Give leadership an objective view of whether IT controls work.",
-          "file": "agents/it-team-it-auditor.md"
+          "file": "agents/it-team-it-auditor.md",
+          "type": "Job Agent"
         },
         {
           "name": "Compliance Officer",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Keep the institution meeting its legal and regulatory technology obligations.",
-          "file": "agents/it-team-compliance-officer.md"
+          "file": "agents/it-team-compliance-officer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Privacy Officer",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Make sure personal information is collected, used, and shared lawfully and respectfully.",
-          "file": "agents/it-team-privacy-officer.md"
+          "file": "agents/it-team-privacy-officer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Accessibility Coordinator",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Make sure everyone, including people with disabilities, can use the institution's technology.",
-          "file": "agents/it-team-accessibility-coordinator.md"
+          "file": "agents/it-team-accessibility-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Vendor or Contract Manager",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Get the institution good value and low risk from its technology vendors.",
-          "file": "agents/it-team-vendor-manager.md"
+          "file": "agents/it-team-vendor-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "IT Procurement Specialist",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Get the right technology purchased correctly and on time.",
-          "file": "agents/it-team-procurement-specialist.md"
+          "file": "agents/it-team-procurement-specialist.md",
+          "type": "Job Agent"
         },
         {
           "name": "IT Finance or Budget Analyst",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Give IT leaders an accurate, timely picture of money so they can decide well.",
-          "file": "agents/it-team-it-budget-analyst.md"
+          "file": "agents/it-team-it-budget-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Technical Writer",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Make IT knowledge easy to find, understand, and follow.",
-          "file": "agents/it-team-technical-writer.md"
+          "file": "agents/it-team-technical-writer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Disaster Recovery and Business Continuity Planner",
           "for": "IT Team: Governance",
           "when": "On demand",
           "text": "Make sure critical services can be restored and the institution can keep operating.",
-          "file": "agents/it-team-continuity-planner.md"
+          "file": "agents/it-team-continuity-planner.md",
+          "type": "Job Agent"
         }
       ]
     },
     {
-      "group": "K12 Education Agents",
+      "section": "edu",
+      "group": "K12 Education",
       "intro": "Curriculum and instruction, coaching, digital learning, media, and school programs. Built on pedagogy for children and teenagers: structure, standards, supervision, and families.",
       "items": [
+        {
+          "name": "K12 Education Lead Agent",
+          "for": "K12 Pack",
+          "when": "Category lead",
+          "text": "Takes requests about K12 curriculum and instruction, coaching, digital learning, media, student data, and school programs, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-k12-lead.md",
+          "type": "Lead Agent"
+        },
         {
           "name": "Director of Instructional Technology and Digital Learning (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Lead a district's instructional technology and digital learning so every classroom uses technology to improve learning.",
-          "file": "agents/it-team-k12-instructional-technology-director.md"
+          "file": "agents/it-team-k12-instructional-technology-director.md",
+          "type": "Job Agent"
         },
         {
           "name": "Director of Curriculum and Instruction (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Make sure every student has access to a strong, aligned curriculum and effective instruction.",
-          "file": "agents/it-team-k12-curriculum-director.md"
+          "file": "agents/it-team-k12-curriculum-director.md",
+          "type": "Job Agent"
         },
         {
           "name": "Digital Learning Coordinator",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Make digital learning programs work for students, teachers, and families.",
-          "file": "agents/it-team-digital-learning-coordinator.md"
+          "file": "agents/it-team-digital-learning-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "E-Rate Coordinator (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Secure and protect federal funding for school connectivity.",
-          "file": "agents/it-team-erate-coordinator.md"
+          "file": "agents/it-team-erate-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Student Information or Data Coordinator (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Keep student data accurate and state reporting clean and on time.",
-          "file": "agents/it-team-student-data-coordinator.md"
+          "file": "agents/it-team-student-data-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Professional Learning Coordinator (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Give teachers and staff professional learning that changes practice and is worth their time.",
-          "file": "agents/it-team-k12-professional-learning-coordinator.md"
+          "file": "agents/it-team-k12-professional-learning-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Instructional Technology Coach (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Help teachers improve instruction with technology through job embedded coaching, one teacher or team at a time.",
-          "file": "agents/it-team-instructional-technology-coach.md"
+          "file": "agents/it-team-instructional-technology-coach.md",
+          "type": "Job Agent"
         },
         {
           "name": "Instructional Technology Specialist (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Make the district's instructional tools work well for teachers and students, and help teachers choose the right one.",
-          "file": "agents/it-team-instructional-technology-specialist.md"
+          "file": "agents/it-team-instructional-technology-specialist.md",
+          "type": "Job Agent"
         },
         {
           "name": "Digital Learning Specialist (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Create and support online and blended courses and content that students can follow without getting lost.",
-          "file": "agents/it-team-digital-learning-specialist.md"
+          "file": "agents/it-team-digital-learning-specialist.md",
+          "type": "Job Agent"
         },
         {
           "name": "Library Media Specialist (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Teach students and staff to find, evaluate, and use information well, and run a media program that supports every classroom.",
-          "file": "agents/it-team-library-media-specialist.md"
+          "file": "agents/it-team-library-media-specialist.md",
+          "type": "Job Agent"
         },
         {
           "name": "Curriculum and Digital Resources Specialist (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Make sure teachers have aligned, quality instructional resources and know where to find them.",
-          "file": "agents/it-team-curriculum-resources-specialist.md"
+          "file": "agents/it-team-curriculum-resources-specialist.md",
+          "type": "Job Agent"
         },
         {
           "name": "Virtual and Online Learning Program Coordinator (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Run a virtual learning program where students stay engaged and finish.",
-          "file": "agents/it-team-virtual-program-coordinator.md"
+          "file": "agents/it-team-virtual-program-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Educational App Vetting and Student Data Privacy Coordinator (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Make sure every digital tool used with students is safe, legal, accessible, and worth using.",
-          "file": "agents/it-team-app-vetting-coordinator.md"
+          "file": "agents/it-team-app-vetting-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Assistive Technology Specialist (K12)",
           "for": "K12 Pack",
           "when": "On demand",
           "text": "Make sure students with disabilities have the tools they need to access learning.",
-          "file": "agents/it-team-assistive-technology-specialist.md"
+          "file": "agents/it-team-assistive-technology-specialist.md",
+          "type": "Job Agent"
         }
       ]
     },
     {
-      "group": "Higher Education Agents",
+      "section": "edu",
+      "group": "Higher Education",
       "intro": "Online programs, faculty development, course design, assessment, and research computing. Built for college and university students and for faculty who own what and how they teach.",
       "items": [
+        {
+          "name": "Higher Education Lead Agent",
+          "for": "Higher Education Pack",
+          "when": "Category lead",
+          "text": "Takes requests about college and university teaching, online programs, faculty development, assessment, and research computing, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-higher-ed-lead.md",
+          "type": "Lead Agent"
+        },
         {
           "name": "Academic Technology Director",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Lead academic technology so it serves teaching, learning, and research priorities.",
-          "file": "agents/it-team-academic-technology-director.md"
+          "file": "agents/it-team-academic-technology-director.md",
+          "type": "Job Agent"
         },
         {
           "name": "Director of Online Learning (Higher Education)",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Lead online programs that are high quality, well supported, and good for the institution and its students.",
-          "file": "agents/it-team-online-learning-director.md"
+          "file": "agents/it-team-online-learning-director.md",
+          "type": "Job Agent"
         },
         {
           "name": "Instructional Technologist",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Help instructors use technology to improve teaching and learning.",
-          "file": "agents/it-team-instructional-technologist.md"
+          "file": "agents/it-team-instructional-technologist.md",
+          "type": "Job Agent"
         },
         {
           "name": "Instructional Designer",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Build courses that are clear, engaging, accessible, and effective.",
-          "file": "agents/it-team-instructional-designer.md"
+          "file": "agents/it-team-instructional-designer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Research Computing or HPC Specialist",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Give researchers the computing and data resources they need to do their work.",
-          "file": "agents/it-team-research-computing-specialist.md"
+          "file": "agents/it-team-research-computing-specialist.md",
+          "type": "Job Agent"
         },
         {
           "name": "Faculty Development Coordinator (Higher Education)",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Help faculty grow as teachers through programs they choose to attend and find useful.",
-          "file": "agents/it-team-faculty-development-coordinator.md"
+          "file": "agents/it-team-faculty-development-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Instructional Media Producer (Higher Education)",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Produce video, audio, and interactive media that help students learn.",
-          "file": "agents/it-team-instructional-media-producer.md"
+          "file": "agents/it-team-instructional-media-producer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Online Program Manager (Higher Education)",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Keep an online program running smoothly from recruitment to graduation.",
-          "file": "agents/it-team-online-program-manager.md"
+          "file": "agents/it-team-online-program-manager.md",
+          "type": "Job Agent"
         },
         {
           "name": "Curriculum and Assessment Coordinator (Higher Education)",
           "for": "Higher Education Pack",
           "when": "On demand",
           "text": "Support faculty in designing programs with clear outcomes and using evidence of student learning to improve them.",
-          "file": "agents/it-team-curriculum-assessment-coordinator.md"
+          "file": "agents/it-team-curriculum-assessment-coordinator.md",
+          "type": "Job Agent"
         }
       ]
     },
     {
-      "group": "Adult and Professional Learning Agents",
+      "section": "edu",
+      "group": "Adult and Professional Learning",
       "intro": "Workforce training, professional learning, required training, and adult education. Built on adult learning principles: experience, relevance, choice, and use right away.",
       "items": [
+        {
+          "name": "Adult and Professional Learning Lead Agent",
+          "for": "Adult Learning Pack",
+          "when": "Category lead",
+          "text": "Takes requests about workforce training, professional learning for employees, required training, and adult education programs, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-adult-learning-lead.md",
+          "type": "Lead Agent"
+        },
         {
           "name": "Director of Learning and Development",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Build the skills the organization needs through learning that is worth the time and money.",
-          "file": "agents/it-team-learning-development-director.md"
+          "file": "agents/it-team-learning-development-director.md",
+          "type": "Job Agent"
         },
         {
           "name": "Learning Needs Analyst",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Find out what people need to learn, and when training is not the right fix.",
-          "file": "agents/it-team-learning-needs-analyst.md"
+          "file": "agents/it-team-learning-needs-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Learning Experience Designer",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Design training that adults can apply on the job right away.",
-          "file": "agents/it-team-learning-experience-designer.md"
+          "file": "agents/it-team-learning-experience-designer.md",
+          "type": "Job Agent"
         },
         {
           "name": "eLearning Developer",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Build online training that works on any device and respects the learner's time.",
-          "file": "agents/it-team-elearning-developer.md"
+          "file": "agents/it-team-elearning-developer.md",
+          "type": "Job Agent"
         },
         {
           "name": "Trainer and Facilitator",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Lead live training, in a room or online, that people find useful and remember.",
-          "file": "agents/it-team-trainer-facilitator.md"
+          "file": "agents/it-team-trainer-facilitator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Learning Platform Administrator",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Run the learning platform so assignments, records, and reports are accurate and easy to use.",
-          "file": "agents/it-team-learning-platform-administrator.md"
+          "file": "agents/it-team-learning-platform-administrator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Compliance and Required Training Coordinator",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Make sure everyone completes the training they are required to have, on time and with as little wasted time as possible.",
-          "file": "agents/it-team-compliance-training-coordinator.md"
+          "file": "agents/it-team-compliance-training-coordinator.md",
+          "type": "Job Agent"
         },
         {
           "name": "Learning Evaluation Analyst",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Find out whether learning programs work and what would make them work better.",
-          "file": "agents/it-team-learning-evaluation-analyst.md"
+          "file": "agents/it-team-learning-evaluation-analyst.md",
+          "type": "Job Agent"
         },
         {
           "name": "Adult Education Program Coordinator",
           "for": "Adult Learning Pack",
           "when": "On demand",
           "text": "Run adult education programs, such as high school equivalency, literacy, English language, and workforce classes, where adults enroll, stay, and reach their goals.",
-          "file": "agents/it-team-adult-education-program-coordinator.md"
+          "file": "agents/it-team-adult-education-program-coordinator.md",
+          "type": "Job Agent"
         }
       ]
     },
     {
-      "group": "IT Team and Learning Skills",
-      "intro": "Shared skills the agents use to hand off work, improve the work over time, and design learning. Each sector has its own learning principles skill, because children, college students, and working adults learn differently.",
+      "section": "skills",
+      "group": "Teamwork and Improvement Skills",
+      "intro": "How agents hand work to each other and make the work better over time.",
       "items": [
         {
           "name": "Process Improvement Review",
           "for": "IT Team",
           "when": "Shared skill",
           "text": "Use when a task is slow, error prone, or done differently each time and you want a better way to do it.",
-          "file": "agents/it-team-skill-process-improvement-review.md"
+          "file": "agents/it-team-skill-process-improvement-review.md",
+          "type": "Skill"
         },
         {
           "name": "Efficiency Audit",
           "for": "IT Team",
           "when": "Shared skill",
           "text": "Use when you want to find where time, money, or effort is being spent without a matching result.",
-          "file": "agents/it-team-skill-efficiency-audit.md"
+          "file": "agents/it-team-skill-efficiency-audit.md",
+          "type": "Skill"
         },
         {
           "name": "Effectiveness Scorecard",
           "for": "IT Team",
           "when": "Shared skill",
           "text": "Use when you need to show whether the work is achieving its purpose, not just getting done.",
-          "file": "agents/it-team-skill-effectiveness-scorecard.md"
+          "file": "agents/it-team-skill-effectiveness-scorecard.md",
+          "type": "Skill"
         },
         {
           "name": "Agent Handoff",
           "for": "IT Team",
           "when": "Shared skill",
           "text": "Use every time one agent asks another agent for help or passes work on.",
-          "file": "agents/it-team-skill-agent-handoff.md"
+          "file": "agents/it-team-skill-agent-handoff.md",
+          "type": "Skill"
         },
         {
           "name": "Automation Finder",
           "for": "IT Team",
           "when": "Shared skill",
           "text": "Use when a task or a handoff repeats and you want to know whether to automate it.",
-          "file": "agents/it-team-skill-automation-finder.md"
+          "file": "agents/it-team-skill-automation-finder.md",
+          "type": "Skill"
         },
         {
           "name": "After Action Review",
           "for": "IT Team",
           "when": "Shared skill",
           "text": "Use after any incident, project, exercise, or task that did not go as planned, or that went unusually well.",
-          "file": "agents/it-team-skill-after-action-review.md"
-        },
+          "file": "agents/it-team-skill-after-action-review.md",
+          "type": "Skill"
+        }
+      ]
+    },
+    {
+      "section": "skills",
+      "group": "Learning Design Skills",
+      "intro": "How agents design learning. Each sector has its own learning principles skill, because children, college students, and working adults learn differently.",
+      "items": [
         {
           "name": "Coaching Cycle",
           "for": "Learning",
           "when": "Shared skill",
           "text": "Use when working one on one or with a small team to change teaching or training practice.",
-          "file": "agents/it-team-skill-coaching-cycle.md"
+          "file": "agents/it-team-skill-coaching-cycle.md",
+          "type": "Skill"
         },
         {
           "name": "Learning Tool Evaluation",
           "for": "Learning",
           "when": "Shared skill",
           "text": "Use before recommending, buying, or approving any app, platform, or digital resource for learning.",
-          "file": "agents/it-team-skill-tool-evaluation.md"
+          "file": "agents/it-team-skill-tool-evaluation.md",
+          "type": "Skill"
         },
         {
           "name": "Professional Learning Design",
           "for": "Learning",
           "when": "Shared skill",
           "text": "Use when planning training or professional development for adults, including teachers, faculty, and staff.",
-          "file": "agents/it-team-skill-professional-learning-design.md"
+          "file": "agents/it-team-skill-professional-learning-design.md",
+          "type": "Skill"
         },
         {
           "name": "Training Needs Analysis",
           "for": "Learning",
           "when": "Shared skill",
           "text": "Use when someone asks for training, to confirm training is the right answer and what it should cover.",
-          "file": "agents/it-team-skill-training-needs-analysis.md"
+          "file": "agents/it-team-skill-training-needs-analysis.md",
+          "type": "Skill"
         },
         {
           "name": "Learning Impact Evaluation",
           "for": "Learning",
           "when": "Shared skill",
           "text": "Use to find out whether a course, training, coaching, or program worked.",
-          "file": "agents/it-team-skill-learning-impact-evaluation.md"
+          "file": "agents/it-team-skill-learning-impact-evaluation.md",
+          "type": "Skill"
         },
         {
           "name": "Design for K12 Learners",
           "for": "Learning",
           "when": "Shared skill",
           "text": "Use whenever you design, choose, or review a lesson, course, tool, or resource for children and teenagers in school.",
-          "file": "agents/it-team-skill-learning-principles-k12.md"
+          "file": "agents/it-team-skill-learning-principles-k12.md",
+          "type": "Skill"
         },
         {
           "name": "Design for Higher Education Learners",
           "for": "Learning",
           "when": "Shared skill",
           "text": "Use whenever you design, choose, or review a course, tool, or resource for college and university students.",
-          "file": "agents/it-team-skill-learning-principles-higher-ed.md"
+          "file": "agents/it-team-skill-learning-principles-higher-ed.md",
+          "type": "Skill"
         },
         {
           "name": "Design for Adult Learners",
           "for": "Learning",
           "when": "Shared skill",
           "text": "Use whenever you design, choose, or review training, a course, or a tool for working adults and adult education students.",
-          "file": "agents/it-team-skill-learning-principles-adult.md"
+          "file": "agents/it-team-skill-learning-principles-adult.md",
+          "type": "Skill"
         }
       ]
     },
     {
-      "group": "Playbooks and Rules",
-      "intro": "The instruction files that keep every agent, and me, working the same way in each project.",
+      "section": "skills",
+      "group": "Brand Skill",
+      "intro": "The skill that keeps anything built for me on brand.",
+      "items": [
+        {
+          "name": "Brand Skill",
+          "for": "Nic Carroll brand",
+          "when": "Always on",
+          "text": "The same brand rules written as a skill an AI agent loads before it builds.",
+          "file": "agents/nic-carroll-brand-skill.md",
+          "type": "Skill"
+        }
+      ]
+    },
+    {
+      "section": "playbooks",
+      "group": "K12 AI Builder Playbook",
+      "intro": "A playbook that shows school staff how to build their own tools in Gemini, using only the Google tools a district already has.",
+      "items": [
+        {
+          "name": "The Nine Step Workflow",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Nine steps from a school problem to a launched tool, with the one choice that matters at step 6.",
+          "file": "agents/k12-gemini-playbook-workflow.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Prompt Library",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Ten copy and paste prompts that plan, build, test, connect, and document a school tool in Gemini.",
+          "file": "agents/k12-gemini-playbook-prompt-library.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Data Owner Controlled Sharing",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Three layers of sharing with the Sheet owner in control, section by section edit rights, and a launch checklist.",
+          "file": "agents/k12-gemini-playbook-sharing.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Keep Tools Alive",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Five rules, a folder layout, and a handoff checklist so a staff built tool survives a job change.",
+          "file": "agents/k12-gemini-playbook-continuity.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Know Your Access",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "The same build at three Google license levels, so a district with no paid AI add on can still do it.",
+          "file": "agents/k12-gemini-playbook-access-versions.md",
+          "type": "Playbook"
+        }
+      ]
+    },
+    {
+      "section": "playbooks",
+      "group": "Project Instructions",
+      "intro": "The instruction file each project loads first, so every agent and I start from the same facts.",
       "items": [
         {
           "name": "Project Instructions",
           "for": "NextGen SIS",
           "when": "Always on",
           "text": "Ground rules: one source of truth for outside connections, never call planned work finished, database changes only add.",
-          "file": "agents/nextgen-sis-project-instructions.md"
+          "file": "agents/nextgen-sis-project-instructions.md",
+          "type": "Playbook"
         },
         {
           "name": "Project Instructions",
           "for": "Milestone Compass",
           "when": "Always on",
           "text": "The planning document and working rules for the practice platform.",
-          "file": "agents/milestone-compass-project-instructions.md"
+          "file": "agents/milestone-compass-project-instructions.md",
+          "type": "Playbook"
         },
         {
           "name": "Project Instructions",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
           "text": "How the data portal is organized and how work on it is done.",
-          "file": "agents/analytics-project-instructions.md"
-        },
+          "file": "agents/analytics-project-instructions.md",
+          "type": "Playbook"
+        }
+      ]
+    },
+    {
+      "section": "playbooks",
+      "group": "Rules and Guides",
+      "intro": "Standing rules for security, testing, code, style, and brand.",
+      "items": [
         {
           "name": "Security Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
           "text": "Security best practices every change must follow.",
-          "file": "agents/analytics-security-rules.md"
+          "file": "agents/analytics-security-rules.md",
+          "type": "Rule"
         },
         {
           "name": "Testing Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
           "text": "What must be tested and how before anything ships.",
-          "file": "agents/analytics-testing-rules.md"
+          "file": "agents/analytics-testing-rules.md",
+          "type": "Rule"
         },
         {
           "name": "Code Style Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
           "text": "Naming and code style conventions.",
-          "file": "agents/analytics-code-style-rules.md"
+          "file": "agents/analytics-code-style-rules.md",
+          "type": "Rule"
         },
         {
           "name": "React Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
           "text": "Best practices for interactive screens.",
-          "file": "agents/analytics-react-rules.md"
+          "file": "agents/analytics-react-rules.md",
+          "type": "Rule"
         },
         {
           "name": "Style System Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
           "text": "Modern CSS guidelines for a multi brand design system.",
-          "file": "agents/analytics-style-system-rules.md"
+          "file": "agents/analytics-style-system-rules.md",
+          "type": "Rule"
         },
         {
           "name": "Branding Rules",
           "for": "Georgia Educational Analytics",
           "when": "Always on",
           "text": "How one portal takes on each district's colors, name, and logo.",
-          "file": "agents/analytics-branding-rules.md"
+          "file": "agents/analytics-branding-rules.md",
+          "type": "Rule"
         },
         {
           "name": "Brand Guide",
           "for": "Nic Carroll brand",
           "when": "Always on",
           "text": "Logo, color, schemes, type, and voice rules for anything that carries my name.",
-          "file": "agents/nic-carroll-brand-guide.md"
-        },
-        {
-          "name": "Brand Skill",
-          "for": "Nic Carroll brand",
-          "when": "Always on",
-          "text": "The same brand rules written as a skill an AI agent loads before it builds.",
-          "file": "agents/nic-carroll-brand-skill.md"
+          "file": "agents/nic-carroll-brand-guide.md",
+          "type": "Rule"
         }
       ]
+    }
+  ],
+  "agentSections": [
+    {
+      "id": "run",
+      "name": "Agents I Run",
+      "what": "Working agents I wrote and use on my own products, on a schedule or on demand."
+    },
+    {
+      "id": "it",
+      "name": "IT Department Jobs",
+      "what": "A whole IT department as agents. One agent for each job title, built from the job description, with a lead agent for every department."
+    },
+    {
+      "id": "edu",
+      "name": "Education Jobs",
+      "what": "Teaching and learning roles as agents, in three packs, because children, college students, and working adults learn differently."
+    },
+    {
+      "id": "skills",
+      "name": "Skills",
+      "what": "Reusable methods any agent can pick up. A skill is not a job. It is how a job gets done well."
+    },
+    {
+      "id": "playbooks",
+      "name": "Playbooks and Rules",
+      "what": "Instruction files that people and agents follow, so the work comes out the same way every time."
     }
   ]
 }

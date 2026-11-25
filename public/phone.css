@@ -18,7 +18,6 @@
   .m-clamp:has(> .m-more.m-in) { padding-bottom: 0; }
   /* tighter sections and type on a phone */
   section { padding-top: 56px !important; padding-bottom: 56px !important; }
-  .ag-stats { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
   #sis .facts, .tool .facts { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
   .case .story[open] { max-height: none; }
 }
