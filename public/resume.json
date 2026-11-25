@@ -1455,13 +1455,13 @@
     },
     {
       "group": "IT Department Agent Team",
-      "intro": "Job descriptions turned into AI agents. Each one has a persona, core tasks, the other agents it calls on for help, and measures for process, efficiency, and effectiveness. This first set covers cybersecurity and identity and access management.",
+      "intro": "A whole IT department as AI agents, built from job descriptions. Start with the front door, which routes any request to a category lead, which routes it to the right role.",
       "items": [
         {
           "name": "Start Here",
           "for": "IT Team",
           "when": "Read first",
-          "text": "What the set is, how to load an agent into any AI tool, and how the agents hand work to each other.",
+          "text": "What the set is, how to load an agent into any AI tool, how to fit it to your organization, and how the agents hand work to each other.",
           "file": "agents/it-team-start-here.md"
         },
         {
@@ -1472,18 +1472,325 @@
           "file": "agents/it-team-roster.md"
         },
         {
+          "name": "IT Front Door Agent",
+          "for": "IT Team",
+          "when": "Front door",
+          "text": "The single starting point for any IT request. Sends it to the right category lead and coordinates work that crosses categories.",
+          "file": "agents/it-team-front-door.md"
+        },
+        {
+          "name": "Executive Leadership Lead Agent",
+          "for": "IT Team: Executive",
+          "when": "Category lead",
+          "text": "Takes requests about strategy, budget, governance, and leadership decisions, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-executive-lead.md"
+        },
+        {
+          "name": "Service Desk and End User Support Lead Agent",
+          "for": "IT Team: Service Desk",
+          "when": "Category lead",
+          "text": "Takes requests about tickets, devices, classrooms, assets, and training, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-service-desk-lead.md"
+        },
+        {
+          "name": "Infrastructure and Operations Lead Agent",
+          "for": "IT Team: Infrastructure",
+          "when": "Category lead",
+          "text": "Takes requests about servers, network, cloud, storage, voice, and data centers, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-infrastructure-lead.md"
+        },
+        {
           "name": "Cybersecurity Lead Agent",
           "for": "IT Team: Cybersecurity",
-          "when": "Front door",
-          "text": "Takes Cybersecurity requests, sends each to the right role agent, and coordinates work that needs more than one.",
+          "when": "Category lead",
+          "text": "Takes requests about threats, incidents, vulnerabilities, risk, and security design, sends each to the right role agent, and coordinates work that needs more than one.",
           "file": "agents/it-team-cybersecurity-lead.md"
         },
         {
           "name": "IAM Lead Agent",
           "for": "IT Team: IAM",
-          "when": "Front door",
-          "text": "Takes Identity and Access Management requests, sends each to the right role agent, and coordinates work that needs more than one.",
+          "when": "Category lead",
+          "text": "Takes requests about accounts, access, sign on, and privileged access, sends each to the right role agent, and coordinates work that needs more than one.",
           "file": "agents/it-team-iam-lead.md"
+        },
+        {
+          "name": "Software Development and Engineering Lead Agent",
+          "for": "IT Team: Software",
+          "when": "Category lead",
+          "text": "Takes requests about building, testing, and releasing software, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-software-lead.md"
+        },
+        {
+          "name": "Data and Analytics Lead Agent",
+          "for": "IT Team: Data",
+          "when": "Category lead",
+          "text": "Takes requests about databases, pipelines, reporting, analytics, and AI models, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-data-lead.md"
+        },
+        {
+          "name": "Enterprise Applications Lead Agent",
+          "for": "IT Team: Applications",
+          "when": "Category lead",
+          "text": "Takes requests about ERP, SIS, LMS, CRM, collaboration, and web platforms, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-applications-lead.md"
+        },
+        {
+          "name": "Architecture, Projects, and Business Alignment Lead Agent",
+          "for": "IT Team: Architecture and Projects",
+          "when": "Category lead",
+          "text": "Takes requests about architecture, projects, products, change, and service processes, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-architecture-projects-lead.md"
+        },
+        {
+          "name": "Governance, Policy, and Administration Lead Agent",
+          "for": "IT Team: Governance",
+          "when": "Category lead",
+          "text": "Takes requests about policy, audit, compliance, privacy, accessibility, vendors, and budget, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-governance-lead.md"
+        },
+        {
+          "name": "Education Specific Lead Agent",
+          "for": "IT Team: Education",
+          "when": "Category lead",
+          "text": "Takes requests about instructional technology, course design, research computing, and K12 programs, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-education-lead.md"
+        }
+      ]
+    },
+    {
+      "group": "IT Team Role Agents",
+      "intro": "One agent for each of 105 IT job titles across 11 categories. Each has a persona, core tasks, the other agents it calls on for help, and measures for process, efficiency, and effectiveness.",
+      "items": [
+        {
+          "name": "Chief Information Officer (CIO)",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Make technology advance the institution's goals, with a budget, team, and portfolio that leadership can trust.",
+          "file": "agents/it-team-cio.md"
+        },
+        {
+          "name": "Chief Technology Officer (CTO)",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Give the institution a technology foundation that is reliable, secure, affordable, and ready for what comes next.",
+          "file": "agents/it-team-cto.md"
+        },
+        {
+          "name": "Chief Information Security Officer (CISO)",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Protect the institution's people, data, and operations by running a security program matched to its real risks.",
+          "file": "agents/it-team-ciso.md"
+        },
+        {
+          "name": "Chief Data Officer (CDO)",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Make the institution's data trusted, well governed, and used for better decisions.",
+          "file": "agents/it-team-chief-data-officer.md"
+        },
+        {
+          "name": "Chief AI Officer",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Help the institution use AI to improve work and learning in ways that are safe, fair, and worth the cost.",
+          "file": "agents/it-team-chief-ai-officer.md"
+        },
+        {
+          "name": "Chief Digital Officer",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Make the institution's services simple to find and use on any device.",
+          "file": "agents/it-team-chief-digital-officer.md"
+        },
+        {
+          "name": "Deputy or Associate CIO",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Run IT day to day so the CIO's strategy is delivered on time and on budget.",
+          "file": "agents/it-team-deputy-cio.md"
+        },
+        {
+          "name": "Vice President of IT",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Lead multiple IT divisions so they act as one organization with shared goals and wise use of money.",
+          "file": "agents/it-team-vp-it.md"
+        },
+        {
+          "name": "IT Director, Executive Director, IT Manager",
+          "for": "IT Team: Executive",
+          "when": "On demand",
+          "text": "Lead a team or functional area so it delivers reliable service and its people grow.",
+          "file": "agents/it-team-it-director.md"
+        },
+        {
+          "name": "Help Desk Technician (Tier 1, 2, 3)",
+          "for": "IT Team: Service Desk",
+          "when": "On demand",
+          "text": "Get people back to work quickly and leave a record that helps prevent the next problem.",
+          "file": "agents/it-team-help-desk-technician.md"
+        },
+        {
+          "name": "Desktop Support Specialist",
+          "for": "IT Team: Service Desk",
+          "when": "On demand",
+          "text": "Keep people's computers and devices working through fast, in person repair and clean deployment.",
+          "file": "agents/it-team-desktop-support-specialist.md"
+        },
+        {
+          "name": "Field Technician",
+          "for": "IT Team: Service Desk",
+          "when": "On demand",
+          "text": "Deliver hands on repair and installation at remote sites safely and in as few trips as possible.",
+          "file": "agents/it-team-field-technician.md"
+        },
+        {
+          "name": "Service Desk Manager",
+          "for": "IT Team: Service Desk",
+          "when": "On demand",
+          "text": "Run a service desk that answers quickly, resolves well, and learns from every ticket.",
+          "file": "agents/it-team-service-desk-manager.md"
+        },
+        {
+          "name": "Endpoint or Client Systems Administrator",
+          "for": "IT Team: Service Desk",
+          "when": "On demand",
+          "text": "Keep every managed device configured, patched, and secure with as little hands on work as possible.",
+          "file": "agents/it-team-endpoint-administrator.md"
+        },
+        {
+          "name": "Audiovisual and Classroom Technology Specialist",
+          "for": "IT Team: Service Desk",
+          "when": "On demand",
+          "text": "Make classrooms and meeting spaces work every time, for every instructor and presenter.",
+          "file": "agents/it-team-av-classroom-specialist.md"
+        },
+        {
+          "name": "IT Asset Manager",
+          "for": "IT Team: Service Desk",
+          "when": "On demand",
+          "text": "Know what hardware and software the institution owns, where it is, who has it, and what it costs.",
+          "file": "agents/it-team-it-asset-manager.md"
+        },
+        {
+          "name": "IT Trainer",
+          "for": "IT Team: Service Desk",
+          "when": "On demand",
+          "text": "Help people use the institution's technology with confidence, so they need less support.",
+          "file": "agents/it-team-it-trainer.md"
+        },
+        {
+          "name": "Systems Administrator (Windows, Linux)",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Keep servers and core services available, patched, and secure.",
+          "file": "agents/it-team-systems-administrator.md"
+        },
+        {
+          "name": "Systems Engineer",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Design and automate server and platform solutions that are reliable and simple to run.",
+          "file": "agents/it-team-systems-engineer.md"
+        },
+        {
+          "name": "Network Administrator",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Keep the network running and people connected day to day.",
+          "file": "agents/it-team-network-administrator.md"
+        },
+        {
+          "name": "Network Engineer",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Design and deliver network changes that improve performance and reliability without disruption.",
+          "file": "agents/it-team-network-engineer.md"
+        },
+        {
+          "name": "Network Architect",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Set a network design and roadmap that will meet the institution's needs for years.",
+          "file": "agents/it-team-network-architect.md"
+        },
+        {
+          "name": "Wireless Engineer",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Deliver wireless that works everywhere people learn, live, and work.",
+          "file": "agents/it-team-wireless-engineer.md"
+        },
+        {
+          "name": "Cloud Engineer",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Build and run cloud resources that are reliable, secure, and cost aware.",
+          "file": "agents/it-team-cloud-engineer.md"
+        },
+        {
+          "name": "Cloud Architect",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Design cloud environments and patterns that teams can use without reinventing them.",
+          "file": "agents/it-team-cloud-architect.md"
+        },
+        {
+          "name": "Storage and Backup Administrator",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Make sure data is stored reliably and can be recovered when needed.",
+          "file": "agents/it-team-storage-backup-administrator.md"
+        },
+        {
+          "name": "Virtualization Engineer",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Run a virtualization platform that is stable, efficient, and has room to grow.",
+          "file": "agents/it-team-virtualization-engineer.md"
+        },
+        {
+          "name": "Data Center Technician",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Keep data center equipment installed, connected, and running safely.",
+          "file": "agents/it-team-data-center-technician.md"
+        },
+        {
+          "name": "Data Center Manager",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Run data center facilities that are safe, efficient, and never the cause of an outage.",
+          "file": "agents/it-team-data-center-manager.md"
+        },
+        {
+          "name": "Telecommunications or Voice Engineer",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Deliver voice and contact center services that are clear, reliable, and safe.",
+          "file": "agents/it-team-voice-engineer.md"
+        },
+        {
+          "name": "Site Reliability Engineer (SRE)",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Make services measurably reliable and reduce the manual work of running them.",
+          "file": "agents/it-team-site-reliability-engineer.md"
+        },
+        {
+          "name": "Network Operations Center (NOC) Technician",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Watch the environment around the clock and get every incident to the right team fast.",
+          "file": "agents/it-team-noc-technician.md"
+        },
+        {
+          "name": "Infrastructure Manager",
+          "for": "IT Team: Infrastructure",
+          "when": "On demand",
+          "text": "Lead the infrastructure teams so services stay reliable and the platform keeps up with need.",
+          "file": "agents/it-team-infrastructure-manager.md"
         },
         {
           "name": "Security Analyst, SOC Analyst",
@@ -1617,6 +1924,377 @@
           "when": "On demand",
           "text": "Protect the most powerful accounts by vaulting credentials, limiting standing privilege, and keeping a record of privileged use.",
           "file": "agents/it-team-pam-administrator.md"
+        },
+        {
+          "name": "Software Developer or Engineer",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Deliver working, maintainable software that solves the real problem.",
+          "file": "agents/it-team-software-developer.md"
+        },
+        {
+          "name": "Web Developer",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Build websites that are fast, accessible, and easy to keep current.",
+          "file": "agents/it-team-web-developer.md"
+        },
+        {
+          "name": "Mobile Developer",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Deliver mobile apps people can rely on and want to use.",
+          "file": "agents/it-team-mobile-developer.md"
+        },
+        {
+          "name": "DevOps Engineer, Platform Engineer",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Make shipping software fast, safe, and repeatable.",
+          "file": "agents/it-team-devops-engineer.md"
+        },
+        {
+          "name": "Release Manager",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Get changes into production predictably, with no surprises for users or support.",
+          "file": "agents/it-team-release-manager.md"
+        },
+        {
+          "name": "Quality Assurance (QA) Analyst, Test Engineer",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Find problems before users do and give the team confidence to release.",
+          "file": "agents/it-team-qa-analyst.md"
+        },
+        {
+          "name": "Software Architect",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Give applications a structure that stays simple to change, run, and secure.",
+          "file": "agents/it-team-software-architect.md"
+        },
+        {
+          "name": "Integration Developer",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Move data between systems accurately, securely, and with clear ownership.",
+          "file": "agents/it-team-integration-developer.md"
+        },
+        {
+          "name": "UX/UI Designer",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Make software easy and pleasant to use for everyone.",
+          "file": "agents/it-team-ux-ui-designer.md"
+        },
+        {
+          "name": "Engineering Manager",
+          "for": "IT Team: Software",
+          "when": "On demand",
+          "text": "Lead developers so they deliver valuable software at a pace they can sustain.",
+          "file": "agents/it-team-engineering-manager.md"
+        },
+        {
+          "name": "Database Administrator (DBA)",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Keep databases available, fast, secure, and recoverable.",
+          "file": "agents/it-team-database-administrator.md"
+        },
+        {
+          "name": "Data Engineer",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Deliver data to the people and tools that need it, on time and correct.",
+          "file": "agents/it-team-data-engineer.md"
+        },
+        {
+          "name": "Data Analyst",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Turn data into clear answers that people can act on.",
+          "file": "agents/it-team-data-analyst.md"
+        },
+        {
+          "name": "Business Intelligence (BI) Developer",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Give decision makers dashboards they trust and use.",
+          "file": "agents/it-team-bi-developer.md"
+        },
+        {
+          "name": "Data Scientist",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Use statistics and models to answer questions that simple reports cannot.",
+          "file": "agents/it-team-data-scientist.md"
+        },
+        {
+          "name": "Data Architect",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Design data structures and platforms so data is consistent and reusable across the institution.",
+          "file": "agents/it-team-data-architect.md"
+        },
+        {
+          "name": "Data Governance Analyst",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Make data understood, owned, and handled correctly.",
+          "file": "agents/it-team-data-governance-analyst.md"
+        },
+        {
+          "name": "Machine Learning or AI Engineer",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Put AI and machine learning to work in real applications safely and reliably.",
+          "file": "agents/it-team-ai-engineer.md"
+        },
+        {
+          "name": "Institutional Research or Reporting Analyst",
+          "for": "IT Team: Data",
+          "when": "On demand",
+          "text": "Provide accurate official data for reporting, accreditation, and planning.",
+          "file": "agents/it-team-institutional-research-analyst.md"
+        },
+        {
+          "name": "ERP Administrator or Analyst (Banner, PeopleSoft, Workday)",
+          "for": "IT Team: Applications",
+          "when": "On demand",
+          "text": "Keep the core finance, HR, and student system accurate, current, and supported.",
+          "file": "agents/it-team-erp-administrator.md"
+        },
+        {
+          "name": "Application Administrator",
+          "for": "IT Team: Applications",
+          "when": "On demand",
+          "text": "Keep an application available, current, and useful to the people who rely on it.",
+          "file": "agents/it-team-application-administrator.md"
+        },
+        {
+          "name": "Application Analyst",
+          "for": "IT Team: Applications",
+          "when": "On demand",
+          "text": "Make applications fit the way departments need to work.",
+          "file": "agents/it-team-application-analyst.md"
+        },
+        {
+          "name": "SIS or LMS Administrator",
+          "for": "IT Team: Applications",
+          "when": "On demand",
+          "text": "Keep the student information and learning systems ready for every term.",
+          "file": "agents/it-team-sis-lms-administrator.md"
+        },
+        {
+          "name": "CRM Administrator (Salesforce, Slate)",
+          "for": "IT Team: Applications",
+          "when": "On demand",
+          "text": "Help recruitment, advancement, and service teams manage relationships with accurate data and simple workflows.",
+          "file": "agents/it-team-crm-administrator.md"
+        },
+        {
+          "name": "Collaboration Administrator (Google Workspace, Microsoft 365)",
+          "for": "IT Team: Applications",
+          "when": "On demand",
+          "text": "Keep email, storage, and meeting tools reliable, secure, and well used.",
+          "file": "agents/it-team-collaboration-administrator.md"
+        },
+        {
+          "name": "Web Content or CMS Administrator",
+          "for": "IT Team: Applications",
+          "when": "On demand",
+          "text": "Keep the website platform healthy and help content editors publish well.",
+          "file": "agents/it-team-cms-administrator.md"
+        },
+        {
+          "name": "Enterprise Architect",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Give the institution a clear map of its systems and a roadmap that reduces cost and complexity.",
+          "file": "agents/it-team-enterprise-architect.md"
+        },
+        {
+          "name": "Solutions Architect",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Design the technical solution for a project so it meets the need and fits the standards.",
+          "file": "agents/it-team-solutions-architect.md"
+        },
+        {
+          "name": "Business Analyst",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Make sure IT builds the right thing by understanding how the work is really done.",
+          "file": "agents/it-team-business-analyst.md"
+        },
+        {
+          "name": "Business Relationship Manager",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Keep IT and each department working as partners.",
+          "file": "agents/it-team-business-relationship-manager.md"
+        },
+        {
+          "name": "IT Project Manager, Program Manager",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Deliver projects on scope, on time, and on budget, with no surprises.",
+          "file": "agents/it-team-project-manager.md"
+        },
+        {
+          "name": "PMO Director",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Make sure IT works on the right projects and delivers them well.",
+          "file": "agents/it-team-pmo-director.md"
+        },
+        {
+          "name": "Product Manager, Product Owner",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Make sure a product or service keeps delivering value to the people who use it.",
+          "file": "agents/it-team-product-manager.md"
+        },
+        {
+          "name": "Scrum Master",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Help the team deliver steadily and get better every sprint.",
+          "file": "agents/it-team-scrum-master.md"
+        },
+        {
+          "name": "Change Manager",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Make changes to IT services succeed, technically and with the people affected.",
+          "file": "agents/it-team-change-manager.md"
+        },
+        {
+          "name": "ITSM Process Owner",
+          "for": "IT Team: Architecture and Projects",
+          "when": "On demand",
+          "text": "Make IT's service processes simple, consistent, and measured.",
+          "file": "agents/it-team-itsm-process-owner.md"
+        },
+        {
+          "name": "IT Policy Analyst",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Keep IT policies clear, current, approved, and followed.",
+          "file": "agents/it-team-it-policy-analyst.md"
+        },
+        {
+          "name": "IT Auditor",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Give leadership an objective view of whether IT controls work.",
+          "file": "agents/it-team-it-auditor.md"
+        },
+        {
+          "name": "Compliance Officer",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Keep the institution meeting its legal and regulatory technology obligations.",
+          "file": "agents/it-team-compliance-officer.md"
+        },
+        {
+          "name": "Privacy Officer",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Make sure personal information is collected, used, and shared lawfully and respectfully.",
+          "file": "agents/it-team-privacy-officer.md"
+        },
+        {
+          "name": "Accessibility Coordinator",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Make sure everyone, including people with disabilities, can use the institution's technology.",
+          "file": "agents/it-team-accessibility-coordinator.md"
+        },
+        {
+          "name": "Vendor or Contract Manager",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Get the institution good value and low risk from its technology vendors.",
+          "file": "agents/it-team-vendor-manager.md"
+        },
+        {
+          "name": "IT Procurement Specialist",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Get the right technology purchased correctly and on time.",
+          "file": "agents/it-team-procurement-specialist.md"
+        },
+        {
+          "name": "IT Finance or Budget Analyst",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Give IT leaders an accurate, timely picture of money so they can decide well.",
+          "file": "agents/it-team-it-budget-analyst.md"
+        },
+        {
+          "name": "Technical Writer",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Make IT knowledge easy to find, understand, and follow.",
+          "file": "agents/it-team-technical-writer.md"
+        },
+        {
+          "name": "Disaster Recovery and Business Continuity Planner",
+          "for": "IT Team: Governance",
+          "when": "On demand",
+          "text": "Make sure critical services can be restored and the institution can keep operating.",
+          "file": "agents/it-team-continuity-planner.md"
+        },
+        {
+          "name": "Instructional Technologist",
+          "for": "IT Team: Education",
+          "when": "On demand",
+          "text": "Help instructors use technology to improve teaching and learning.",
+          "file": "agents/it-team-instructional-technologist.md"
+        },
+        {
+          "name": "Instructional Designer",
+          "for": "IT Team: Education",
+          "when": "On demand",
+          "text": "Build courses that are clear, engaging, accessible, and effective.",
+          "file": "agents/it-team-instructional-designer.md"
+        },
+        {
+          "name": "Academic Technology Director",
+          "for": "IT Team: Education",
+          "when": "On demand",
+          "text": "Lead academic technology so it serves teaching, learning, and research priorities.",
+          "file": "agents/it-team-academic-technology-director.md"
+        },
+        {
+          "name": "Research Computing or HPC Specialist",
+          "for": "IT Team: Education",
+          "when": "On demand",
+          "text": "Give researchers the computing and data resources they need to do their work.",
+          "file": "agents/it-team-research-computing-specialist.md"
+        },
+        {
+          "name": "Digital Learning Coordinator",
+          "for": "IT Team: Education",
+          "when": "On demand",
+          "text": "Make digital learning programs work for students, teachers, and families.",
+          "file": "agents/it-team-digital-learning-coordinator.md"
+        },
+        {
+          "name": "E-Rate Coordinator (K12)",
+          "for": "IT Team: Education",
+          "when": "On demand",
+          "text": "Secure and protect federal funding for school connectivity.",
+          "file": "agents/it-team-erate-coordinator.md"
+        },
+        {
+          "name": "Student Information or Data Coordinator (K12)",
+          "for": "IT Team: Education",
+          "when": "On demand",
+          "text": "Keep student data accurate and state reporting clean and on time.",
+          "file": "agents/it-team-student-data-coordinator.md"
         }
       ]
     },
