@@ -547,8 +547,9 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
 <div id="kit-read" hidden><div id="kit-box" role="dialog" aria-modal="true" aria-labelledby="kit-name"><div id="kit-bar"><b id="kit-name"></b><button class="btn tonal small" type="button" id="kit-copy">Copy</button><a class="btn outlined small" id="kit-dl" href="#" download>Download</a><button class="btn outlined small" type="button" id="kit-close">Close</button></div><div id="kit-doc"></div></div></div>
 <dialog id="kit-follow" aria-labelledby="kf-title" style="border:0;padding:28px;border-radius:28px;width:min(520px,92vw);background:var(--card);color:var(--on-surface)">
   <h2 id="kf-title" style="margin:0 0 10px">Follow Me Before You Download</h2>
-  <p style="margin:0">These guides are free to use and share. If they help, follow me on LinkedIn, where I share new ones and how I use them to lead, save money, and move faster.</p>
-  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:16px"><a class="btn filled" id="kf-follow" href="https://www.linkedin.com/in/nic-carroll/" target="_blank" rel="noopener me">Follow on LinkedIn</a><a class="btn outlined" id="kf-go" href="#" download>Continue to Download</a><button type="button" class="btn outlined" id="kf-close" style="margin-left:auto">Cancel</button></div>
+  <p style="margin:0">These guides are free to use and share. Follow me on LinkedIn first, where I share new ones and how I use them to lead, save money, and move faster. The download unlocks after you do.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:16px"><a class="btn filled" id="kf-follow" href="https://www.linkedin.com/in/nic-carroll/" target="_blank" rel="noopener me">Follow on LinkedIn</a><a class="btn outlined" id="kf-go" href="#" download aria-disabled="true" style="opacity:.45;pointer-events:none">Download Unlocks After You Follow</a></div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:12px"><button type="button" class="btn outlined small" id="kf-already">I Already Follow Nic</button><button type="button" class="btn outlined small" id="kf-close" style="margin-left:auto">Cancel</button></div>
 </dialog>
 </main>
 
@@ -751,17 +752,18 @@ document.getElementById("kit-read").addEventListener("mousedown",function(e){if(
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!document.getElementById("kit-read").hidden)kitHide()});
 document.getElementById("kit-copy").addEventListener("click",function(){var b=this;function say(t){b.textContent=t;setTimeout(function(){b.textContent="Copy"},1600)}try{navigator.clipboard.writeText(kitCur.md).then(function(){say("Copied")},function(){say("Select and Copy")})}catch(e){say("Select and Copy")}});
 
-var KITDIR="agents/k12-kit/";
-function kitDl(k){return '<a class="btn outlined small" href="'+KITDIR+kitEsc(k.f)+'" download>Download</a>'}
-function kitOpened(k){var a=document.getElementById("kit-dl");a.setAttribute("href",KITDIR+k.f)}
+function kitDl(k){return '<a class="btn outlined small" href="'+"agents/k12-kit/"+kitEsc(k.f)+'" download>Download</a>'}
+function kitOpened(k){var a=document.getElementById("kit-dl");a.setAttribute("href","agents/k12-kit/"+k.f)}
 document.addEventListener("click",function(e){var b=e.target.closest("[data-kit]");if(!b)return;var k=KIT.filter(function(x){return x.f===b.dataset.kit})[0];
-  b.disabled=true;fetch(KITDIR+k.f).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){b.disabled=false;kitShow(k,t)},function(){b.disabled=false;b.textContent="Could Not Open"})});
-/* A friendly ask to follow on LinkedIn before the first download on this page. It never blocks the download. */
+  b.disabled=true;fetch("agents/k12-kit/"+k.f).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){b.disabled=false;kitShow(k,t)},function(){b.disabled=false;b.textContent="Could Not Open"})});
+/* Visitors follow on LinkedIn before the first download on this page. The download unlocks after they select Follow, or say they already follow. */
 (function(){var dlg=document.getElementById("kit-follow");if(!dlg||!dlg.showModal)return;var asked=false,go=document.getElementById("kf-go");
   try{asked=sessionStorage.getItem("nc.followAsk")==="1"}catch(e){}
   document.addEventListener("click",function(e){if(asked||!e.target.closest)return;var a=e.target.closest('a[download][href^="agents/"]');if(!a||a.id==="kf-go")return;e.preventDefault();e.stopPropagation();go.setAttribute("href",a.getAttribute("href"));dlg.showModal()},true);
-  go.addEventListener("click",function(){asked=true;try{sessionStorage.setItem("nc.followAsk","1")}catch(e){}setTimeout(function(){dlg.close()},50)});
-  document.getElementById("kf-follow").addEventListener("click",function(){go.textContent="Download Now"});
+  var followed=false;function unlock(){followed=true;go.removeAttribute("aria-disabled");go.style.opacity="";go.style.pointerEvents="";go.textContent="Download Now";go.className="btn filled"}
+  go.addEventListener("click",function(e){if(!followed){e.preventDefault();return}asked=true;try{sessionStorage.setItem("nc.followAsk","1")}catch(err){}setTimeout(function(){dlg.close()},50)});
+  document.getElementById("kf-follow").addEventListener("click",unlock);
+  document.getElementById("kf-already").addEventListener("click",unlock);
   document.getElementById("kf-close").addEventListener("click",function(){dlg.close()});
   dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
 })();
