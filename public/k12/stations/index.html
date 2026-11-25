@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Station Rotation Board · Nic Carroll</title>
+<meta name="description" content="Station Rotation Board: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Station Rotation Board">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-stations.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="css/base.css">
+<style>
+.clock{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center}
+.time{font:400 clamp(3.5rem,11vw,6rem)/1 var(--md-font);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.time.low{color:var(--md-error)}
+.clock .side{display:grid;gap:12px;min-width:0}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.scard{background:var(--md-surface-container-lowest);border-radius:var(--md-shape-l);box-shadow:var(--md-elev-1);padding:16px;display:grid;gap:12px;align-content:start;min-width:0;overflow-wrap:anywhere}
+.scard .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.scard h3{font:500 1.375rem/1.75rem var(--md-font);letter-spacing:0}
+.gchip{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 16px;border-radius:var(--md-shape-m);font:500 1.125rem/1.5rem var(--md-font)}
+.gchip.none{background:var(--md-surface-container);color:var(--md-on-surface-variant);font-weight:400;font-size:.875rem}
+.next{font:400 .875rem/1.25rem var(--md-font);color:var(--md-on-surface-variant)}
+.members{font:400 .875rem/1.25rem var(--md-font);opacity:.85}
+.dotc{width:14px;height:14px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.15)}
+body.present .edit-only{display:none !important}
+body.present .time{font-size:clamp(5rem,16vw,9rem)}
+body.present .scard h3{font-size:1.75rem;line-height:2.25rem}
+body.present .gchip{font-size:1.5rem;line-height:2rem;min-height:64px}
+@media (max-width:640px){.clock{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Playbook</a>
+  <span class="lead"><span class="material-symbols-outlined" aria-hidden="true">timer</span></span>
+  <div><h1>Station Rotation Board</h1><div class="sub">Grade 3 literacy block, sample groups</div></div>
+  <span class="sp"></span>
+  <button class="btn tonal sm" id="present" type="button" aria-pressed="false">Projector view</button>
+  <button class="btn outlined sm edit-only" id="reset" type="button">Restore sample</button>
+</div></header>
+<main class="wrap" id="app"></main>
+<script src="js/kit.js"></script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-stations-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+function sym(n){return '<span class="material-symbols-outlined" aria-hidden="true">'+n+'</span>'}
+var COLORS={Blue:["#D3E3FD","#041E49"],Green:["#C4EED0","#072711"],Orange:["#FFE0B2","#2B1700"],Purple:["#E9DDFF","#22005D"],Teal:["#9CF1F0","#002020"],Pink:["#FFD9E2","#3E001D"]};
+function sample(){return {
+  minutes:15,rot:0,
+  stations:[
+    {id:K.uid(),name:"Teacher Table",what:"Guided reading with your group book"},
+    {id:K.uid(),name:"Word Work",what:"Build this week's spelling words with letter tiles"},
+    {id:K.uid(),name:"Read to Self",what:"Read your library book and fill in the reading log"},
+    {id:K.uid(),name:"Writing",what:"Finish your opinion paragraph draft"},
+    {id:K.uid(),name:"Chromebooks",what:"Typing practice, then the vocabulary game"}
+  ],
+  groups:[
+    {id:K.uid(),name:"Blue Jays",color:"Blue",members:""},
+    {id:K.uid(),name:"Green Frogs",color:"Green",members:""},
+    {id:K.uid(),name:"Orange Foxes",color:"Orange",members:""},
+    {id:K.uid(),name:"Purple Owls",color:"Purple",members:""},
+    {id:K.uid(),name:"Teal Turtles",color:"Teal",members:""}
+  ]
+}}
+var S=K.load(KEY,sample),running=false,left=S.minutes*60000,endAt=0,timer=null;
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();stop();left=S.minutes*60000;draw()}
+function fmt(ms){var s=Math.max(0,Math.ceil(ms/1000));return Math.floor(s/60)+":"+(s%60<10?"0":"")+s%60}
+function slots(){return Math.max(S.stations.length,S.groups.length,1)}
+/* group g sits at slot (g + rot) mod slots; a slot past the last station is a break */
+function groupAt(si,rot){var n=slots(),out=null;S.groups.forEach(function(g,gi){if((gi+rot)%n===si)out=g});return out}
+function stationOf(gi,rot){return S.stations[(gi+rot)%slots()]||null}
+
+function draw(){
+  var n=slots(),round=S.rot%n+1,total=S.minutes*60000;
+  $("app").innerHTML=
+  '<div class="panel"><div class="clock"><div class="time'+(left<60000&&left<total?" low":"")+'" id="time" role="timer" aria-live="off">'+fmt(left)+'</div><div class="side"><div class="ph"><h2>Rotation '+round+' of '+n+'</h2><span class="muted small" id="state">'+(running?"Running":left<total?"Paused":"Ready")+'</span></div><div class="track"><div class="fill" id="bar" style="width:'+(left/total*100)+'%"></div></div>'+
+   '<div class="btnrow"><button class="btn filled" type="button" id="go" style="height:48px">'+sym(running?"pause":"play_arrow")+(running?"Pause":"Start")+'</button><button class="btn tonal" type="button" id="next" style="height:48px">'+sym("skip_next")+'Rotate now</button><button class="btn outlined" type="button" id="again">'+sym("restart_alt")+'Reset timer</button>'+
+   '<label class="field edit-only" for="mins" style="min-width:150px;margin-left:8px"><span>Minutes each</span><select id="mins">'+[5,8,10,12,15,20,25,30].map(function(m){return '<option'+(m===S.minutes?" selected":"")+'>'+m+'</option>'}).join("")+'</select></label></div></div></div></div>'+
+  '<div class="sgrid">'+S.stations.map(function(st,si){
+    var g=groupAt(si,S.rot),col=g?COLORS[g.color]||COLORS.Blue:null,gi=g?S.groups.indexOf(g):-1,nx=g?stationOf(gi,S.rot+1):null;
+    return '<div class="scard"><div class="top"><h3>'+esc(st.name)+'</h3><button class="iconb edit-only" type="button" data-st="'+st.id+'" aria-label="Edit station '+esc(st.name)+'">'+sym("edit")+'</button></div><p>'+esc(st.what)+'</p>'+
+      (g?'<div class="gchip" style="background:'+col[0]+';color:'+col[1]+'"><div><div>'+esc(g.name)+'</div>'+(g.members?'<div class="members">'+esc(g.members)+'</div>':'')+'</div></div><div class="next">Next for '+esc(g.name)+': <b>'+(nx?esc(nx.name):"Break")+'</b></div>'
+        :'<div class="gchip none">No group here this rotation</div>')+'</div>';
+  }).join("")+'</div>'+
+  '<div class="two edit-only"><div class="panel"><div class="ph"><h2>Groups</h2><button class="btn tonal sm" type="button" id="add-g">'+sym("add")+'Add group</button></div><ul class="list">'+(S.groups.map(function(g,gi){var st=stationOf(gi,S.rot);return '<li class="row"><span class="dotc" style="background:'+(COLORS[g.color]||COLORS.Blue)[0]+'"></span><span class="grow"><b>'+esc(g.name)+'</b> <span class="muted">now at '+(st?esc(st.name):"Break")+'</span></span><button class="iconb" type="button" data-g="'+g.id+'" aria-label="Edit group '+esc(g.name)+'">'+sym("edit")+'</button></li>'}).join("")||'<li class="empty">No groups yet.</li>')+'</ul></div>'+
+   '<div class="panel"><div class="ph"><h2>Stations</h2><button class="btn tonal sm" type="button" id="add-s">'+sym("add")+'Add station</button></div><p class="muted small">Groups move one station to the right each rotation. With more groups than stations, the extra group takes a break. With more stations than groups, a station sits empty.</p><p class="muted small">Projector view hides the editing controls and makes everything larger for the board.</p></div></div>'+
+  '<div class="built edit-only"><b>How this was built</b><span>Built in Gemini Canvas, then connected to a Google Sheet with two tabs: <code>Stations</code> and <code>Groups</code>. No student records are needed, only group names. Kit file <code>12_station_rotation.md</code> has the prompts. Changes on this demo save in your browser only.</span></div>';
+}
+function paint(){var t=$("time"),b=$("bar"),total=S.minutes*60000;if(!t)return;t.textContent=fmt(left);t.className="time"+(left<60000?" low":"");b.style.width=Math.max(0,left/total*100)+"%"}
+function stop(){running=false;clearInterval(timer)}
+function start(){if(left<=0)left=S.minutes*60000;running=true;endAt=Date.now()+left;clearInterval(timer);timer=setInterval(function(){left=endAt-Date.now();if(left<=0){rotate(true)}else paint()},200);draw()}
+function rotate(auto){stop();S.rot=(S.rot+1)%slots();left=S.minutes*60000;save();draw();K.toast(auto?"Time is up. Groups have moved to their next station.":"Groups have moved to their next station.")}
+$("app").addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t)return;
+  if(t.id==="go"){if(running){left=endAt-Date.now();stop();draw()}else start()}
+  else if(t.id==="next")rotate(false);
+  else if(t.id==="again"){stop();left=S.minutes*60000;draw()}
+  else if(t.id==="add-s")K.form({title:"Add station",fields:[{k:"name",l:"Station name"},{k:"what",l:"What students do here",type:"textarea"}],values:{},onSave:function(v){v.id=K.uid();S.stations.push(v);save();draw()}});
+  else if(t.id==="add-g")K.form({title:"Add group",fields:gFields(),values:{color:Object.keys(COLORS)[S.groups.length%6]},onSave:function(v){v.id=K.uid();S.groups.push(v);save();draw()}});
+  else if(t.dataset.st){var st=S.stations.filter(function(x){return x.id===t.dataset.st})[0];
+    K.form({title:"Edit station",fields:[{k:"name",l:"Station name"},{k:"what",l:"What students do here",type:"textarea"}],values:st,onSave:function(v){st.name=v.name;st.what=v.what;save();draw()},
+      onDelete:function(){var before=snap();S.stations=S.stations.filter(function(x){return x!==st});S.rot=0;save();draw();K.toast("Station deleted.",function(){restore(before)})}})}
+  else if(t.dataset.g){var g=S.groups.filter(function(x){return x.id===t.dataset.g})[0];
+    K.form({title:"Edit group",fields:gFields(),values:g,onSave:function(v){g.name=v.name;g.color=v.color;g.members=v.members;save();draw()},
+      onDelete:function(){var before=snap();S.groups=S.groups.filter(function(x){return x!==g});S.rot=0;save();draw();K.toast("Group deleted.",function(){restore(before)})}})}
+});
+function gFields(){return [{k:"name",l:"Group name"},{k:"color",l:"Color",type:"select",options:Object.keys(COLORS)},{k:"members",l:"Members, first names only (optional)",type:"textarea"}]}
+$("app").addEventListener("change",function(e){if(e.target.id==="mins"){S.minutes=+e.target.value;save();stop();left=S.minutes*60000;draw()}});
+$("present").addEventListener("click",function(){var on=document.body.classList.toggle("present");this.setAttribute("aria-pressed",on);this.textContent=on?"Exit projector view":"Projector view"});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();save();stop();left=S.minutes*60000;draw();K.toast("Sample restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>

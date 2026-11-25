@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Group Maker and Picker · Nic Carroll</title>
+<meta name="description" content="Group Maker and Picker: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Group Maker and Picker">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-groups.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="css/base.css">
+<style>
+.spot{display:grid;gap:16px;justify-items:center;text-align:center;padding:32px 16px;border-radius:var(--md-shape-xl);background:var(--md-primary-container);color:var(--md-on-primary-container)}
+.spot .name{font:500 clamp(2.5rem,9vw,4.5rem)/1.1 var(--md-font);letter-spacing:-.01em;overflow-wrap:anywhere;min-height:1.1em}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.nchip{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:var(--md-shape-s);border:1px solid var(--md-outline-variant);font:500 .875rem/1 var(--md-font)}
+.nchip.used{background:var(--md-surface-container-highest);color:var(--md-on-surface-variant);text-decoration:line-through;border-color:transparent}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.gcard{border-radius:var(--md-shape-m);padding:16px;display:grid;gap:8px;align-content:start;overflow-wrap:anywhere}
+.gcard h3{font:500 1.125rem/1.5rem var(--md-font)}
+.gcard ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.room{display:grid;gap:8px}
+.desk{min-height:56px;border-radius:var(--md-shape-s);border:1px solid var(--md-outline-variant);background:var(--md-surface-container-lowest);font:500 .875rem/1.25rem var(--md-font);padding:4px;overflow-wrap:anywhere;color:var(--md-on-surface)}
+.desk.empty{border-style:dashed;color:var(--md-on-surface-variant);font-weight:400}
+.desk[aria-pressed="true"]{background:var(--md-secondary-container);border-color:var(--md-primary);box-shadow:inset 0 0 0 1px var(--md-primary)}
+.front{text-align:center;padding:8px;border-radius:var(--md-shape-s);background:var(--md-surface-container-highest);font:500 .75rem/1rem var(--md-font);letter-spacing:.08em;text-transform:uppercase;color:var(--md-on-surface-variant)}
+.roombox{overflow-x:auto}
+.row.out .grow{color:var(--md-on-surface-variant);text-decoration:line-through}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Playbook</a>
+  <span class="lead"><span class="material-symbols-outlined" aria-hidden="true">groups</span></span>
+  <div><h1>Group Maker and Picker</h1><div class="sub">Invented class roster, for any grade</div></div>
+  <span class="badge">Sample data</span><span class="sp"></span>
+  <button class="btn outlined sm" id="reset" type="button">Restore sample class</button>
+</div></header>
+<main class="wrap">
+  <div class="ph"><div class="seg" role="group" aria-label="Tool" id="tabs"></div><span class="muted small" id="here"></span></div>
+  <div id="app" style="display:grid;gap:24px"></div>
+  <div class="built"><b>How this was built</b><span>Built in Gemini Canvas, then connected to a Google Sheet with one tab named <code>Roster</code>. The roster is student information, so the Sheet is shared only with the teacher and any co teacher. Kit file <code>14_group_maker.md</code> has the prompts. Changes on this demo save in your browser only.</span></div>
+</main>
+<script src="js/kit.js"></script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-groups-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+function sym(n){return '<span class="material-symbols-outlined" aria-hidden="true">'+n+'</span>'}
+var NAMES=["Avery B.","Jordan C.","Maya N.","Elijah H.","Sofia R.","Noah W.","Zoe B.","Liam C.","Aaliyah N.","Mateo H.","Harper R.","Isaiah W.","Chloe B.","Diego C.","Nia N.","Owen H.","Layla R.","Caleb W.","Ruby B.","Mason C.","Imani N.","Lucas H.","Ella R.","Jayden W."];
+var TINT=[["#D3E3FD","#041E49"],["#C4EED0","#072711"],["#FFE0B2","#2B1700"],["#E9DDFF","#22005D"],["#9CF1F0","#002020"],["#FFD9E2","#3E001D"],["#DDE3EA","#1A1C1E"],["#F9DEDC","#410E0B"]];
+function sample(){var r=NAMES.map(function(n,i){return {id:"s"+i,name:n,out:i===7||i===18}});
+  return {roster:r,picked:[],last:"",ngroups:6,groups:[],rows:4,cols:6,seats:r.map(function(s){return s.id})}}
+var S=K.load(KEY,sample),tab="pick",swap=-1;
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();draw()}
+function present(){return S.roster.filter(function(s){return !s.out})}
+function nameOf(id){var s=S.roster.filter(function(x){return x.id===id})[0];return s?s.name:""}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function makeGroups(){var ids=shuffle(present().map(function(s){return s.id})),g=[];for(var i=0;i<S.ngroups;i++)g.push([]);ids.forEach(function(id,i){g[i%S.ngroups].push(id)});S.groups=g.filter(function(x){return x.length})}
+function fitSeats(){var n=S.rows*S.cols,ids=S.roster.map(function(s){return s.id}),cur=(S.seats||[]).filter(function(id){return id===null||ids.indexOf(id)>=0});
+  ids.forEach(function(id){if(cur.indexOf(id)<0){var k=cur.indexOf(null);if(k>=0&&k<n)cur[k]=id;else cur.push(id)}});
+  while(cur.length<n)cur.push(null);
+  if(cur.length>n){var keep=cur.filter(function(x){return x!==null});cur=keep.slice(0,n);while(cur.length<n)cur.push(null)}
+  S.seats=cur}
+
+function draw(){
+  var TABS=[["pick","Pick a student"],["groups","Make groups"],["seats","Seating chart"],["roster","Roster"]];
+  $("tabs").innerHTML=TABS.map(function(t){return '<button type="button" data-tab="'+t[0]+'" aria-pressed="'+(t[0]===tab)+'">'+t[1]+'</button>'}).join("");
+  var p=present();$("here").textContent=p.length+" here today, "+(S.roster.length-p.length)+" absent";
+  var h="";
+  if(tab==="pick"){
+    var leftN=p.filter(function(s){return S.picked.indexOf(s.id)<0}).length;
+    h='<div class="spot"><p class="small">'+(S.last?"You are up":"Ready when you are")+'</p><div class="name" id="spot" aria-live="polite">'+(S.last?esc(nameOf(S.last)):"?")+'</div><button class="btn filled" type="button" id="pick" style="height:56px;padding:0 32px;font-size:1rem"'+(p.length?"":" disabled")+'>'+sym("casino")+'Pick a student</button><p class="small">'+leftN+' of '+p.length+' not picked yet. Everyone gets a turn before anyone goes twice.</p></div>'+
+      '<div class="panel"><div class="ph"><h2>Who has gone</h2><button class="btn outlined sm" type="button" id="clear">Start a new round</button></div><div class="chips">'+p.map(function(s){return '<span class="nchip'+(S.picked.indexOf(s.id)>=0?" used":"")+'">'+esc(s.name)+'</span>'}).join("")+'</div></div>';
+  }
+  if(tab==="groups"){
+    h='<div class="panel"><div class="controls"><label class="field" for="ng" style="min-width:160px"><span>Number of groups</span><select id="ng">'+[2,3,4,5,6,7,8,10,12].map(function(n){return '<option'+(n===S.ngroups?" selected":"")+'>'+n+'</option>'}).join("")+'</select></label><button class="btn filled" type="button" id="mk" style="height:48px">'+sym("shuffle")+'Make new groups</button><button class="btn outlined" type="button" id="cp"'+(S.groups.length?"":" disabled")+'>'+sym("content_copy")+'Copy groups</button></div><p class="muted small">Groups are random and as even as possible. Absent students are left out.</p></div>'+
+      (S.groups.length?'<div class="ggrid">'+S.groups.map(function(g,i){var c=TINT[i%TINT.length];return '<div class="gcard" style="background:'+c[0]+';color:'+c[1]+'"><h3>Group '+(i+1)+'</h3><ul>'+g.map(function(id){return '<li>'+esc(nameOf(id))+'</li>'}).join("")+'</ul></div>'}).join("")+'</div>':'<div class="panel"><p class="empty">Select Make new groups to start.</p></div>');
+  }
+  if(tab==="seats"){
+    fitSeats();
+    h='<div class="panel"><div class="controls"><label class="field" for="rw" style="min-width:110px"><span>Rows</span><select id="rw">'+[2,3,4,5,6].map(function(n){return '<option'+(n===S.rows?" selected":"")+'>'+n+'</option>'}).join("")+'</select></label><label class="field" for="cl" style="min-width:110px"><span>Seats per row</span><select id="cl">'+[3,4,5,6,7,8].map(function(n){return '<option'+(n===S.cols?" selected":"")+'>'+n+'</option>'}).join("")+'</select></label><button class="btn filled" type="button" id="sh" style="height:48px">'+sym("shuffle")+'Shuffle seats</button></div>'+
+      '<div class="roombox"><div class="room" style="min-width:'+(S.cols*96)+'px"><div class="front">Front of the room</div><div style="display:grid;gap:8px;grid-template-columns:repeat('+S.cols+',minmax(0,1fr))">'+S.seats.map(function(id,i){return '<button class="desk'+(id?"":" empty")+'" type="button" data-seat="'+i+'" aria-pressed="'+(swap===i)+'">'+(id?esc(nameOf(id)):"Empty")+'</button>'}).join("")+'</div></div></div>'+
+      '<p class="muted small">To move someone, select their seat, then select the seat to trade with.'+(S.roster.length>S.rows*S.cols?' There are more students than seats, so add a row.':'')+'</p></div>';
+  }
+  if(tab==="roster"){
+    h='<div class="panel"><div class="ph"><h2>Class roster</h2><span class="muted small">'+S.roster.length+' students</span></div><form class="quick" id="addf" style="max-width:480px"><input type="text" id="addn" aria-label="Add a student" placeholder="Add a student, first name and last initial"><button class="btn tonal" type="submit">Add</button></form><ul class="list" style="columns:2 280px;display:block">'+S.roster.map(function(s){return '<li class="row'+(s.out?" out":"")+'" style="break-inside:avoid"><span class="grow">'+esc(s.name)+'</span><button class="btn text sm" type="button" data-out="'+s.id+'">'+(s.out?"Mark here":"Mark absent")+'</button><button class="iconb" type="button" data-ed="'+s.id+'" aria-label="Edit '+esc(s.name)+'">'+sym("edit")+'</button></li>'}).join("")+'</ul></div>';
+  }
+  $("app").innerHTML=h;
+}
+var REDUCED=false;try{REDUCED=window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
+function pick(){
+  var p=present(),pool=p.filter(function(s){return S.picked.indexOf(s.id)<0});
+  if(!pool.length){S.picked=[];pool=p}
+  if(!pool.length)return;
+  var win=pool[Math.floor(Math.random()*pool.length)];
+  var finish=function(){S.picked.push(win.id);S.last=win.id;save();draw();var b=$("pick");if(b)b.focus()};
+  if(REDUCED||p.length<2){finish();return}
+  var n=0,el=$("spot"),btn=$("pick");btn.disabled=true;
+  var t=setInterval(function(){n++;if(!el.isConnected){clearInterval(t);return}el.textContent=p[Math.floor(Math.random()*p.length)].name;if(n>=12){clearInterval(t);finish()}},70);
+}
+$("tabs").addEventListener("click",function(e){var b=e.target.closest("[data-tab]");if(b){tab=b.dataset.tab;swap=-1;draw()}});
+$("app").addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t)return;var d=t.dataset;
+  if(t.id==="pick")pick();
+  else if(t.id==="clear"){S.picked=[];S.last="";save();draw()}
+  else if(t.id==="mk"){makeGroups();save();draw()}
+  else if(t.id==="cp"){var text=S.groups.map(function(g,i){return "Group "+(i+1)+": "+g.map(nameOf).join(", ")}).join("\n"),done=function(ok){K.toast(ok?"Groups copied.":"Copying is blocked here. Select the names to copy them.")};
+    try{navigator.clipboard.writeText(text).then(function(){done(true)},function(){done(false)})}catch(err){done(false)}}
+  else if(t.id==="sh"){var ids=shuffle(S.roster.map(function(s){return s.id})),n=S.rows*S.cols;S.seats=ids.slice(0,n);while(S.seats.length<n)S.seats.push(null);swap=-1;save();draw()}
+  else if(d.seat!==undefined){var i=+d.seat;if(swap<0){swap=i;draw()}else{var a=S.seats[swap];S.seats[swap]=S.seats[i];S.seats[i]=a;swap=-1;save();draw()}}
+  else if(d.out){var s=S.roster.filter(function(x){return x.id===d.out})[0];s.out=!s.out;save();draw()}
+  else if(d.ed){var st=S.roster.filter(function(x){return x.id===d.ed})[0];
+    K.form({title:"Edit student",fields:[{k:"name",l:"Name"}],values:st,onSave:function(v){st.name=v.name;save();draw()},
+      onDelete:function(){var before=snap();S.roster=S.roster.filter(function(x){return x!==st});S.picked=S.picked.filter(function(x){return x!==st.id});S.groups=[];if(S.last===st.id)S.last="";save();draw();K.toast("Student removed.",function(){restore(before)})}})}
+});
+$("app").addEventListener("change",function(e){
+  if(e.target.id==="ng"){S.ngroups=+e.target.value;save()}
+  if(e.target.id==="rw"){S.rows=+e.target.value;swap=-1;save();draw()}
+  if(e.target.id==="cl"){S.cols=+e.target.value;swap=-1;save();draw()}
+});
+$("app").addEventListener("submit",function(e){if(e.target.id!=="addf")return;e.preventDefault();var v=$("addn").value.trim();if(!v)return;S.roster.push({id:K.uid(),name:v,out:false});save();draw();$("addn").focus()});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();save();draw();K.toast("Sample class restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>

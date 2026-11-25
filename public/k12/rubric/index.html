@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rubric Grader · Nic Carroll</title>
+<meta name="description" content="Rubric Grader: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Rubric Grader">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-rubric.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="css/base.css">
+<style>
+.cols{display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr);gap:24px;align-items:start}
+.cols>*{min-width:0}
+.roster{display:grid;gap:4px;max-height:640px;overflow:auto}
+.sbtn{display:flex;align-items:center;gap:8px;justify-content:space-between;min-height:48px;padding:6px 12px;border:0;border-radius:var(--md-shape-full);background:transparent;text-align:left;font:500 .875rem/1.25rem var(--md-font);color:var(--md-on-surface)}
+.sbtn:hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent)}
+.sbtn[aria-current="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.crit{border:1px solid var(--md-outline-variant);border-radius:var(--md-shape-m);padding:12px 16px;display:grid;gap:8px}
+.crit .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.lvls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.lvl{min-height:56px;padding:6px 8px;border:1px solid var(--md-outline);border-radius:var(--md-shape-s);background:transparent;display:grid;gap:2px;justify-items:center;align-content:center;font:500 .8125rem/1.125rem var(--md-font);color:var(--md-on-surface);overflow-wrap:anywhere;text-align:center}
+.lvl b{font:500 1.125rem/1.25rem var(--md-font)}
+.lvl:hover{background:color-mix(in srgb,var(--md-primary) 8%,transparent)}
+.lvl[aria-pressed="true"]{border-color:transparent}
+.lvl.l1[aria-pressed="true"]{background:var(--md-error-container);color:var(--md-on-error-container)}
+.lvl.l2[aria-pressed="true"]{background:var(--md-caution-container);color:var(--md-on-caution-container)}
+.lvl.l3[aria-pressed="true"]{background:var(--md-tertiary-container);color:var(--md-on-tertiary-container)}
+.lvl.l4[aria-pressed="true"]{background:var(--md-primary-container);color:var(--md-on-primary-container)}
+.total{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--md-surface-container);border-radius:var(--md-shape-m);padding:16px}
+.total .n{font:400 2.25rem/2.75rem var(--md-font);font-variant-numeric:tabular-nums}
+textarea.note{width:100%;min-height:88px;border:1px solid var(--md-outline);border-radius:var(--md-shape-xs);padding:12px 16px;font:400 1rem/1.5rem var(--md-font);background:transparent;resize:vertical}
+pre.prompt{margin:0;background:var(--md-surface-container);border-radius:var(--md-shape-m);padding:16px;font:400 .8125rem/1.25rem "Roboto Mono",ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:240px;overflow:auto}
+@media (max-width:860px){.cols{grid-template-columns:minmax(0,1fr)}.roster{max-height:260px}.lvls{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Playbook</a>
+  <span class="lead"><span class="material-symbols-outlined" aria-hidden="true">rule</span></span>
+  <div><h1>Rubric Grader</h1><div class="sub">Grade 8 English language arts, invented students and scores</div></div>
+  <span class="badge">Sample data</span><span class="sp"></span>
+  <button class="btn outlined sm" id="reset" type="button">Restore sample</button>
+</div></header>
+<main class="wrap" id="app"></main>
+<script src="js/kit.js"></script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-rubric-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+function sym(n){return '<span class="material-symbols-outlined" aria-hidden="true">'+n+'</span>'}
+var NAMES=["Avery B.","Jordan C.","Maya N.","Elijah H.","Sofia R.","Noah W.","Zoe B.","Liam C.","Aaliyah N.","Mateo H.","Harper R.","Isaiah W.","Chloe B.","Diego C.","Nia N.","Owen H.","Layla R.","Caleb W.","Ruby B.","Mason C.","Imani N.","Lucas H.","Ella R.","Jayden W."];
+var LV=["","Beginning","Developing","Proficient","Distinguished"];
+function sample(){
+  var crit=[["Claim","States a clear position that answers the prompt"],["Evidence","Supports the claim with relevant facts and quotes from the sources"],["Reasoning","Explains how the evidence supports the claim and answers the other side"],["Organization","Has an introduction, body paragraphs with transitions, and a conclusion"],["Conventions","Uses correct grammar, spelling, and punctuation"]].map(function(c,i){return {id:"c"+i,name:c[0],desc:c[1]}});
+  var students=NAMES.map(function(n,i){return {id:"s"+i,name:n}}),scores={},notes={};
+  students.forEach(function(s,i){scores[s.id]={};if(i>=15)return;crit.forEach(function(c,j){if(i===14&&j>2)return;var v=3+(((i*7+j*5)%6)-3>0?1:((i*7+j*5)%6)-3<-1?-1:0)-(j===2&&i%3===0?1:0);scores[s.id][c.id]=Math.max(1,Math.min(4,v))})});
+  notes.s0="Strong opening paragraph. The counterclaim needs a response.";
+  return {title:"Argument essay: Should the school day start later?",criteria:crit,students:students,scores:scores,notes:notes,sel:"s0"};
+}
+var S=K.load(KEY,sample);
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();draw()}
+function sc(sid,cid){return (S.scores[sid]||{})[cid]||0}
+function stat(sid){var n=0,sum=0;S.criteria.forEach(function(c){var v=sc(sid,c.id);if(v){n++;sum+=v}});return {n:n,sum:sum,max:S.criteria.length*4,done:n===S.criteria.length&&n>0}}
+function prompt(sid){
+  var st=stat(sid),note=S.notes[sid]||"";
+  return "Write feedback for a middle school student on a piece of writing. Do not use a name. Speak to the student as \"you\".\n\nAssignment: "+S.title+"\n\nRubric scores, on a scale of 1 Beginning, 2 Developing, 3 Proficient, 4 Distinguished:\n"+
+    S.criteria.map(function(c){var v=sc(sid,c.id);return "* "+c.name+" ("+c.desc+"): "+(v?v+" "+LV[v]:"not scored")}).join("\n")+
+    "\n\nMy notes: "+(note||"[add what you noticed in the writing]")+"\n\nWrite 4 short sentences:\n1. One specific strength, tied to the highest score\n2. One thing to work on, tied to the lowest score\n3. One concrete next step the student can do in 10 minutes\n4. An encouraging closing line\n\nUse plain words a middle school student understands. Do not mention the numbers.";
+}
+function draw(){
+  if(!S.students.some(function(s){return s.id===S.sel}))S.sel=S.students.length?S.students[0].id:"";
+  var cur=S.students.filter(function(s){return s.id===S.sel})[0],done=S.students.filter(function(s){return stat(s.id).done}).length;
+  var pcts=S.students.map(function(s){var t=stat(s.id);return t.done?t.sum/t.max*100:null}).filter(function(x){return x!==null});
+  var classAvg=pcts.length?Math.round(pcts.reduce(function(a,b){return a+b},0)/pcts.length):0;
+  var cav=S.criteria.map(function(c){var a=S.students.map(function(s){return sc(s.id,c.id)}).filter(Boolean);return {c:c,avg:a.length?a.reduce(function(x,y){return x+y},0)/a.length:0,n:a.length}});
+  var low=cav.filter(function(x){return x.n}).sort(function(a,b){return a.avg-b.avg})[0];
+  var right="";
+  if(cur){var t=stat(cur.id),pct=t.n?Math.round(t.sum/(t.n*4)*100):0,idx=S.students.indexOf(cur);
+    right='<div class="panel"><div class="ph"><div><h2>'+esc(cur.name)+'</h2><p class="muted small">'+esc(S.title)+'</p></div><div style="display:flex;gap:4px"><button class="iconb" type="button" id="prev" aria-label="Previous student"'+(idx===0?" disabled":"")+'>'+sym("chevron_left")+'</button><button class="iconb" type="button" id="next" aria-label="Next student"'+(idx===S.students.length-1?" disabled":"")+'>'+sym("chevron_right")+'</button><button class="iconb" type="button" id="ed-stu" aria-label="Edit student">'+sym("edit")+'</button></div></div>'+
+      S.criteria.map(function(c){var v=sc(cur.id,c.id);return '<div class="crit"><div class="top"><div><h3>'+esc(c.name)+'</h3><p class="muted small">'+esc(c.desc)+'</p></div><button class="iconb" type="button" data-crit="'+c.id+'" aria-label="Edit criterion '+esc(c.name)+'">'+sym("edit")+'</button></div><div class="lvls" role="group" aria-label="Score for '+esc(c.name)+'">'+[1,2,3,4].map(function(n){return '<button class="lvl l'+n+'" type="button" data-score="'+c.id+'|'+n+'" aria-pressed="'+(v===n)+'"><b>'+n+'</b>'+LV[n]+'</button>'}).join("")+'</div></div>'}).join("")+
+      '<div><button class="btn tonal sm" type="button" id="add-crit">'+sym("add")+'Add criterion</button></div>'+
+      '<div class="total"><div><div class="n">'+t.sum+' of '+t.max+'</div><div class="muted small">'+(t.done?pct+"% of points":t.n+" of "+S.criteria.length+" criteria scored")+'</div></div><span class="sp"></span>'+(t.done?'<span class="pill ok">Scoring complete</span>':'<span class="pill warn">In progress</span>')+'<button class="btn outlined sm" type="button" id="clear"'+(t.n?"":" disabled")+'>Clear scores</button></div>'+
+      '<label class="small" for="note">My notes on this paper</label><textarea class="note" id="note" placeholder="What did you notice?">'+esc(S.notes[cur.id]||"")+'</textarea></div>';
+  }
+  $("app").innerHTML=
+  '<div class="kpis"><div class="kpi"><div class="v">'+done+' of '+S.students.length+'</div><div class="k">Papers fully scored</div></div><div class="kpi good"><div class="v">'+classAvg+'%</div><div class="k">Class average on scored papers</div></div><div class="kpi warn"><div class="v" style="font-size:1.5rem;line-height:2.75rem">'+(low?esc(low.c.name):"None yet")+'</div><div class="k">Lowest criterion, reteach this</div></div><div class="kpi"><div class="v">'+(S.students.length-done)+'</div><div class="k">Papers left to score</div></div></div>'+
+  '<div class="panel"><label class="field" for="title" style="display:flex"><span>Assignment</span><input id="title" type="text" value="'+esc(S.title)+'"></label></div>'+
+  '<div class="cols"><div class="panel"><div class="ph"><h2>Students</h2><button class="btn tonal sm" type="button" id="add-stu">'+sym("add")+'Add</button></div><div class="roster">'+S.students.map(function(s){var t=stat(s.id);return '<button class="sbtn" type="button" data-sel="'+s.id+'" aria-current="'+(s.id===S.sel)+'"><span>'+esc(s.name)+'</span>'+(t.done?'<span class="pill ok">'+t.sum+' of '+t.max+'</span>':t.n?'<span class="pill warn">Started</span>':'<span class="muted small">Not scored</span>')+'</button>'}).join("")+'</div></div>'+(right||'<div class="panel"><p class="empty">Add a student to begin.</p></div>')+'</div>'+
+  '<div class="two"><div class="panel"><h2>Class average by criterion</h2><div class="bars">'+cav.map(function(x){return '<div class="barrow"><div class="t"><span><b>'+esc(x.c.name)+'</b></span><span class="r">'+(x.n?x.avg.toFixed(1)+" of 4":"No scores")+'</span></div><div class="track"><div class="fill'+(x.n&&x.avg<2.5?" full":x.n&&x.avg<3?" near":"")+'" style="width:'+(x.avg/4*100)+'%"></div></div></div>'}).join("")+'</div></div>'+
+   (cur?'<div class="panel"><h2>Draft feedback with Gemini</h2><p class="muted small">The prompt uses the scores and your notes. It never includes the student\'s name.</p><pre class="prompt" id="prompt">'+esc(prompt(cur.id))+'</pre><div><button class="btn filled" type="button" id="copy">'+sym("content_copy")+'Copy prompt for Gemini</button></div></div>':'')+'</div>'+
+  '<div class="built"><b>How this was built</b><span>Built in Gemini Canvas, then connected to a Google Sheet with tabs named <code>Rubric</code>, <code>Students</code>, and <code>Scores</code>. Scores are student records, so the Sheet is shared only with the teacher of record. Kit file <code>17_rubric_grader.md</code> has the prompts. Changes on this demo save in your browser only.</span></div>';
+}
+function cFields(){return [{k:"name",l:"Criterion"},{k:"desc",l:"What Proficient looks like",type:"textarea"}]}
+$("app").addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t||t.disabled)return;var d=t.dataset,cur=S.students.filter(function(s){return s.id===S.sel})[0],idx=S.students.indexOf(cur);
+  if(d.sel){S.sel=d.sel;save();draw()}
+  else if(d.score){var p=d.score.split("|"),v=+p[1];S.scores[cur.id]=S.scores[cur.id]||{};if(S.scores[cur.id][p[0]]===v)delete S.scores[cur.id][p[0]];else S.scores[cur.id][p[0]]=v;save();var y=window.scrollY;draw();window.scrollTo(0,y);var b=document.querySelector('[data-score="'+d.score+'"]');if(b)b.focus()}
+  else if(t.id==="prev"||t.id==="next"){S.sel=S.students[idx+(t.id==="next"?1:-1)].id;save();draw()}
+  else if(t.id==="clear"){var before=snap();S.scores[cur.id]={};save();draw();K.toast("Scores cleared.",function(){restore(before)})}
+  else if(t.id==="add-crit")K.form({title:"Add criterion",fields:cFields(),values:{},onSave:function(v){v.id=K.uid();S.criteria.push(v);save();draw()}});
+  else if(d.crit){var c=S.criteria.filter(function(x){return x.id===d.crit})[0];
+    K.form({title:"Edit criterion",fields:cFields(),values:c,onSave:function(v){c.name=v.name;c.desc=v.desc;save();draw()},
+      onDelete:function(){var b4=snap();S.criteria=S.criteria.filter(function(x){return x!==c});Object.keys(S.scores).forEach(function(k){delete S.scores[k][c.id]});save();draw();K.toast("Criterion and its scores removed.",function(){restore(b4)})}})}
+  else if(t.id==="add-stu")K.form({title:"Add student",fields:[{k:"name",l:"Name, first name and last initial"}],values:{},onSave:function(v){var s={id:K.uid(),name:v.name};S.students.push(s);S.scores[s.id]={};S.sel=s.id;save();draw()}});
+  else if(t.id==="ed-stu")K.form({title:"Edit student",fields:[{k:"name",l:"Name"}],values:cur,onSave:function(v){cur.name=v.name;save();draw()},
+      onDelete:function(){var b5=snap();S.students=S.students.filter(function(x){return x!==cur});delete S.scores[cur.id];delete S.notes[cur.id];save();draw();K.toast("Student and scores removed.",function(){restore(b5)})}});
+  else if(t.id==="copy"){var text=prompt(S.sel),done=function(ok){K.toast(ok?"Prompt copied. Paste it into Gemini.":"Select the prompt text and copy it.")};
+    try{navigator.clipboard.writeText(text).then(function(){done(true)},function(){done(false)})}catch(err){done(false)}}
+});
+$("app").addEventListener("input",function(e){if(e.target.id==="note"){S.notes[S.sel]=e.target.value;save();$("prompt").textContent=prompt(S.sel)}});
+$("app").addEventListener("change",function(e){if(e.target.id==="title"){S.title=e.target.value.trim()||"Untitled assignment";save();draw()}});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();save();draw();K.toast("Sample restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>

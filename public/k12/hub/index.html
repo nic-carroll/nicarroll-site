@@ -127,6 +127,7 @@ main{padding:28px 28px 96px;max-width:1180px;width:100%;margin:0 auto;display:fl
 .snack{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--inverse-surface);color:var(--inverse-on-surface);border-radius:var(--r-xs);min-height:48px;padding:4px 8px 4px 16px;display:flex;gap:8px;align-items:center;box-shadow:var(--e2);z-index:60;font-size:.875rem}
 .snack[hidden]{display:none}
 .snack button{border:0;background:transparent;color:var(--inverse-primary);font-weight:500;padding:6px 10px;border-radius:6px}
+.embed a[href*="S9bGSH6neDDqR6Y5qSjhAq"]{display:none !important}
 .foot{font-size:.8125rem;color:var(--on-surface-variant);display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:8px}
 
 @media (max-width:820px){
@@ -163,6 +164,7 @@ main{padding:28px 28px 96px;max-width:1180px;width:100%;margin:0 auto;display:fl
 <div class="snack" id="snack" hidden role="status"><span id="snack-t"></span><button type="button" id="snack-undo">Undo</button></div>
 
 <script>
+try{if(location.hash.indexOf("embed")>=0)document.documentElement.classList.add("embed")}catch(e){}
 (function(){
 "use strict";
 var KEY="classroom-hub-v1";

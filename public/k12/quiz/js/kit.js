@@ -1,4 +1,5 @@
 /* Shared helpers for the showcase dashboards: escaping, ids, browser storage, an edit dialog, and an undo message. */
+try{if(location.hash.indexOf("embed")>=0)document.documentElement.classList.add("embed")}catch(e){}
 var K=(function(){
   "use strict";
   function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
@@ -28,7 +29,7 @@ var K=(function(){
         var val=Array.isArray(op)?op[0]:op,lab=Array.isArray(op)?op[1]:op;
         return '<option value="'+esc(val)+'"'+(String(val)===String(v)?" selected":"")+'>'+esc(lab)+'</option>';
       }).join("")+'</select>';
-      else inner='<input id="'+id+'" type="'+(f.type||"text")+'" value="'+esc(v)+'"'+(f.ph?' placeholder="'+esc(f.ph)+'"':'')+(f.type==="number"?' min="1"':'')+'>';
+      else inner='<input id="'+id+'" type="'+(f.type||"text")+'" value="'+esc(v)+'"'+(f.ph?' placeholder="'+esc(f.ph)+'"':'')+(f.type==="number"?' min="'+(f.min==null?1:f.min)+'"':'')+'>';
       return '<label class="field" for="'+id+'"><span>'+esc(f.l)+'</span>'+inner+'</label>';
     }).join("");
     last=document.activeElement;
@@ -39,8 +40,8 @@ var K=(function(){
   $("k-dlg").addEventListener("submit",function(e){
     e.preventDefault();if(!cur)return;
     var vals={},firstKey=cur.fields[0].k;
-    cur.fields.forEach(function(f){var el=$("kf-"+f.k);vals[f.k]=f.type==="number"?Math.max(1,parseInt(el.value,10)||1):el.value.trim()});
-    if(!vals[firstKey]){$("kf-"+firstKey).focus();return}
+    cur.fields.forEach(function(f){var el=$("kf-"+f.k);var lo=f.min==null?1:f.min;vals[f.k]=f.type==="number"?Math.max(lo,parseInt(el.value,10)||lo):el.value.trim()});
+    if(vals[firstKey]===""||vals[firstKey]==null){$("kf-"+firstKey).focus();return}
     var fn=cur.onSave;close();fn(vals);
   });
   $("k-cancel").addEventListener("click",close);

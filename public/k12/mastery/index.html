@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Standards Mastery Tracker · Nic Carroll</title>
+<meta name="description" content="Standards Mastery Tracker: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Standards Mastery Tracker">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-mastery.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="css/base.css">
+<style>
+.heat td,.heat th{padding:6px 8px;height:44px;text-align:center}
+.heat td:first-child,.heat th:first-child{text-align:left;position:sticky;left:0;background:var(--md-surface-container-lowest);z-index:1;white-space:nowrap}
+.heat thead th:first-child{background:var(--md-surface-container-low);z-index:2}
+.heat th button{border:0;background:transparent;font:inherit;color:inherit;padding:6px 8px;border-radius:var(--md-shape-s);cursor:pointer}
+.heat th button[aria-pressed="true"]{background:var(--md-primary);color:var(--md-on-primary)}
+.cellb{width:100%;min-width:56px;height:32px;border:0;border-radius:var(--md-shape-s);font:500 .875rem/1 var(--md-font);font-variant-numeric:tabular-nums}
+.cellb:hover{box-shadow:var(--md-elev-1)}
+.lv0{background:var(--md-surface-container);color:var(--md-on-surface-variant);font-weight:400}
+.lv1{background:var(--md-error-container);color:var(--md-on-error-container)}
+.lv2{background:var(--md-caution-container);color:var(--md-on-caution-container)}
+.lv3{background:var(--md-tertiary-container);color:var(--md-on-tertiary-container)}
+.lv4{background:var(--md-primary-container);color:var(--md-on-primary-container)}
+.legend{display:flex;gap:8px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:var(--md-shape-s);font:500 .75rem/1 var(--md-font)}
+.names{display:flex;gap:8px;flex-wrap:wrap}
+.names span{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:var(--md-shape-s);font:500 .875rem/1 var(--md-font)}
+pre.prompt{margin:0;background:var(--md-surface-container);border-radius:var(--md-shape-m);padding:16px;font:400 .8125rem/1.25rem "Roboto Mono",ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:280px;overflow:auto}
+.two>*{min-width:0}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Playbook</a>
+  <span class="lead"><span class="material-symbols-outlined" aria-hidden="true">insights</span></span>
+  <div><h1>Standards Mastery Tracker</h1><div class="sub">Grade 3 math, invented students and scores</div></div>
+  <span class="badge">Sample data</span><span class="sp"></span>
+  <button class="btn outlined sm" id="reset" type="button">Restore sample class</button>
+</div></header>
+<main class="wrap" id="app"></main>
+<script src="js/kit.js"></script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-mastery-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+function sym(n){return '<span class="material-symbols-outlined" aria-hidden="true">'+n+'</span>'}
+var NAMES=["Avery B.","Jordan C.","Maya N.","Elijah H.","Sofia R.","Noah W.","Zoe B.","Liam C.","Aaliyah N.","Mateo H.","Harper R.","Isaiah W.","Chloe B.","Diego C.","Nia N.","Owen H.","Layla R.","Caleb W.","Ruby B.","Mason C.","Imani N.","Lucas H.","Ella R.","Jayden W."];
+var LEVELS=["Not assessed","Beginning","Developing","Proficient","Distinguished"];
+function level(v){return v===undefined||v===null||v===""?0:v<50?1:v<70?2:v<90?3:4}
+function sample(){
+  var stds=[{code:"3.NR.1",label:"Place value and rounding, numbers up to 10,000"},{code:"3.PAR.2",label:"Addition and subtraction within 10,000"},{code:"3.PAR.3",label:"Multiplication and division within 100"},{code:"3.NR.4",label:"Fractions with denominators 2, 3, 4, 6, and 8"},{code:"3.MDR.5",label:"Measurement problems, including time"},{code:"3.GSR.7",label:"Area of rectangles"}];
+  var base=[86,82,71,58,0,0],students=[],scores={};
+  NAMES.forEach(function(n,i){var id="s"+i;students.push({id:id,name:n});scores[id]={};
+    stds.forEach(function(s,j){if(j>=4)return;var skill=((i*37)%41)-20,wob=((i*13+j*29)%23)-11,v=Math.max(20,Math.min(100,base[j]+skill+wob));
+      if(j===3&&i%9===4)return;scores[id][s.code]=Math.round(v/5)*5})});
+  return {students:students,standards:stds,scores:scores,sel:"3.NR.4"};
+}
+var S=K.load(KEY,sample);
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();draw()}
+function val(sid,code){var r=S.scores[sid];return r?r[code]:undefined}
+function avg(code){var a=S.students.map(function(s){return val(s.id,code)}).filter(function(v){return level(v)>0});return a.length?Math.round(a.reduce(function(x,y){return x+y},0)/a.length):null}
+function ns(n){return n+(n===1?" student":" students")}
+function prompt(code){
+  var std=S.standards.filter(function(s){return s.code===code})[0];if(!std)return "";
+  var c=[0,0,0,0,0];S.students.forEach(function(s){c[level(val(s.id,code))]++});
+  return "I teach Grade 3 in Georgia. My class took an exit ticket on one standard.\n\nStandard code: "+std.code+"\nTopic: "+std.label+"\nOfficial wording from SuitCASE: [paste the standard here]\n\nResults, with no student names:\n* Beginning (below 50%): "+ns(c[1])+"\n* Developing (50 to 69%): "+ns(c[2])+"\n* Proficient (70 to 89%): "+ns(c[3])+"\n* Distinguished (90% and up): "+ns(c[4])+"\n* Not assessed yet: "+ns(c[0])+"\n\nCommon mistakes I saw: [describe what students got wrong]\n\nWrite a reteaching plan:\n1. A 15 minute small group lesson for the Beginning group, with hands on materials\n2. A 15 minute small group lesson for the Developing group\n3. An extension task the Proficient and Distinguished students can do on their own while I teach\n4. A new 4 question exit ticket to check again, with an answer key\n\nKeep it practical for one teacher with no helper.";
+}
+function draw(){
+  if(!S.standards.some(function(s){return s.code===S.sel}))S.sel=S.standards.length?S.standards[0].code:"";
+  var assessed=S.standards.filter(function(s){return avg(s.code)!==null}),mastered=assessed.filter(function(s){return avg(s.code)>=70}).length;
+  var all=[];S.students.forEach(function(st){S.standards.forEach(function(s){var v=val(st.id,s.code);if(level(v)>0)all.push(v)})});
+  var classAvg=all.length?Math.round(all.reduce(function(x,y){return x+y},0)/all.length):0;
+  var need=S.students.filter(function(st){return S.standards.some(function(s){return level(val(st.id,s.code))===1})}).length;
+  var sel=S.sel,groups=[[],[],[],[],[]];S.students.forEach(function(st){groups[level(val(st.id,sel))].push(st.name)});
+  var selStd=S.standards.filter(function(s){return s.code===sel})[0];
+  var head='<tr><th>Student</th>'+S.standards.map(function(s){return '<th><button type="button" data-sel="'+esc(s.code)+'" aria-pressed="'+(s.code===sel)+'" title="'+esc(s.label)+'">'+esc(s.code)+'</button></th>'}).join("")+'</tr>';
+  var body=S.students.map(function(st){return '<tr><td><button class="btn text sm" type="button" data-stu="'+st.id+'" style="padding:0 8px">'+esc(st.name)+'</button></td>'+S.standards.map(function(s){var v=val(st.id,s.code),lv=level(v);return '<td><button class="cellb lv'+lv+'" type="button" data-cell="'+st.id+'|'+esc(s.code)+'" aria-label="'+esc(st.name)+', '+esc(s.code)+', '+(lv?v+" percent, "+LEVELS[lv]:"not assessed")+'">'+(lv?v:"+")+'</button></td>'}).join("")+'</tr>'}).join("");
+  var foot='<tr><td><b>Class average</b></td>'+S.standards.map(function(s){var a=avg(s.code);return '<td><b>'+(a===null?"":a+"%")+'</b></td>'}).join("")+'</tr>';
+  function names(lv,cls){return groups[lv].length?'<div class="names">'+groups[lv].map(function(n){return '<span class="'+cls+'">'+esc(n)+'</span>'}).join("")+'</div>':'<p class="muted small">No students at this level.</p>'}
+  $("app").innerHTML=
+  '<div class="kpis"><div class="kpi"><div class="v">'+classAvg+'%</div><div class="k">Class average, all scores</div></div><div class="kpi good"><div class="v">'+mastered+' of '+assessed.length+'</div><div class="k">Assessed standards at 70% or higher</div></div><div class="kpi '+(need?"bad":"good")+'"><div class="v">'+need+'</div><div class="k">Students with a Beginning score</div></div><div class="kpi warn"><div class="v">'+(S.standards.length-assessed.length)+'</div><div class="k">Standards not assessed yet</div></div></div>'+
+  '<div class="panel"><div class="ph"><h2>Exit ticket scores by standard</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn tonal sm" type="button" id="add-stu">'+sym("add")+'Add student</button><button class="btn tonal sm" type="button" id="add-std">'+sym("add")+'Add standard</button></div></div><div class="legend"><span class="lv1">Beginning, below 50</span><span class="lv2">Developing, 50 to 69</span><span class="lv3">Proficient, 70 to 89</span><span class="lv4">Distinguished, 90 and up</span><span class="lv0">Not assessed</span></div><div class="tablebox"><table class="heat"><thead>'+head+'</thead><tbody>'+body+foot+'</tbody></table></div><p class="muted small">Select a score to change it. Select a standard code to see its reteach groups. Select a student name to rename or remove them.</p></div>'+
+  (selStd?'<div class="two"><div class="panel"><div class="ph"><h2>Groups for '+esc(sel)+'</h2><button class="btn outlined sm" type="button" id="ed-std">Edit standard</button></div><p class="muted small">'+esc(selStd.label)+'</p><h3>Reteach first: Beginning</h3>'+names(1,"lv1")+'<h3>Small group practice: Developing</h3>'+names(2,"lv2")+'<h3>On track: Proficient</h3>'+names(3,"lv3")+'<h3>Ready for more: Distinguished</h3>'+names(4,"lv4")+(groups[0].length?'<h3>Not assessed yet</h3>'+names(0,"lv0"):'')+'</div>'+
+   '<div class="panel"><h2>Plan the reteach with Gemini</h2><p class="muted small">The prompt sends counts only. No student names or scores leave this page.</p><pre class="prompt" id="prompt">'+esc(prompt(sel))+'</pre><div><button class="btn filled" type="button" id="copy">'+sym("content_copy")+'Copy prompt for Gemini</button></div></div></div>':'')+
+  '<div class="built"><b>How this was built</b><span>Built in Gemini Canvas, then connected to a Google Sheet with tabs named <code>Students</code>, <code>Standards</code>, and <code>Scores</code>. This tool holds student records, so the Sheet is shared only with the teacher of record and approved staff, and the district privacy lead signs off first. Kit file <code>15_mastery_tracker.md</code> has the prompts. Changes on this demo save in your browser only.</span></div>';
+}
+$("app").addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t)return;var d=t.dataset;
+  if(d.sel){S.sel=d.sel;save();draw()}
+  else if(d.cell){var p=d.cell.split("|"),sid=p[0],code=p[1],cur=val(sid,code),st=S.students.filter(function(x){return x.id===sid})[0];
+    K.form({title:st.name+", "+code,fields:[{k:"score",l:"Score, 0 to 100",type:"number",min:0}],values:{score:level(cur)?cur:""},
+      onSave:function(v){S.scores[sid]=S.scores[sid]||{};S.scores[sid][code]=Math.max(0,Math.min(100,v.score));save();draw()},
+      onDelete:level(cur)?function(){delete S.scores[sid][code];save();draw();K.toast("Score cleared.")}:null})}
+  else if(d.stu){var s=S.students.filter(function(x){return x.id===d.stu})[0];
+    K.form({title:"Edit student",fields:[{k:"name",l:"Name"}],values:s,onSave:function(v){s.name=v.name;save();draw()},
+      onDelete:function(){var before=snap();S.students=S.students.filter(function(x){return x!==s});delete S.scores[s.id];save();draw();K.toast("Student and scores removed.",function(){restore(before)})}})}
+  else if(t.id==="add-stu")K.form({title:"Add student",fields:[{k:"name",l:"Name, first name and last initial"}],values:{},onSave:function(v){S.students.push({id:K.uid(),name:v.name});save();draw()}});
+  else if(t.id==="add-std")K.form({title:"Add a standard from SuitCASE",fields:[{k:"code",l:"Standard code",ph:"3.GSR.8"},{k:"label",l:"Standard wording",type:"textarea",ph:"Paste the wording from SuitCASE"}],values:{},onSave:function(v){if(!S.standards.some(function(s){return s.code===v.code}))S.standards.push({code:v.code,label:v.label||"Added by teacher"});S.sel=v.code;save();draw()}});
+  else if(t.id==="ed-std"){var sd=S.standards.filter(function(s){return s.code===S.sel})[0];
+    K.form({title:"Edit standard "+sd.code,fields:[{k:"label",l:"Standard wording",type:"textarea"}],values:sd,onSave:function(v){sd.label=v.label;save();draw()},
+      onDelete:function(){var before=snap();S.standards=S.standards.filter(function(x){return x!==sd});Object.keys(S.scores).forEach(function(k){delete S.scores[k][sd.code]});save();draw();K.toast("Standard and its scores removed.",function(){restore(before)})}})}
+  else if(t.id==="copy"){var text=prompt(S.sel),done=function(ok){K.toast(ok?"Prompt copied. Paste it into Gemini.":"Select the prompt text and copy it.")};
+    try{navigator.clipboard.writeText(text).then(function(){done(true)},function(){done(false)})}catch(err){done(false)}}
+});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();save();draw();K.toast("Sample class restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>

@@ -47,6 +47,7 @@ button{cursor:pointer}
 .sp{flex:1}
 .badge{font:500 .75rem/1rem var(--md-font);letter-spacing:.042em;height:32px;display:inline-flex;align-items:center;padding:0 12px;border-radius:var(--md-shape-s);border:1px solid var(--md-outline-variant);color:var(--md-on-surface-variant)}
 main.wrap{padding:24px 24px 96px;display:grid;gap:24px}
+[hidden]{display:none !important}
 
 /* common buttons: 40 high, full shape, label large */
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 24px;border-radius:var(--md-shape-full);border:0;font:500 .875rem/1.25rem var(--md-font);letter-spacing:.007em;background:transparent;white-space:nowrap;transition:box-shadow .15s,background-color .15s}
@@ -172,3 +173,6 @@ code{font-family:"Roboto Mono",ui-monospace,Menlo,monospace;font-size:.8125rem;b
   .fab{right:16px;bottom:16px}
 }
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
+
+/* inside the playbook page the tool hides its own back link */
+.embed a[href*="S9bGSH6neDDqR6Y5qSjhAq"]{display:none}

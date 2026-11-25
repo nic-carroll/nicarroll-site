@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weekly Lesson Planner · Nic Carroll</title>
+<meta name="description" content="Weekly Lesson Planner: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Weekly Lesson Planner">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-planner.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css">
+<link rel="stylesheet" href="css/base.css">
+<style>
+.week{display:grid;grid-template-columns:110px repeat(5,minmax(150px,1fr));gap:8px;min-width:900px}
+.weekbox{overflow-x:auto;padding-bottom:4px}
+.dh{font:500 .875rem/1.25rem var(--md-font);color:var(--md-on-surface-variant);padding:8px;text-align:center;border-radius:var(--md-shape-s);background:var(--md-surface-container)}
+.dh.today{background:var(--md-primary);color:var(--md-on-primary)}
+.sh{display:flex;align-items:center;justify-content:space-between;gap:4px;font:500 .875rem/1.25rem var(--md-font);padding:8px 4px 8px 12px;border-radius:var(--md-shape-s);background:var(--md-secondary-container);color:var(--md-on-secondary-container);overflow-wrap:anywhere}
+.lesson{display:grid;gap:6px;align-content:start;text-align:left;border:1px solid var(--md-outline-variant);border-radius:var(--md-shape-m);padding:10px 12px;background:var(--md-surface-container-lowest);min-height:104px;overflow-wrap:anywhere;font:400 .875rem/1.25rem var(--md-font);color:var(--md-on-surface);width:100%}
+.lesson:hover{box-shadow:var(--md-elev-1)}
+.lesson b{font-weight:500}
+.lesson.done{background:var(--md-surface-container);color:var(--md-on-surface-variant)}
+.lesson.done b{text-decoration:line-through}
+.lesson .meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.slot{display:grid;place-items:center;border:1px dashed var(--md-outline);border-radius:var(--md-shape-m);min-height:104px;background:transparent;color:var(--md-primary);font:500 .875rem/1.25rem var(--md-font);width:100%}
+.slot:hover{background:color-mix(in srgb,var(--md-primary) 8%,transparent)}
+pre.prompt{margin:0;background:var(--md-surface-container);border-radius:var(--md-shape-m);padding:16px;font:400 .8125rem/1.25rem "Roboto Mono",ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:300px;overflow:auto}
+.cov{display:grid;gap:8px}
+.two>*{min-width:0}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Playbook</a>
+  <span class="lead"><span class="material-symbols-outlined" aria-hidden="true">calendar_view_week</span></span>
+  <div><h1>Weekly Lesson Planner</h1><div class="sub">Grade 3, sample week</div></div>
+  <span class="badge">Sample data</span><span class="sp"></span>
+  <button class="btn outlined sm" id="reset" type="button">Restore sample week</button>
+</div></header>
+<main class="wrap" id="app"></main>
+<script src="js/kit.js"></script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-planner-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+function sym(n){return '<span class="material-symbols-outlined" aria-hidden="true">'+n+'</span>'}
+var DAYS=["Monday","Tuesday","Wednesday","Thursday","Friday"];
+var TODAY=new Date().getDay()-1;
+function L(day,subject,title,std,act,mat,done){return {id:K.uid(),day:day,subject:subject,title:title,std:std||"",act:act||"",mat:mat||"",done:!!done}}
+function sample(){return {
+  week:"Week of December 1",minutes:45,
+  subjects:["Reading","Math","Writing","Science"],
+  standards:[
+    {code:"3.NR.1",label:"Place value and rounding, numbers up to 10,000"},
+    {code:"3.PAR.2",label:"Addition and subtraction within 10,000"},
+    {code:"3.PAR.3",label:"Multiplication and division within 100"},
+    {code:"3.NR.4",label:"Fractions with denominators 2, 3, 4, 6, and 8"},
+    {code:"3.MDR.5",label:"Measurement problems, including time"},
+    {code:"3.GSR.7",label:"Area of rectangles"}
+  ],
+  lessons:[
+    L(0,"Math","Arrays and equal groups","3.PAR.3","Build arrays with counters. Write a multiplication sentence for each.","Counters, grid paper",true),
+    L(1,"Math","Multiplication facts for 6 and 7","3.PAR.3","Skip counting warm up. Fact family triangles in pairs.","Fact triangles",true),
+    L(2,"Math","Division as sharing equally","3.PAR.3","Share 24 cubes among 3, 4, and 6 plates. Record each as a division sentence.","Cubes, paper plates"),
+    L(3,"Math","Area with square tiles","3.GSR.7","Cover rectangles with tiles. Connect rows and columns to multiplication.","Square tiles"),
+    L(4,"Math","Unit check: multiplication and division","3.PAR.3","Ten question check, then math games.","Printed check"),
+    L(0,"Reading","Main idea in nonfiction","","Read the article on sea turtles. Find the main idea together.","Class set of the article",true),
+    L(1,"Reading","Key details that support the main idea","","Highlight three details. Partner share.","Highlighters"),
+    L(3,"Reading","Small group conferences","","Meet with two groups. Others read independently.","Group books"),
+    L(0,"Writing","Opinion writing: state your opinion","","Mini lesson on strong opinion sentences. Draft an opening.","Anchor chart",true),
+    L(2,"Writing","Opinion writing: give two reasons","","Add two reasons with the word because.","Graphic organizer"),
+    L(4,"Writing","Share and celebrate","","Author's chair for five volunteers.",""),
+    L(1,"Science","Habitats: what animals need","","Sort animal cards by habitat. Discuss food, water, and shelter.","Animal cards"),
+    L(3,"Science","Habitat diorama planning","","Sketch a habitat and list materials to bring.","Planning sheet")
+  ],
+  pick:""
+}}
+var S=K.load(KEY,sample);
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();draw()}
+function stdLabel(c){var s=S.standards.filter(function(x){return x.code===c})[0];return s?s.label:""}
+function byId(id){return S.lessons.filter(function(l){return l.id===id})[0]}
+function prompt(l){
+  if(!l)return "Select a lesson to build its prompt.";
+  return "You are helping a Grade 3 teacher in Georgia plan one lesson.\n\nSubject: "+l.subject+"\nLesson topic: "+l.title+"\n"+
+   (l.std?"Standard code: "+l.std+"\nTopic: "+stdLabel(l.std)+"\nOfficial wording from SuitCASE: [paste the standard here]\n":"Standard: [paste the standard code and wording from SuitCASE here]\n")+
+   (l.act?"My notes so far: "+l.act+"\n":"")+(l.mat?"Materials I have: "+l.mat+"\n":"")+
+   "Time: "+S.minutes+" minutes\n\nWrite a lesson plan with these parts:\n1. Learning target in student friendly words, starting with \"I can\"\n2. Opening, about 5 minutes\n3. Mini lesson with one worked example\n4. Guided practice\n5. Independent practice, with one easier and one harder version\n6. A small group idea for students who need more support\n7. Exit ticket with 3 questions and an answer key\n8. Materials list\n\nKeep every part short enough to read at a glance. Use only materials found in a typical elementary classroom. Do not include any student names.";
+}
+function draw(){
+  var planned=S.lessons.length,taught=S.lessons.filter(function(l){return l.done}).length,stds={},total=S.subjects.length*5;
+  S.lessons.forEach(function(l){if(l.std)stds[l.std]=(stds[l.std]||0)+1});
+  var untagged=S.lessons.filter(function(l){return !l.std}).length;
+  if(!byId(S.pick))S.pick=S.lessons.length?S.lessons[0].id:"";
+  var grid='<div></div>'+DAYS.map(function(d,i){return '<div class="dh'+(i===TODAY?" today":"")+'">'+d+'</div>'}).join("");
+  S.subjects.forEach(function(sub){
+    grid+='<div class="sh"><span>'+esc(sub)+'</span><button class="iconb" type="button" data-sub="'+esc(sub)+'" aria-label="Edit subject '+esc(sub)+'" style="width:32px;height:32px">'+sym("edit")+'</button></div>';
+    for(var d=0;d<5;d++){
+      var ls=S.lessons.filter(function(l){return l.subject===sub&&l.day===d});
+      grid+='<div style="display:grid;gap:8px;align-content:start">'+ls.map(function(l){
+        return '<button class="lesson'+(l.done?" done":"")+'" type="button" data-edit="'+l.id+'"><b>'+esc(l.title)+'</b><span class="meta">'+(l.std?'<span class="pill ok">'+esc(l.std)+'</span>':'<span class="pill warn">No standard</span>')+(l.done?'<span class="pill info">Taught</span>':'')+'</span></button>';
+      }).join("")+(ls.length?'':'<button class="slot" type="button" data-add="'+d+'" data-subject="'+esc(sub)+'" aria-label="Plan '+esc(sub)+' for '+DAYS[d]+'">'+sym("add")+'</button>')+'</div>';
+    }
+  });
+  var cov=S.standards.map(function(s){var n=stds[s.code]||0;return '<div class="barrow"><div class="t"><span><b>'+esc(s.code)+'</b> <span class="muted">'+esc(s.label)+'</span></span><span class="r">'+n+(n===1?" lesson":" lessons")+'</span></div><div class="track"><div class="fill" style="width:'+Math.min(100,n*20)+'%"></div></div></div>'}).join("");
+  $("app").innerHTML=
+  '<div class="kpis"><div class="kpi"><div class="v">'+planned+'</div><div class="k">Lessons planned</div></div><div class="kpi good"><div class="v">'+taught+'</div><div class="k">Taught so far</div></div><div class="kpi '+(untagged?"warn":"good")+'"><div class="v">'+untagged+'</div><div class="k">Lessons with no standard</div></div><div class="kpi"><div class="v">'+Math.max(0,total-countFilled())+'</div><div class="k">Open slots this week</div></div></div>'+
+  '<div class="panel"><div class="ph"><label class="field" for="week" style="flex:1 1 240px;max-width:360px"><span>Week</span><input id="week" type="text" value="'+esc(S.week)+'"></label><div class="btnrow" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn tonal sm" type="button" id="add-sub">'+sym("add")+'Add subject</button><button class="btn filled sm" type="button" id="add-lesson">'+sym("add")+'Add lesson</button></div></div><div class="weekbox"><div class="week">'+grid+'</div></div><p class="muted small">Select a lesson to edit it, mark it taught, move it, or delete it. Select + to plan an open slot.</p></div>'+
+  '<div class="two"><div class="panel"><h2>Draft a lesson with Gemini</h2><div class="controls"><label class="field" for="pick" style="flex:1 1 240px"><span>Lesson</span><select id="pick">'+S.lessons.map(function(l){return '<option value="'+l.id+'"'+(l.id===S.pick?" selected":"")+'>'+esc(DAYS[l.day].slice(0,3)+"  "+l.subject+": "+l.title)+'</option>'}).join("")+'</select></label><label class="field" for="mins" style="min-width:130px"><span>Minutes</span><select id="mins">'+[20,30,45,60,90].map(function(m){return '<option'+(m===S.minutes?" selected":"")+'>'+m+'</option>'}).join("")+'</select></label></div><pre class="prompt" id="prompt">'+esc(prompt(byId(S.pick)))+'</pre><div><button class="btn filled" type="button" id="copy">'+sym("content_copy")+'Copy prompt for Gemini</button></div><p class="muted small">Paste the official standard wording from SuitCASE into the prompt before you send it. Read what Gemini writes and make it yours.</p></div>'+
+   '<div class="panel"><div class="ph"><h2>Standards this week</h2><button class="btn outlined sm" type="button" id="add-std">Add a standard</button></div><div class="cov">'+cov+'</div><p class="muted small">Only a few math standards are loaded, with short topic labels. Add the standards for your other subjects from SuitCASE.</p></div></div>'+
+  '<div class="built"><b>How this was built</b><span>Built in Gemini Canvas, then connected to a Google Sheet with tabs named <code>Lessons</code> and <code>Standards</code>. A grade level team can share one Sheet and plan together. Kit file <code>13_lesson_planner.md</code> has the prompts. Changes on this demo save in your browser only.</span></div>';
+}
+function countFilled(){var seen={};S.lessons.forEach(function(l){if(S.subjects.indexOf(l.subject)>=0)seen[l.subject+"|"+l.day]=1});return Object.keys(seen).length}
+function fields(){return [{k:"title",l:"Lesson topic"},{k:"subject",l:"Subject",type:"select",options:S.subjects},{k:"day",l:"Day",type:"select",options:DAYS.map(function(d,i){return [String(i),d]})},{k:"std",l:"Standard",type:"select",options:[["","No standard yet"]].concat(S.standards.map(function(s){return [s.code,s.code+"  "+s.label]}))},{k:"act",l:"Activities",type:"textarea"},{k:"mat",l:"Materials"},{k:"done",l:"Status",type:"select",options:[["","Not taught yet"],["1","Taught"]]}]}
+function editLesson(l,isNew){
+  var v={title:l.title,subject:l.subject,day:String(l.day),std:l.std,act:l.act,mat:l.mat,done:l.done?"1":""};
+  K.form({title:isNew?"Plan a lesson":"Edit lesson",fields:fields(),values:v,
+    onSave:function(x){l.title=x.title;l.subject=x.subject;l.day=+x.day;l.std=x.std;l.act=x.act;l.mat=x.mat;l.done=x.done==="1";if(isNew)S.lessons.push(l);S.pick=l.id;save();draw()},
+    onDelete:isNew?null:function(){var before=snap();S.lessons=S.lessons.filter(function(z){return z!==l});save();draw();K.toast("Lesson deleted.",function(){restore(before)})}});
+}
+$("app").addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t)return;var d=t.dataset;
+  if(d.edit)editLesson(byId(d.edit),false);
+  else if(d.add!==undefined)editLesson(L(+d.add,d.subject,"","","",""),true);
+  else if(t.id==="add-lesson")editLesson(L(Math.max(0,Math.min(4,TODAY)),S.subjects[0]||"","","","",""),true);
+  else if(t.id==="add-sub")K.form({title:"Add subject",fields:[{k:"name",l:"Subject name"}],values:{},onSave:function(v){if(S.subjects.indexOf(v.name)<0){S.subjects.push(v.name);save();draw()}}});
+  else if(d.sub!==undefined){var old=d.sub;
+    K.form({title:"Edit subject",fields:[{k:"name",l:"Subject name"}],values:{name:old},
+      onSave:function(v){S.subjects[S.subjects.indexOf(old)]=v.name;S.lessons.forEach(function(l){if(l.subject===old)l.subject=v.name});save();draw()},
+      onDelete:function(){var before=snap();S.subjects=S.subjects.filter(function(x){return x!==old});S.lessons=S.lessons.filter(function(l){return l.subject!==old});save();draw();K.toast("Subject and its lessons deleted.",function(){restore(before)})}})}
+  else if(t.id==="add-std")K.form({title:"Add a standard from SuitCASE",fields:[{k:"code",l:"Standard code",ph:"S3L1"},{k:"label",l:"Standard wording",type:"textarea",ph:"Paste the wording from SuitCASE"}],values:{},onSave:function(v){S.standards=S.standards.filter(function(s){return s.code!==v.code});S.standards.push({code:v.code,label:v.label||"Added by teacher"});save();draw()}});
+  else if(t.id==="copy"){var text=prompt(byId(S.pick)),done=function(ok){K.toast(ok?"Prompt copied. Paste it into Gemini.":"Select the prompt text and copy it.")};
+    try{navigator.clipboard.writeText(text).then(function(){done(true)},function(){done(false)})}catch(err){done(false)}}
+});
+$("app").addEventListener("change",function(e){
+  if(e.target.id==="pick"){S.pick=e.target.value;save();$("prompt").textContent=prompt(byId(S.pick))}
+  if(e.target.id==="mins"){S.minutes=+e.target.value;save();$("prompt").textContent=prompt(byId(S.pick))}
+  if(e.target.id==="week"){S.week=e.target.value.trim()||"This week";save()}
+});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();save();draw();K.toast("Sample week restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gemini Tool Builder Playbook · Nic Carroll</title>
-<meta name="description" content="A playbook by Nic Carroll that shows K12 staff how to build dashboards, trackers, and schedulers in Gemini inside Google Workspace for Education. Nine steps, five live example tools, a prompt library, and data owner controlled sharing.">
+<meta name="description" content="A playbook by Nic Carroll that shows K12 staff how to build dashboards, trackers, and schedulers in Gemini inside Google Workspace for Education. Nine steps, eleven live example tools, a prompt library, and data owner controlled sharing.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Nic Carroll">
 <meta property="og:title" content="Gemini Tool Builder Playbook for K12">
@@ -174,6 +174,18 @@ tr:last-child td{border-bottom:0}
 .howto>*{min-width:0}
 @media (max-width:860px){.tgrid,.howto{grid-template-columns:minmax(0,1fr)}}
 
+.frame{border:1px solid var(--outline-variant);border-radius:var(--r-l);overflow:hidden;background:var(--card)}
+.frame-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;background:var(--surface-low);border-bottom:1px solid var(--outline-variant)}
+.frame-top a{text-decoration:none}
+.frame iframe{display:block;width:100%;height:820px;border:0;background:var(--surface)}
+@media (max-width:860px){.frame iframe{height:680px}}
+
+.idea.go{cursor:pointer;transition:box-shadow .15s,transform .15s}
+.idea.go:hover{box-shadow:var(--e1);transform:translateY(-2px)}
+.idea.go .try{margin-top:4px;display:inline-flex;align-items:center;align-self:flex-start;height:36px;padding:0 16px;border-radius:999px;background:var(--primary);color:var(--on-primary);font-weight:500;font-size:.875rem}
+.idea.go[aria-current="true"]{outline:2px solid var(--primary);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.idea.go{transition:none}}
+
 /* versions */
 .vers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .ver{background:var(--card);border:1px solid var(--outline-variant);border-radius:var(--r-l);padding:24px;display:flex;flex-direction:column;gap:12px}
@@ -284,71 +296,18 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
     <div class="sec-head">
       <p class="label">What you can build</p>
       <h2>Working examples, built the playbook way</h2>
-      <p class="muted">The three tools below are live. Filter, search, and change assignments. All names and records are invented sample data for Oakhaven High School, an imaginary school.</p>
+      <p class="muted">All eleven tools are live. Select any card and it opens right here on the page. All names and records are invented sample data for an imaginary district.</p>
     </div>
-    <h3 style="margin-bottom:12px">Open a full dashboard</h3>
-    <div class="ideas" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:0 0 32px">
-      <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--primary)" href="k12/flex/"><span class="who">Administrators</span><b>Flex Period Scheduling</b><span class="muted">Assign students, manage sessions and seats, place everyone left over in one click.</span><span class="chip file">04 and 05</span></a>
-      <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--on-primary-container)" href="k12/team/"><span class="who">Teams</span><b>Grade Level Team Dashboard</b><span class="muted">One shared page where each role edits only its own sections.</span><span class="chip file">08_team_dashboard.md</span></a>
-      <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid #006A6A" href="k12/hub/"><span class="who">Elementary teachers</span><b>My Classroom Hub</b><span class="muted">Links, weekly focus, to do lists, calendar stickers, meeting notes, and ideas.</span><span class="chip file">09_teacher_dashboard.md</span></a>
-      <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--warn)" href="k12/quiz/"><span class="who">Teachers and students</span><b>Classroom Quiz Show</b><span class="muted">A quiz game with Georgia Milestones item types. Gemini drafts questions for the standard you pick.</span><span class="chip file">11_quiz_show.md</span></a>
-      <a class="idea" style="text-decoration:none;color:inherit;border-top:5px solid var(--tertiary)" href="k12/repair/"><span class="who">Technology staff</span><b>Chromebook Repair Tracker</b><span class="muted">Tickets by building and status, with repairs open too long flagged.</span><span class="chip file">04 and 05</span></a>
+    <h3 style="margin-bottom:12px">Pick a tool to try</h3>
+    <div class="seg" role="group" aria-label="Filter tools by level" id="band" style="margin-bottom:16px"></div>
+    <div class="ideas" id="gallery" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:0 0 32px"></div>
+    <h3 id="try-tools" style="margin-bottom:4px">Try every tool right here</h3>
+    <div class="tabs" role="tablist" aria-label="Example tools" id="demo-tabs"></div>
+    <div class="frame">
+      <div class="frame-top"><b id="frame-name"></b><span class="muted" id="frame-who"></span><span style="flex:1"></span><a class="btn outlined small" id="frame-open" href="#">Open full page</a></div>
+      <iframe id="demo-frame" title="Example tool"></iframe>
     </div>
-    <h3 id="try" style="margin-bottom:4px">Or try three of them right here</h3>
-    <div class="tabs" role="tablist" aria-label="Example tools">
-      <button class="tab" role="tab" id="tab-flex" aria-selected="true" aria-controls="pane-flex">Flex period scheduling</button>
-      <button class="tab" role="tab" id="tab-team" aria-selected="false" aria-controls="pane-team">Team dashboard</button>
-      <button class="tab" role="tab" id="tab-rep" aria-selected="false" aria-controls="pane-rep">Device repair tracker</button>
-    </div>
-
-    <div class="demo" id="pane-flex" role="tabpanel" aria-labelledby="tab-flex">
-      <div class="demo-top"><h3>9th Period Flex Scheduling</h3><span class="badge">Sample data</span></div>
-      <div class="demo-body">
-        <div class="kpis" id="fx-kpis"></div>
-        <div class="controls">
-          <label class="field" for="fx-q"><span>Search student</span><input id="fx-q" type="search" placeholder="Name"></label>
-          <label class="field" for="fx-grade"><span>Grade</span><select id="fx-grade"><option value="">All grades</option><option>9</option><option>10</option><option>11</option><option>12</option></select></label>
-          <label class="field" for="fx-type"><span>Session type</span><select id="fx-type"><option value="">All types</option><option>Tutoring</option><option>Makeup</option><option>Enrichment</option><option>Study Hall</option></select></label>
-          <label class="field" for="fx-status"><span>Status</span><select id="fx-status"><option value="">All students</option><option value="u">Unassigned only</option><option value="a">Assigned only</option></select></label>
-          <button class="btn outlined" id="fx-reset" type="button">Reset</button>
-        </div>
-        <div class="two">
-          <div>
-            <h3 style="margin-bottom:12px">Seats by session</h3>
-            <div class="bars" id="fx-bars"></div>
-          </div>
-          <div>
-            <h3 style="margin-bottom:12px">Students <span class="muted" id="fx-count" style="font-weight:400;font-size:.875rem"></span></h3>
-            <div class="tablebox"><table><thead><tr><th>Student</th><th>Grade</th><th>Session</th><th>Status</th></tr></thead><tbody id="fx-rows"></tbody></table></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="demo" id="pane-rep" role="tabpanel" aria-labelledby="tab-rep" hidden>
-      <div class="demo-top" style="background:var(--tertiary)"><h3>Chromebook Repair Tracker</h3><span class="badge">Sample data</span></div>
-      <div class="demo-body">
-        <div class="kpis" id="rp-kpis"></div>
-        <div class="controls">
-          <label class="field" for="rp-b"><span>Building</span><select id="rp-b"><option value="">All buildings</option></select></label>
-          <label class="field" for="rp-s"><span>Status</span><select id="rp-s"><option value="">All statuses</option><option>New</option><option>In repair</option><option>Waiting on part</option><option>Ready for pickup</option></select></label>
-        </div>
-        <div class="tablebox"><table><thead><tr><th>Ticket</th><th>Asset tag</th><th>Building</th><th>Issue</th><th>Status</th><th>Days open</th></tr></thead><tbody id="rp-rows"></tbody></table></div>
-      </div>
-    </div>
-
-    <div class="demo" id="pane-team" role="tabpanel" aria-labelledby="tab-team" hidden>
-      <div class="demo-top" style="background:var(--on-primary-container)"><h3>Grade 9 Team Dashboard</h3><span class="badge">Sample data</span></div>
-      <div class="demo-body">
-        <div class="branch">
-          <b>View as</b>
-          <div class="seg" role="group" aria-label="Role" id="tm-roles"></div>
-          <p class="muted" id="tm-note" style="font-size:.875rem"></p>
-        </div>
-        <div class="tgrid" id="tm-grid"></div>
-        <p class="muted" style="font-size:.875rem">Each card reads one tab of the team's Google Sheet. The Sheet owner decides who may edit each tab, and the dashboard shows an Add box only where that person has edit rights.</p>
-      </div>
-    </div>
+    <p class="muted" style="font-size:.875rem;margin-top:8px">Each tool runs live inside this page with invented sample data. Scroll inside the frame, or open the full page for more room.</p>
 
     <h3 style="margin-top:32px">More tools staff have asked for</h3>
     <div class="ideas">
@@ -496,10 +455,10 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
 <footer>
   <div class="wrap">
     <p><b>Take the playbook with you.</b> Every part of this page is also a markdown file you can read, share, or hand to an AI assistant.</p>
-    <div class="dl-row"><a class="fill" href="agents/k12-gemini-tool-builder-playbook.zip" download>Download All Five (zip)</a><a href="agents/k12-gemini-playbook-workflow.md" download>Workflow</a><a href="agents/k12-gemini-playbook-prompt-library.md" download>Prompt Library</a><a href="agents/k12-gemini-playbook-sharing.md" download>Sharing</a><a href="agents/k12-gemini-playbook-continuity.md" download>Keep Tools Alive</a><a href="agents/k12-gemini-playbook-access-versions.md" download>Know Your Access</a></div>
+    <div class="dl-row"><a class="fill" href="agents/k12-gemini-tool-builder-playbook.zip" download>Download All (zip)</a><a href="agents/k12-gemini-playbook-workflow.md" download>Workflow</a><a href="agents/k12-gemini-playbook-prompt-library.md" download>Prompt Library</a><a href="agents/k12-gemini-playbook-sharing.md" download>Sharing</a><a href="agents/k12-gemini-playbook-continuity.md" download>Keep Tools Alive</a><a href="agents/k12-gemini-playbook-access-versions.md" download>Know Your Access</a></div>
     <p style="margin-top:20px">The steps on this page name the Builder Kit files they pair with.</p>
     <div class="files">
-      <span class="chip file">00_START_HERE.md</span><span class="chip file">01_tool_brief.md</span><span class="chip file">02_data_sheet_setup.md</span><span class="chip file">03_gem_instructions.md</span><span class="chip file">04_build_prompts.md</span><span class="chip file">05_live_data_prompts.md</span><span class="chip file">06_publish_and_share.md</span><span class="chip file">07_version_notes.md</span><span class="chip file">08_team_dashboard.md</span><span class="chip file">09_teacher_dashboard.md</span><span class="chip file">10_keep_tools_alive.md</span><span class="chip file">11_quiz_show.md</span>
+      <span class="chip file">00_START_HERE.md</span><span class="chip file">01_tool_brief.md</span><span class="chip file">02_data_sheet_setup.md</span><span class="chip file">03_gem_instructions.md</span><span class="chip file">04_build_prompts.md</span><span class="chip file">05_live_data_prompts.md</span><span class="chip file">06_publish_and_share.md</span><span class="chip file">07_version_notes.md</span><span class="chip file">08_team_dashboard.md</span><span class="chip file">09_teacher_dashboard.md</span><span class="chip file">10_keep_tools_alive.md</span><span class="chip file">11_quiz_show.md</span><span class="chip file">12_station_rotation.md</span><span class="chip file">13_lesson_planner.md</span><span class="chip file">14_group_maker.md</span><span class="chip file">15_mastery_tracker.md</span><span class="chip file">16_agenda_board.md</span><span class="chip file">17_rubric_grader.md</span>
     </div>
     <p style="margin-top:16px">Practical guidance, not legal advice. Your district privacy lead owns the final reading of FERPA and state law.</p>
   </div>
@@ -570,147 +529,44 @@ $("detail").addEventListener("click",function(e){
 });
 drawSteps();
 
-/* ---------- flex scheduling demo ---------- */
-var SESS=[
- {n:"Algebra Tutoring",t:"Tutoring",who:"Ms. Alvarez",cap:10},
- {n:"Biology Lab Makeup",t:"Makeup",who:"Mr. Chen",cap:7},
- {n:"Writing Center",t:"Tutoring",who:"Ms. Okafor",cap:8},
- {n:"Robotics Club",t:"Enrichment",who:"Mr. Patel",cap:12},
- {n:"SAT Prep",t:"Enrichment",who:"Ms. Brooks",cap:12},
- {n:"Quiet Study Hall",t:"Study Hall",who:"Mr. Diaz",cap:18},
- {n:"Spanish Conversation",t:"Enrichment",who:"Sra. Ruiz",cap:6},
- {n:"Test Retakes",t:"Makeup",who:"Ms. Kim",cap:10}
+/* ---------- live tools, each one a page of this artifact shown in a frame ---------- */
+var DEMOS=[
+ {k:"hub",n:"My Classroom Hub",who:"Elementary teachers",band:"el",c:"#006A6A",d:"Links, weekly focus, to do lists, calendar stickers, meeting notes, and ideas.",f:"Kit file 09"},
+ {k:"quiz",n:"Classroom Quiz Show",who:"Teachers and students",band:"el",c:"#8A5300",d:"A quiz game with Georgia Milestones item types. Gemini drafts questions for the standard you pick.",f:"Kit file 11"},
+ {k:"stations",n:"Station Rotation Board",who:"Elementary teachers",band:"el",c:"#6B3FA0",d:"A projector board with a countdown timer that moves each group to its next station.",f:"Kit file 12"},
+ {k:"planner",n:"Weekly Lesson Planner",who:"Elementary teachers",band:"el",c:"#0B57D0",d:"A week at a glance by day and subject, tagged to Georgia standards, with a lesson plan prompt.",f:"Kit file 13"},
+ {k:"agenda",n:"Class Agenda Board",who:"Middle and high school teachers",band:"sec",c:"#9A2B59",d:"Learning target, do now, agenda, and homework for every period, shared view only with students.",f:"Kit file 16"},
+ {k:"rubric",n:"Rubric Grader",who:"Middle and high school teachers",band:"sec",c:"#B3540A",d:"Score writing and projects one tap per criterion, see what to reteach, and draft feedback.",f:"Kit file 17"},
+ {k:"flex",n:"Flex Period Scheduling",who:"High school administrators",band:"sec",c:"#0B57D0",d:"Assign students, manage sessions and seats, place everyone left over in one click.",f:"Kit files 04 and 05"},
+ {k:"groups",n:"Group Maker and Picker",who:"Teachers, any grade",band:"any",c:"#146C2E",d:"Random student picker, fair group maker, and a seating chart you can shuffle.",f:"Kit file 14"},
+ {k:"mastery",n:"Standards Mastery Tracker",who:"Teachers, any grade",band:"any",c:"#B3261E",d:"Exit ticket scores by standard, color coded, with reteach groups and a reteach plan prompt.",f:"Kit file 15"},
+ {k:"team",n:"Grade Level Team Dashboard",who:"Teams, any grade",band:"any",c:"#041E49",d:"One shared page where each role edits only its own sections.",f:"Kit file 08"},
+ {k:"repair",n:"Chromebook Repair Tracker",who:"Technology staff",band:"any",c:"#146C2E",d:"Tickets by building and status, with repairs open too long flagged.",f:"Kit files 04 and 05"}
 ];
-var FN=["Avery","Jordan","Maya","Elijah","Sofia","Noah","Zoe","Liam","Aaliyah","Mateo","Harper","Isaiah"];
-var LN=["Bennett","Castillo","Nguyen","Holloway","Reyes","Whitaker"];
-var ORDER=[0,0,0,1,1,2,2,3,3,3,4,4,4,4,5,5,5,5,5,6,6,7,7,7];
-var STU=[];
-for(var i=0;i<72;i++){
-  STU.push({name:FN[i%12]+" "+LN[Math.floor(i/12)],grade:9+((i*3+Math.floor(i/5))%4),sess:(i%7===3)?-1:ORDER[(i*5)%24]});
-}
-function counts(){var c=SESS.map(function(){return 0});STU.forEach(function(s){if(s.sess>=0)c[s.sess]++});return c}
-function state(n,cap){return n>=cap?"full":(n/cap>=.85?"near":"ok")}
-function drawFlex(){
-  var c=counts(),un=STU.filter(function(s){return s.sess<0}).length;
-  var full=0,near=0,open=0;
-  SESS.forEach(function(s,i){var st=state(c[i],s.cap);if(st==="full")full++;else if(st==="near")near++;open+=Math.max(0,s.cap-c[i])});
-  $("fx-kpis").innerHTML=
-   '<div class="kpi"><div class="v">'+STU.length+'</div><div class="k">Students this period</div></div>'+
-   '<div class="kpi '+(un?"bad":"good")+'"><div class="v">'+un+'</div><div class="k">Unassigned</div></div>'+
-   '<div class="kpi good"><div class="v">'+open+'</div><div class="k">Open seats</div></div>'+
-   '<div class="kpi '+(full?"warn":"good")+'"><div class="v">'+full+'</div><div class="k">Sessions full</div></div>';
-  var ty=$("fx-type").value;
-  $("fx-bars").innerHTML=SESS.map(function(s,i){
-    if(ty&&s.t!==ty)return "";
-    var st=state(c[i],s.cap),pct=Math.min(100,Math.round(c[i]/s.cap*100));
-    return '<div class="barrow"><div class="t"><span><b>'+esc(s.n)+'</b> <span class="muted">'+esc(s.who)+'</span></span><span>'+c[i]+' of '+s.cap+(st==="full"?' <span class="pill bad">Full</span>':st==="near"?' <span class="pill warn">Nearly full</span>':'')+'</span></div><div class="track"><div class="fill '+(st==="ok"?"":st)+'" style="width:'+pct+'%"></div></div></div>';
-  }).join("")||'<div class="empty">No sessions of this type.</div>';
-  var q=$("fx-q").value.trim().toLowerCase(),g=$("fx-grade").value,stt=$("fx-status").value;
-  var rows=STU.map(function(s,idx){return {s:s,idx:idx}}).filter(function(r){
-    var s=r.s;
-    if(q&&s.name.toLowerCase().indexOf(q)<0)return false;
-    if(g&&String(s.grade)!==g)return false;
-    if(stt==="u"&&s.sess>=0)return false;
-    if(stt==="a"&&s.sess<0)return false;
-    if(ty&&(s.sess<0||SESS[s.sess].t!==ty))return false;
-    return true;
-  });
-  rows.sort(function(a,b){return (a.s.sess<0?0:1)-(b.s.sess<0?0:1)||a.s.name.localeCompare(b.s.name)});
-  $("fx-count").textContent="showing "+rows.length+" of "+STU.length;
-  $("fx-rows").innerHTML=rows.map(function(r){
-    var s=r.s,opts='<option value="-1"'+(s.sess<0?" selected":"")+'>Unassigned</option>'+SESS.map(function(x,i){
-      var isFull=c[i]>=x.cap&&s.sess!==i;
-      return '<option value="'+i+'"'+(s.sess===i?" selected":"")+(isFull?" disabled":"")+'>'+esc(x.n)+(isFull?" (full)":"")+'</option>';
-    }).join("");
-    return '<tr><td>'+esc(s.name)+'</td><td>'+s.grade+'</td><td><select aria-label="Session for '+esc(s.name)+'" data-idx="'+r.idx+'">'+opts+'</select></td><td>'+(s.sess<0?'<span class="pill bad">Needs a session</span>':'<span class="pill ok">Assigned</span>')+'</td></tr>';
-  }).join("")||'<tr><td colspan="4" class="empty">No students match these filters.</td></tr>';
-}
-["fx-q","fx-grade","fx-type","fx-status"].forEach(function(id){$(id).addEventListener("input",drawFlex)});
-$("fx-reset").addEventListener("click",function(){$("fx-q").value="";$("fx-grade").value="";$("fx-type").value="";$("fx-status").value="";drawFlex()});
-$("fx-rows").addEventListener("change",function(e){var t=e.target;if(t.dataset.idx!==undefined){STU[+t.dataset.idx].sess=+t.value;drawFlex()}});
-drawFlex();
-
-/* ---------- repair tracker demo ---------- */
-var BLD=["Oakhaven High","Oakhaven Middle","Cedar Elementary"];
-var ISS=["Cracked screen","Will not charge","Keyboard keys missing","No Wi Fi","Hinge broken","Trackpad stuck"];
-var STS=["New","In repair","Waiting on part","Ready for pickup"];
-var REP=[];
-for(var k=0;k<24;k++){REP.push({id:"R"+(1040+k),tag:"CB"+(20311+k*37),b:BLD[k%3],iss:ISS[(k*5)%6],st:STS[(k*3+Math.floor(k/4))%4],days:1+((k*7)%13)})}
-BLD.forEach(function(b){var o=document.createElement("option");o.textContent=b;$("rp-b").appendChild(o)});
-function drawRep(){
-  var b=$("rp-b").value,s=$("rp-s").value;
-  var rows=REP.filter(function(r){return(!b||r.b===b)&&(!s||r.st===s)});
-  var open=rows.filter(function(r){return r.st!=="Ready for pickup"}),late=open.filter(function(r){return r.days>7});
-  var wait=rows.filter(function(r){return r.st==="Waiting on part"}).length,ready=rows.length-open.length;
-  $("rp-kpis").innerHTML=
-   '<div class="kpi"><div class="v">'+open.length+'</div><div class="k">Open repairs</div></div>'+
-   '<div class="kpi '+(late.length?"bad":"good")+'"><div class="v">'+late.length+'</div><div class="k">Open over 7 days</div></div>'+
-   '<div class="kpi warn"><div class="v">'+wait+'</div><div class="k">Waiting on part</div></div>'+
-   '<div class="kpi good"><div class="v">'+ready+'</div><div class="k">Ready for pickup</div></div>';
-  rows.sort(function(x,y){return y.days-x.days});
-  var cls={"New":"info","In repair":"warn","Waiting on part":"bad","Ready for pickup":"ok"};
-  $("rp-rows").innerHTML=rows.map(function(r){
-    var lateRow=r.days>7&&r.st!=="Ready for pickup";
-    return '<tr><td>'+r.id+'</td><td>'+r.tag+'</td><td>'+esc(r.b)+'</td><td>'+esc(r.iss)+'</td><td><span class="pill '+cls[r.st]+'">'+r.st+'</span></td><td>'+(lateRow?'<b style="color:var(--error)">'+r.days+'</b>':r.days)+'</td></tr>';
-  }).join("")||'<tr><td colspan="6" class="empty">No tickets match these filters.</td></tr>';
-}
-$("rp-b").addEventListener("input",drawRep);$("rp-s").addEventListener("input",drawRep);drawRep();
-
-/* tabs */
-function pick(which){
-  ["flex","team","rep"].forEach(function(k){
-    $("tab-"+k).setAttribute("aria-selected",k===which);
-    $("pane-"+k).hidden=k!==which;
-  });
-}
-["flex","team","rep"].forEach(function(k){$("tab-"+k).addEventListener("click",function(){pick(k)})});
-
-/* ---------- team dashboard demo ---------- */
-var ROLES=[
- {k:"lead",n:"Team lead",note:"Owns the Sheet. Can edit every section and decides who else can."},
- {k:"member",n:"Team member",note:"Can add tasks, meeting notes, and ideas. Links, focus, and dates are locked."},
- {k:"admin",n:"Administrator",note:"Can set the weekly focus and important dates, and add ideas. Team working sections are locked."},
- {k:"view",n:"View only",note:"Can read everything the Sheet is shared for. Cannot change anything."}
-];
-var SECS=[
- {k:"links",t:"Quick links",ph:"Add a link title"},
- {k:"focus",t:"Weekly focus",ph:"Add a focus"},
- {k:"tasks",t:"Team tasks",ph:"Add a task"},
- {k:"dates",t:"Important dates",ph:"Add a date"},
- {k:"notes",t:"Meeting notes and actions",ph:"Add a note"},
- {k:"ideas",t:"Ideas parking lot",ph:"Add an idea"}
-];
-var PERM={lead:{links:1,focus:1,tasks:1,dates:1,notes:1,ideas:1},member:{tasks:1,notes:1,ideas:1},admin:{focus:1,dates:1,ideas:1},view:{}};
-var TEAM={
- links:["Pacing guide","Common assessments folder","Team agenda template","Parent contact log"],
- focus:["Unit 4 common assessment on Friday","Finalize flex session rosters by Wednesday"],
- tasks:[{t:"Upload Unit 4 study guide (Bennett)",done:true},{t:"Enter progress report comments (all)",done:false},{t:"Book media center for Dec 3 (Reyes)",done:false}],
- dates:["Dec 1: Progress reports due","Dec 3: Media center research day","Dec 11: Team data meeting","Dec 18: Semester exams begin"],
- notes:["Nov 17: One retake policy for Unit 4. Action: Castillo drafts the parent letter.","Nov 10: Reviewed benchmark results by standard. Action: Nguyen shares the reteach plan."],
- ideas:["Cross curricular project with science in spring","Student led conferences pilot"]
-};
-var role="member";
-function drawTeam(){
-  $("tm-roles").innerHTML=ROLES.map(function(r){return '<button type="button" data-r="'+r.k+'" aria-pressed="'+(r.k===role)+'">'+r.n+'</button>'}).join("");
-  $("tm-note").textContent=ROLES.filter(function(r){return r.k===role})[0].note;
-  $("tm-grid").innerHTML=SECS.map(function(s){
-    var can=!!PERM[role][s.k],items=TEAM[s.k];
-    var list=items.map(function(it,i){
-      if(s.k==="tasks")return '<li class="'+(it.done?"done":"")+'"><label><input type="checkbox" data-task="'+i+'"'+(it.done?" checked":"")+(can?"":" disabled")+'><span>'+esc(it.t)+'</span></label></li>';
-      return '<li>'+esc(it)+'</li>';
-    }).join("");
-    return '<div class="tcard'+(can?" can":"")+'"><div class="th"><h3>'+s.t+'</h3>'+(can?'<span class="pill ok">You can edit</span>':'<span class="pill info">View only</span>')+'</div><ul>'+list+'</ul>'+
-      (can?'<form class="tadd" data-sec="'+s.k+'"><input id="tm-in-'+s.k+'" type="text" aria-label="'+s.ph+'" placeholder="'+s.ph+'"><button class="btn tonal small" type="submit">Add</button></form>':'<div class="tlock">Locked for this role by the Sheet owner.</div>')+'</div>';
+DEMOS.forEach(function(d){d.src="k12/"+d.k+"/";d.url=d.src});
+var BANDS=[["all","All tools"],["el","Elementary"],["sec","Middle and high school"],["any","Any grade and staff"]],band="all";
+function drawGallery(){
+  $("band").innerHTML=BANDS.map(function(b){return '<button type="button" data-band="'+b[0]+'" aria-pressed="'+(b[0]===band)+'">'+b[1]+'</button>'}).join("");
+  $("gallery").innerHTML=DEMOS.filter(function(d){return band==="all"||d.band===band}).map(function(d){
+    return '<a class="idea go" style="text-decoration:none;color:inherit;border-top:5px solid '+d.c+'" href="#try-tools" data-open="'+d.k+'" aria-current="'+(d.k===curDemo)+'"><span class="who">'+esc(d.who)+'</span><b>'+esc(d.n)+'</b><span class="muted">'+esc(d.d)+'</span><span class="chip file">'+esc(d.f)+'</span><span class="try">Try it<span aria-hidden="true"> →</span></span></a>';
   }).join("");
 }
-$("tm-roles").addEventListener("click",function(e){var b=e.target.closest("[data-r]");if(b){role=b.dataset.r;drawTeam()}});
-$("tm-grid").addEventListener("submit",function(e){
-  e.preventDefault();var f=e.target,k=f.dataset.sec,v=f.querySelector("input").value.trim();
-  if(!v)return;
-  TEAM[k].push(k==="tasks"?{t:v,done:false}:v);drawTeam();
+var curDemo="hub";
+function showDemo(k){
+  curDemo=k;var d=DEMOS.filter(function(x){return x.k===k})[0];
+  $("demo-tabs").innerHTML=DEMOS.map(function(x){return '<button class="tab" role="tab" type="button" data-demo="'+x.k+'" aria-selected="'+(x.k===k)+'">'+x.n+'</button>'}).join("");
+  $("frame-name").textContent=d.n;$("frame-who").textContent=d.who;$("frame-open").href=d.url;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-open]"),function(a){a.setAttribute("aria-current",a.dataset.open===k)});
+  $("demo-frame").title=d.n+", live example";$("demo-frame").src=d.src+"#embed";
+}
+$("demo-tabs").addEventListener("click",function(e){var b=e.target.closest("[data-demo]");if(b)showDemo(b.dataset.demo)});
+document.addEventListener("click",function(e){
+  var a=e.target.closest("[data-open]");if(!a)return;
+  e.preventDefault();showDemo(a.dataset.open);
+  $("try-tools").scrollIntoView({behavior:"smooth",block:"start"});
 });
-$("tm-grid").addEventListener("change",function(e){var t=e.target;if(t.dataset.task!==undefined){TEAM.tasks[+t.dataset.task].done=t.checked;drawTeam()}});
-drawTeam();
+$("band").addEventListener("click",function(e){var b=e.target.closest("[data-band]");if(b){band=b.dataset.band;drawGallery()}});
+drawGallery();showDemo("hub");
 
 /* ---------- prompts ---------- */
 var PROMPTS=[
@@ -756,9 +612,6 @@ function hprog(){var n=document.querySelectorAll("#handoff input:checked").lengt
 $("handoff").addEventListener("change",function(e){hsaved[e.target.dataset.i]=e.target.checked;try{localStorage.setItem("gtb-handoff",JSON.stringify(hsaved))}catch(err){}hprog()});
 hprog();
 })();
-</script>
-<script>
-document.addEventListener("click", function (e) { var a = e.target.closest && e.target.closest("a[data-tab]"); if (!a) return; var t = document.getElementById(a.dataset.tab); if (t) t.click(); });
 </script>
 </body>
 </html>

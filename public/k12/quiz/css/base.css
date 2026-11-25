@@ -173,3 +173,6 @@ code{font-family:"Roboto Mono",ui-monospace,Menlo,monospace;font-size:.8125rem;b
   .fab{right:16px;bottom:16px}
 }
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
+
+/* inside the playbook page the tool hides its own back link */
+.embed a[href*="S9bGSH6neDDqR6Y5qSjhAq"]{display:none}
