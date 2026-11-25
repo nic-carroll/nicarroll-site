@@ -234,6 +234,32 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
 .dirs{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;background:#f2b43c;color:#0c1a2e;text-decoration:none;font-size:.9375rem;padding:10px 16px}.dirs b{font-weight:700}.dirs:hover{text-decoration:underline}.byline{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;align-items:center;background:#0c1a2e;color:#dbe7f5;text-decoration:none;font-size:.875rem;padding:9px 16px}.byline em{font-style:normal}.byline b{color:#fff}.byline span{color:#f2b43c;font-weight:600}.byline:hover span{text-decoration:underline}
 .dl-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.dl-row a{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--outline);color:var(--primary);font-weight:500;font-size:.875rem;text-decoration:none;background:var(--card)}.dl-row a.fill{background:var(--primary);color:var(--on-primary);border-color:transparent}.dl-row a:hover{box-shadow:var(--e1)}
 .flow>*,.howto>*,.tgrid>*,.two>*,.hero-grid>*{min-width:0}@media (max-width:860px){.howto,.tgrid,.two,.hero-grid{grid-template-columns:minmax(0,1fr)}.howto ol,.howto ul{grid-template-columns:minmax(0,1fr);max-width:100%}.howto li{min-width:0;overflow-wrap:anywhere}.steps{max-width:100%}}
+
+.kit-h{margin:28px 0 12px;font-size:1.125rem;line-height:1.5rem;font-weight:500}
+.kit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.kitc{min-width:0;background:var(--card);border:1px solid var(--outline-variant);border-radius:var(--r-m,16px);padding:16px;display:flex;flex-direction:column;gap:8px}
+.kitc b{font-weight:500;overflow-wrap:anywhere}
+.kitc p{font-size:.875rem;line-height:1.25rem;margin:0;overflow-wrap:anywhere;flex:1}
+.kitc .acts{display:flex;gap:8px;flex-wrap:wrap}
+.kit-top{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px}
+#kit-read{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:16px}
+#kit-read[hidden]{display:none}
+#kit-box{background:var(--card,#fff);color:var(--on-surface,#1F1F1F);width:min(820px,100%);max-height:calc(100vh - 32px);border-radius:28px;display:flex;flex-direction:column;overflow:hidden}
+#kit-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:16px 20px;border-bottom:1px solid var(--outline-variant)}
+#kit-bar b{flex:1 1 200px;min-width:0;overflow-wrap:anywhere;font-weight:500}
+#kit-doc{padding:8px 24px 28px;overflow-y:auto;overflow-wrap:anywhere}
+#kit-doc h1{font-size:1.75rem;line-height:2.25rem;font-weight:400;margin:20px 0 8px}
+#kit-doc h2{font-size:1.375rem;line-height:1.75rem;font-weight:500;margin:24px 0 8px}
+#kit-doc h3{font-size:1.0625rem;line-height:1.5rem;font-weight:500;margin:18px 0 6px}
+#kit-doc p,#kit-doc li{font-size:1rem;line-height:1.6rem}
+#kit-doc p{margin:10px 0}
+#kit-doc ul,#kit-doc ol{margin:8px 0;padding-left:26px}
+#kit-doc li{margin:4px 0}
+#kit-doc blockquote{margin:12px 0;padding:10px 16px;border-left:4px solid var(--primary);background:var(--surface-low,#F0F4F9);border-radius:0 8px 8px 0}
+#kit-doc blockquote p{margin:0}
+#kit-doc pre{margin:12px 0}
+#kit-doc code{font-family:var(--font-mono,monospace);font-size:.875em;background:var(--surface-low,#F0F4F9);padding:1px 5px;border-radius:4px}
+#kit-doc pre code{background:none;padding:0}
 </style>
 <script src="/sitebar.js?v=20261125b" defer></script>
 </head>
@@ -254,6 +280,7 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
       <a href="#data">Data</a>
       <a href="#sharing">Sharing</a>
       <a href="#continuity">Continuity</a>
+      <a href="#kit">Builder Kit</a>
     </nav>
   </div>
 </header>
@@ -508,16 +535,28 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
     <p class="muted" style="font-size:.875rem;margin-top:16px">Full guidance, the tool register columns, and a prompt that has Gemini write the Build Notes are in kit file <span class="chip file">10_keep_tools_alive.md</span></p>
   </div>
 </section>
+<section id="kit">
+  <div class="wrap">
+    <p class="label">Builder Kit</p>
+    <h2>Every Guide, Ready to Read or Download</h2>
+    <p class="muted">33 markdown guides. Read one here, copy it, or download it. Hand any of them to an AI assistant and it can walk you through the steps.</p>
+    <div class="kit-top"><a class="btn filled" href="agents/k12-gemini-tool-builder-playbook.zip" download>Download Everything (Zip)</a></div>
+    <div id="kit-list"></div>
+  </div>
+</section>
+<div id="kit-read" hidden><div id="kit-box" role="dialog" aria-modal="true" aria-labelledby="kit-name"><div id="kit-bar"><b id="kit-name"></b><button class="btn tonal small" type="button" id="kit-copy">Copy</button><a class="btn outlined small" id="kit-dl" href="#" download>Download</a><button class="btn outlined small" type="button" id="kit-close">Close</button></div><div id="kit-doc"></div></div></div>
+<dialog id="kit-follow" aria-labelledby="kf-title" style="border:0;padding:28px;border-radius:28px;width:min(520px,92vw);background:var(--card);color:var(--on-surface)">
+  <h2 id="kf-title" style="margin:0 0 10px">Follow Me Before You Download</h2>
+  <p style="margin:0">These guides are free to use and share. If they help, follow me on LinkedIn, where I share new ones and how I use them to lead, save money, and move faster.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:16px"><a class="btn filled" id="kf-follow" href="https://www.linkedin.com/in/nic-carroll/" target="_blank" rel="noopener me">Follow on LinkedIn</a><a class="btn outlined" id="kf-go" href="#" download>Continue to Download</a><button type="button" class="btn outlined" id="kf-close" style="margin-left:auto">Cancel</button></div>
+</dialog>
 </main>
 
 <footer>
   <div class="wrap">
     <p><b>Take the playbook with you.</b> Every part of this page is also a markdown file you can read, share, or hand to an AI assistant.</p>
     <div class="dl-row"><a class="fill" href="agents/k12-gemini-tool-builder-playbook.zip" download>Download All (zip)</a><a href="agents/k12-gemini-playbook-workflow.md" download>Workflow</a><a href="agents/k12-gemini-playbook-prompt-library.md" download>Prompt Library</a><a href="agents/k12-gemini-playbook-sharing.md" download>Sharing</a><a href="agents/k12-gemini-playbook-continuity.md" download>Keep Tools Alive</a><a href="agents/k12-gemini-playbook-access-versions.md" download>Know Your Access</a></div>
-    <p style="margin-top:20px">The steps on this page name the Builder Kit files they pair with.</p>
-    <div class="files">
-      <span class="chip file">00_START_HERE.md</span><span class="chip file">01_tool_brief.md</span><span class="chip file">02_data_sheet_setup.md</span><span class="chip file">03_gem_instructions.md</span><span class="chip file">04_build_prompts.md</span><span class="chip file">05_live_data_prompts.md</span><span class="chip file">06_publish_and_share.md</span><span class="chip file">07_version_notes.md</span><span class="chip file">08_team_dashboard.md</span><span class="chip file">09_teacher_dashboard.md</span><span class="chip file">10_keep_tools_alive.md</span><span class="chip file">11_quiz_show.md</span><span class="chip file">12_station_rotation.md</span><span class="chip file">13_lesson_planner.md</span><span class="chip file">14_group_maker.md</span><span class="chip file">15_mastery_tracker.md</span><span class="chip file">16_agenda_board.md</span><span class="chip file">17_rubric_grader.md</span><span class="chip file">18_data_without_apps_script.md</span><span class="chip file">19_test_before_you_share.md</span>
-    </div>
+    <p style="margin-top:20px">Every guide this page names is in the <a href="#kit">Builder Kit</a> section, with 33 guides to read or download.</p>
     <p style="margin-top:16px">Practical guidance, not legal advice. Your district privacy lead owns the final reading of FERPA and state law.</p>
   </div>
 </footer>
@@ -682,6 +721,49 @@ $("handoff").innerHTML=HK.map(function(c,i){return '<label for="hk'+i+'"><input 
 function hprog(){var n=document.querySelectorAll("#handoff input:checked").length;$("hk-progress").textContent=n+" of "+HK.length+" done"+(n===HK.length?". Handoff complete.":"")}
 $("handoff").addEventListener("change",function(e){hsaved[e.target.dataset.i]=e.target.checked;try{localStorage.setItem("gtb-handoff",JSON.stringify(hsaved))}catch(err){}hprog()});
 hprog();
+})();
+
+function kitInline(s){return kitEsc(s).replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>")}
+function kitEsc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function kitRender(md){
+  var L=md.replace(/\r/g,"").split("\n"),o=[],i=0,list="";
+  function end(){if(list){o.push("</"+list+">");list=""}}
+  while(i<L.length){var l=L[i],m;
+    if(/^```/.test(l)){end();var c=[];i++;while(i<L.length&&!/^```/.test(L[i])){c.push(L[i]);i++}i++;o.push("<pre><code>"+kitEsc(c.join("\n"))+"</code></pre>");continue}
+    if((m=/^(#{1,3}) (.+)$/.exec(l))){end();o.push("<h"+m[1].length+">"+kitInline(m[2])+"</h"+m[1].length+">")}
+    else if(/^> ?/.test(l)){end();var q=[];while(i<L.length&&/^> ?/.test(L[i])){q.push(L[i].replace(/^> ?/,""));i++}o.push("<blockquote><p>"+kitInline(q.join(" "))+"</p></blockquote>");continue}
+    else if((m=/^\s*(\d+)\. (.+)$/.exec(l))){if(list!=="ol"){end();o.push('<ol start="'+m[1]+'">');list="ol"}o.push("<li>"+kitInline(m[2])+"</li>")}
+    else if((m=/^\s*[*] (.+)$/.exec(l))){if(!list){o.push("<ul>");list="ul"}o.push((list==="ol"?'<li style="list-style:disc;margin-left:20px">':"<li>")+kitInline(m[1])+"</li>")}
+    else if(!l.trim()){var nx=L[i+1]||"";if(!/^\s*(\d+\. |[*] )/.test(nx))end()}
+    else{end();var p=[l];while(i+1<L.length&&L[i+1].trim()&&!/^(#{1,3} |> ?|```|\s*\d+\. |\s*[*] )/.test(L[i+1])){i++;p.push(L[i])}o.push("<p>"+kitInline(p.join(" "))+"</p>")}
+    i++}
+  end();return o.join("")}
+
+var KIT=[{"f": "00_START_HERE.md", "t": "Gemini Tool Builder Kit for K12", "d": "This kit gives school staff everything needed to build a working tool with Gemini inside Google Workspace for Education. No APIs, no connectors,...", "g": 0}, {"f": "01_tool_brief.md", "t": "Tool Brief", "d": "Fill this in before you open Gemini. You will paste the finished brief into your first prompt.", "g": 1}, {"f": "02_data_sheet_setup.md", "t": "Data Sheet Setup", "d": "A tool is only as good as the Sheet behind it. Spend ten minutes here and the build goes smoothly.", "g": 1}, {"f": "03_gem_instructions.md", "t": "Custom Gem: School Tool Builder", "d": "This is optional. If Gems are turned on for your account, a district can create one Gem with these instructions and share it with staff. Builders...", "g": 1}, {"f": "04_build_prompts.md", "t": "Build Prompts", "d": "Run these in order in the Gemini app with Canvas turned on. Replace everything in brackets. Use fake data only.", "g": 1}, {"f": "05_live_data_prompts.md", "t": "Live Data: Connect the Tool to Your Sheet", "d": "Use this path when the tool shows student or staff records, or when the data changes often. The tool becomes a Google Apps Script web app attached...", "g": 1}, {"f": "06_publish_and_share.md", "t": "Publish and Share", "d": "2. Choose Pages, click the plus sign, and choose Full page embed. Name the page.", "g": 1}, {"f": "07_version_notes.md", "t": "Version Notes", "d": "Every version ends with the same finished tool. Paid access removes manual steps.", "g": 1}, {"f": "18_data_without_apps_script.md", "t": "Save Your Data in Google Sheets, No Apps Script Needed", "d": "Every tool in this kit is a dashboard on top of a Google Sheet. The Sheet is the notebook where the data is kept. The dashboard is the easy way to...", "g": 2}, {"f": "26_link_sheets_and_back_up.md", "t": "Link Sheets and Back Up", "d": "Every tool in this playbook uses a Google Sheet as its database. This file shows how to link another Sheet, how to choose which tabs to use, and...", "g": 2}, {"f": "31_georgia_standards.md", "t": "Georgia Standards in Every Tool", "d": "Teachers should click a standard, not type one. This file shows how to get the Georgia standards into one Sheet that every tool reads.", "g": 2}, {"f": "32_saving_sync_and_offline.md", "t": "Saving, Sync, and Working Offline", "d": "Every tool saves in two steps, so work is never lost when the Sheet cannot be reached.", "g": 2}, {"f": "19_test_before_you_share.md", "t": "Test Before You Share", "d": "A tool that breaks in front of a class costs more time than it saves. Run these checks before anyone else uses a tool. They take about ten minutes...", "g": 2}, {"f": "10_keep_tools_alive.md", "t": "Keep Tools Alive: Building and Sharing So Nothing Gets Lost", "d": "A tool that lives in one person's account disappears when that person changes schools, changes roles, or leaves. These practices make every tool...", "g": 2}, {"f": "09_teacher_dashboard.md", "t": "Elementary Teacher Dashboard (My Classroom Hub)", "d": "A personal command center a teacher can fully edit: add, change, and delete anything on the page. This file has the prompts to build it in Gemini...", "g": 3}, {"f": "11_quiz_show.md", "t": "Classroom Quiz Show: Game Style Practice with Georgia Milestones Item Types", "d": "A quiz game a teacher builds with Gemini and shares in Google Classroom. The teacher edits. Students play. Questions are tagged to Georgia...", "g": 3}, {"f": "12_station_rotation.md", "t": "Station Rotation Board", "d": "A board for the projector that shows which group is at which station, counts down the time, and moves every group to its next station. Built for...", "g": 3}, {"f": "13_lesson_planner.md", "t": "Weekly Lesson Planner", "d": "A week at a glance planner by day and subject. Every lesson can carry a Georgia standard, and the tool writes a Gemini prompt that drafts the...", "g": 3}, {"f": "14_group_maker.md", "t": "Group Maker and Picker", "d": "Three classroom routines in one tool: pick a student at random, make fair groups, and arrange a seating chart. Works for any grade.", "g": 3}, {"f": "15_mastery_tracker.md", "t": "Standards Mastery Tracker", "d": "A color coded view of exit ticket scores by student and standard. It shows who needs reteaching, which standards the class has mastered, and...", "g": 3}, {"f": "16_agenda_board.md", "t": "Class Agenda Board", "d": "A daily agenda for middle and high school teachers with several class periods. The teacher posts the learning target, do now, agenda, and homework...", "g": 3}, {"f": "17_rubric_grader.md", "t": "Rubric Grader", "d": "Score writing and projects against a rubric with one tap per criterion. The tool totals the score, shows which criterion the class struggles with,...", "g": 3}, {"f": "20_pbis_points_board.md", "t": "PBIS Points Board", "d": "Give points for your school expectations, let students trade points for rewards, and send family reports. It works like a class points app, but...", "g": 3}, {"f": "21_hall_pass_log.md", "t": "Hall Pass Log", "d": "Sign a student out in two taps, see who is out and for how long, and keep a record you can show an administrator.", "g": 3}, {"f": "22_family_contact_log.md", "t": "Family Contact Log", "d": "Keep every call, email, text, and conference in one record, with follow up dates and a list of families you have not reached yet.", "g": 3}, {"f": "23_missing_work_tracker.md", "t": "Missing Work Tracker", "d": "See missing work by student and by assignment, mark it turned in with one click, and send a family note that fills in by itself.", "g": 3}, {"f": "24_classroom_jobs.md", "t": "Classroom Jobs Board", "d": "Post weekly classroom jobs and rotate them fairly with one click, so every child reaches every job.", "g": 3}, {"f": "25_substitute_binder.md", "t": "Substitute Binder", "d": "Put the schedule, routines, and emergency lesson plans in one link, with a place for the substitute to leave notes for you.", "g": 3}, {"f": "27_class_poll.md", "t": "Class Poll", "d": "Ask a live question and watch the answers come in as a chart, a rating, a word cloud, or a list of student questions.", "g": 3}, {"f": "28_class_whiteboard.md", "t": "Class Whiteboard", "d": "Draw, type, and highlight on a whiteboard that saves every board by itself and plays any board back like a recording.", "g": 3}, {"f": "29_class_idea_board.md", "t": "Class Idea Board", "d": "Collect student ideas on a shared wall, sorted into columns, a wall, or a timeline. You approve each post before the class sees it.", "g": 3}, {"f": "08_team_dashboard.md", "t": "Team Dashboard with Section Level Editing", "d": "Build one interactive dashboard for a course team, grade level team, administrative team, or whole school team. Share it with Google Workspace...", "g": 4}, {"f": "30_curriculum_team_tools.md", "t": "Curriculum Team Tools", "d": "Four tools for the curriculum department: the executive director, the curriculum director, instructional specialists, and coaches. Each one is a...", "g": 4}],KITG=["Start Here", "Build a Tool Step by Step", "Data, Standards, Saving, and Safety", "Tool Guides for Teachers", "Tool Guides for Teams and the Curriculum Department"],kitCur=null,kitLast=null;
+(function(){
+  var h="";KITG.forEach(function(g,gi){h+='<h3 class="kit-h">'+kitEsc(g)+'</h3><div class="kit-grid">'+KIT.filter(function(k){return k.g===gi}).map(function(k){return '<div class="kitc"><span class="chip file">'+kitEsc(k.f)+'</span><b>'+kitEsc(k.t)+'</b><p class="muted">'+kitEsc(k.d)+'</p><div class="acts"><button class="btn tonal small" type="button" data-kit="'+kitEsc(k.f)+'">Read</button>'+kitDl(k)+'</div></div>'}).join("")+'</div>'});
+  document.getElementById("kit-list").innerHTML=h;
+})();
+function kitShow(k,md){kitCur={k:k,md:md};kitLast=document.activeElement;document.getElementById("kit-name").textContent=k.f;document.getElementById("kit-doc").innerHTML=kitRender(md);document.getElementById("kit-read").hidden=false;document.getElementById("kit-doc").scrollTop=0;document.getElementById("kit-close").focus();kitOpened(k)}
+function kitHide(){document.getElementById("kit-read").hidden=true;if(kitLast&&document.contains(kitLast))kitLast.focus()}
+document.getElementById("kit-close").addEventListener("click",kitHide);
+document.getElementById("kit-read").addEventListener("mousedown",function(e){if(e.target.id==="kit-read")kitHide()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!document.getElementById("kit-read").hidden)kitHide()});
+document.getElementById("kit-copy").addEventListener("click",function(){var b=this;function say(t){b.textContent=t;setTimeout(function(){b.textContent="Copy"},1600)}try{navigator.clipboard.writeText(kitCur.md).then(function(){say("Copied")},function(){say("Select and Copy")})}catch(e){say("Select and Copy")}});
+
+var KITDIR="agents/k12-kit/";
+function kitDl(k){return '<a class="btn outlined small" href="'+KITDIR+kitEsc(k.f)+'" download>Download</a>'}
+function kitOpened(k){var a=document.getElementById("kit-dl");a.setAttribute("href",KITDIR+k.f)}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-kit]");if(!b)return;var k=KIT.filter(function(x){return x.f===b.dataset.kit})[0];
+  b.disabled=true;fetch(KITDIR+k.f).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){b.disabled=false;kitShow(k,t)},function(){b.disabled=false;b.textContent="Could Not Open"})});
+/* A friendly ask to follow on LinkedIn before the first download on this page. It never blocks the download. */
+(function(){var dlg=document.getElementById("kit-follow");if(!dlg||!dlg.showModal)return;var asked=false,go=document.getElementById("kf-go");
+  try{asked=sessionStorage.getItem("nc.followAsk")==="1"}catch(e){}
+  document.addEventListener("click",function(e){if(asked||!e.target.closest)return;var a=e.target.closest('a[download][href^="agents/"]');if(!a||a.id==="kf-go")return;e.preventDefault();e.stopPropagation();go.setAttribute("href",a.getAttribute("href"));dlg.showModal()},true);
+  go.addEventListener("click",function(){asked=true;try{sessionStorage.setItem("nc.followAsk","1")}catch(e){}setTimeout(function(){dlg.close()},50)});
+  document.getElementById("kf-follow").addEventListener("click",function(){go.textContent="Download Now"});
+  document.getElementById("kf-close").addEventListener("click",function(){dlg.close()});
+  dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
 })();
 </script>
 </body>

@@ -514,7 +514,7 @@
       "title": "Gemini Tool Builder Playbook",
       "sub": "School Staff Build Their Own Tools With AI",
       "status": "Live demo",
-      "summary": "A playbook that teaches K12 staff to turn a school problem into a working dashboard, tracker, or scheduler in Gemini, inside Google Workspace for Education. Nine steps, 24 live example tools, a prompt library, and sharing rules that keep the data owner in control.",
+      "summary": "A playbook that teaches K12 staff to turn a school problem into a working dashboard, tracker, or scheduler in Gemini, inside Google Workspace for Education. Nine steps, 24 live example tools, 33 setup guides to read or download, a prompt library, and sharing rules that keep the data owner in control.",
       "tags": [
         "K12",
         "AI",
@@ -2891,6 +2891,54 @@
           "when": "K12",
           "text": "The same build at three Google license levels, so a district with no paid AI add on can still do it.",
           "file": "agents/k12-gemini-playbook-access-versions.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Builder Kit: Start Here",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "The map of all 33 Builder Kit guides and the order to use them.",
+          "file": "agents/k12-kit/00_START_HERE.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Link Sheets and Back Up",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Paste a Sheet link, choose its tabs, pull a roster into any tool with one formula, and back everything up.",
+          "file": "agents/k12-kit/26_link_sheets_and_back_up.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Saving, Sync, and Working Offline",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "How a tool saves on the device first, sends changes to the Sheet when it can, keeps working offline, and moves to a new Sheet.",
+          "file": "agents/k12-kit/32_saving_sync_and_offline.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Georgia Standards in Every Tool",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "How to load the Georgia standards once so teachers pick a grade and subject and click the standards they teach.",
+          "file": "agents/k12-kit/31_georgia_standards.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Curriculum Team Tools",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Setup for the Curriculum Warehouse, Pacing Guide, Coaching Cycle Tracker, and Instructional Materials Review.",
+          "file": "agents/k12-kit/30_curriculum_team_tools.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Test Before You Share",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Ten checks to run on any tool before another person uses it.",
+          "file": "agents/k12-kit/19_test_before_you_share.md",
           "type": "Playbook"
         }
       ]

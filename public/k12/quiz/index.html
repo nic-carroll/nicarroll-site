@@ -766,7 +766,7 @@ var K=(function(){
   };
   var KEYS={"Flex Period Scheduling Dashboard":"demo-flex-v1","Grade Level Team Dashboard":"demo-team-v1","Chromebook Repair Tracker":"demo-repair-v1","Classroom Quiz Show":"demo-quiz-v1","Station Rotation Board":"demo-stations-v1","Weekly Lesson Planner":"demo-planner-v1","Group Maker and Picker":"demo-groups-v1","Standards Mastery Tracker":"demo-mastery-v1","Class Agenda Board":"demo-agenda-v1","Rubric Grader":"demo-rubric-v1","PBIS Points Board":"demo-pbis-v1","Class Poll":"demo-poll-v1","Class Whiteboard":"demo-wb-v1","Class Idea Board":"demo-board-v1","Curriculum Warehouse":"demo-warehouse-v1","Coaching Cycle Tracker":"demo-coach-v1","Pacing Guide":"demo-pacing-v1","Instructional Materials Review":"demo-materials-v1","Hall Pass Log":"demo-pass-v1","Family Contact Log":"demo-contact-v1","Missing Work Tracker":"demo-missing-v1","Classroom Jobs Board":"demo-jobs-v1","Substitute Binder":"demo-sub-v1"};
   function sources(){
-    var title=document.title,defs=SRC_DEFAULTS[title];if(!defs||$("k-sources"))return;
+    var title=document.title.split(" \u00b7 ")[0].split(" | ")[0].trim(),defs=SRC_DEFAULTS[title];if(!defs||$("k-sources"))return;
     var key="k-sources:"+title,bkeys=[KEYS[title],key,KStd.PREFS];
     var list=load(key,function(){return defs.map(function(d){return {id:uid(),name:d[0],url:"",tabs:d[1],use:d[2],mode:d[3]}})});
     var sec=document.createElement("section");sec.className="wrap";sec.id="k-sources";

@@ -293,8 +293,19 @@ var KLink=(function(){
   function formulas(src){return split(src.tabs).map(function(t){var r=/^[A-Za-z0-9_]+$/.test(t)?t:"'"+t.replace(/'/g,"''")+"'";return {tab:t,f:'=IMPORTRANGE("'+src.url+'", "'+r+'!A:Z")'}})}
 
   /* ---------- backup and restore ---------- */
-  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
-  function set(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
+  var canStore=(function(){try{localStorage.setItem("k-test","1");var y=localStorage.getItem("k-test")==="1";localStorage.removeItem("k-test");return y}catch(e){return false}})(),MEM={};
+  /* When the page is not allowed to store anything, keep it in memory so the tool still runs and can be backed up. */
+  function get(k){if(canStore){try{return localStorage.getItem(k)}catch(e){}}return MEM[k]===undefined?null:MEM[k]}
+  function set(k,v){MEM[k]=v;if(canStore){try{localStorage.setItem(k,v);return true}catch(e){return false}}return false}
+  function del(k){delete MEM[k];try{localStorage.removeItem(k)}catch(e){}}
+  function warn(onBackup){
+    if(canStore||document.getElementById("kl-warn"))return;
+    var w=document.createElement("div");w.id="kl-warn";w.setAttribute("role","alert");
+    w.style.cssText="background:var(--md-error-container,#F9DEDC);color:var(--md-on-error-container,#410E0B);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:.9375rem;line-height:1.375rem";
+    w.innerHTML='<span style="flex:1 1 280px;min-width:0"><b style="font-weight:500">This page cannot save on this device.</b> Your changes will be lost when you close or reload it. '+(live()?"They are still sent to your Google Sheet.":"Download a backup before you leave, and ask the person who set this up to connect it to a Google Sheet.")+'</span>';
+    if(onBackup){var b=document.createElement("button");b.type="button";b.className="btn filled sm";b.textContent="Download a backup";b.addEventListener("click",onBackup);w.appendChild(b)}
+    document.body.insertBefore(w,document.body.firstChild);
+  }
   function text(title,keys){var data={};keys.forEach(function(k){var v=get(k);if(v!=null)data[k]=v});return JSON.stringify({app:title,made:new Date().toISOString(),data:data})}
   function pad(n){return n<10?"0"+n:""+n}
   /* Saving a file. Inside the Claude artifact viewer a page must use the viewer's own save tool. Anywhere else an ordinary download link works. */
@@ -330,7 +341,7 @@ var KLink=(function(){
     var obj;try{obj=JSON.parse(t)}catch(e){fail("That is not a backup from this tool. Choose the file that ends in .json");return}
     if(!obj||!obj.data||typeof obj.data!=="object"){fail("That is not a backup from this tool.");return}
     if(obj.app!==R.title){fail("That backup is from a different tool: "+(obj.app||"unknown")+". Open that tool to restore it.");return}
-    var n=0;R.keys.forEach(function(k){if(typeof obj.data[k]==="string"){set(k,obj.data[k]);n++}else{try{localStorage.removeItem(k)}catch(e){}}});
+    var n=0;R.keys.forEach(function(k){if(typeof obj.data[k]==="string"){set(k,obj.data[k]);n++}else del(k)});
     if(!n){fail("The backup file is empty.");return}
     set("k-restored:"+R.title,"1");location.reload();
   }
@@ -340,9 +351,9 @@ var KLink=(function(){
     else if(p)apply(p);
     else fail("Choose a backup file first.");
   }
-  function justRestored(title){var k="k-restored:"+title;if(get(k)){try{localStorage.removeItem(k)}catch(e){}return true}return false}
+  function justRestored(title){var k="k-restored:"+title;if(get(k)){del(k);return true}return false}
 
-  return {open:open,ok:ok,formulas:formulas,saveFile:saveFile,download:download,backupText:text,last:last,restore:restore,justRestored:justRestored,live:live};
+  return {open:open,ok:ok,formulas:formulas,get:get,set:set,del:del,canStore:canStore,warn:warn,saveFile:saveFile,download:download,backupText:text,last:last,restore:restore,justRestored:justRestored,live:live};
 })();
 
 /* Georgia standards, shared by every tool. Ships with a short sample list. The official list is loaded from a file saved from the state SuitCASE site, so the wording always comes from the state. */
@@ -642,7 +653,7 @@ function vData(){
   return '<div class="head"><div><h1>Data sources</h1><p class="muted">This dashboard reads from and saves to Google Sheets. Link another Sheet whenever a new source comes along.</p></div>'+addBtn("sources","Link a Sheet")+'</div>'+
   '<div class="grid g2">'+(S.sources.map(function(s){return '<div class="card"><div class="ch"><span class="tag">'+esc(s.mode)+'</span>'+editBtn("sources",s.id,s.name)+'</div><h3>'+esc(s.name)+'</h3><p><b>Tabs:</b> '+esc(s.tabs)+'</p><p class="muted">'+esc(s.use)+'</p><p>'+(ok(s.url)?'<a href="'+esc(s.url)+'" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Open Sheet</a>':s.url?'<span class="tag" style="background:var(--tertiary-container)">Check the link</span>':'<span class="muted">Sample, not linked</span>')+'</p></div>'}).join("")||'<p class="empty">No Sheets linked yet.</p>')+'</div>'+
   (function(){var refs=S.sources.filter(function(s){return /^Reference/.test(s.mode)&&ok(s.url)});return refs.length?'<div class="card"><h3>Formulas for your reference Sheets</h3><p class="muted">One formula for each tab you chose. Paste each one into cell A1 of a new tab in your main Sheet.</p>'+refs.map(function(s){return KLink.formulas(s).map(function(x){return '<p style="overflow-wrap:anywhere"><code>'+esc(x.f)+'</code></p>'}).join("")}).join("")+'</div>':''})()+
-  (function(){var lb=KLink.last(document.title);return '<div class="head" style="margin-top:24px"><div><h1>Back up and restore</h1><p class="muted">A backup is one file with everything on this dashboard and your linked Sheets.</p></div><span class="tag"'+(lb?'':' style="background:var(--tertiary-container)"')+'>'+(lb?"Last backup: "+esc(lb):"No backup yet")+'</span></div>'+
+  (function(){var lb=KLink.last("My Classroom Hub");return '<div class="head" style="margin-top:24px"><div><h1>Back up and restore</h1><p class="muted">A backup is one file with everything on this dashboard and your linked Sheets.</p></div><span class="tag"'+(lb?'':' style="background:var(--tertiary-container)"')+'>'+(lb?"Last backup: "+esc(lb):"No backup yet")+'</span></div>'+
    '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn filled" type="button" data-act="bkdown">Download a backup</button><button class="btn tonal" type="button" data-act="bkcopy">Copy backup as text</button><button class="btn outlined" type="button" data-act="bkrestore">Restore from a backup</button></div>'})()+
   '<div class="foot"><span>On this demo, links are saved in your browser only. The real tool keeps this list on a tab named Sources, and the Google Sheet is the database: use File, Make a copy, and File, Version history, as two more safety nets. Kit files 18 and 26 explain the setup.</span></div>';
 }
@@ -724,9 +735,9 @@ $("main").addEventListener("click",function(e){
   else if(a==="edit"&&d.coll==="sources"){var so=S.sources.filter(function(x){return x.id===d.id})[0];
     KLink.open({source:{name:so.name,url:so.url,tabs:so.tabs,allTabs:so.allTabs,use:so.use,mode:/^Reads/.test(so.mode)?"save":"ref"},onSave:function(v){so.name=v.name;so.url=v.url;so.tabs=v.tabs;so.allTabs=v.allTabs;so.use=v.use;so.mode=v.mode==="save"?"Reads and saves":"Reference, read only";save();draw()},
       onDelete:function(){remember("Data source removed.");S.sources=S.sources.filter(function(x){return x!==so});save();draw()}})}
-  else if(a==="bkdown"){KLink.download(document.title,[KEY],function(){draw()})}
-  else if(a==="bkcopy"){try{navigator.clipboard.writeText(KLink.backupText(document.title,[KEY]))}catch(err){}}
-  else if(a==="bkrestore")KLink.restore(document.title,[KEY]);
+  else if(a==="bkdown"){KLink.download("My Classroom Hub",[KEY],function(){draw()})}
+  else if(a==="bkcopy"){try{navigator.clipboard.writeText(KLink.backupText("My Classroom Hub",[KEY]))}catch(err){}}
+  else if(a==="bkrestore")KLink.restore("My Classroom Hub",[KEY]);
   else if(a==="add"){
     var def={};
     if(d.coll==="events"){def.date=d.date||iso(new Date());def.sticker=STICKERS[0]}
@@ -762,5 +773,6 @@ $("main").addEventListener("submit",function(e){
 draw();
 })();
 </script>
+<script>KLink.warn()</script>
 </body>
 </html>

@@ -199,6 +199,9 @@ code{font-family:"Roboto Mono",ui-monospace,Menlo,monospace;font-size:.8125rem;b
 body.arena #k-sources,body.student #k-sources,body.present #k-sources,.embed .k-src-jump{display:none}
 body.arena .k-src-jump,body.student .k-src-jump,body.present .k-src-jump{display:none}
 
+#k-status{height:auto;min-height:28px;padding:4px 10px;white-space:normal;max-width:100%;text-align:left}
+body.arena #k-status,body.student #k-status,body.present #k-status{display:none}
+
 </style>
 <style>
 .clock{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center}
@@ -359,8 +362,19 @@ var KLink=(function(){
   function formulas(src){return split(src.tabs).map(function(t){var r=/^[A-Za-z0-9_]+$/.test(t)?t:"'"+t.replace(/'/g,"''")+"'";return {tab:t,f:'=IMPORTRANGE("'+src.url+'", "'+r+'!A:Z")'}})}
 
   /* ---------- backup and restore ---------- */
-  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
-  function set(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
+  var canStore=(function(){try{localStorage.setItem("k-test","1");var y=localStorage.getItem("k-test")==="1";localStorage.removeItem("k-test");return y}catch(e){return false}})(),MEM={};
+  /* When the page is not allowed to store anything, keep it in memory so the tool still runs and can be backed up. */
+  function get(k){if(canStore){try{return localStorage.getItem(k)}catch(e){}}return MEM[k]===undefined?null:MEM[k]}
+  function set(k,v){MEM[k]=v;if(canStore){try{localStorage.setItem(k,v);return true}catch(e){return false}}return false}
+  function del(k){delete MEM[k];try{localStorage.removeItem(k)}catch(e){}}
+  function warn(onBackup){
+    if(canStore||document.getElementById("kl-warn"))return;
+    var w=document.createElement("div");w.id="kl-warn";w.setAttribute("role","alert");
+    w.style.cssText="background:var(--md-error-container,#F9DEDC);color:var(--md-on-error-container,#410E0B);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:.9375rem;line-height:1.375rem";
+    w.innerHTML='<span style="flex:1 1 280px;min-width:0"><b style="font-weight:500">This page cannot save on this device.</b> Your changes will be lost when you close or reload it. '+(live()?"They are still sent to your Google Sheet.":"Download a backup before you leave, and ask the person who set this up to connect it to a Google Sheet.")+'</span>';
+    if(onBackup){var b=document.createElement("button");b.type="button";b.className="btn filled sm";b.textContent="Download a backup";b.addEventListener("click",onBackup);w.appendChild(b)}
+    document.body.insertBefore(w,document.body.firstChild);
+  }
   function text(title,keys){var data={};keys.forEach(function(k){var v=get(k);if(v!=null)data[k]=v});return JSON.stringify({app:title,made:new Date().toISOString(),data:data})}
   function pad(n){return n<10?"0"+n:""+n}
   /* Saving a file. Inside the Claude artifact viewer a page must use the viewer's own save tool. Anywhere else an ordinary download link works. */
@@ -396,7 +410,7 @@ var KLink=(function(){
     var obj;try{obj=JSON.parse(t)}catch(e){fail("That is not a backup from this tool. Choose the file that ends in .json");return}
     if(!obj||!obj.data||typeof obj.data!=="object"){fail("That is not a backup from this tool.");return}
     if(obj.app!==R.title){fail("That backup is from a different tool: "+(obj.app||"unknown")+". Open that tool to restore it.");return}
-    var n=0;R.keys.forEach(function(k){if(typeof obj.data[k]==="string"){set(k,obj.data[k]);n++}else{try{localStorage.removeItem(k)}catch(e){}}});
+    var n=0;R.keys.forEach(function(k){if(typeof obj.data[k]==="string"){set(k,obj.data[k]);n++}else del(k)});
     if(!n){fail("The backup file is empty.");return}
     set("k-restored:"+R.title,"1");location.reload();
   }
@@ -406,9 +420,9 @@ var KLink=(function(){
     else if(p)apply(p);
     else fail("Choose a backup file first.");
   }
-  function justRestored(title){var k="k-restored:"+title;if(get(k)){try{localStorage.removeItem(k)}catch(e){}return true}return false}
+  function justRestored(title){var k="k-restored:"+title;if(get(k)){del(k);return true}return false}
 
-  return {open:open,ok:ok,formulas:formulas,saveFile:saveFile,download:download,backupText:text,last:last,restore:restore,justRestored:justRestored,live:live};
+  return {open:open,ok:ok,formulas:formulas,get:get,set:set,del:del,canStore:canStore,warn:warn,saveFile:saveFile,download:download,backupText:text,last:last,restore:restore,justRestored:justRestored,live:live};
 })();
 
 /* Georgia standards, shared by every tool. Ships with a short sample list. The official list is loaded from a file saved from the state SuitCASE site, so the wording always comes from the state. */
@@ -545,8 +559,60 @@ var K=(function(){
   function icon(n,c,s){var v=ICONS[n]||"",f=v.charAt(0)==="F";if(f)v=v.slice(1);return '<svg class="ico'+(f?" ico-fill":"")+(c?" "+c:"")+'" viewBox="0 0 24 24" aria-hidden="true"'+(s?' style="'+s+'"':"")+'>'+v+'</svg>'}
   function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
   function uid(){return Math.random().toString(36).slice(2,10)}
-  function load(key,fallback){try{var v=JSON.parse(localStorage.getItem(key)||"null");if(v)return v}catch(e){}return fallback()}
-  function save(key,data){try{localStorage.setItem(key,JSON.stringify(data))}catch(e){}}
+  /* Saving happens in two steps. First on this device, right away, so nothing is lost offline. Then to the linked Google Sheet, when the page is signed in and the Sheet can be reached. */
+  /* The tool name is the page title up to any site suffix, so a host site can add its own name after a dot. */
+  var TITLE=document.title.split(" \u00b7 ")[0].split(" | ")[0].trim(),SY={pending:+(KLink.get("k-pending:"+TITLE)||0),why:"",busy:false,dataKey:"",srcKey:"k-sources:"+TITLE};
+  function load(key,fallback){try{var v=JSON.parse(KLink.get(key)||"null");if(v)return v}catch(e){}return fallback()}
+  function save(key,data){
+    KLink.set(key,JSON.stringify(data));
+    if(key===SY.dataKey){SY.pending++;KLink.set("k-pending:"+TITLE,String(SY.pending));KLink.set("k-stamp:"+TITLE,String(Date.now()))}
+    if(key===SY.dataKey||key===SY.srcKey){status();clearTimeout(SY.t);SY.t=setTimeout(sync,key===SY.srcKey?50:1200)}
+  }
+  function target(){var l=[];try{l=JSON.parse(KLink.get(SY.srcKey)||"[]")}catch(e){}for(var i=0;i<l.length;i++)if(l[i].mode==="save"&&KLink.ok(l[i].url)&&!/\/d\/sample-/.test(l[i].url))return l[i].url;return ""}
+  function stamp(){return +(KLink.get("k-stamp:"+TITLE)||0)}
+  function plural(n){return n+(n===1?" change":" changes")}
+  function status(){
+    var el=$("k-status");if(!el)return;var live=KLink.live(),on=navigator.onLine!==false,c="info",m;
+    if(live){
+      if(!target()){c="warn";m="No Sheet linked. "+(SY.pending?plural(SY.pending)+" kept on this device":"Link a Sheet to save")}
+      else if(!on){c="warn";m="Offline. "+plural(SY.pending)+" kept on this device"}
+      else if(SY.why==="fail"){c="bad";m="Sheet not reached. "+plural(SY.pending)+" safe on this device"}
+      else if(SY.pending||SY.busy){m="Saving to your Sheet"}
+      else{c="ok";m="Saved to your Sheet"}
+    }else if(!KLink.canStore){c="bad";m="Not saving on this device"}
+    else m=on?"Saved on this device":"Offline. Saved on this device";
+    el.className="pill "+c;el.textContent=m;
+    var d=$("k-syncline");if(d)d.textContent=live?(target()?(SY.pending?plural(SY.pending)+" waiting to go to the Sheet. They are safe on this device until then.":"Everything is saved to the linked Sheet."):"No Sheet is linked for saving yet. Changes stay on this device until you link one."):"This preview is not signed in to Google, so changes stay on this device. In your own copy they also go to the linked Sheet.";
+  }
+  function payload(){var d={};[SY.dataKey,SY.srcKey].forEach(function(x){var v=KLink.get(x);if(v!=null)d[x]=v});return JSON.stringify({app:TITLE,made:new Date().toISOString(),data:d})}
+  function push(url){
+    var n=SY.pending,st=stamp()||Date.now();SY.busy=true;status();
+    google.script.run.withSuccessHandler(function(){SY.busy=false;SY.why="";SY.pending=Math.max(0,SY.pending-n);KLink.set("k-pending:"+TITLE,String(SY.pending));KLink.set("k-stamp:"+TITLE,String(st));status();if(SY.pending)sync()})
+      .withFailureHandler(function(){SY.busy=false;SY.why="fail";status()}).saveState(url,TITLE,payload(),st);
+  }
+  /* Decide which copy is newer. Changes made on this device always win, so offline work is never thrown away. */
+  function sync(){
+    if(!KLink.live()||SY.busy)return;var url=target();status();if(!url||navigator.onLine===false)return;
+    if(SY.pending){push(url);return}
+    SY.busy=true;
+    google.script.run.withSuccessHandler(function(r){SY.busy=false;SY.why="";
+        if(r&&r.json&&+r.stamp>stamp()){var o=null;try{o=JSON.parse(r.json)}catch(e){}
+          if(o&&o.app===TITLE&&o.data&&typeof o.data[SY.dataKey]==="string"&&KLink.canStore){KLink.set(SY.dataKey,o.data[SY.dataKey]);KLink.set("k-stamp:"+TITLE,String(r.stamp));KLink.set("k-pulled:"+TITLE,"1");location.reload();return}}
+        else if(!r||!r.json||+r.stamp<stamp()){if(!stamp())KLink.set("k-stamp:"+TITLE,String(Date.now()));push(url);return}
+        status()})
+      .withFailureHandler(function(){SY.busy=false;SY.why="fail";status()}).loadState(url,TITLE);
+  }
+  function syncInit(){
+    SY.dataKey=KEYS[TITLE]||"";if(!SY.dataKey)return;
+    var bar=document.querySelector(".bar .wrap");if(bar&&!$("k-status")){var el=document.createElement("span");el.id="k-status";el.className="pill info";el.setAttribute("role","status");var j=bar.querySelector(".k-src-jump")||$("reset");if(j)bar.insertBefore(el,j);else bar.appendChild(el)}
+    KLink.warn(function(){KLink.saveFile(TITLE.replace(/[^A-Za-z0-9]+/g,"_")+"_backup.json",payload(),function(g){toast(g===false?"The file could not be saved here.":"Backup saved.")})});
+    status();
+    window.addEventListener("online",function(){status();sync()});window.addEventListener("offline",status);
+    setInterval(function(){if(SY.pending||SY.why==="fail")sync()},20000);
+    window.addEventListener("beforeunload",function(e){if(KLink.live()?SY.pending>0:!KLink.canStore&&stamp()){e.preventDefault();e.returnValue=""}});
+    if(KLink.get("k-pulled:"+TITLE)){KLink.del("k-pulled:"+TITLE);toast("Loaded the newest copy from your Sheet.")}
+    sync();
+  }
   var ICON={
     edit:icon("edit"),
     x:icon("delete")
@@ -626,7 +692,7 @@ var K=(function(){
   };
   var KEYS={"Flex Period Scheduling Dashboard":"demo-flex-v1","Grade Level Team Dashboard":"demo-team-v1","Chromebook Repair Tracker":"demo-repair-v1","Classroom Quiz Show":"demo-quiz-v1","Station Rotation Board":"demo-stations-v1","Weekly Lesson Planner":"demo-planner-v1","Group Maker and Picker":"demo-groups-v1","Standards Mastery Tracker":"demo-mastery-v1","Class Agenda Board":"demo-agenda-v1","Rubric Grader":"demo-rubric-v1","PBIS Points Board":"demo-pbis-v1","Class Poll":"demo-poll-v1","Class Whiteboard":"demo-wb-v1","Class Idea Board":"demo-board-v1","Curriculum Warehouse":"demo-warehouse-v1","Coaching Cycle Tracker":"demo-coach-v1","Pacing Guide":"demo-pacing-v1","Instructional Materials Review":"demo-materials-v1","Hall Pass Log":"demo-pass-v1","Family Contact Log":"demo-contact-v1","Missing Work Tracker":"demo-missing-v1","Classroom Jobs Board":"demo-jobs-v1","Substitute Binder":"demo-sub-v1"};
   function sources(){
-    var title=document.title,defs=SRC_DEFAULTS[title];if(!defs||$("k-sources"))return;
+    var title=TITLE,defs=SRC_DEFAULTS[title];if(!defs||$("k-sources"))return;
     var key="k-sources:"+title,bkeys=[KEYS[title],key,KStd.PREFS];
     var list=load(key,function(){return defs.map(function(d){return {id:uid(),name:d[0],url:"",tabs:d[1],use:d[2],mode:d[3]}})});
     var sec=document.createElement("section");sec.className="wrap";sec.id="k-sources";
@@ -648,6 +714,7 @@ var K=(function(){
         '<p class="small"><b style="font-weight:500">My grades:</b> '+(z.grades.length?esc(z.grades.join(", ")):"all")+'. <b style="font-weight:500">My subjects:</b> '+(z.subjects.length?esc(z.subjects.join(", ")):"all")+'. <span class="muted">'+z.mine+' standards match.</span></p>'+
         '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn tonal sm" type="button" data-kstd="setup">'+icon("school")+'Choose my grades and subjects</button>'+(hook?'<button class="btn filled sm" type="button" data-kstd="pick">'+icon("add")+'Pick standards for this tool</button>':'')+'</div>'+
         '<p class="muted small">Kit file <code>31_georgia_standards.md</code> shows how a district loads the official list once for everyone.</p></div><div class="panel" style="margin-top:24px">'})()+
+        '<div class="ph"><div><h2>Saving</h2><p class="muted small" id="k-syncline"></p></div>'+(KLink.live()?'<button class="btn tonal sm" type="button" data-kbk="sync">Save to the Sheet now</button>':'')+'</div></div><div class="panel" style="margin-top:24px">'+
         '<div class="ph"><div><h2>Back up and restore</h2><p class="muted small">A backup is one file with everything in this tool: your data and your linked Sheets.</p></div><span class="pill '+(lb?"ok":"warn")+'" id="k-lastb">'+(lb?"Last backup: "+esc(lb):"No backup yet")+'</span></div>'+
         '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn filled sm" type="button" data-kbk="down">'+icon("download")+'Download a backup</button><button class="btn tonal sm" type="button" data-kbk="copy">'+icon("content_copy")+'Copy backup as text</button><button class="btn outlined sm" type="button" data-kbk="restore">'+icon("restart_alt")+'Restore from a backup</button></div>'+
         '<p class="muted small">In your real tool the Google Sheet is the database, so there are two more safety nets. In the Sheet, choose File, then Make a copy, at the end of each grading period. And File, then Version history, lets you roll back to any earlier day. Kit file <code>26_link_sheets_and_back_up.md</code> has the steps.</p></div>';
@@ -659,7 +726,8 @@ var K=(function(){
       if(sd){if(sd.dataset.kstd==="setup")KStd.setup(function(){draw();toast("Saved. Your standards list is ready.")});else KStd.pick({title:"Pick standards for this tool",onDone:function(list){if(!list.length){toast("No standards were picked.");return}var r=window.KSTD_APPLY(list);toast(list.length+(list.length===1?" standard":" standards")+" added to this tool."+(list[0].official?"":" These are sample labels, not the official wording."))}});return}
       var k=e.target.closest("[data-kbk]");
       if(k){var w=k.dataset.kbk;
-        if(w==="down"){KLink.download(title,bkeys,function(okk,nm){draw();toast(okk===false?"The file could not be saved here. Use Copy backup as text instead.":okk?"Backup saved as "+nm:"Backup sent to your Downloads folder as "+nm+". If no file appears, use Copy backup as text.")})}
+        if(w==="sync"){sync();toast(navigator.onLine===false?"You are offline. It will save when you are back online.":"Saving to your Sheet.")}
+        else if(w==="down"){KLink.download(title,bkeys,function(okk,nm){draw();toast(okk===false?"The file could not be saved here. Use Copy backup as text instead.":okk?"Backup saved as "+nm:"Backup sent to your Downloads folder as "+nm+". If no file appears, use Copy backup as text.")})}
         else if(w==="copy"){var tx=KLink.backupText(title,bkeys),fin=function(g){toast(g?"Backup copied. Paste it into a Google Doc to keep it.":"Copying is blocked here. Use Download a backup.")};try{navigator.clipboard.writeText(tx).then(function(){fin(true)},function(){fin(false)})}catch(err){fin(false)}}
         else KLink.restore(title,bkeys);
         return}
@@ -669,7 +737,7 @@ var K=(function(){
       KLink.open({source:s,onSave:function(v){s.name=v.name;s.url=v.url;s.tabs=v.tabs;s.allTabs=v.allTabs;s.use=v.use;s.mode=v.mode;save(key,list);draw()},
         onDelete:function(){var before=JSON.stringify(list);list=list.filter(function(x){return x!==s});save(key,list);draw();toast("Data source removed.",function(){list=JSON.parse(before);save(key,list);draw()})}});
     });
-    draw();
+    draw();syncInit();var d0=draw;draw=function(){d0();status()};
     if(KLink.justRestored(title))toast("Backup restored.");
   }
   if(document.readyState==="complete")setTimeout(sources,0);else window.addEventListener("load",sources);
