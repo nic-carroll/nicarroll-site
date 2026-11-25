@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gemini Tool Builder Playbook · Nic Carroll</title>
-<meta name="description" content="A playbook by Nic Carroll that shows K12 staff how to build dashboards, trackers, and schedulers in Gemini inside Google Workspace for Education. Nine steps, eleven live example tools, a prompt library, and data owner controlled sharing.">
+<meta name="description" content="A playbook by Nic Carroll that shows K12 staff how to build dashboards, trackers, and schedulers in Gemini inside Google Workspace for Education. Nine steps, 24 live example tools, a prompt library, and data owner controlled sharing.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Nic Carroll">
 <meta property="og:title" content="Gemini Tool Builder Playbook for K12">
@@ -103,15 +103,15 @@ section{padding:40px 0}
 .seg button+button{border-left:1px solid var(--outline)}
 .seg button{display:inline-flex;align-items:center;gap:8px;height:40px}
 .seg button[aria-pressed="true"]{background:var(--primary-container);color:var(--on-primary-container)}
-.seg button[aria-pressed="true"]::before{content:"\2713";font-weight:700;font-size:15px;line-height:1}
+.seg button[aria-pressed="true"]::before{content:"\2713";font-size:16px;line-height:1;font-weight:700}
 .chip{display:inline-flex;align-items:center;gap:6px;min-height:28px;max-width:100%;padding:4px 12px;overflow-wrap:anywhere;align-self:flex-start;border-radius:8px;font-size:.8125rem;font-weight:500;background:var(--secondary-container);color:var(--on-secondary-container)}
 .chip.file{font-family:var(--font-mono);font-weight:400}
 .rowgap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .stepnav{display:flex;gap:8px;justify-content:space-between;margin-top:auto;padding-top:8px}
 
 /* examples */
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--outline-variant);margin-bottom:20px;overflow-x:auto}
-.tab{border:0;background:transparent;padding:14px 20px;font-weight:500;font-size:.875rem;color:var(--on-surface-variant);border-bottom:3px solid transparent;white-space:nowrap}
+.tabs{display:flex;gap:0;flex-wrap:wrap;border-bottom:1px solid var(--outline-variant);margin-bottom:20px}
+.tab{border:0;background:transparent;padding:10px 14px;font-weight:500;font-size:.875rem;color:var(--on-surface-variant);border-bottom:3px solid transparent;white-space:nowrap}
 .tab[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--primary)}
 .demo{background:var(--card);border-radius:var(--r-l);border:1px solid var(--outline-variant);overflow:hidden}
 .demo-top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:16px 20px;background:var(--primary);color:var(--on-primary)}
@@ -251,6 +251,7 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
       <a href="#examples">Examples</a>
       <a href="#versions">Versions</a>
       <a href="#prompts">Prompts</a>
+      <a href="#data">Data</a>
       <a href="#sharing">Sharing</a>
       <a href="#continuity">Continuity</a>
     </nav>
@@ -296,7 +297,7 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
     <div class="sec-head">
       <p class="label">What you can build</p>
       <h2>Working examples, built the playbook way</h2>
-      <p class="muted">All eleven tools are live. Select any card and it opens right here on the page. All names and records are invented sample data for an imaginary district.</p>
+      <p class="muted">All twenty four tools are live. Select any card and it opens right here on the page. All names and records are invented sample data for an imaginary district.</p>
     </div>
     <h3 style="margin-bottom:12px">Pick a tool to try</h3>
     <div class="seg" role="group" aria-label="Filter tools by level" id="band" style="margin-bottom:16px"></div>
@@ -362,6 +363,63 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
       <p class="muted">Run them in order with Canvas turned on. Use fake data until step 8 is done.</p>
     </div>
     <div class="plist" id="plist"></div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Where the data lives</p>
+      <h2>Every tool saves to a Google Sheet, with no script to install</h2>
+      <p class="muted">The Sheet is the notebook. The tool is the easy way to see it and change it. Pick the path your Google edition supports. Each one has click by click steps in kit file 18.</p>
+    </div>
+    <div class="vers">
+      <div class="ver main">
+        <span class="label" style="color:inherit">Every school, free</span>
+        <span class="tag">Path 1</span>
+        <h3>A dashboard inside Google Sheets</h3>
+        <ul><li>A Data tab and a Dashboard tab</li><li>Gemini writes the formulas and tells you where to paste them</li><li>Charts, click to filter buttons, and a Google Form for adding data</li></ul>
+      </div>
+      <div class="ver">
+        <span class="label">Education Standard or Plus</span>
+        <span class="tag">Path 2</span>
+        <h3>An app with AppSheet</h3>
+        <ul><li>Extensions, then AppSheet, then Create an app</li><li>Add, edit, and delete buttons with no code</li><li>Add more Sheets as new tables any time</li><li>Adults only</li></ul>
+      </div>
+      <div class="ver">
+        <span class="label">Google AI Pro for Education</span>
+        <span class="tag">Path 3</span>
+        <h3>A Sheets canvas from one prompt</h3>
+        <ul><li>Insert, then Create a canvas</li><li>Editors can add, change, and delete. Viewers can only look</li><li>Shares the same way the Sheet does</li></ul>
+      </div>
+    </div>
+    <div class="howto">
+      <div>
+        <h3>Link another Sheet in nine small steps</h3>
+        <p class="muted" style="margin:8px 0 12px">For a roster from the office or the district standards list. Your Sheet shows a live copy that updates by itself.</p>
+        <ol>
+          <li>Copy the link of the other Sheet.</li>
+          <li>Note the exact name of the tab you want.</li>
+          <li>Open your Sheet and add a new tab.</li>
+          <li>Click cell A1 and paste the formula below.</li>
+          <li>Press Enter. You see #REF! and that is normal.</li>
+          <li>Click the cell, then click Allow access.</li>
+          <li>The data fills in. Add the Sheet to your Sources tab.</li>
+        </ol>
+        <pre style="margin-top:12px">=IMPORTRANGE("paste the link here", "Roster!A:Z")</pre>
+      </div>
+      <div>
+        <h3>Built into every tool</h3>
+        <ul style="margin:8px 0 0;padding-left:20px;display:grid;gap:8px">
+          <li>Each example tool has a <b>Data sources</b> panel listing the Sheets it reads and saves to.</li>
+          <li>Paste a new Sheet link there and the tool writes the linking formula for you.</li>
+          <li>Reference Sheets are marked read only, so nobody changes the office roster by mistake.</li>
+          <li>Each tool is one self contained page. It loads no outside fonts, scripts, or services.</li>
+          <li>Run the ten checks in kit file 19 before anyone else uses a tool.</li>
+        </ul>
+        <p class="muted" style="font-size:.875rem;margin-top:12px">Apps Script stays available for fully custom pages. A tech coach sets it up once so teachers never have to.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -458,7 +516,7 @@ footer{padding:32px 0 56px;color:var(--on-surface-variant);font-size:.875rem}
     <div class="dl-row"><a class="fill" href="agents/k12-gemini-tool-builder-playbook.zip" download>Download All (zip)</a><a href="agents/k12-gemini-playbook-workflow.md" download>Workflow</a><a href="agents/k12-gemini-playbook-prompt-library.md" download>Prompt Library</a><a href="agents/k12-gemini-playbook-sharing.md" download>Sharing</a><a href="agents/k12-gemini-playbook-continuity.md" download>Keep Tools Alive</a><a href="agents/k12-gemini-playbook-access-versions.md" download>Know Your Access</a></div>
     <p style="margin-top:20px">The steps on this page name the Builder Kit files they pair with.</p>
     <div class="files">
-      <span class="chip file">00_START_HERE.md</span><span class="chip file">01_tool_brief.md</span><span class="chip file">02_data_sheet_setup.md</span><span class="chip file">03_gem_instructions.md</span><span class="chip file">04_build_prompts.md</span><span class="chip file">05_live_data_prompts.md</span><span class="chip file">06_publish_and_share.md</span><span class="chip file">07_version_notes.md</span><span class="chip file">08_team_dashboard.md</span><span class="chip file">09_teacher_dashboard.md</span><span class="chip file">10_keep_tools_alive.md</span><span class="chip file">11_quiz_show.md</span><span class="chip file">12_station_rotation.md</span><span class="chip file">13_lesson_planner.md</span><span class="chip file">14_group_maker.md</span><span class="chip file">15_mastery_tracker.md</span><span class="chip file">16_agenda_board.md</span><span class="chip file">17_rubric_grader.md</span>
+      <span class="chip file">00_START_HERE.md</span><span class="chip file">01_tool_brief.md</span><span class="chip file">02_data_sheet_setup.md</span><span class="chip file">03_gem_instructions.md</span><span class="chip file">04_build_prompts.md</span><span class="chip file">05_live_data_prompts.md</span><span class="chip file">06_publish_and_share.md</span><span class="chip file">07_version_notes.md</span><span class="chip file">08_team_dashboard.md</span><span class="chip file">09_teacher_dashboard.md</span><span class="chip file">10_keep_tools_alive.md</span><span class="chip file">11_quiz_show.md</span><span class="chip file">12_station_rotation.md</span><span class="chip file">13_lesson_planner.md</span><span class="chip file">14_group_maker.md</span><span class="chip file">15_mastery_tracker.md</span><span class="chip file">16_agenda_board.md</span><span class="chip file">17_rubric_grader.md</span><span class="chip file">18_data_without_apps_script.md</span><span class="chip file">19_test_before_you_share.md</span>
     </div>
     <p style="margin-top:16px">Practical guidance, not legal advice. Your district privacy lead owns the final reading of FERPA and state law.</p>
   </div>
@@ -540,11 +598,24 @@ var DEMOS=[
  {k:"flex",n:"Flex Period Scheduling",who:"High school administrators",band:"sec",c:"#0B57D0",d:"Assign students, manage sessions and seats, place everyone left over in one click.",f:"Kit files 04 and 05"},
  {k:"groups",n:"Group Maker and Picker",who:"Teachers, any grade",band:"any",c:"#146C2E",d:"Random student picker, fair group maker, and a seating chart you can shuffle.",f:"Kit file 14"},
  {k:"mastery",n:"Standards Mastery Tracker",who:"Teachers, any grade",band:"any",c:"#B3261E",d:"Exit ticket scores by standard, color coded, with reteach groups and a reteach plan prompt.",f:"Kit file 15"},
+ {k:"points",n:"PBIS Points Board",who:"Teachers, any grade",band:"any",c:"#146C2E",d:"Give points for school expectations, run a rewards store, and send family reports. You own the data.",f:"Kit file 20"},
+ {k:"poll",n:"Class Poll",who:"Teachers and students",band:"any",c:"#6B3FA0",d:"Live multiple choice, ratings, word clouds, and student questions, answered through a Google Form.",f:"Kit file 27"},
+ {k:"wb",n:"Class Whiteboard",who:"Teachers, any grade",band:"any",c:"#0B57D0",d:"Draw, type, and highlight. Every board saves by itself and plays back like a recording.",f:"Kit file 28"},
+ {k:"board",n:"Class Idea Board",who:"Teachers and students",band:"any",c:"#9A2B59",d:"A shared wall of student posts in columns, a wall, or a timeline, with teacher approval.",f:"Kit file 29"},
+ {k:"jobs",n:"Classroom Jobs Board",who:"Elementary teachers",band:"el",c:"#8A5300",d:"Weekly jobs that rotate fairly with one click, with a projector view for the class.",f:"Kit file 24"},
+ {k:"pass",n:"Hall Pass Log",who:"Middle and high school teachers",band:"sec",c:"#B3261E",d:"Sign students out in two taps, see who is out and for how long, and keep the record.",f:"Kit file 21"},
+ {k:"missing",n:"Missing Work Tracker",who:"Middle and high school teachers",band:"sec",c:"#9A2B59",d:"Missing work by student and assignment, with a family note that writes itself.",f:"Kit file 23"},
+ {k:"contact",n:"Family Contact Log",who:"Teachers, any grade",band:"any",c:"#006A6A",d:"Every call, email, and conference in one record, with follow ups and families not reached yet.",f:"Kit file 22"},
+ {k:"sub",n:"Substitute Binder",who:"Teachers, any grade",band:"any",c:"#041E49",d:"Schedule, routines, and emergency plans in one link, with a place for the substitute to leave notes.",f:"Kit file 25"},
+ {k:"warehouse",n:"Curriculum Warehouse",who:"Curriculum directors and specialists",band:"dist",c:"#041E49",d:"A library of approved lessons tagged to Georgia standards, with review, approval, and a map of gaps.",f:"Kit file 30"},
+ {k:"pacing",n:"Pacing Guide",who:"Curriculum directors",band:"dist",c:"#0B57D0",d:"Units by week with their standards, and which schools are on pace, ahead, or behind.",f:"Kit file 30"},
+ {k:"coach",n:"Coaching Cycle Tracker",who:"Instructional coaches",band:"dist",c:"#146C2E",d:"Coaching cycles by stage, every visit and next step, and what teachers want support with.",f:"Kit file 30"},
+ {k:"materials",n:"Instructional Materials Review",who:"Executive directors",band:"dist",c:"#9A2B59",d:"Products from request to board vote, scored on a rubric, with a privacy review that must pass first.",f:"Kit file 30"},
  {k:"team",n:"Grade Level Team Dashboard",who:"Teams, any grade",band:"any",c:"#041E49",d:"One shared page where each role edits only its own sections.",f:"Kit file 08"},
  {k:"repair",n:"Chromebook Repair Tracker",who:"Technology staff",band:"any",c:"#146C2E",d:"Tickets by building and status, with repairs open too long flagged.",f:"Kit files 04 and 05"}
 ];
 DEMOS.forEach(function(d){d.src="k12/"+d.k+"/";d.url=d.src});
-var BANDS=[["all","All tools"],["el","Elementary"],["sec","Middle and high school"],["any","Any grade and staff"]],band="all";
+var BANDS=[["all","All tools"],["el","Elementary"],["sec","Middle and high school"],["any","Any grade and staff"],["dist","District curriculum team"]],band="all";
 function drawGallery(){
   $("band").innerHTML=BANDS.map(function(b){return '<button type="button" data-band="'+b[0]+'" aria-pressed="'+(b[0]===band)+'">'+b[1]+'</button>'}).join("");
   $("gallery").innerHTML=DEMOS.filter(function(d){return band==="all"||d.band===band}).map(function(d){

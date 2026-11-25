@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curriculum Warehouse · Nic Carroll</title>
+<meta name="description" content="Curriculum Warehouse: a working example tool from the Gemini Tool Builder Playbook for K12 by Nic Carroll. All names and records are invented sample data.">
+<meta property="og:title" content="Curriculum Warehouse">
+<meta property="og:image" content="https://niccarroll.org/assets/showcase/k12-warehouse.jpg">
+<link rel="icon" href="../../brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts.css?v=20261125">
+<script src="/sitebar.js?v=20261125b" defer></script>
+<style>
+/* Material Design 3, light scheme. Color roles, type scale, shape scale, elevation and state layers follow m3.material.io.
+   Layout: small top app bar, one centered column, summary cards first, then controls, then detail. */
+:root{
+  color-scheme:light;
+  /* color roles */
+  --md-primary:#0B57D0; --md-on-primary:#FFFFFF;
+  --md-primary-container:#D3E3FD; --md-on-primary-container:#041E49;
+  --md-secondary-container:#C2E7FF; --md-on-secondary-container:#001D35;
+  --md-tertiary:#146C2E; --md-tertiary-container:#C4EED0; --md-on-tertiary-container:#072711;
+  --md-error:#B3261E; --md-error-container:#F9DEDC; --md-on-error-container:#410E0B;
+  --md-surface:#F8FAFD; --md-surface-container-lowest:#FFFFFF; --md-surface-container-low:#F3F6FB;
+  --md-surface-container:#F0F4F9; --md-surface-container-high:#E9EEF6; --md-surface-container-highest:#DDE3EA;
+  --md-on-surface:#1F1F1F; --md-on-surface-variant:#444746;
+  --md-outline:#747775; --md-outline-variant:#C4C7C5;
+  --md-inverse-surface:#303030; --md-inverse-on-surface:#F2F2F2; --md-inverse-primary:#A8C7FA;
+  /* extended color: caution */
+  --md-caution:#8A5300; --md-caution-container:#FFE0B2; --md-on-caution-container:#2B1700;
+  /* shape scale */
+  --md-shape-xs:4px; --md-shape-s:8px; --md-shape-m:12px; --md-shape-l:16px; --md-shape-xl:28px; --md-shape-full:999px;
+  /* elevation */
+  --md-elev-1:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);
+  --md-elev-3:0 1px 3px rgba(0,0,0,.3),0 4px 8px 3px rgba(0,0,0,.15);
+  --md-font:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --field-bg:var(--md-surface);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--md-surface);color:var(--md-on-surface);font:400 1rem/1.5rem var(--md-font);letter-spacing:.031em}
+/* type scale */
+h1,h2,h3{margin:0;font-family:var(--md-font);text-wrap:balance}
+h1{font:400 1.375rem/1.75rem var(--md-font);letter-spacing:0}            /* title large */
+h2{font:400 1.375rem/1.75rem var(--md-font);letter-spacing:0}            /* title large */
+h3{font:500 1rem/1.5rem var(--md-font);letter-spacing:.009em}            /* title medium */
+p{margin:0}
+.muted{color:var(--md-on-surface-variant)}
+.small{font:400 .875rem/1.25rem var(--md-font);letter-spacing:.016em}    /* body medium */
+button,input,select,textarea{font:inherit;color:inherit;letter-spacing:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--md-primary);outline-offset:2px}
+.ico{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;display:inline-block}
+.ico.ico-fill{fill:currentColor;stroke:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* top app bar, small */
+.bar{background:var(--md-surface-container);color:var(--md-on-surface);position:sticky;top:0;z-index:20}
+.bar .wrap{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.bar .lead{width:40px;height:40px;border-radius:var(--md-shape-m);background:var(--md-primary-container);color:var(--md-on-primary-container);display:grid;place-items:center;flex:none}
+.bar .sub{font:400 .75rem/1rem var(--md-font);letter-spacing:.033em;color:var(--md-on-surface-variant)}
+.sp{flex:1}
+.badge{font:500 .75rem/1rem var(--md-font);letter-spacing:.042em;height:32px;display:inline-flex;align-items:center;padding:0 12px;border-radius:var(--md-shape-s);border:1px solid var(--md-outline-variant);color:var(--md-on-surface-variant)}
+main.wrap{padding:24px 24px 96px;display:grid;gap:24px}
+[hidden]{display:none !important}
+
+/* common buttons: 40 high, full shape, label large */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 24px;border-radius:var(--md-shape-full);border:0;font:500 .875rem/1.25rem var(--md-font);letter-spacing:.007em;background:transparent;white-space:nowrap;transition:box-shadow .15s,background-color .15s}
+.btn .ico{width:18px;height:18px;margin-left:-8px}
+.btn.filled{background:var(--md-primary);color:var(--md-on-primary)}
+.btn.filled:hover{box-shadow:var(--md-elev-1);background:color-mix(in srgb,var(--md-on-primary) 8%,var(--md-primary))}
+.btn.tonal{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.btn.tonal:hover{box-shadow:var(--md-elev-1);background:color-mix(in srgb,var(--md-on-secondary-container) 8%,var(--md-secondary-container))}
+.btn.outlined{border:1px solid var(--md-outline);color:var(--md-primary)}
+.btn.text{color:var(--md-primary);padding:0 12px}
+.btn.outlined:hover,.btn.text:hover{background:color-mix(in srgb,var(--md-primary) 8%,transparent)}
+.btn.danger{color:var(--md-error)}
+.btn.danger:hover{background:color-mix(in srgb,var(--md-error) 8%,transparent)}
+.btn.sm{height:32px;padding:0 16px}
+.btn:disabled{opacity:.38;cursor:default;box-shadow:none}
+/* standard icon button: 40 target, state layer */
+.iconb{border:0;background:transparent;width:40px;height:40px;border-radius:50%;display:inline-grid;place-items:center;color:var(--md-on-surface-variant);flex:none}
+.iconb .ico{width:20px;height:20px}
+.iconb:hover{background:color-mix(in srgb,var(--md-on-surface-variant) 8%,transparent)}
+/* extended FAB */
+.fab{position:fixed;right:24px;bottom:24px;height:56px;padding:0 20px 0 16px;border:0;border-radius:var(--md-shape-l);background:var(--md-primary-container);color:var(--md-on-primary-container);box-shadow:var(--md-elev-3);display:inline-flex;align-items:center;gap:12px;font:500 .875rem/1.25rem var(--md-font);letter-spacing:.007em;z-index:30}
+.fab:hover{background:color-mix(in srgb,var(--md-on-primary-container) 8%,var(--md-primary-container))}
+
+/* cards: medium shape */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.kpi{background:var(--md-surface-container-highest);border-radius:var(--md-shape-m);padding:16px;display:grid;gap:4px;position:relative;overflow:hidden}   /* filled card */
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--md-primary)}
+.kpi.good::before{background:var(--md-tertiary)} .kpi.warn::before{background:var(--md-caution)} .kpi.bad::before{background:var(--md-error)}
+.kpi .v{font:400 2.25rem/2.75rem var(--md-font);letter-spacing:0;font-variant-numeric:tabular-nums;padding-left:8px}   /* display small */
+.kpi .k{font:500 .75rem/1rem var(--md-font);letter-spacing:.042em;color:var(--md-on-surface-variant);padding-left:8px} /* label medium */
+.panel{--field-bg:var(--md-surface-container-lowest);background:var(--md-surface-container-lowest);border:1px solid var(--md-outline-variant);border-radius:var(--md-shape-m);padding:16px;display:flex;flex-direction:column;gap:16px;min-width:0}   /* outlined card */
+.ph{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.controls{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding-top:8px}
+
+/* outlined text fields: 56 high, extra small shape, label on the outline */
+.field{position:relative;display:inline-flex;flex-direction:column;min-width:170px}
+.field>span{position:absolute;left:12px;top:-8px;padding:0 4px;background:var(--field-bg);font:400 .75rem/1rem var(--md-font);letter-spacing:.033em;color:var(--md-on-surface-variant);z-index:1;pointer-events:none}
+.field input,.field select,.field textarea{height:56px;width:100%;border:1px solid var(--md-outline);border-radius:var(--md-shape-xs);padding:0 16px;font:400 1rem/1.5rem var(--md-font);letter-spacing:.031em;background:transparent;color:var(--md-on-surface)}
+.field textarea{height:auto;min-height:112px;padding:16px;resize:vertical}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:var(--md-on-surface)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--md-primary);box-shadow:inset 0 0 0 1px var(--md-primary)}
+.field:focus-within>span{color:var(--md-primary)}
+td select{height:36px;min-width:150px;max-width:100%;border:1px solid var(--md-outline);border-radius:var(--md-shape-s);padding:0 8px;font:400 .875rem/1.25rem var(--md-font);background:transparent}
+
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:24px;align-items:start}
+/* linear progress style bars: 4 high track is the spec; 8 here so seat counts stay readable */
+.bars{display:grid;gap:12px}
+.barrow{display:grid;gap:4px}
+.barrow .t{display:flex;justify-content:space-between;gap:8px;align-items:center;font:400 .875rem/1.25rem var(--md-font);letter-spacing:.016em}
+.barrow .t b{font-weight:500}
+.barrow .t .r{font-variant-numeric:tabular-nums;color:var(--md-on-surface-variant);white-space:nowrap;display:flex;align-items:center;gap:8px}
+.track{height:8px;border-radius:var(--md-shape-full);background:var(--md-surface-container-highest);overflow:hidden}
+.fill{height:100%;border-radius:var(--md-shape-full);background:var(--md-primary)}
+.fill.near{background:var(--md-caution)} .fill.full{background:var(--md-error)}
+
+.tablebox{overflow-x:auto;border:1px solid var(--md-outline-variant);border-radius:var(--md-shape-m)}
+table{border-collapse:collapse;width:100%;font:400 .875rem/1.25rem var(--md-font);letter-spacing:.016em}
+th,td{text-align:left;padding:8px 16px;height:52px;border-bottom:1px solid var(--md-outline-variant)}
+th,td.nw{white-space:nowrap}
+.tablebox.scroll{max-height:600px;overflow:auto}
+th{position:sticky;top:0;height:56px;background:var(--md-surface-container-low);font:500 .875rem/1.25rem var(--md-font);letter-spacing:.007em;color:var(--md-on-surface-variant);z-index:1}
+tbody tr:hover{background:color-mix(in srgb,var(--md-on-surface) 4%,transparent)}
+tr:last-child td{border-bottom:0}
+/* status labels, shaped like chips */
+.pill{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:var(--md-shape-s);font:500 .75rem/1rem var(--md-font);letter-spacing:.042em}
+.pill.ok{background:var(--md-tertiary-container);color:var(--md-on-tertiary-container)}
+.pill.warn{background:var(--md-caution-container);color:var(--md-on-caution-container)}
+.pill.bad{background:var(--md-error-container);color:var(--md-on-error-container)}
+.pill.info{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.st{display:inline-flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;background:var(--md-outline)}
+.dot.ok{background:var(--md-tertiary)} .dot.warn{background:var(--md-caution)} .dot.bad{background:var(--md-error)} .dot.info{background:var(--md-primary)}
+.cols4{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.bar a.btn{text-decoration:none}
+.btn.text .ico{margin-left:0}
+.empty{padding:24px;text-align:center;color:var(--md-on-surface-variant)}
+
+/* segmented buttons */
+.seg{display:inline-flex;border:1px solid var(--md-outline);border-radius:var(--md-shape-full);overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:transparent;height:40px;padding:0 16px;display:inline-flex;align-items:center;gap:8px;font:500 .875rem/1.25rem var(--md-font);letter-spacing:.007em;color:var(--md-on-surface)}
+.seg button+button{border-left:1px solid var(--md-outline)}
+.seg button:hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent)}
+.seg button[aria-pressed="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.seg button[aria-pressed="true"]::before{content:"\2713";font-size:16px;line-height:1;font-weight:700}
+
+.tgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tcard{background:var(--md-surface-container-low);border-radius:var(--md-shape-m);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0;box-shadow:var(--md-elev-1)}   /* elevated card */
+.tcard.can{background:var(--md-surface-container-lowest)}
+.tcard:not(.can){box-shadow:none;background:var(--md-surface-container-highest)}   /* filled card for locked sections */
+/* lists: one line items, 48 min height */
+.list{list-style:none;margin:0;padding:0;display:grid;font:400 .875rem/1.25rem var(--md-font);letter-spacing:.016em}
+.row{display:flex;align-items:center;gap:8px;min-height:48px;padding:4px 0 4px 8px;border-bottom:1px solid var(--md-outline-variant);min-width:0}
+.row:last-child{border-bottom:0}
+.row .grow{flex:1;min-width:0;overflow-wrap:anywhere;padding:6px 0}
+.row input[type=checkbox]{width:18px;height:18px;margin:0 8px 0 3px;accent-color:var(--md-primary);flex:none}
+.row.done .grow{text-decoration:line-through;color:var(--md-on-surface-variant)}
+.quick{display:flex;gap:8px;margin-top:auto;align-items:center}
+.quick input{flex:1;min-width:0;height:40px;border:1px solid var(--md-outline);border-radius:var(--md-shape-xs);padding:0 12px;background:transparent;font:400 .875rem/1.25rem var(--md-font)}
+.quick input:focus{outline:none;border-color:var(--md-primary);box-shadow:inset 0 0 0 1px var(--md-primary)}
+.lock{margin-top:auto;display:flex;gap:8px;align-items:center;font:400 .75rem/1rem var(--md-font);letter-spacing:.033em;color:var(--md-on-surface-variant)}
+
+/* basic dialog */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.32);display:grid;place-items:center;padding:16px;z-index:50}
+.scrim[hidden]{display:none}
+.dialog{--field-bg:var(--md-surface-container-high);background:var(--md-surface-container-high);border-radius:var(--md-shape-xl);padding:24px;width:min(480px,100%);max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;gap:24px;box-shadow:var(--md-elev-3)}
+.dialog h2{font:400 1.5rem/2rem var(--md-font)}   /* headline small */
+.k-fields{display:grid;gap:24px;padding-top:8px}
+.k-fields .field{display:flex}
+.dlg-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+/* snackbar */
+.snack{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);min-height:48px;background:var(--md-inverse-surface);color:var(--md-inverse-on-surface);border-radius:var(--md-shape-xs);padding:4px 8px 4px 16px;display:flex;gap:8px;align-items:center;box-shadow:var(--md-elev-3);z-index:60;font:400 .875rem/1.25rem var(--md-font);letter-spacing:.016em;max-width:calc(100% - 32px)}
+.snack[hidden]{display:none}
+.snack button{border:0;background:transparent;color:var(--md-inverse-primary);font:500 .875rem/1.25rem var(--md-font);height:40px;padding:0 12px;border-radius:var(--md-shape-full)}
+.built{background:var(--md-surface-container);border-radius:var(--md-shape-m);padding:16px;display:grid;gap:4px;font:400 .875rem/1.25rem var(--md-font);letter-spacing:.016em;color:var(--md-on-surface-variant)}
+.built b{color:var(--md-on-surface);font-weight:500}
+code{font-family:"Roboto Mono",ui-monospace,Menlo,monospace;font-size:.8125rem;background:var(--md-surface-container-highest);padding:1px 6px;border-radius:var(--md-shape-xs)}
+@media (max-width:860px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .two,.tgrid,.cols4{grid-template-columns:1fr !important}
+  .wrap{padding:0 16px}
+  main.wrap{padding:16px 16px 96px}
+  .fab{right:16px;bottom:16px}
+}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+
+/* inside the playbook page the tool hides its own back link */
+.embed a[href*="S9bGSH6neDDqR6Y5qSjhAq"]{display:none}
+
+/* data sources panel, added to every tool by kit.js */
+#k-sources{padding-bottom:72px;margin-top:-64px}
+#k-sources a{color:var(--md-primary)}
+.k-src-jump{text-decoration:none}
+.k-formula{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--md-surface-container);border-radius:var(--md-shape-s);padding:8px 8px 8px 12px;margin-bottom:8px}
+.k-formula code{flex:1;min-width:0;overflow-wrap:anywhere;background:transparent;padding:0}
+body.arena #k-sources,body.student #k-sources,body.present #k-sources,.embed .k-src-jump{display:none}
+body.arena .k-src-jump,body.student .k-src-jump,body.present .k-src-jump{display:none}
+
+</style>
+<style>
+.controls .field{flex:1 1 170px;min-width:0}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.les{border:1px solid var(--md-outline-variant);border-radius:var(--md-shape-m);background:var(--md-surface-container-lowest);padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.les h3{overflow-wrap:anywhere}
+.les p{font:400 .875rem/1.25rem var(--md-font);overflow-wrap:anywhere}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.std{display:inline-flex;align-items:center;min-height:28px;padding:2px 10px;border-radius:var(--md-shape-s);background:var(--md-primary-container);color:var(--md-on-primary-container);font:500 .8125rem/1.125rem var(--md-font)}
+.meta{display:flex;gap:6px 12px;flex-wrap:wrap;font:400 .75rem/1rem var(--md-font);color:var(--md-on-surface-variant)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.note{background:var(--md-caution-container);color:var(--md-on-caution-container);border-radius:var(--md-shape-s);padding:8px 12px;font:400 .8125rem/1.125rem var(--md-font);overflow-wrap:anywhere}
+.pick{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.pk{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--md-outline-variant);border-radius:var(--md-shape-s);min-width:0;font:400 .875rem/1.25rem var(--md-font)}
+.pk:has(input:checked){background:var(--md-secondary-container);border-color:transparent}
+.pk input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--md-primary);flex:none}
+.pk b{font-weight:500}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding-top:8px}
+.form .wide{grid-column:1/-1}
+.who{background:var(--md-surface-container);border-radius:var(--md-shape-m);padding:12px 16px;font:400 .875rem/1.25rem var(--md-font);color:var(--md-on-surface-variant)}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="btn text" href="../../k12-playbook.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Playbook</a>
+  <span class="lead"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5v11H3zM7 20v-7h10v7M7 16h10"/></svg></span>
+  <div><h1>Curriculum Warehouse</h1><div class="sub">Approved lessons aligned to Georgia standards, invented district</div></div>
+  <span class="sp"></span>
+  <div class="seg" role="group" aria-label="Signed in as" id="role"></div>
+  <button class="btn outlined sm" id="reset" type="button">Restore sample</button>
+</div></header>
+<main class="wrap" id="app"></main>
+<script>
+/* Shared by every tool: the "Link a Google Sheet" steps and the backup and restore tools.
+   In a real copy that runs as an Apps Script web app, step 1 asks the script for the Sheet's name and tabs.
+   In this preview there is no signed in Google account, so the teacher types them or tries a sample Sheet. */
+var KLink=(function(){
+  "use strict";
+  var P="var(--md-primary,var(--primary))",OV="var(--md-on-surface-variant,var(--on-surface-variant))",OL="var(--md-outline-variant,var(--outline-variant,#C4C7C5))";
+  var st=document.createElement("style");
+  st.textContent=".kl-step{font-size:.75rem;line-height:1rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:"+P+";margin:0}"+
+   ".kl-body{display:flex;flex-direction:column;gap:20px;min-width:0}"+
+   ".kl-help{font-size:.875rem;line-height:1.25rem;color:"+OV+";margin:0}"+
+   ".kl-err{font-size:.875rem;line-height:1.25rem;color:var(--md-error,var(--error,#B3261E));margin:0}"+
+   ".kl-note{font-size:.875rem;line-height:1.25rem;border-radius:12px;padding:12px 16px;background:var(--md-caution-container,#FFE0B2);color:var(--md-on-caution-container,#2B1700);margin:0}"+
+   ".kl-samples{display:flex;flex-wrap:wrap;gap:8px;align-items:center}"+
+   ".kl-samples button,.kl-tab{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 14px;border:1px solid "+OL+";border-radius:8px;background:transparent;color:inherit;font:inherit;font-size:.875rem;line-height:1.25rem;font-weight:500;overflow-wrap:anywhere;text-align:left}"+
+   ".kl-found{display:flex;gap:12px;align-items:center;border-radius:12px;padding:12px 16px;background:var(--md-tertiary-container,#C4EED0);color:var(--md-on-tertiary-container,#072711);min-width:0}"+
+   ".kl-found div{flex:1;min-width:0;display:grid;gap:2px}.kl-found b{font-weight:500;overflow-wrap:anywhere}.kl-found span{font-size:.75rem;line-height:1rem;overflow-wrap:anywhere}"+
+   ".kl-found button{border:0;background:transparent;color:inherit;font:inherit;font-size:.875rem;font-weight:500;text-decoration:underline;padding:8px;flex:none}"+
+   ".kl-tabs{border:0;margin:0;padding:0;display:grid;gap:8px;min-width:0}.kl-tabs legend{font-size:.875rem;line-height:1.25rem;font-weight:500;padding:0 0 8px}"+
+   ".kl-tablist{display:flex;flex-wrap:wrap;gap:8px}.kl-tab input{width:18px;height:18px;margin:0;accent-color:"+P+";flex:none}"+
+   ".kl-tab:has(input:checked){background:var(--md-secondary-container,var(--secondary-container,#C2E7FF));border-color:transparent}"+
+   ".kl-file{font:inherit;font-size:.875rem;max-width:100%}";
+  document.head.appendChild(st);
+  var host=document.createElement("div");
+  host.innerHTML='<div class="scrim" id="kl-scrim" hidden><form class="dialog" id="kl-dlg" role="dialog" aria-modal="true" aria-labelledby="kl-t" novalidate><h2 id="kl-t"></h2><div class="kl-body" id="kl-body"></div><div class="dlg-actions" id="kl-act"></div></form></div>';
+  document.body.appendChild(host);
+  function $(id){return document.getElementById(id)}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  function ok(u){return /^https:\/\/docs\.google\.com\/spreadsheets\/d\/[^\/\s]+/.test(u)}
+  function live(){try{return !!(window.google&&google.script&&google.script.run)}catch(e){return false}}
+  var SAMPLES=[
+    {name:"Class Roster",url:"https://docs.google.com/spreadsheets/d/sample-class-roster/edit",tabs:["1st Period","2nd Period","3rd Period","5th Period","6th Period","Homeroom"]},
+    {name:"School Calendar",url:"https://docs.google.com/spreadsheets/d/sample-school-calendar/edit",tabs:["Dates","Testing Windows","Early Release Days"]},
+    {name:"Georgia Standards from SuitCASE",url:"https://docs.google.com/spreadsheets/d/sample-georgia-standards/edit",tabs:["Math","English Language Arts","Science","Social Studies"]}];
+  function isSample(u){return /\/d\/sample-/.test(u)}
+  var o=null,s=null,lastFocus=null,mode="";
+
+  function close(){$("kl-scrim").hidden=true;o=null;mode="";if(lastFocus&&document.contains(lastFocus))lastFocus.focus()}
+  function show(){lastFocus=document.activeElement;$("kl-scrim").hidden=false}
+
+  /* ---------- link a Sheet ---------- */
+  function open(opts){
+    o=opts;mode="link";var src=opts.source;
+    s=src?{step:2,url:src.url||"",name:src.name||"",all:(src.allTabs&&src.allTabs.length?src.allTabs:split(src.tabs)).slice(),picked:split(src.tabs),use:src.use||"",mode:src.mode||"ref",manual:false,err:"",busy:false,edit:true}
+         :{step:1,url:"",name:"",all:[],picked:[],use:"",mode:opts.mode||"ref",manual:false,err:"",busy:false,edit:false};
+    s.picked.forEach(function(t){if(s.all.indexOf(t)<0)s.all.push(t)});
+    show();render();
+  }
+  function split(t){return String(t||"").split(",").map(function(x){return x.trim()}).filter(Boolean)}
+  function render(){
+    $("kl-t").textContent=s.edit?"Edit linked Sheet":"Link a Google Sheet";
+    var b="",a="";
+    if(s.step===1){
+      b='<p class="kl-step">Step 1 of 2: paste the link</p>'+
+        '<p class="kl-help">Open the Google Sheet, copy the address from the top of the browser, and paste it here.</p>'+
+        '<label class="field" for="kl-url"><span>Link to the Google Sheet</span><input id="kl-url" value="'+esc(s.url)+'" placeholder="https://docs.google.com/spreadsheets/d/..." autocomplete="off"></label>'+
+        (s.err?'<p class="kl-err" role="alert">'+esc(s.err)+'</p>':'')+
+        (s.busy?'<p class="kl-help" role="status">Looking for the Sheet...</p>':'')+
+        (s.manual?'<p class="kl-note">This preview is not signed in to Google, so it cannot open your Sheet. In your own copy, the name and the list of tabs fill in by themselves. For now, type them.</p>'+
+          '<label class="field" for="kl-name"><span>Name of the Sheet</span><input id="kl-name" value="'+esc(s.name)+'"></label>'+
+          '<label class="field" for="kl-all"><span>Tab names, separated by commas</span><input id="kl-all" value="'+esc(s.all.join(", "))+'" placeholder="Roster, Schedule"></label>':'')+
+        (live()?'':'<div class="kl-samples"><span class="kl-help">No link handy? Try a sample Sheet:</span>'+SAMPLES.map(function(x,i){return '<button type="button" data-kls="'+i+'">'+esc(x.name)+'</button>'}).join("")+'</div>');
+      a='<span style="flex:1"></span><button type="button" class="btn text" data-kl="cancel">Cancel</button><button type="submit" class="btn filled"'+(s.busy?" disabled":"")+'>'+(s.manual?"Continue":"Find this Sheet")+'</button>';
+    }else{
+      b='<p class="kl-step">Step 2 of 2: choose the tabs</p>'+
+        '<div class="kl-found"><div><b>'+esc(s.name||"Google Sheet")+'</b><span>'+esc(s.url?(isSample(s.url)?"Sample Sheet for this preview":s.url.slice(0,70)+(s.url.length>70?"...":"")):"Sample, no link yet")+'</span></div><button type="button" data-kl="change">Change link</button></div>'+
+        '<fieldset class="kl-tabs"><legend>Tabs to use from this Sheet</legend>'+(s.all.length?'<div class="kl-tablist">'+s.all.map(function(t,i){return '<label class="kl-tab"><input type="checkbox" data-klt="'+i+'"'+(s.picked.indexOf(t)>=0?" checked":"")+'>'+esc(t)+'</label>'}).join("")+'</div>':'<p class="kl-help">No tabs were found. Select Change link and try again.</p>')+'</fieldset>'+
+        (s.err?'<p class="kl-err" role="alert">'+esc(s.err)+'</p>':'')+
+        '<label class="field" for="kl-use"><span>What it feeds in this tool</span><input id="kl-use" value="'+esc(s.use)+'" placeholder="Student names"></label>'+
+        '<label class="field" for="kl-mode"><span>How it is used</span><select id="kl-mode"><option value="ref"'+(s.mode==="ref"?" selected":"")+'>Reference, read only</option><option value="save"'+(s.mode==="save"?" selected":"")+'>Reads and saves</option></select></label>';
+      a=(s.edit&&o.onDelete?'<button type="button" class="btn text danger" data-kl="delete">Remove</button>':'')+'<span style="flex:1"></span><button type="button" class="btn text" data-kl="cancel">Cancel</button><button type="submit" class="btn filled">Save</button>';
+    }
+    $("kl-body").innerHTML=b;$("kl-act").innerHTML=a;
+    var f=$("kl-body").querySelector(s.manual?"#kl-name":"input");if(f)f.focus();
+  }
+  function keep(){
+    var e;
+    if((e=$("kl-url")))s.url=e.value.trim();
+    if((e=$("kl-name")))s.name=e.value.trim();
+    if((e=$("kl-all")))s.all=split(e.value);
+    if((e=$("kl-use")))s.use=e.value.trim();
+    if((e=$("kl-mode")))s.mode=e.value;
+  }
+  function found(info){s.busy=false;s.err="";s.name=info.name;s.all=info.tabs.slice();s.picked=s.picked.filter(function(t){return s.all.indexOf(t)>=0});if(!s.picked.length&&s.all.length===1)s.picked=s.all.slice();s.step=2;s.manual=false;render()}
+  function find(skip){
+    if(!skip)keep();s.err="";
+    if(!ok(s.url)){s.err="That does not look like a Google Sheets link. It should start with https://docs.google.com/spreadsheets/d/";render();return}
+    var sm=SAMPLES.filter(function(x){return x.url===s.url})[0];
+    if(sm){found(sm);return}
+    if(live()){
+      s.busy=true;render();
+      google.script.run.withSuccessHandler(function(info){if(mode==="link")found(info)}).withFailureHandler(function(){if(mode!=="link")return;s.busy=false;s.err="The Sheet could not be opened. Check that you can open the link yourself, then try again.";render()}).sheetInfo(s.url);
+      return;
+    }
+    if(!s.manual){s.manual=true;render();return}
+    if(!s.name){s.err="Type the name of the Sheet.";render();return}
+    if(!s.all.length){s.err="Type at least one tab name. The tab names are at the bottom of the Sheet.";render();return}
+    found({name:s.name,tabs:s.all});
+  }
+  $("kl-dlg").addEventListener("submit",function(e){
+    e.preventDefault();
+    if(mode==="restore"){doRestore();return}
+    if(mode!=="link")return;
+    if(s.step===1){find();return}
+    keep();
+    if(!s.picked.length){s.err="Tick at least one tab to use.";render();return}
+    var out={name:s.name,url:s.url,tabs:s.all.filter(function(t){return s.picked.indexOf(t)>=0}).join(", "),allTabs:s.all.slice(),use:s.use,mode:s.mode},fn=o.onSave;
+    close();fn(out);
+  });
+  $("kl-dlg").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    if(b.dataset.kl==="cancel")close();
+    else if(b.dataset.kl==="change"){keep();s.step=1;s.err="";s.manual=!live()&&!isSample(s.url)&&!!s.url;render()}
+    else if(b.dataset.kl==="delete"){var fn=o.onDelete;close();fn()}
+    else if(b.dataset.kls){keep();s.url=SAMPLES[+b.dataset.kls].url;s.manual=false;find(true)}
+  });
+  $("kl-dlg").addEventListener("change",function(e){
+    var i=e.target.dataset.klt;if(i===undefined)return;var t=s.all[+i],k=s.picked.indexOf(t);
+    if(e.target.checked&&k<0)s.picked.push(t);if(!e.target.checked&&k>=0)s.picked.splice(k,1);
+  });
+  $("kl-scrim").addEventListener("mousedown",function(e){if(e.target===$("kl-scrim"))close()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&mode)close()});
+
+  /* one IMPORTRANGE formula per chosen tab */
+  function formulas(src){return split(src.tabs).map(function(t){var r=/^[A-Za-z0-9_]+$/.test(t)?t:"'"+t.replace(/'/g,"''")+"'";return {tab:t,f:'=IMPORTRANGE("'+src.url+'", "'+r+'!A:Z")'}})}
+
+  /* ---------- backup and restore ---------- */
+  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function set(k,v){try{localStorage.setItem(k,v);return true}catch(e){return false}}
+  function text(title,keys){var data={};keys.forEach(function(k){var v=get(k);if(v!=null)data[k]=v});return JSON.stringify({app:title,made:new Date().toISOString(),data:data})}
+  function pad(n){return n<10?"0"+n:""+n}
+  /* Saving a file. Inside the Claude artifact viewer a page must use the viewer's own save tool. Anywhere else an ordinary download link works. */
+  var saver=null,framed=false;
+  try{if(window.claude&&typeof claude.use==="function"){framed=true;claude.use("downloads").then(function(d){saver=d},function(){})}}catch(e){}
+  function saveFile(name,data,cb){
+    cb=cb||function(){};
+    if(saver){try{saver.save({filename:name,data:data}).then(function(){cb(true)},function(){cb(false)})}catch(e){cb(false)}return}
+    try{var a=document.createElement("a");a.href=URL.createObjectURL(data instanceof Blob?data:new Blob([data],{type:"application/octet-stream"}));a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);cb(framed?null:true)}catch(e){cb(false)}
+  }
+  function download(title,keys,cb){
+    var d=new Date(),name=title.replace(/[^A-Za-z0-9]+/g,"_")+"_backup_"+d.getFullYear()+"_"+pad(d.getMonth()+1)+"_"+pad(d.getDate())+".json";
+    saveFile(name,text(title,keys),function(ok){if(ok!==false)set("k-backup:"+title,String(Date.now()));if(cb)cb(ok,name)});
+    return name;
+  }
+  function last(title){
+    var t=+get("k-backup:"+title);if(!t)return "";
+    var d=new Date(t),h=d.getHours(),m=d.getMinutes(),MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+    return MN[d.getMonth()]+" "+d.getDate()+" at "+((h+11)%12+1)+":"+pad(m)+(h<12?" am":" pm");
+  }
+  var R=null;
+  function restore(title,keys){
+    R={title:title,keys:keys,err:""};mode="restore";show();
+    $("kl-t").textContent="Restore from a backup";
+    $("kl-body").innerHTML='<p class="kl-help">Choose the backup file you downloaded from this tool. Everything in the tool now will be replaced with what is in the file.</p>'+
+      '<input class="kl-file" type="file" id="kl-file" accept=".json,application/json" aria-label="Backup file">'+
+      '<label class="field" for="kl-paste"><span>Or paste the backup text</span><textarea id="kl-paste"></textarea></label><p class="kl-err" id="kl-rerr" role="alert" hidden></p>';
+    $("kl-act").innerHTML='<span style="flex:1"></span><button type="button" class="btn text" data-kl="cancel">Cancel</button><button type="submit" class="btn filled">Restore</button>';
+    $("kl-file").focus();
+  }
+  function fail(m){var e=$("kl-rerr");e.textContent=m;e.hidden=false}
+  function apply(t){
+    var obj;try{obj=JSON.parse(t)}catch(e){fail("That is not a backup from this tool. Choose the file that ends in .json");return}
+    if(!obj||!obj.data||typeof obj.data!=="object"){fail("That is not a backup from this tool.");return}
+    if(obj.app!==R.title){fail("That backup is from a different tool: "+(obj.app||"unknown")+". Open that tool to restore it.");return}
+    var n=0;R.keys.forEach(function(k){if(typeof obj.data[k]==="string"){set(k,obj.data[k]);n++}else{try{localStorage.removeItem(k)}catch(e){}}});
+    if(!n){fail("The backup file is empty.");return}
+    set("k-restored:"+R.title,"1");location.reload();
+  }
+  function doRestore(){
+    var f=$("kl-file").files&&$("kl-file").files[0],p=$("kl-paste").value.trim();
+    if(f){var rd=new FileReader();rd.onload=function(){apply(String(rd.result))};rd.onerror=function(){fail("The file could not be read.")};rd.readAsText(f)}
+    else if(p)apply(p);
+    else fail("Choose a backup file first.");
+  }
+  function justRestored(title){var k="k-restored:"+title;if(get(k)){try{localStorage.removeItem(k)}catch(e){}return true}return false}
+
+  return {open:open,ok:ok,formulas:formulas,saveFile:saveFile,download:download,backupText:text,last:last,restore:restore,justRestored:justRestored,live:live};
+})();
+
+/* Georgia standards, shared by every tool. Ships with a short sample list. The official list is loaded from a file saved from the state SuitCASE site, so the wording always comes from the state. */
+var KStd=(function(){
+  "use strict";
+  var KEY="k-standards-v1",PK="k-standards-mine-v1",FEED="https://case.georgiastandards.org/ims/case/v1p1/CFPackages/e9dd7229-3558-4df2-85c6-57b8938f6180";
+  var SAMPLE=[["3.NR.1","3","Place value and rounding"],["3.PAR.2","3","Addition and subtraction strategies"],["3.PAR.3","3","Multiplication and division within 100"],["3.NR.4","3","Fractions as numbers"],["3.MDR.5","3","Measurement, time, and data"],["3.GSR.6","3","Geometric and spatial reasoning"],["3.GSR.7","3","Area and perimeter"],["4.NR.2","4","Multi digit operations"],["4.PAR.3","4","Patterns and factors"],["4.NR.4","4","Fraction equivalence and operations"],["4.NR.5","4","Decimals and fractions"]].map(function(x){return {code:x[0],grade:x[1],subject:"Math",text:x[2],t:"s"}});
+  function $(id){return document.getElementById(id)}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  function get(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}}
+  function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+  function data(){var v=get(KEY);return v&&v.items&&v.items.length?v:{items:SAMPLE,source:"Sample list with short labels",sample:true}}
+  function prefs(){var p=get(PK);return p&&p.grades?p:{grades:[],subjects:[]}}
+  function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i})}
+  function gsort(a,b){function n(g){return g==="K"?0:/^\d+$/.test(g)?+g:99}return n(a)-n(b)||(a<b?-1:1)}
+  function grades(){return uniq(data().items.map(function(i){return i.grade})).sort(gsort)}
+  function subjects(){return uniq(data().items.map(function(i){return i.subject})).sort()}
+  function mine(){var p=prefs();return data().items.filter(function(i){return (!p.grades.length||p.grades.indexOf(i.grade)>=0)&&(!p.subjects.length||p.subjects.indexOf(i.subject)>=0)})}
+  function lvl(x){x=String(x);return x==="KG"||x==="K"?"K":/^\d+$/.test(x)?String(+x):x}
+  function gradeOf(it){
+    var m=/^(K|\d{1,2})\./.exec(it.humanCodingScheme||"");if(m)return lvl(m[1]);
+    var L=(it.educationLevel||[]).map(lvl);if(L.length===1)return L[0];
+    if(L.length&&L.every(function(x){return +x>=9}))return "High school";
+    return L.length?L[0]+" to "+L[L.length-1]:"Other";
+  }
+  function guess(doc){var t=((doc&&doc.title)||"")+" "+(((doc&&doc.subject)||[]).join(" "));
+    if(/math/i.test(t))return "Math";if(/english|language arts|ELA/i.test(t))return "English Language Arts";if(/science/i.test(t))return "Science";if(/social/i.test(t))return "Social Studies";return ""}
+  /* Reads a CASE package: the file the state site gives for a whole framework. */
+  function parse(text,subject){
+    var o=JSON.parse(text),items=o.CFItems||(o.CFPackage&&o.CFPackage.CFItems)||[],doc=o.CFDocument||(o.CFPackage&&o.CFPackage.CFDocument)||{};
+    if(!items.length)throw new Error("none");
+    subject=subject||guess(doc)||"Other";
+    var out=[],seen={};
+    items.forEach(function(it){
+      var code=(it.humanCodingScheme||"").trim(),type=it.CFItemType||"",txt=String(it.fullStatement||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+      if(!code||!txt||/^(course|domain|subject|grade)/i.test(type)||seen[code])return;seen[code]=1;
+      out.push({code:code,grade:gradeOf(it),subject:subject,text:txt,t:/element|objective|expectation/i.test(type)?"e":"s"});
+    });
+    if(!out.length)throw new Error("none");
+    return {items:out,title:(doc.title||"").trim(),subject:subject};
+  }
+  function store(res){
+    var cur=get(KEY),keep=cur&&cur.items?cur.items.filter(function(i){return i.subject!==res.subject}):[];
+    var d=new Date(),MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+    return put(KEY,{items:keep.concat(res.items),source:(res.title||"State file")+", loaded "+MN[d.getMonth()]+" "+d.getDate(),sample:false});
+  }
+  var st=document.createElement("style");
+  st.textContent=".ks-list{display:grid;gap:6px;max-height:42vh;overflow-y:auto;padding:2px}.ks-row{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--md-outline-variant,var(--outline-variant,#C4C7C5));border-radius:8px;font-size:.875rem;line-height:1.25rem;min-width:0}.ks-row span{min-width:0;overflow-wrap:anywhere}.ks-row b{font-weight:500}.ks-row input{width:18px;height:18px;margin:1px 0 0;flex:none;accent-color:var(--md-primary,var(--primary))}.ks-row:has(input:checked){background:var(--md-secondary-container,var(--secondary-container,#C2E7FF));border-color:transparent}.ks-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}.ks-steps{margin:0;padding-left:20px;font-size:.875rem;line-height:1.375rem}.ks-steps code{overflow-wrap:anywhere;word-break:break-all}#ks-dlg{width:min(640px,100%)}";
+  document.head.appendChild(st);
+  var host=document.createElement("div");
+  host.innerHTML='<div class="scrim" id="ks-scrim" hidden><form class="dialog" id="ks-dlg" role="dialog" aria-modal="true" aria-labelledby="ks-t" novalidate><h2 id="ks-t"></h2><div class="kl-body" id="ks-body"></div><div class="dlg-actions" id="ks-act"></div></form></div>';
+  document.body.appendChild(host);
+  var mode="",cb=null,P=null,last=null;
+  function show(){last=document.activeElement;$("ks-scrim").hidden=false}
+  function close(){$("ks-scrim").hidden=true;mode="";if(last&&document.contains(last))last.focus()}
+  function chips(name,list,on){return '<div class="kl-tablist">'+list.map(function(x){return '<label class="kl-tab"><input type="checkbox" data-ks'+name+'="'+esc(x)+'"'+(on.indexOf(x)>=0?" checked":"")+'>'+esc(name==="g"?(x==="K"?"Kindergarten":/^\d+$/.test(x)?"Grade "+x:x):x)+'</label>'}).join("")+'</div>'}
+  /* ---------- choose my grades and subjects, and load the official list ---------- */
+  function setup(done){
+    mode="setup";cb=done||null;var d=data(),p=prefs();P={grades:p.grades.slice(),subjects:p.subjects.slice(),msg:"",err:""};show();drawSetup();
+  }
+  function drawSetup(){
+    var d=data();
+    $("ks-t").textContent="Georgia standards";
+    $("ks-body").innerHTML='<p class="kl-help">'+(d.sample?'<b>Using the sample list.</b> It has real Georgia codes with short labels, not the official wording.':'<b>'+d.items.length+' standards loaded.</b> '+esc(d.source)+'.')+'</p>'+
+      '<fieldset class="kl-tabs"><legend>Grades I teach</legend>'+chips("g",grades(),P.grades)+'</fieldset>'+
+      '<fieldset class="kl-tabs"><legend>Subjects I teach</legend>'+chips("s",subjects(),P.subjects)+'</fieldset>'+
+      '<fieldset class="kl-tabs"><legend>Load the official list from the state</legend><ol class="ks-steps"><li>Open this address in a new browser tab:<br><code>'+FEED+'</code></li><li>Hold Ctrl and press S to save the page as a file. On a Mac, hold Command.</li><li>Choose that file here. That address is the math list. Each subject has its own.</li></ol>'+
+      '<div class="ks-two"><input class="kl-file" type="file" id="ks-file" accept=".json,application/json,text/plain" aria-label="Standards file from the state site"><label class="field" for="ks-sub"><span>Subject of this file</span><input id="ks-sub" placeholder="Math"></label></div></fieldset>'+
+      (P.msg?'<p class="kl-help" role="status" style="color:var(--md-tertiary,#146C2E);font-weight:500">'+esc(P.msg)+'</p>':'')+(P.err?'<p class="kl-err" role="alert">'+esc(P.err)+'</p>':'');
+    $("ks-act").innerHTML=(d.sample?'':'<button type="button" class="btn text danger" data-ks="clear">Go back to the sample list</button>')+'<span style="flex:1"></span><button type="button" class="btn text" data-ks="cancel">Cancel</button><button type="submit" class="btn filled">Save</button>';
+  }
+  function loadFile(f){
+    var sub=$("ks-sub").value.trim(),rd=new FileReader();
+    rd.onload=function(){
+      try{var res=parse(String(rd.result),sub);
+        if(!store(res)){P.err="The file is too large to keep in this browser. Ask your tech coach to load it into the Standards Sheet instead.";P.msg=""}
+        else{P.msg=res.items.length+" "+res.subject+" standards loaded. Now tick your grades.";P.err="";P.grades=P.grades.filter(function(g){return grades().indexOf(g)>=0});if(P.subjects.indexOf(res.subject)<0)P.subjects.push(res.subject)}
+      }catch(e){P.err="That file does not look like a standards file from the state site. Save the page again and choose the new file.";P.msg=""}
+      drawSetup();
+    };
+    rd.onerror=function(){P.err="The file could not be read.";drawSetup()};rd.readAsText(f);
+  }
+  /* ---------- click the standards to use ---------- */
+  function pick(o){
+    mode="pick";cb=o.onDone;var p=prefs(),G=grades(),SJ=subjects();
+    P={sel:(o.selected||[]).slice(),grade:p.grades.length===1?p.grades[0]:"",subject:p.subjects.length===1?p.subjects[0]:"",q:"",el:false,title:o.title||"Pick standards"};show();drawPick(true);
+  }
+  function rows(){var p=prefs(),q=P.q.toLowerCase();return data().items.filter(function(i){return (P.grade?i.grade===P.grade:(!p.grades.length||p.grades.indexOf(i.grade)>=0))&&(P.subject?i.subject===P.subject:(!p.subjects.length||p.subjects.indexOf(i.subject)>=0))&&(P.el||i.t!=="e")&&(!q||(i.code+" "+i.text).toLowerCase().indexOf(q)>=0)})}
+  function listHtml(){var R=rows(),cut=R.slice(0,150);return (cut.map(function(i){return '<label class="ks-row"><input type="checkbox" data-kspick="'+esc(i.code)+'"'+(P.sel.indexOf(i.code)>=0?" checked":"")+'><span><b>'+esc(i.code)+'</b> '+esc(i.text)+'</span></label>'}).join("")||'<p class="kl-help">No standards match. Change the grade, the subject, or the search.</p>')+(R.length>150?'<p class="kl-help">Showing the first 150 of '+R.length+'. Pick a grade or search to narrow the list.</p>':'')}
+  function drawPick(full){
+    if(full){
+      var p=prefs(),G=p.grades.length?p.grades:grades(),SJ=p.subjects.length?p.subjects:subjects(),hasEl=data().items.some(function(i){return i.t==="e"});
+      $("ks-t").textContent=P.title;
+      $("ks-body").innerHTML='<div class="ks-two"><label class="field" for="ks-g"><span>Grade</span><select id="ks-g"><option value="">All my grades</option>'+G.map(function(g){return '<option value="'+esc(g)+'"'+(g===P.grade?" selected":"")+'>'+esc(g==="K"?"Kindergarten":/^\d+$/.test(g)?"Grade "+g:g)+'</option>'}).join("")+'</select></label><label class="field" for="ks-s"><span>Subject</span><select id="ks-s"><option value="">All my subjects</option>'+SJ.map(function(s){return '<option'+(s===P.subject?" selected":"")+'>'+esc(s)+'</option>'}).join("")+'</select></label></div>'+
+        '<label class="field" for="ks-q"><span>Search by code or words</span><input id="ks-q" value="'+esc(P.q)+'"></label>'+(hasEl?'<label class="kl-tab" style="align-self:flex-start"><input type="checkbox" id="ks-el"'+(P.el?" checked":"")+'>Show the smaller learning objectives too</label>':'')+
+        '<div class="ks-list" id="ks-list"></div>';
+      $("ks-act").innerHTML='<span class="kl-help" id="ks-n"></span><span style="flex:1"></span><button type="button" class="btn text" data-ks="cancel">Cancel</button><button type="submit" class="btn filled">Use these</button>';
+    }
+    $("ks-list").innerHTML=listHtml();$("ks-n").textContent=P.sel.length+" picked";
+  }
+  $("ks-dlg").addEventListener("submit",function(e){
+    e.preventDefault();var fn=cb;
+    if(mode==="setup"){put(PK,{grades:P.grades,subjects:P.subjects});close();if(fn)fn()}
+    else if(mode==="pick"){var all=data().items,out=P.sel.map(function(c){return all.filter(function(i){return i.code===c})[0]}).filter(Boolean),smp=!!data().sample;close();if(fn)fn(out.map(function(i){return {code:i.code,grade:i.grade,subject:i.subject,text:i.text,official:!smp}}))}
+  });
+  $("ks-dlg").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    if(b.dataset.ks==="cancel")close();
+    else if(b.dataset.ks==="clear"){try{localStorage.removeItem(KEY)}catch(err){}P.grades=[];P.subjects=[];P.msg="Back to the sample list.";P.err="";drawSetup()}
+  });
+  $("ks-dlg").addEventListener("change",function(e){
+    var d=e.target.dataset,t=e.target;
+    function tog(a,v){var i=a.indexOf(v);if(t.checked&&i<0)a.push(v);if(!t.checked&&i>=0)a.splice(i,1)}
+    if(d.ksg!==undefined)tog(P.grades,d.ksg);
+    else if(d.kss!==undefined)tog(P.subjects,d.kss);
+    else if(d.kspick!==undefined){tog(P.sel,d.kspick);$("ks-n").textContent=P.sel.length+" picked"}
+    else if(t.id==="ks-file"&&t.files&&t.files[0])loadFile(t.files[0]);
+    else if(t.id==="ks-g"){P.grade=t.value;drawPick()}
+    else if(t.id==="ks-s"){P.subject=t.value;drawPick()}
+    else if(t.id==="ks-el"){P.el=t.checked;drawPick()}
+  });
+  $("ks-dlg").addEventListener("input",function(e){if(e.target.id==="ks-q"){P.q=e.target.value;drawPick()}});
+  $("ks-scrim").addEventListener("mousedown",function(e){if(e.target===$("ks-scrim"))close()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&mode)close()});
+  function summary(){var d=data(),p=prefs();return {count:d.items.length,sample:!!d.sample,source:d.source,grades:p.grades.slice().sort(gsort),subjects:p.subjects.slice().sort(),mine:mine().filter(function(i){return i.t!=="e"}).length}}
+  return {setup:setup,pick:pick,mine:mine,summary:summary,parse:parse,PREFS:PK};
+})();
+
+/* Shared helpers for the showcase dashboards: escaping, ids, browser storage, an edit dialog, and an undo message. */
+try{if(location.hash.indexOf("embed")>=0)document.documentElement.classList.add("embed")}catch(e){}
+var K=(function(){
+  "use strict";
+  var ICONS={"arrow_back":"<path d='M19 12H5M11 6l-6 6 6 6'/>","arrow_forward":"<path d='M5 12h14M13 6l6 6-6 6'/>","arrow_upward":"<path d='M12 19V5M6 11l6-6 6 6'/>","arrow_downward":"<path d='M12 5v14M6 13l6 6 6-6'/>","chevron_left":"<path d='M15 6l-6 6 6 6'/>","chevron_right":"<path d='M9 6l6 6-6 6'/>","edit":"<path d='M4 20h4L19 9l-4-4L4 16zM13 7l4 4'/>","delete":"<path d='M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13M10 11v6M14 11v6'/>","close":"<path d='M6 6l12 12M18 6L6 18'/>","add":"<path d='M12 5v14M5 12h14'/>","check":"<path d='M5 12l5 5 9-10'/>","check_circle":"<circle cx='12' cy='12' r='9'/><path d='M8 12l3 3 5-6'/>","task_alt":"<circle cx='12' cy='12' r='9'/><path d='M8 12l3 3 5-6'/>","content_copy":"<rect x='9' y='9' width='11' height='11' rx='2'/><path d='M5 15V5a1 1 0 0 1 1-1h10'/>","download":"<path d='M12 4v11M7 11l5 5 5-5M5 20h14'/>","shuffle":"<path d='M4 7h3l10 10h3M4 17h3l3-3M14 10l3-3h3M18 5l2 2-2 2M18 15l2 2-2 2'/>","casino":"<rect x='4' y='4' width='16' height='16' rx='3'/><path d='M9 9h.01M15 15h.01M12 12h.01M15 9h.01M9 15h.01' stroke-width='2.6'/>","play_arrow":"F<path d='M8 5l11 7-11 7z'/>","pause":"<path d='M8 5v14M16 5v14' stroke-width='3'/>","skip_next":"<path d='M6 5l9 7-9 7zM18 5v14'/>","restart_alt":"<path d='M4 12a8 8 0 1 0 3-6.2M4 4v5h5'/>","replay":"<path d='M4 12a8 8 0 1 0 3-6.2M4 4v5h5'/>","timer":"<circle cx='12' cy='13' r='8'/><path d='M12 13V9M9 2h6'/>","groups":"<circle cx='9' cy='9' r='3'/><circle cx='17' cy='10' r='2.5'/><path d='M3 19c0-3 3-5 6-5s6 2 6 5M16 14.5c3 0 5 1.8 5 4.5'/>","calendar_view_week":"<rect x='3' y='5' width='18' height='14' rx='2'/><path d='M9 5v14M15 5v14'/>","calendar_month":"<rect x='4' y='5' width='16' height='15' rx='2'/><path d='M4 10h16M8 3v4M16 3v4'/>","today":"<rect x='4' y='5' width='16' height='15' rx='2'/><path d='M4 10h16M8 3v4M16 3v4M8 14h3v3H8z'/>","event_available":"<rect x='4' y='5' width='16' height='15' rx='2'/><path d='M4 10h16M8 3v4M16 3v4M9 15l2 2 4-4'/>","insights":"<path d='M4 17l5-6 4 3 7-9M4 21h16'/>","rule":"<path d='M4 7l2 2 4-4M4 16l2 2 4-4M14 7h6M14 17h6'/>","quiz":"<path d='M5 4h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-6l-4 4v-4H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z'/><path d='M10 8.5a2 2 0 1 1 3 1.7c-.7.4-1 .8-1 1.5M12 13.6v.01'/>","build":"<path d='M15 4a5 5 0 0 0-4.6 7L4 17.400V20h2.600l6.4-6.400A5 5 0 0 0 20 9l-3 3-3-1-1-3z'/>","backspace":"<path d='M9 5h11v14H9l-6-7zM13 9l4 6M17 9l-4 6'/>","local_fire_department":"F<path d='M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 1-3-1-5 1-9z'/>","stars":"F<path d='M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z'/>","star":"F<path d='M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z'/>","home":"<path d='M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z'/>","link":"<path d='M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1'/><path d='M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1'/>","lightbulb":"<path d='M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.500h6c0-1 .3-1.8 1-2.500A6 6 0 0 0 12 3z'/>","calculate":"<rect x='5' y='3' width='14' height='18' rx='2'/><path d='M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01'/>","school":"<path d='M2 9l10-5 10 5-10 5zM6 11.500V16c2 2 10 2 12 0v-4.5'/>","emoji_events":"<path d='M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8'/>","bolt":"F<path d='M13 3L5 13h6l-1 8 8-10h-6z'/>","lock":"<rect x='6' y='11' width='12' height='9' rx='2'/><path d='M9 11V8a3 3 0 0 1 6 0v3'/>"};
+  function icon(n,c,s){var v=ICONS[n]||"",f=v.charAt(0)==="F";if(f)v=v.slice(1);return '<svg class="ico'+(f?" ico-fill":"")+(c?" "+c:"")+'" viewBox="0 0 24 24" aria-hidden="true"'+(s?' style="'+s+'"':"")+'>'+v+'</svg>'}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  function uid(){return Math.random().toString(36).slice(2,10)}
+  function load(key,fallback){try{var v=JSON.parse(localStorage.getItem(key)||"null");if(v)return v}catch(e){}return fallback()}
+  function save(key,data){try{localStorage.setItem(key,JSON.stringify(data))}catch(e){}}
+  var ICON={
+    edit:icon("edit"),
+    x:icon("delete")
+  };
+
+  var host=document.createElement("div");
+  host.innerHTML='<div class="scrim" id="k-scrim" hidden><form class="dialog" id="k-dlg" role="dialog" aria-modal="true" aria-labelledby="k-t"><h2 id="k-t"></h2><div id="k-f" class="k-fields"></div><div class="dlg-actions"><button type="button" class="btn text danger" id="k-del">Delete</button><span style="flex:1"></span><button type="button" class="btn text" id="k-cancel">Cancel</button><button type="submit" class="btn filled">Save</button></div></form></div><div class="snack" id="k-snack" hidden role="status"><span id="k-st"></span><button type="button" id="k-undo">Undo</button></div>';
+  document.body.appendChild(host);
+  function $(id){return document.getElementById(id)}
+  var cur=null,last=null;
+
+  /* form({title, fields:[{k,l,type,options,ph}], values, onSave(vals), onDelete()}) */
+  function form(o){
+    cur=o;var vals=o.values||{};
+    $("k-t").textContent=o.title;
+    $("k-del").hidden=!o.onDelete;
+    $("k-f").innerHTML=o.fields.map(function(f){
+      var v=vals[f.k]==null?"":vals[f.k],id="kf-"+f.k,inner;
+      if(f.type==="textarea")inner='<textarea id="'+id+'"'+(f.ph?' placeholder="'+esc(f.ph)+'"':'')+'>'+esc(v)+'</textarea>';
+      else if(f.type==="select")inner='<select id="'+id+'">'+f.options.map(function(op){
+        var val=Array.isArray(op)?op[0]:op,lab=Array.isArray(op)?op[1]:op;
+        return '<option value="'+esc(val)+'"'+(String(val)===String(v)?" selected":"")+'>'+esc(lab)+'</option>';
+      }).join("")+'</select>';
+      else inner='<input id="'+id+'" type="'+(f.type||"text")+'" value="'+esc(v)+'"'+(f.ph?' placeholder="'+esc(f.ph)+'"':'')+(f.type==="number"?' min="'+(f.min==null?1:f.min)+'"':'')+'>';
+      return '<label class="field" for="'+id+'"><span>'+esc(f.l)+'</span>'+inner+'</label>';
+    }).join("");
+    last=document.activeElement;
+    $("k-scrim").hidden=false;
+    var first=$("k-f").querySelector("input,textarea,select");if(first)first.focus();
+  }
+  function close(){$("k-scrim").hidden=true;cur=null;if(last&&document.contains(last))last.focus()}
+  $("k-dlg").addEventListener("submit",function(e){
+    e.preventDefault();if(!cur)return;
+    var vals={},firstKey=cur.fields[0].k;
+    cur.fields.forEach(function(f){var el=$("kf-"+f.k);var lo=f.min==null?1:f.min;vals[f.k]=f.type==="number"?Math.max(lo,parseInt(el.value,10)||lo):el.value.trim()});
+    if(vals[firstKey]===""||vals[firstKey]==null){$("kf-"+firstKey).focus();return}
+    var fn=cur.onSave;close();fn(vals);
+  });
+  $("k-cancel").addEventListener("click",close);
+  $("k-del").addEventListener("click",function(){if(cur&&cur.onDelete){var fn=cur.onDelete;close();fn()}});
+  $("k-scrim").addEventListener("mousedown",function(e){if(e.target===$("k-scrim"))close()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&cur)close()});
+
+  var undoFn=null,timer=null;
+  function toast(msg,undo){
+    undoFn=undo||null;$("k-st").textContent=msg;$("k-undo").hidden=!undo;$("k-snack").hidden=false;
+    clearTimeout(timer);timer=setTimeout(function(){$("k-snack").hidden=true;undoFn=null},7000);
+  }
+  $("k-undo").addEventListener("click",function(){var fn=undoFn;undoFn=null;$("k-snack").hidden=true;if(fn)fn()});
+
+
+  /* ---------- Data sources: every tool lists the Google Sheets it reads and saves to, and lets the owner link more ---------- */
+  var SRC_DEFAULTS={
+    "Flex Period Scheduling Dashboard":[["Flex Scheduling Data","Sessions, Assignments","Sessions, seats, and student assignments","save"],["Student Roster Export","Students","Names and grades from the student information system","ref"]],
+    "Grade Level Team Dashboard":[["Grade 9 Team Dashboard Data","Links, Focus, Tasks, Dates, Notes, Ideas","Every section of the dashboard","save"],["School Calendar","Dates","District and school dates shown with the team's dates","ref"]],
+    "Chromebook Repair Tracker":[["Repair Tickets","Tickets","Tickets, status, and technician notes","save"],["Device Inventory","Devices","Asset tags and buildings to check tickets against","ref"]],
+    "Classroom Quiz Show":[["Quiz Bank","Quizzes, Questions","Quizzes and their questions","save"],["Georgia Standards from SuitCASE","Standards","Standard codes and wording for tagging questions","ref"]],
+    "Station Rotation Board":[["Station Rotation Data","Stations, Groups","Stations, groups, and minutes","save"]],
+    "Weekly Lesson Planner":[["Lesson Plans","Lessons, Subjects","Lessons by day and subject","save"],["Georgia Standards from SuitCASE","Standards","Standard codes and wording for tagging lessons","ref"],["District Pacing Guide","Pacing","Suggested units by week","ref"]],
+    "Group Maker and Picker":[["Class Groups Data","Seats, Groups","Seating chart and saved groups","save"],["Class Roster","Roster","Student names and who is absent","ref"]],
+    "Standards Mastery Tracker":[["Mastery Scores","Scores","Exit ticket scores by student and standard","save"],["Class Roster","Roster","Student names","ref"],["Georgia Standards from SuitCASE","Standards","Standard codes and wording","ref"]],
+    "Class Agenda Board":[["Class Agendas","Periods, Agendas, Upcoming","Daily agendas and upcoming dates","save"],["School Calendar","Dates","Holidays and testing days","ref"]],
+    "Class Whiteboard":[["Whiteboard Library","Boards, Strokes","Every saved board and its playback","save"]],
+    "Class Idea Board":[["Idea Board Posts","Sections, Posts","Sections and every post, filled by a Google Form","save"]],
+    "Curriculum Warehouse":[["Curriculum Warehouse","Lessons, Standards, Reviews","Every lesson, its standards, and its review status","save"],["Georgia Standards from SuitCASE","Standards","Standard codes and wording that lessons are tagged to","ref"]],
+    "Coaching Cycle Tracker":[["Coaching Cycles","Teachers, Cycles, Visits","Cycles, goals, and every visit","save"],["Staff Roster","Teachers","Teacher names, grades, and schools","ref"]],
+    "Pacing Guide":[["Pacing Guides","Courses, Units, School Progress","Units by week and where each school is","save"],["Georgia Standards from SuitCASE","Standards","Standard codes for each unit","ref"],["School Calendar","Dates","Testing windows and breaks","ref"]],
+    "Instructional Materials Review":[["Materials Review","Materials, Scores","Products, stages, rubric scores, and privacy status","save"],["Enrollment by School","Enrollment","Student counts used for cost","ref"]],
+    "Class Poll":[["Class Poll Responses","Polls, Responses","Questions and every answer, filled by a Google Form","save"],["Class Roster","Roster","Student names, only if answers are not anonymous","ref"]],
+    "PBIS Points Board":[["PBIS Points Data","Expectations, Awards, Rewards, Redeemed","Expectations, every point given, and rewards","save"],["Class Roster","Roster","Student names","ref"]],
+    "Hall Pass Log":[["Hall Pass Data","Passes","Every sign out and return","save"],["Class Roster","Roster","Student names by class period","ref"]],
+    "Family Contact Log":[["Family Contact Data","Contacts","Every contact and follow up","save"],["Class Roster","Roster","Student names","ref"]],
+    "Missing Work Tracker":[["Missing Work Data","Missing","One row per student and assignment","save"],["Class Roster","Roster","Student names by class period","ref"]],
+    "Classroom Jobs Board":[["Classroom Jobs Data","Jobs, Order","Jobs and the rotation order","save"],["Class Roster","Roster","Student names","ref"]],
+    "Substitute Binder":[["Substitute Binder Data","Info, Schedule, Routines, Plans, Notes","Everything in the binder","save"],["School Calendar","Dates","Early release and testing days","ref"]],
+    "Rubric Grader":[["Rubric Scores","Scores, Notes","Scores and teacher notes","save"],["Class Roster","Roster","Student names","ref"],["Department Rubrics","Rubric","Shared rubric criteria","ref"]]
+  };
+  var KEYS={"Flex Period Scheduling Dashboard":"demo-flex-v1","Grade Level Team Dashboard":"demo-team-v1","Chromebook Repair Tracker":"demo-repair-v1","Classroom Quiz Show":"demo-quiz-v1","Station Rotation Board":"demo-stations-v1","Weekly Lesson Planner":"demo-planner-v1","Group Maker and Picker":"demo-groups-v1","Standards Mastery Tracker":"demo-mastery-v1","Class Agenda Board":"demo-agenda-v1","Rubric Grader":"demo-rubric-v1","PBIS Points Board":"demo-pbis-v1","Class Poll":"demo-poll-v1","Class Whiteboard":"demo-wb-v1","Class Idea Board":"demo-board-v1","Curriculum Warehouse":"demo-warehouse-v1","Coaching Cycle Tracker":"demo-coach-v1","Pacing Guide":"demo-pacing-v1","Instructional Materials Review":"demo-materials-v1","Hall Pass Log":"demo-pass-v1","Family Contact Log":"demo-contact-v1","Missing Work Tracker":"demo-missing-v1","Classroom Jobs Board":"demo-jobs-v1","Substitute Binder":"demo-sub-v1"};
+  function sources(){
+    var title=document.title,defs=SRC_DEFAULTS[title];if(!defs||$("k-sources"))return;
+    var key="k-sources:"+title,bkeys=[KEYS[title],key,KStd.PREFS];
+    var list=load(key,function(){return defs.map(function(d){return {id:uid(),name:d[0],url:"",tabs:d[1],use:d[2],mode:d[3]}})});
+    var sec=document.createElement("section");sec.className="wrap";sec.id="k-sources";
+    var mains=document.querySelectorAll("main");mains[mains.length-1].after(sec);
+    var bar=document.querySelector(".bar .wrap"),btn=document.createElement("a");
+    btn.className="btn outlined sm k-src-jump";btn.href="#k-sources";btn.innerHTML=icon("link")+"Data and backup";
+    var reset=$("reset");if(reset)bar.insertBefore(btn,reset);else bar.appendChild(btn);
+    var ok=KLink.ok;
+    function draw(){
+      var refs=list.filter(function(s){return s.mode==="ref"&&ok(s.url)}),lb=KLink.last(title);
+      sec.innerHTML='<div class="panel"><div class="ph"><div><h2>Data sources</h2><p class="muted small">This tool reads from and saves to Google Sheets. Link another Sheet, or another tab, whenever a new source comes along.</p></div><button class="btn tonal sm" type="button" data-ksrc="add">'+icon("add")+'Link a Sheet</button></div>'+
+        '<div class="tablebox"><table><thead><tr><th>Google Sheet</th><th>Tabs used</th><th>What it feeds</th><th>How it is used</th><th>Link</th><th>Edit</th></tr></thead><tbody>'+
+        (list.map(function(s){return '<tr><td><b style="font-weight:500">'+esc(s.name)+'</b></td><td>'+esc(s.tabs)+'</td><td>'+esc(s.use)+'</td><td>'+(s.mode==="save"?'<span class="pill ok">Reads and saves</span>':'<span class="pill info">Reference, read only</span>')+'</td><td class="nw">'+(ok(s.url)?(/\/d\/sample-/.test(s.url)?'<span class="pill info">Sample Sheet</span>':'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">Open Sheet</a>'):s.url?'<span class="pill warn">Check the link</span>':'<span class="muted">Sample, not linked</span>')+'</td><td class="nw"><button class="iconb" type="button" data-ksrc="'+s.id+'" aria-label="Edit '+esc(s.name)+'">'+icon("edit")+'</button></td></tr>'}).join("")||'<tr><td colspan="6" class="empty">No Sheets linked yet.</td></tr>')+
+        '</tbody></table></div>'+
+        (refs.length?'<div><p class="small" style="margin-bottom:8px">One formula for each tab you chose. Paste each one into cell A1 of a new tab in your main Sheet. It pulls that tab in and keeps it up to date, with no script.</p>'+refs.map(function(s){return KLink.formulas(s).map(function(x,i){return '<div class="k-formula"><code>'+esc(x.f)+'</code><button class="btn text sm" type="button" data-kcopy="'+s.id+'|'+i+'">Copy</button></div>'}).join("")}).join("")+'</div>':'')+
+        '<p class="muted small">On this demo, links are saved in your browser only. The real tool keeps this list on a tab named <code>Sources</code>. Kit file <code>18_data_without_apps_script.md</code> explains how each tool saves to Sheets without Apps Script.</p></div>'+
+        '<div class="panel" style="margin-top:24px">'+
+        (function(){var z=KStd.summary(),hook=typeof window.KSTD_APPLY==="function";return '<div class="ph"><div><h2>Georgia standards</h2><p class="muted small">Tell the tool what you teach once. After that you click standards and never type a code.</p></div><span class="pill '+(z.sample?"warn":"ok")+'" id="k-stdstat">'+(z.sample?"Sample list, short labels":z.count+" official standards loaded")+'</span></div>'+
+        '<p class="small"><b style="font-weight:500">My grades:</b> '+(z.grades.length?esc(z.grades.join(", ")):"all")+'. <b style="font-weight:500">My subjects:</b> '+(z.subjects.length?esc(z.subjects.join(", ")):"all")+'. <span class="muted">'+z.mine+' standards match.</span></p>'+
+        '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn tonal sm" type="button" data-kstd="setup">'+icon("school")+'Choose my grades and subjects</button>'+(hook?'<button class="btn filled sm" type="button" data-kstd="pick">'+icon("add")+'Pick standards for this tool</button>':'')+'</div>'+
+        '<p class="muted small">Kit file <code>31_georgia_standards.md</code> shows how a district loads the official list once for everyone.</p></div><div class="panel" style="margin-top:24px">'})()+
+        '<div class="ph"><div><h2>Back up and restore</h2><p class="muted small">A backup is one file with everything in this tool: your data and your linked Sheets.</p></div><span class="pill '+(lb?"ok":"warn")+'" id="k-lastb">'+(lb?"Last backup: "+esc(lb):"No backup yet")+'</span></div>'+
+        '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn filled sm" type="button" data-kbk="down">'+icon("download")+'Download a backup</button><button class="btn tonal sm" type="button" data-kbk="copy">'+icon("content_copy")+'Copy backup as text</button><button class="btn outlined sm" type="button" data-kbk="restore">'+icon("restart_alt")+'Restore from a backup</button></div>'+
+        '<p class="muted small">In your real tool the Google Sheet is the database, so there are two more safety nets. In the Sheet, choose File, then Make a copy, at the end of each grading period. And File, then Version history, lets you roll back to any earlier day. Kit file <code>26_link_sheets_and_back_up.md</code> has the steps.</p></div>';
+    }
+    sec.addEventListener("click",function(e){
+      var c=e.target.closest("[data-kcopy]");
+      if(c){var pr=c.dataset.kcopy.split("|"),s0=list.filter(function(x){return x.id===pr[0]})[0],ft=KLink.formulas(s0)[+pr[1]].f,done=function(g){toast(g?"Formula copied.":"Select the formula and copy it.")};try{navigator.clipboard.writeText(ft).then(function(){done(true)},function(){done(false)})}catch(err){done(false)}return}
+      var sd=e.target.closest("[data-kstd]");
+      if(sd){if(sd.dataset.kstd==="setup")KStd.setup(function(){draw();toast("Saved. Your standards list is ready.")});else KStd.pick({title:"Pick standards for this tool",onDone:function(list){if(!list.length){toast("No standards were picked.");return}var r=window.KSTD_APPLY(list);toast(list.length+(list.length===1?" standard":" standards")+" added to this tool."+(list[0].official?"":" These are sample labels, not the official wording."))}});return}
+      var k=e.target.closest("[data-kbk]");
+      if(k){var w=k.dataset.kbk;
+        if(w==="down"){KLink.download(title,bkeys,function(okk,nm){draw();toast(okk===false?"The file could not be saved here. Use Copy backup as text instead.":okk?"Backup saved as "+nm:"Backup sent to your Downloads folder as "+nm+". If no file appears, use Copy backup as text.")})}
+        else if(w==="copy"){var tx=KLink.backupText(title,bkeys),fin=function(g){toast(g?"Backup copied. Paste it into a Google Doc to keep it.":"Copying is blocked here. Use Download a backup.")};try{navigator.clipboard.writeText(tx).then(function(){fin(true)},function(){fin(false)})}catch(err){fin(false)}}
+        else KLink.restore(title,bkeys);
+        return}
+      var b=e.target.closest("[data-ksrc]");if(!b)return;
+      if(b.dataset.ksrc==="add"){KLink.open({source:null,onSave:function(v){v.id=uid();list.push(v);save(key,list);draw();toast(v.name+" linked.")}});return}
+      var s=list.filter(function(x){return x.id===b.dataset.ksrc})[0];
+      KLink.open({source:s,onSave:function(v){s.name=v.name;s.url=v.url;s.tabs=v.tabs;s.allTabs=v.allTabs;s.use=v.use;s.mode=v.mode;save(key,list);draw()},
+        onDelete:function(){var before=JSON.stringify(list);list=list.filter(function(x){return x!==s});save(key,list);draw();toast("Data source removed.",function(){list=JSON.parse(before);save(key,list);draw()})}});
+    });
+    draw();
+    if(KLink.justRestored(title))toast("Backup restored.");
+  }
+  if(document.readyState==="complete")setTimeout(sources,0);else window.addEventListener("load",sources);
+
+  return {icon:icon,esc:esc,uid:uid,load:load,save:save,form:form,toast:toast,ICON:ICON};
+})();
+
+</script>
+<script>
+(function(){
+"use strict";
+var KEY="demo-warehouse-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+var ROLES=[["teacher","Teacher"],["spec","Instructional specialist"],["dir","Curriculum director"]];
+var CAN={teacher:"You can search approved lessons, mark the ones you use, and submit your own for review.",spec:"You can review submitted lessons, check the standards alignment, and recommend approval or send a lesson back with a note.",dir:"You give final approval, retire lessons, and watch which standards still have no approved lesson."};
+var SC={"Submitted":"info","Recommended":"warn","Approved":"ok","Needs changes":"bad","Retired":"info"};
+function sample(){
+  var stds=[["3.NR.1","3","Math","Place value and rounding"],["3.PAR.2","3","Math","Addition and subtraction strategies"],["3.PAR.3","3","Math","Multiplication and division within 100"],["3.NR.4","3","Math","Fractions as numbers"],["3.MDR.5","3","Math","Measurement, time, and data"],["3.GSR.7","3","Math","Area and perimeter"],
+   ["4.NR.2","4","Math","Multi digit operations"],["4.PAR.3","4","Math","Patterns and factors"],["4.NR.4","4","Math","Fraction equivalence and operations"],["4.NR.5","4","Math","Decimals and fractions"],
+   ["3.T.T.1","3","English Language Arts","Reading and analyzing texts"],["3.T.C.1","3","English Language Arts","Writing for a purpose"]].map(function(x){return {code:x[0],grade:x[1],subject:x[2],label:x[3]}});
+  var L=[["Arrays on the playground","3","Math",["3.PAR.3"],45,"Ms. Okafor","Pine Ridge Elementary","Students build arrays with cones and write a multiplication sentence for each one.","Approved",14],
+   ["Fraction strips number line","3","Math",["3.NR.4"],50,"Mr. Delgado","Lakeview Elementary","Students fold paper strips and place halves, thirds, and fourths on a number line.","Approved",22],
+   ["Rounding road trip","3","Math",["3.NR.1"],40,"Ms. Tran","Pine Ridge Elementary","A map game where students round distances to the nearest ten and hundred.","Approved",9],
+   ["Area of our classroom","3","Math",["3.GSR.7","3.PAR.3"],60,"Ms. Okafor","Pine Ridge Elementary","Students tile and measure floor sections, then connect area to multiplication.","Recommended",0],
+   ["Fact family triangles","3","Math",["3.PAR.3","3.PAR.2"],30,"Mr. Banks","Oak Hollow Elementary","Partner practice linking multiplication and division facts.","Submitted",0],
+   ["Decimal grid shading","4","Math",["4.NR.5"],45,"Ms. Hall","Lakeview Elementary","Students shade hundredths grids and write each amount as a decimal and a fraction.","Approved",11],
+   ["Equivalent fraction pizza","4","Math",["4.NR.4"],45,"Mr. Delgado","Lakeview Elementary","Students cut paper pizzas to prove two fractions are equal.","Needs changes",0],
+   ["Factor pairs hunt","4","Math",["4.PAR.3"],35,"Ms. Hall","Lakeview Elementary","A gallery walk to find every factor pair for numbers to 50.","Submitted",0],
+   ["Main idea detectives","3","English Language Arts",["3.T.T.1"],45,"Ms. Tran","Pine Ridge Elementary","Students find the main idea and two key details in a short article.","Approved",17],
+   ["Old elapsed time worksheet","3","Math",["3.MDR.5"],30,"Mr. Banks","Oak Hollow Elementary","Replaced by the clock walk lesson.","Retired",3]];
+  return {role:"teacher",view:"library",stds:stds,
+    lessons:L.map(function(x,i){return {id:"l"+i,title:x[0],grade:x[1],subject:x[2],stds:x[3],mins:x[4],author:x[5],school:x[6],summary:x[7],link:"",status:x[8],uses:x[9],note:x[8]==="Needs changes"?"The task matches the standard, but add the exit ticket and the answer key before this can be approved.":""}})};
+}
+var S=K.load(KEY,sample),F={q:"",grade:"",subject:"",std:"",status:""},edit=null;
+function save(){K.save(KEY,S)}
+function snap(){return JSON.stringify(S)}
+function restore(j){S=JSON.parse(j);save();draw()}
+window.KSTD_APPLY=function(list){list.forEach(function(x){var s=std(x.code);if(s){s.label=x.text;s.grade=x.grade;s.subject=x.subject}else S.stds.push({code:x.code,grade:x.grade,subject:x.subject,label:x.text})});S.view="stds";save();draw()};
+function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i})}
+function std(c){return S.stds.filter(function(s){return s.code===c})[0]}
+function opts(list,cur,all){return '<option value="">'+all+'</option>'+list.map(function(x){var v=Array.isArray(x)?x[0]:x,l=Array.isArray(x)?x[1]:x;return '<option value="'+esc(v)+'"'+(v===cur?" selected":"")+'>'+esc(l)+'</option>'}).join("")}
+function card(l){
+  var r=S.role,a="";
+  if(l.status==="Approved"){a+='<button class="btn tonal sm" type="button" data-use="'+l.id+'">'+K.icon("check")+'I used this</button>';if(r==="dir")a+='<button class="btn text danger sm" type="button" data-set="'+l.id+'|Retired">Retire</button>'}
+  if(r==="spec"&&l.status==="Submitted")a+='<button class="btn filled sm" type="button" data-set="'+l.id+'|Recommended">Recommend approval</button><button class="btn outlined sm" type="button" data-back="'+l.id+'">Send back</button>';
+  if(r==="dir"&&(l.status==="Recommended"||l.status==="Submitted"))a+='<button class="btn filled sm" type="button" data-set="'+l.id+'|Approved">'+K.icon("check")+'Approve</button><button class="btn outlined sm" type="button" data-back="'+l.id+'">Send back</button>';
+  if(r==="dir"&&l.status==="Retired")a+='<button class="btn outlined sm" type="button" data-set="'+l.id+'|Approved">Bring back</button>';
+  if(l.status==="Needs changes")a+='<button class="btn filled sm" type="button" data-ed="'+l.id+'">'+K.icon("edit")+'Fix and resubmit</button>';
+  else if(r!=="teacher")a+='<button class="iconb" type="button" data-ed="'+l.id+'" aria-label="Edit '+esc(l.title)+'">'+K.icon("edit")+'</button>';
+  return '<article class="les"><div class="ph" style="align-items:flex-start"><h3>'+esc(l.title)+'</h3><span class="pill '+SC[l.status]+'">'+l.status+'</span></div><div class="chips">'+l.stds.map(function(c){var s=std(c);return '<span class="std" title="'+esc(s?s.label:"")+'">'+esc(c)+'</span>'}).join("")+'</div><p>'+esc(l.summary)+'</p>'+
+    (l.note&&l.status==="Needs changes"?'<div class="note"><b style="font-weight:500">Reviewer note:</b> '+esc(l.note)+'</div>':'')+
+    '<div class="meta"><span>Grade '+esc(l.grade)+', '+esc(l.subject)+'</span><span>'+l.mins+' minutes</span><span>'+esc(l.author)+', '+esc(l.school)+'</span>'+(l.status==="Approved"?'<span>Used '+l.uses+(l.uses===1?" time":" times")+'</span>':'')+'</div>'+(a?'<div class="acts">'+a+'</div>':'')+'</article>';
+}
+function draw(){
+  $("role").innerHTML=ROLES.map(function(r){return '<button type="button" data-role="'+r[0]+'" aria-pressed="'+(S.role===r[0])+'">'+r[1]+'</button>'}).join("");
+  var live=S.lessons.filter(function(l){return l.status==="Approved"}),queue=S.lessons.filter(function(l){return l.status==="Submitted"||l.status==="Recommended"});
+  var cov={};S.stds.forEach(function(s){cov[s.code]={a:0,p:0}});S.lessons.forEach(function(l){l.stds.forEach(function(c){if(!cov[c])return;if(l.status==="Approved")cov[c].a++;else if(l.status!=="Retired")cov[c].p++})});
+  var covered=S.stds.filter(function(s){return cov[s.code].a>0}).length,gaps=S.stds.length-covered;
+  var h='<div class="who"><b style="font-weight:500;color:var(--md-on-surface)">Signed in as '+ROLES.filter(function(r){return r[0]===S.role})[0][1].toLowerCase()+'.</b> '+CAN[S.role]+'</div>'+
+    '<div class="kpis"><div class="kpi good"><div class="v">'+live.length+'</div><div class="k">Approved lessons</div></div><div class="kpi'+(queue.length?" warn":" good")+'"><div class="v">'+queue.length+'</div><div class="k">Waiting for review</div></div><div class="kpi"><div class="v">'+covered+' of '+S.stds.length+'</div><div class="k">Standards with an approved lesson</div></div><div class="kpi'+(gaps?" bad":" good")+'"><div class="v">'+gaps+'</div><div class="k">Standards with no lesson yet</div></div></div>';
+  if(edit){h+=editor();$("app").innerHTML=h;return}
+  h+='<div class="ph"><div class="seg" role="group" aria-label="View">'+[["library","Lesson library"],["queue","Review queue"],["coverage","Standards coverage"],["stds","Standards list"]].map(function(v){return '<button type="button" data-view="'+v[0]+'" aria-pressed="'+(S.view===v[0])+'">'+v[1]+'</button>'}).join("")+'</div><button class="btn filled" type="button" id="submit">'+K.icon("add")+'Submit a lesson</button></div>';
+  if(S.view==="library"){
+    var staff=S.role!=="teacher",rows=S.lessons.filter(function(l){return (staff?(!F.status||l.status===F.status):l.status==="Approved")&&(!F.grade||l.grade===F.grade)&&(!F.subject||l.subject===F.subject)&&(!F.std||l.stds.indexOf(F.std)>=0)&&(!F.q||(l.title+" "+l.summary+" "+l.author+" "+l.stds.join(" ")).toLowerCase().indexOf(F.q.toLowerCase())>=0)});
+    var sl=S.stds.filter(function(s){return (!F.grade||s.grade===F.grade)&&(!F.subject||s.subject===F.subject)});
+    h+='<div class="panel"><div class="controls" style="padding-top:8px"><label class="field" for="f-q"><span>Search lessons</span><input id="f-q" value="'+esc(F.q)+'"></label><label class="field" for="f-grade"><span>Grade</span><select id="f-grade">'+opts(uniq(S.stds.map(function(s){return s.grade})),F.grade,"All grades")+'</select></label><label class="field" for="f-subject"><span>Subject</span><select id="f-subject">'+opts(uniq(S.stds.map(function(s){return s.subject})),F.subject,"All subjects")+'</select></label><label class="field" for="f-std"><span>Standard</span><select id="f-std">'+opts(sl.map(function(s){return [s.code,s.code+", "+s.label]}),F.std,"All standards")+'</select></label>'+(staff?'<label class="field" for="f-status"><span>Status</span><select id="f-status">'+opts(Object.keys(SC),F.status,"Every status")+'</select></label>':'')+'</div><p class="muted small" id="count">'+rows.length+(rows.length===1?" lesson":" lessons")+(staff?"":", approved only")+'</p></div><div class="cards" id="cards">'+(rows.map(card).join("")||'<p class="empty">No lessons match. Try clearing a filter.</p>')+'</div>';
+  }else if(S.view==="queue"){
+    var mine=S.lessons.filter(function(l){return l.status==="Submitted"||l.status==="Recommended"||l.status==="Needs changes"});
+    h+='<div class="panel"><div><h2>Review queue</h2><p class="muted small">A lesson moves from Submitted, to Recommended by a specialist, to Approved by the director. Only approved lessons show in the teacher library.</p></div></div><div class="cards">'+(mine.map(card).join("")||'<p class="empty">Nothing is waiting.</p>')+'</div>';
+  }else if(S.view==="coverage"){
+    var mx=S.stds.reduce(function(a,s){return Math.max(a,cov[s.code].a)},1);
+    h+='<div class="panel"><div><h2>Standards coverage</h2><p class="muted small">How many approved lessons each standard has. A standard with none is a gap to fill.</p></div><div class="tablebox"><table><thead><tr><th>Standard</th><th>Grade and subject</th><th>Approved lessons</th><th>In the pipeline</th><th>Status</th></tr></thead><tbody>'+S.stds.map(function(s){var c=cov[s.code];return '<tr><td><b style="font-weight:500">'+esc(s.code)+'</b><br><span class="muted">'+esc(s.label)+'</span></td><td class="nw">Grade '+esc(s.grade)+', '+esc(s.subject)+'</td><td><div style="display:flex;gap:8px;align-items:center;min-width:140px"><span style="width:20px">'+c.a+'</span><div class="track" style="flex:1"><div class="fill" style="width:'+Math.round(c.a/mx*100)+'%"></div></div></div></td><td>'+c.p+'</td><td>'+(c.a?'<span class="pill ok">Covered</span>':c.p?'<span class="pill warn">Lesson in review</span>':'<span class="pill bad">No lesson yet</span>')+'</td></tr>'}).join("")+'</tbody></table></div></div>';
+  }else{
+    h+='<div class="panel"><div class="ph"><div><h2>Standards list</h2><p class="muted small">The codes are Georgia standard codes. The short labels here are samples, not the official wording. The real list comes from the state SuitCASE site.</p></div>'+(S.role==="teacher"?'':'<button class="btn tonal sm" type="button" id="add-std">'+K.icon("add")+'Add standard</button>')+'</div><div class="tablebox"><table><thead><tr><th>Code</th><th>Grade</th><th>Subject</th><th>Short label</th><th>Edit</th></tr></thead><tbody>'+S.stds.map(function(s){return '<tr><td class="nw"><b style="font-weight:500">'+esc(s.code)+'</b></td><td>'+esc(s.grade)+'</td><td>'+esc(s.subject)+'</td><td>'+esc(s.label)+'</td><td class="nw">'+(S.role==="teacher"?'':'<button class="iconb" type="button" data-es="'+esc(s.code)+'" aria-label="Edit '+esc(s.code)+'">'+K.icon("edit")+'</button>')+'</td></tr>'}).join("")+'</tbody></table></div></div>';
+  }
+  h+='<div class="built"><b>How this is set up</b><span>One Google Sheet in a shared drive that the curriculum department owns, with tabs named <code>Lessons</code>, <code>Standards</code>, and <code>Reviews</code>. Teachers submit through a Google Form. Specialists and the director are Editors, and teachers are Viewers of the approved list only. Kit file <code>30_curriculum_team_tools.md</code> has the setup steps. Changes on this demo save in your browser only.</span></div>';
+  $("app").innerHTML=h;
+}
+function editor(){
+  var e=edit,list=S.stds.filter(function(s){return s.grade===e.grade&&s.subject===e.subject});
+  return '<div class="panel"><div><h2>'+(e.id?"Edit lesson":"Submit a lesson")+'</h2><p class="muted small">Pick the grade and subject first. The standards for that grade and subject appear, and you tick the ones the lesson teaches.</p></div><form class="form" id="lf">'+
+   '<label class="field wide" for="e-title"><span>Lesson title</span><input id="e-title" value="'+esc(e.title)+'"></label>'+
+   '<label class="field" for="e-grade"><span>Grade</span><select id="e-grade">'+uniq(S.stds.map(function(s){return s.grade})).map(function(g){return '<option'+(g===e.grade?" selected":"")+'>'+esc(g)+'</option>'}).join("")+'</select></label>'+
+   '<label class="field" for="e-subject"><span>Subject</span><select id="e-subject">'+uniq(S.stds.map(function(s){return s.subject})).map(function(g){return '<option'+(g===e.subject?" selected":"")+'>'+esc(g)+'</option>'}).join("")+'</select></label>'+
+   '<label class="field" for="e-mins"><span>Minutes</span><input id="e-mins" type="number" min="5" value="'+esc(e.mins)+'"></label>'+
+   '<div class="wide"><p class="small" style="font-weight:500;margin-bottom:8px">Standards this lesson teaches</p><div class="pick">'+(list.map(function(s){return '<label class="pk"><input type="checkbox" data-pk="'+esc(s.code)+'"'+(e.stds.indexOf(s.code)>=0?" checked":"")+'><span><b>'+esc(s.code)+'</b><br>'+esc(s.label)+'</span></label>'}).join("")||'<p class="muted small">No standards are loaded for this grade and subject yet.</p>')+'</div></div>'+
+   '<label class="field wide" for="e-sum"><span>What students do, in a sentence or two</span><textarea id="e-sum">'+esc(e.summary)+'</textarea></label>'+
+   '<label class="field" for="e-author"><span>Your name</span><input id="e-author" value="'+esc(e.author)+'"></label><label class="field" for="e-school"><span>School</span><input id="e-school" value="'+esc(e.school)+'"></label>'+
+   '<label class="field wide" for="e-link"><span>Link to the lesson file in Google Drive</span><input id="e-link" value="'+esc(e.link)+'" placeholder="https://docs.google.com/..."></label>'+
+   '<p class="kl-err wide" id="e-err" role="alert" hidden style="color:var(--md-error);margin:0"></p>'+
+   '<div class="wide acts"><button class="btn filled" type="submit">'+(e.id&&S.role!=="teacher"&&e.status!=="Needs changes"?"Save changes":"Submit for review")+'</button><button class="btn text" type="button" id="e-cancel">Cancel</button>'+(e.id&&S.role==="dir"?'<span style="flex:1"></span><button class="btn text danger" type="button" id="e-del">Delete lesson</button>':'')+'</div></form></div>';
+}
+function keep(){var e=edit;["title","grade","subject","mins","author","school","link"].forEach(function(k){var el=$("e-"+k);if(el)e[k]=el.value.trim()});e.summary=$("e-sum").value.trim();e.mins=Math.max(5,parseInt(e.mins,10)||30)}
+$("role").addEventListener("click",function(e){var b=e.target.closest("[data-role]");if(b){S.role=b.dataset.role;edit=null;save();draw()}});
+$("app").addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t||t.type==="submit")return;var d=t.dataset,b=snap(),l;
+  if(d.view){S.view=d.view;save();draw()}
+  else if(t.id==="submit"){edit={id:"",title:"",grade:F.grade||S.stds[0].grade,subject:F.subject||S.stds[0].subject,stds:[],mins:45,author:"",school:"",summary:"",link:"",status:"Submitted"};draw();$("e-title").focus()}
+  else if(t.id==="e-cancel"){edit=null;draw()}
+  else if(t.id==="e-del"){S.lessons=S.lessons.filter(function(x){return x.id!==edit.id});edit=null;save();draw();K.toast("Lesson deleted.",function(){restore(b)})}
+  else if(d.ed){l=S.lessons.filter(function(x){return x.id===d.ed})[0];edit=JSON.parse(JSON.stringify(l));draw()}
+  else if(d.use){l=S.lessons.filter(function(x){return x.id===d.use})[0];l.uses++;save();draw();K.toast("Thanks. That helps the department see which lessons get used.",function(){restore(b)})}
+  else if(d.set){var p=d.set.split("|");l=S.lessons.filter(function(x){return x.id===p[0]})[0];l.status=p[1];l.note="";save();draw();K.toast(l.title+" is now "+p[1].toLowerCase()+".",function(){restore(b)})}
+  else if(d.back){l=S.lessons.filter(function(x){return x.id===d.back})[0];K.form({title:"Send back for changes",fields:[{k:"note",l:"What needs to change before approval",type:"textarea"}],values:{},onSave:function(v){l.status="Needs changes";l.note=v.note;save();draw();K.toast("Sent back to "+l.author+".",function(){restore(b)})}})}
+  else if(t.id==="add-std")K.form({title:"Add standard",fields:[{k:"code",l:"Standard code",ph:"5.NR.1"},{k:"grade",l:"Grade"},{k:"subject",l:"Subject"},{k:"label",l:"Short label"}],values:{subject:"Math"},onSave:function(v){if(std(v.code)){K.toast("That code is already in the list.");return}S.stds.push(v);save();draw()}});
+  else if(d.es){var s=std(d.es);K.form({title:"Edit standard "+s.code,fields:[{k:"label",l:"Short label"},{k:"grade",l:"Grade"},{k:"subject",l:"Subject"}],values:s,onSave:function(v){s.label=v.label;s.grade=v.grade;s.subject=v.subject;save();draw()},
+    onDelete:function(){S.stds=S.stds.filter(function(x){return x!==s});S.lessons.forEach(function(x){x.stds=x.stds.filter(function(c){return c!==s.code})});save();draw();K.toast("Standard removed.",function(){restore(b)})}})}
+});
+$("app").addEventListener("change",function(e){
+  var id=e.target.id,d=e.target.dataset;
+  if(d.pk){var i=edit.stds.indexOf(d.pk);if(e.target.checked&&i<0)edit.stds.push(d.pk);if(!e.target.checked&&i>=0)edit.stds.splice(i,1)}
+  else if(id==="e-grade"||id==="e-subject"){keep();edit.stds=[];draw()}
+  else if(id.indexOf("f-")===0&&id!=="f-q"){F[id.slice(2)]=e.target.value;if(id!=="f-std"&&id!=="f-status")F.std="";draw()}
+});
+$("app").addEventListener("input",function(e){if(e.target.id!=="f-q")return;F.q=e.target.value;var p=e.target.selectionStart;draw();var q=$("f-q");q.focus();try{q.setSelectionRange(p,p)}catch(err){}});
+$("app").addEventListener("submit",function(e){
+  if(e.target.id!=="lf")return;e.preventDefault();keep();var er=$("e-err"),b=snap();
+  function bad(m){er.textContent=m;er.hidden=false}
+  if(!edit.title)return bad("Give the lesson a title.");
+  if(!edit.stds.length)return bad("Tick at least one standard. A lesson cannot be approved without one.");
+  if(!edit.summary)return bad("Add a sentence about what students do.");
+  if(edit.id){var l=S.lessons.filter(function(x){return x.id===edit.id})[0];var was=l.status;for(var k in edit)l[k]=edit[k];if(was==="Needs changes"){l.status="Submitted";l.note=""}}
+  else{edit.id=K.uid();edit.uses=0;edit.note="";S.lessons.unshift(edit);S.view="queue"}
+  var ti=edit.title;edit=null;save();draw();K.toast(ti+" saved.",function(){restore(b)});
+});
+$("reset").addEventListener("click",function(){var before=snap();S=sample();edit=null;F={q:"",grade:"",subject:"",std:"",status:""};save();draw();K.toast("Sample restored.",function(){restore(before)})});
+draw();
+})();
+</script>
+</body>
+</html>
