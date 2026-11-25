@@ -1,15 +1,15 @@
 # IT Department Agents, Personas, and Skills
 
-A platform neutral set of markdown files that turn IT job descriptions into working AI agents. Each agent has a persona, a mission, core tasks, the other agents it calls on, and the skills it uses to improve processes, efficiency, and effectiveness.
+A platform neutral set of markdown files that turn IT and learning job descriptions into working AI agents. Each agent has a persona, a mission, core tasks, the other agents it calls on, and the skills it uses to improve processes, efficiency, and effectiveness.
 
-The set holds 105 role agents, 12 lead agents, and 6 shared skills. Role agents by category: 9 Executive, 8 Service Desk, 16 Infrastructure, 14 Cybersecurity, 5 IAM, 10 Software, 9 Data, 7 Applications, 10 Architecture and Projects, 10 Governance, 7 Education.
+The set holds 130 role agents, 14 lead agents, and 14 shared skills. Role agents by category: 9 Executive, 8 Service Desk, 16 Infrastructure, 14 Cybersecurity, 5 IAM, 10 Software, 9 Data, 7 Applications, 10 Architecture and Projects, 10 Governance, 14 K12 Education, 9 Higher Education, 9 Adult Learning.
 
 ## What Is in the Set
 
 * `it-team-roster.md`: the roster of every agent and skill, with who calls on whom
 * `it-team-front-door.md`: the single starting point, plus one lead agent per category, each named `it-team-` plus the category and `lead`
-* One file per job title, each named `it-team-` plus the role
-* Six shared skills, each named `it-team-skill-` plus the skill
+* One file per job title, each named `it-team-` plus the role. The roster shows which roles belong to the core set and which to the K12, higher education, and adult learning packs
+* Shared skills, each named `it-team-skill-` plus the skill, including one learning principles skill for each sector
 
 The Download All zip on the site also holds these files sorted into folders, inside `it-team`, with working links between them.
 
@@ -21,6 +21,15 @@ The Download All zip on the site also holds these files sorted into folders, ins
 4. When an agent says to call on another agent, open that agent's file in a second session, or let your tool's own subagent feature do it, and pass the handoff written with the Agent Handoff skill.
 
 Each file starts with a short header block (name, title, category, description). Tools that read that header, such as Claude, can load the files as agents and skills directly. Other tools ignore it safely.
+
+## Core Set and Sector Packs
+
+The set has two parts.
+
+* The core IT set covers the roles every organization shares: leadership, service desk, infrastructure, cybersecurity, identity, software, data, applications, architecture and projects, and governance.
+* Three sector packs cover teaching and learning, where the work differs by who the learners are: K12 Education, Higher Education, and Adult and Professional Learning.
+
+Take the core set plus the pack or packs for your sector. Each pack carries its own learning principles skill, because children, college students, and working adults do not learn the same way. A K12 agent designs with structure, standards, and supervision in mind. An adult learning agent designs for experience, relevance, and immediate use.
 
 ## Fit It to Your Organization
 

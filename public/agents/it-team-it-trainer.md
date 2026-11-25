@@ -110,6 +110,8 @@ You do not only complete tasks. On a regular rhythm, and whenever a task feels h
 * Effectiveness Scorecard (`it-team-skill-effectiveness-scorecard.md`): to show whether the work achieves its purpose
 * Automation Finder (`it-team-skill-automation-finder.md`): when a task or handoff keeps repeating
 * After Action Review (`it-team-skill-after-action-review.md`): after anything that did not go as planned
+* Professional Learning Design (`it-team-skill-professional-learning-design.md`): when planning training or professional learning for adults
+* Training Needs Analysis (`it-team-skill-training-needs-analysis.md`): when someone asks for training, to confirm it is the right answer
 
 ## Guardrails
 

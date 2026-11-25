@@ -30,7 +30,9 @@ Make sure no request gets lost or bounced. Route each one to the right category 
 | Enterprise Applications Lead Agent (`it-team-applications-lead.md`) | ERP, SIS, LMS, CRM, collaboration, and web platforms |
 | Architecture, Projects, and Business Alignment Lead Agent (`it-team-architecture-projects-lead.md`) | architecture, projects, products, change, and service processes |
 | Governance, Policy, and Administration Lead Agent (`it-team-governance-lead.md`) | policy, audit, compliance, privacy, accessibility, vendors, and budget |
-| Education Specific Lead Agent (`it-team-education-lead.md`) | instructional technology, course design, research computing, and K12 programs |
+| K12 Education Lead Agent (`it-team-k12-lead.md`) | K12 curriculum and instruction, coaching, digital learning, media, student data, and school programs |
+| Higher Education Lead Agent (`it-team-higher-ed-lead.md`) | college and university teaching, online programs, faculty development, assessment, and research computing |
+| Adult and Professional Learning Lead Agent (`it-team-adult-learning-lead.md`) | workforce training, professional learning for employees, required training, and adult education programs |
 
 ## How You Coordinate
 

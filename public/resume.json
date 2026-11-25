@@ -1455,13 +1455,13 @@
     },
     {
       "group": "IT Department Agent Team",
-      "intro": "A whole IT department as AI agents, built from job descriptions. Start with the front door, which routes any request to a category lead, which routes it to the right role.",
+      "intro": "A whole IT department as AI agents, built from job descriptions, plus teaching and learning packs for K12, higher education, and adult learning. Start with the front door, which routes any request to a lead, which routes it to the right role.",
       "items": [
         {
           "name": "Start Here",
           "for": "IT Team",
           "when": "Read first",
-          "text": "What the set is, how to load an agent into any AI tool, how to fit it to your organization, and how the agents hand work to each other.",
+          "text": "What the set is, how the core IT set and the three sector packs fit together, how to load an agent into any AI tool, and how the agents hand work to each other.",
           "file": "agents/it-team-start-here.md"
         },
         {
@@ -1475,7 +1475,7 @@
           "name": "IT Front Door Agent",
           "for": "IT Team",
           "when": "Front door",
-          "text": "The single starting point for any IT request. Sends it to the right category lead and coordinates work that crosses categories.",
+          "text": "The single starting point for any request. Sends it to the right category or sector lead and coordinates work that crosses them.",
           "file": "agents/it-team-front-door.md"
         },
         {
@@ -1549,17 +1549,31 @@
           "file": "agents/it-team-governance-lead.md"
         },
         {
-          "name": "Education Specific Lead Agent",
-          "for": "IT Team: Education",
+          "name": "K12 Education Lead Agent",
+          "for": "K12 Pack",
           "when": "Category lead",
-          "text": "Takes requests about instructional technology, course design, research computing, and K12 programs, sends each to the right role agent, and coordinates work that needs more than one.",
-          "file": "agents/it-team-education-lead.md"
+          "text": "Takes requests about K12 curriculum and instruction, coaching, digital learning, media, student data, and school programs, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-k12-lead.md"
+        },
+        {
+          "name": "Higher Education Lead Agent",
+          "for": "Higher Education Pack",
+          "when": "Category lead",
+          "text": "Takes requests about college and university teaching, online programs, faculty development, assessment, and research computing, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-higher-ed-lead.md"
+        },
+        {
+          "name": "Adult and Professional Learning Lead Agent",
+          "for": "Adult Learning Pack",
+          "when": "Category lead",
+          "text": "Takes requests about workforce training, professional learning for employees, required training, and adult education programs, sends each to the right role agent, and coordinates work that needs more than one.",
+          "file": "agents/it-team-adult-learning-lead.md"
         }
       ]
     },
     {
       "group": "IT Team Role Agents",
-      "intro": "One agent for each of 105 IT job titles across 11 categories. Each has a persona, core tasks, the other agents it calls on for help, and measures for process, efficiency, and effectiveness.",
+      "intro": "The core set every organization shares: one agent for each of 98 IT job titles. Each has a persona, core tasks, the other agents it calls on for help, and measures for process, efficiency, and effectiveness.",
       "items": [
         {
           "name": "Chief Information Officer (CIO)",
@@ -2246,61 +2260,254 @@
           "when": "On demand",
           "text": "Make sure critical services can be restored and the institution can keep operating.",
           "file": "agents/it-team-continuity-planner.md"
+        }
+      ]
+    },
+    {
+      "group": "K12 Education Agents",
+      "intro": "Curriculum and instruction, coaching, digital learning, media, and school programs. Built on pedagogy for children and teenagers: structure, standards, supervision, and families.",
+      "items": [
+        {
+          "name": "Director of Instructional Technology and Digital Learning (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Lead a district's instructional technology and digital learning so every classroom uses technology to improve learning.",
+          "file": "agents/it-team-k12-instructional-technology-director.md"
         },
         {
-          "name": "Instructional Technologist",
-          "for": "IT Team: Education",
+          "name": "Director of Curriculum and Instruction (K12)",
+          "for": "K12 Pack",
           "when": "On demand",
-          "text": "Help instructors use technology to improve teaching and learning.",
-          "file": "agents/it-team-instructional-technologist.md"
-        },
-        {
-          "name": "Instructional Designer",
-          "for": "IT Team: Education",
-          "when": "On demand",
-          "text": "Build courses that are clear, engaging, accessible, and effective.",
-          "file": "agents/it-team-instructional-designer.md"
-        },
-        {
-          "name": "Academic Technology Director",
-          "for": "IT Team: Education",
-          "when": "On demand",
-          "text": "Lead academic technology so it serves teaching, learning, and research priorities.",
-          "file": "agents/it-team-academic-technology-director.md"
-        },
-        {
-          "name": "Research Computing or HPC Specialist",
-          "for": "IT Team: Education",
-          "when": "On demand",
-          "text": "Give researchers the computing and data resources they need to do their work.",
-          "file": "agents/it-team-research-computing-specialist.md"
+          "text": "Make sure every student has access to a strong, aligned curriculum and effective instruction.",
+          "file": "agents/it-team-k12-curriculum-director.md"
         },
         {
           "name": "Digital Learning Coordinator",
-          "for": "IT Team: Education",
+          "for": "K12 Pack",
           "when": "On demand",
           "text": "Make digital learning programs work for students, teachers, and families.",
           "file": "agents/it-team-digital-learning-coordinator.md"
         },
         {
           "name": "E-Rate Coordinator (K12)",
-          "for": "IT Team: Education",
+          "for": "K12 Pack",
           "when": "On demand",
           "text": "Secure and protect federal funding for school connectivity.",
           "file": "agents/it-team-erate-coordinator.md"
         },
         {
           "name": "Student Information or Data Coordinator (K12)",
-          "for": "IT Team: Education",
+          "for": "K12 Pack",
           "when": "On demand",
           "text": "Keep student data accurate and state reporting clean and on time.",
           "file": "agents/it-team-student-data-coordinator.md"
+        },
+        {
+          "name": "Professional Learning Coordinator (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Give teachers and staff professional learning that changes practice and is worth their time.",
+          "file": "agents/it-team-k12-professional-learning-coordinator.md"
+        },
+        {
+          "name": "Instructional Technology Coach (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Help teachers improve instruction with technology through job embedded coaching, one teacher or team at a time.",
+          "file": "agents/it-team-instructional-technology-coach.md"
+        },
+        {
+          "name": "Instructional Technology Specialist (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Make the district's instructional tools work well for teachers and students, and help teachers choose the right one.",
+          "file": "agents/it-team-instructional-technology-specialist.md"
+        },
+        {
+          "name": "Digital Learning Specialist (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Create and support online and blended courses and content that students can follow without getting lost.",
+          "file": "agents/it-team-digital-learning-specialist.md"
+        },
+        {
+          "name": "Library Media Specialist (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Teach students and staff to find, evaluate, and use information well, and run a media program that supports every classroom.",
+          "file": "agents/it-team-library-media-specialist.md"
+        },
+        {
+          "name": "Curriculum and Digital Resources Specialist (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Make sure teachers have aligned, quality instructional resources and know where to find them.",
+          "file": "agents/it-team-curriculum-resources-specialist.md"
+        },
+        {
+          "name": "Virtual and Online Learning Program Coordinator (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Run a virtual learning program where students stay engaged and finish.",
+          "file": "agents/it-team-virtual-program-coordinator.md"
+        },
+        {
+          "name": "Educational App Vetting and Student Data Privacy Coordinator (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Make sure every digital tool used with students is safe, legal, accessible, and worth using.",
+          "file": "agents/it-team-app-vetting-coordinator.md"
+        },
+        {
+          "name": "Assistive Technology Specialist (K12)",
+          "for": "K12 Pack",
+          "when": "On demand",
+          "text": "Make sure students with disabilities have the tools they need to access learning.",
+          "file": "agents/it-team-assistive-technology-specialist.md"
         }
       ]
     },
     {
-      "group": "IT Team Skills",
-      "intro": "Shared skills every IT team agent uses to hand off work and to make the work better over time.",
+      "group": "Higher Education Agents",
+      "intro": "Online programs, faculty development, course design, assessment, and research computing. Built for college and university students and for faculty who own what and how they teach.",
+      "items": [
+        {
+          "name": "Academic Technology Director",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Lead academic technology so it serves teaching, learning, and research priorities.",
+          "file": "agents/it-team-academic-technology-director.md"
+        },
+        {
+          "name": "Director of Online Learning (Higher Education)",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Lead online programs that are high quality, well supported, and good for the institution and its students.",
+          "file": "agents/it-team-online-learning-director.md"
+        },
+        {
+          "name": "Instructional Technologist",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Help instructors use technology to improve teaching and learning.",
+          "file": "agents/it-team-instructional-technologist.md"
+        },
+        {
+          "name": "Instructional Designer",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Build courses that are clear, engaging, accessible, and effective.",
+          "file": "agents/it-team-instructional-designer.md"
+        },
+        {
+          "name": "Research Computing or HPC Specialist",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Give researchers the computing and data resources they need to do their work.",
+          "file": "agents/it-team-research-computing-specialist.md"
+        },
+        {
+          "name": "Faculty Development Coordinator (Higher Education)",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Help faculty grow as teachers through programs they choose to attend and find useful.",
+          "file": "agents/it-team-faculty-development-coordinator.md"
+        },
+        {
+          "name": "Instructional Media Producer (Higher Education)",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Produce video, audio, and interactive media that help students learn.",
+          "file": "agents/it-team-instructional-media-producer.md"
+        },
+        {
+          "name": "Online Program Manager (Higher Education)",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Keep an online program running smoothly from recruitment to graduation.",
+          "file": "agents/it-team-online-program-manager.md"
+        },
+        {
+          "name": "Curriculum and Assessment Coordinator (Higher Education)",
+          "for": "Higher Education Pack",
+          "when": "On demand",
+          "text": "Support faculty in designing programs with clear outcomes and using evidence of student learning to improve them.",
+          "file": "agents/it-team-curriculum-assessment-coordinator.md"
+        }
+      ]
+    },
+    {
+      "group": "Adult and Professional Learning Agents",
+      "intro": "Workforce training, professional learning, required training, and adult education. Built on adult learning principles: experience, relevance, choice, and use right away.",
+      "items": [
+        {
+          "name": "Director of Learning and Development",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Build the skills the organization needs through learning that is worth the time and money.",
+          "file": "agents/it-team-learning-development-director.md"
+        },
+        {
+          "name": "Learning Needs Analyst",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Find out what people need to learn, and when training is not the right fix.",
+          "file": "agents/it-team-learning-needs-analyst.md"
+        },
+        {
+          "name": "Learning Experience Designer",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Design training that adults can apply on the job right away.",
+          "file": "agents/it-team-learning-experience-designer.md"
+        },
+        {
+          "name": "eLearning Developer",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Build online training that works on any device and respects the learner's time.",
+          "file": "agents/it-team-elearning-developer.md"
+        },
+        {
+          "name": "Trainer and Facilitator",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Lead live training, in a room or online, that people find useful and remember.",
+          "file": "agents/it-team-trainer-facilitator.md"
+        },
+        {
+          "name": "Learning Platform Administrator",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Run the learning platform so assignments, records, and reports are accurate and easy to use.",
+          "file": "agents/it-team-learning-platform-administrator.md"
+        },
+        {
+          "name": "Compliance and Required Training Coordinator",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Make sure everyone completes the training they are required to have, on time and with as little wasted time as possible.",
+          "file": "agents/it-team-compliance-training-coordinator.md"
+        },
+        {
+          "name": "Learning Evaluation Analyst",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Find out whether learning programs work and what would make them work better.",
+          "file": "agents/it-team-learning-evaluation-analyst.md"
+        },
+        {
+          "name": "Adult Education Program Coordinator",
+          "for": "Adult Learning Pack",
+          "when": "On demand",
+          "text": "Run adult education programs, such as high school equivalency, literacy, English language, and workforce classes, where adults enroll, stay, and reach their goals.",
+          "file": "agents/it-team-adult-education-program-coordinator.md"
+        }
+      ]
+    },
+    {
+      "group": "IT Team and Learning Skills",
+      "intro": "Shared skills the agents use to hand off work, improve the work over time, and design learning. Each sector has its own learning principles skill, because children, college students, and working adults learn differently.",
       "items": [
         {
           "name": "Process Improvement Review",
@@ -2343,6 +2550,62 @@
           "when": "Shared skill",
           "text": "Use after any incident, project, exercise, or task that did not go as planned, or that went unusually well.",
           "file": "agents/it-team-skill-after-action-review.md"
+        },
+        {
+          "name": "Coaching Cycle",
+          "for": "Learning",
+          "when": "Shared skill",
+          "text": "Use when working one on one or with a small team to change teaching or training practice.",
+          "file": "agents/it-team-skill-coaching-cycle.md"
+        },
+        {
+          "name": "Learning Tool Evaluation",
+          "for": "Learning",
+          "when": "Shared skill",
+          "text": "Use before recommending, buying, or approving any app, platform, or digital resource for learning.",
+          "file": "agents/it-team-skill-tool-evaluation.md"
+        },
+        {
+          "name": "Professional Learning Design",
+          "for": "Learning",
+          "when": "Shared skill",
+          "text": "Use when planning training or professional development for adults, including teachers, faculty, and staff.",
+          "file": "agents/it-team-skill-professional-learning-design.md"
+        },
+        {
+          "name": "Training Needs Analysis",
+          "for": "Learning",
+          "when": "Shared skill",
+          "text": "Use when someone asks for training, to confirm training is the right answer and what it should cover.",
+          "file": "agents/it-team-skill-training-needs-analysis.md"
+        },
+        {
+          "name": "Learning Impact Evaluation",
+          "for": "Learning",
+          "when": "Shared skill",
+          "text": "Use to find out whether a course, training, coaching, or program worked.",
+          "file": "agents/it-team-skill-learning-impact-evaluation.md"
+        },
+        {
+          "name": "Design for K12 Learners",
+          "for": "Learning",
+          "when": "Shared skill",
+          "text": "Use whenever you design, choose, or review a lesson, course, tool, or resource for children and teenagers in school.",
+          "file": "agents/it-team-skill-learning-principles-k12.md"
+        },
+        {
+          "name": "Design for Higher Education Learners",
+          "for": "Learning",
+          "when": "Shared skill",
+          "text": "Use whenever you design, choose, or review a course, tool, or resource for college and university students.",
+          "file": "agents/it-team-skill-learning-principles-higher-ed.md"
+        },
+        {
+          "name": "Design for Adult Learners",
+          "for": "Learning",
+          "when": "Shared skill",
+          "text": "Use whenever you design, choose, or review training, a course, or a tool for working adults and adult education students.",
+          "file": "agents/it-team-skill-learning-principles-adult.md"
         }
       ]
     },
