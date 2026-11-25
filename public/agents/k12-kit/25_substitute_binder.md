@@ -37,7 +37,7 @@ You need one tab for each line below. The tab names must match exactly.
 Do one of these. The first is fastest.
 
 1. **You have a Class Roster Sheet already.** Follow `26_link_sheets_and_back_up.md` to link it. Your names fill in by themselves and stay up to date.
-2. **You do not.** Type or paste your student names into the `Roster` tab, one per row, starting in row 2.
+2. **You do not.** Type or paste your students into the `Roster` tab, one per row, starting in row 2. Fill in the student number or the student email, whichever your school uses. You need at least one of them.
 
 ## Step 4. How the tool works
 

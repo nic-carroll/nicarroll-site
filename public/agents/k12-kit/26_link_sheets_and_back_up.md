@@ -12,9 +12,26 @@ This is the same in every tool.
 2. **Check the name.** The tool shows the name of the Sheet it found. If it is the wrong Sheet, click **Change link**.
 3. **Tick the tabs.** The tool lists every tab in that Sheet. Tick the ones this tool should use, then click **Save**.
 
+### No link yet? Two more ways to start
+
+On the first step, under the link box, there are two buttons.
+
+**Search My Google Drive.** Type part of the Sheet's name, such as `roster`. The tool lists the Sheets you can already open. Select one and the tool moves on to the tabs.
+
+**Create a New Sheet.** The tool makes a Sheet with the right tabs and column headings already in row 1, puts it in your Drive, and links it. For a class roster the headings are:
+
+`Last name | First name | Period | Course | Student number | Student email`
+
+Fill in the student number or the student email, whichever your school uses. You need at least one of them, so the tool can tell apart two students with the same name. Use Period for a class period or section, and Course for the course name.
+
 ### Why the example tools ask you to type the name and tabs
 
 The example tools in the gallery are previews. They are not signed in to Google, so they cannot open your Sheet. They ask you to type the name and the tab names instead, or to try a sample Sheet. Your own copy fills these in by itself.
+
+For the same reason, the two buttons work differently in an example tool:
+
+* **Search My Google Drive** opens your Drive in a new tab, showing Sheets only. Right click the Sheet, click **Share**, then **Copy link**, and paste the link into the tool.
+* **Create a New Sheet** shows the headings with a **Copy the Headings** button and a link that opens a blank Google Sheet. Paste the headings into cell A1, then paste the new Sheet's link into the tool.
 
 ## Part 2. What makes step 2 and step 3 automatic
 

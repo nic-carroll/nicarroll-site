@@ -24,7 +24,7 @@ Sign a student out in two taps, see who is out and for how long, and keep a reco
 
 You need one tab for each line below. The tab names must match exactly.
 
-1. Double click **Sheet1** and rename it `Roster`. In row 1, type these headings, one per cell, from left to right: `Student | Period`
+1. Double click **Sheet1** and rename it `Roster`. In row 1, type these headings, one per cell, from left to right: `Last name | First name | Period | Course | Student number | Student email`
 2. Click the **+** at the bottom left to add a tab, then name it `Passes`. In row 1, type these headings, one per cell, from left to right: `Date | Student | Period | Going to | Time out | Time back | Minutes`
 
 3. Add one more tab named `Sources`. In row 1 type: `Sheet name | Link | Tabs used | What it feeds`. This is where you list any other Sheet this tool reads.
@@ -34,7 +34,7 @@ You need one tab for each line below. The tab names must match exactly.
 Do one of these. The first is fastest.
 
 1. **You have a Class Roster Sheet already.** Follow `26_link_sheets_and_back_up.md` to link it. Your names fill in by themselves and stay up to date.
-2. **You do not.** Type or paste your student names into the `Roster` tab, one per row, starting in row 2.
+2. **You do not.** Type or paste your students into the `Roster` tab, one per row, starting in row 2. Fill in the student number or the student email, whichever your school uses. You need at least one of them.
 
 ## Step 4. How the tool works
 

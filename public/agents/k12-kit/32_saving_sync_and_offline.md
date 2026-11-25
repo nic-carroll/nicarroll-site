@@ -65,7 +65,7 @@ This protects offline work. It also means two people editing the same tool at th
 
 ## Part 4. The one time setup that makes sync work
 
-A tech coach does this once. It is the same web app setup described in `18_data_without_apps_script.md`, with three functions added. The script runs as the person using the page, so it can only open Sheets that person can already open.
+A tech coach does this once. It is the same web app setup described in `18_data_without_apps_script.md`, with five functions added. They cover reading a Sheet's name and tabs, searching Drive for Sheets, creating a new Sheet with the right headings, and saving and loading a tool's data. The script runs as the person using the page, so it can only open Sheets that person can already open.
 
 ```
 var DATA_TAB = 'App Data';
@@ -76,6 +76,38 @@ function sheetInfo(url) {
     name: ss.getName(),
     tabs: ss.getSheets().map(function (s) { return s.getName(); })
   };
+}
+
+function searchSheets(query) {
+  var q = 'mimeType = "application/vnd.google-apps.spreadsheet" and trashed = false';
+  if (query) q += ' and title contains "' + String(query).replace(/["\\]/g, '') + '"';
+  var files = DriveApp.searchFiles(q);
+  var out = [];
+  while (files.hasNext() && out.length < 20) {
+    var f = files.next();
+    out.push({
+      name: f.getName(),
+      url: f.getUrl(),
+      updated: 'Updated ' + Utilities.formatDate(f.getLastUpdated(), Session.getScriptTimeZone(), 'MMMM d')
+    });
+  }
+  return out;
+}
+
+function createSheet(name, tabs) {
+  var ss = SpreadsheetApp.create(name);
+  var names = [];
+  (tabs || []).forEach(function (tab, i) {
+    var sheet = i === 0 ? ss.getSheets()[0] : ss.insertSheet();
+    sheet.setName(tab.name);
+    names.push(tab.name);
+    if (tab.cols && tab.cols.length) {
+      sheet.getRange(1, 1, 1, tab.cols.length).setValues([tab.cols]).setFontWeight('bold');
+      sheet.setFrozenRows(1);
+    }
+  });
+  if (!names.length) names.push(ss.getSheets()[0].getName());
+  return { name: ss.getName(), url: ss.getUrl(), tabs: names };
 }
 
 function saveState(url, tool, json, stamp) {

@@ -259,7 +259,11 @@ var KLink=(function(){
    ".kl-tabs{border:0;margin:0;padding:0;display:grid;gap:8px;min-width:0}.kl-tabs legend{font-size:.875rem;line-height:1.25rem;font-weight:500;padding:0 0 8px}"+
    ".kl-tablist{display:flex;flex-wrap:wrap;gap:8px}.kl-tab input{width:18px;height:18px;margin:0;accent-color:"+P+";flex:none}"+
    ".kl-tab:has(input:checked){background:var(--md-secondary-container,var(--secondary-container,#C2E7FF));border-color:transparent}"+
-   ".kl-file{font:inherit;font-size:.875rem;max-width:100%}";
+   ".kl-file{font:inherit;font-size:.875rem;max-width:100%}"+
+   ".kl-hits{display:grid;gap:8px}.kl-hit{display:grid;gap:2px;text-align:left;padding:12px 16px;border:1px solid "+OL+";border-radius:12px;background:transparent;color:inherit;font:inherit;min-width:0}.kl-hit b{font-weight:500;overflow-wrap:anywhere}.kl-hit span{font-size:.75rem;line-height:1rem;color:"+OV+"}.kl-hit:hover{background:var(--md-surface-container,rgba(0,0,0,.05))}"+
+   ".kl-ol{margin:0;padding-left:22px;font-size:.875rem;line-height:1.5rem}.kl-ol a{color:"+P+";font-weight:500}"+
+   ".kl-spec{display:grid;gap:10px}.kl-tabspec{border:1px solid "+OL+";border-radius:12px;padding:12px;display:grid;gap:8px;min-width:0}.kl-tabhead{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}.kl-tabhead b{font-weight:500}"+
+   ".kl-cols{display:flex;flex-wrap:wrap;gap:6px}.kl-cols span{font-size:.8125rem;line-height:1.125rem;padding:4px 10px;border-radius:8px;background:var(--md-surface-container-highest,var(--surface-container-highest,#E1E3E1));overflow-wrap:anywhere}";
   document.head.appendChild(st);
   var host=document.createElement("div");
   host.innerHTML='<div class="scrim" id="kl-scrim" hidden><form class="dialog" id="kl-dlg" role="dialog" aria-modal="true" aria-labelledby="kl-t" novalidate><h2 id="kl-t"></h2><div class="kl-body" id="kl-body"></div><div class="dlg-actions" id="kl-act"></div></form></div>';
@@ -280,16 +284,39 @@ var KLink=(function(){
 
   /* ---------- link a Sheet ---------- */
   function open(opts){
-    o=opts;mode="link";var src=opts.source;
+    o=opts;mode="link";var src=opts.source;var SPEC=opts.spec||null;
     s=src?{step:2,url:src.url||"",name:src.name||"",all:(src.allTabs&&src.allTabs.length?src.allTabs:split(src.tabs)).slice(),picked:split(src.tabs),use:src.use||"",mode:src.mode||"ref",manual:false,err:"",busy:false,edit:true}
          :{step:1,url:"",name:"",all:[],picked:[],use:"",mode:opts.mode||"ref",manual:false,err:"",busy:false,edit:false};
-    s.picked.forEach(function(t){if(s.all.indexOf(t)<0)s.all.push(t)});
+    s.picked.forEach(function(t){if(s.all.indexOf(t)<0)s.all.push(t)});s.spec=SPEC||{name:"Class Roster",use:"Student names",tabs:[{name:"Roster",cols:["Last name","First name","Period","Course","Student number","Student email"]}]};
     show();render();
   }
   function split(t){return String(t||"").split(",").map(function(x){return x.trim()}).filter(Boolean)}
   function render(){
     $("kl-t").textContent=s.edit?"Edit linked Sheet":"Link a Google Sheet";
     var b="",a="";
+    if(s.step==="search"){
+      $("kl-t").textContent="Search My Google Drive";
+      b=live()?'<p class="kl-help">Type part of the Sheet name. Only Sheets you can already open are shown.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><label class="field" for="kl-q" style="flex:1 1 220px"><span>Sheet name</span><input id="kl-q" value="'+esc(s.q||"")+'" autocomplete="off"></label><button type="submit" class="btn filled" style="align-self:center">Search</button></div>'+
+          (s.busy?'<p class="kl-help" role="status">Searching your Drive...</p>':'')+(s.err?'<p class="kl-err" role="alert">'+esc(s.err)+'</p>':'')+
+          (s.hits?(s.hits.length?'<div class="kl-hits">'+s.hits.map(function(x,i){return '<button type="button" class="kl-hit" data-klh="'+i+'"><b>'+esc(x.name)+'</b><span>'+esc(x.updated||"")+'</span></button>'}).join("")+'</div>':'<p class="kl-help">No Sheets matched. Try fewer letters.</p>'):'')
+        :'<p class="kl-note">This preview is not signed in to Google, so it cannot search your Drive here. In your own copy, you type a name and pick the Sheet from a list.</p>'+
+          '<ol class="kl-ol"><li><a href="https://drive.google.com/drive/search?q=type:spreadsheet" target="_blank" rel="noopener">Open My Google Drive, Sheets Only</a>. It opens in a new tab.</li><li>Right click the Sheet you want, then click <b>Share</b>, then <b>Copy link</b>.</li><li>Come back here, select <b>Back</b>, and paste the link.</li></ol>'+
+          '<p class="kl-help">Or pick one of these sample Sheets to see how it works:</p><div class="kl-hits">'+SAMPLES.map(function(x,i){return '<button type="button" class="kl-hit" data-kls="'+i+'"><b>'+esc(x.name)+'</b><span>Sample Sheet, '+x.tabs.length+' tabs</span></button>'}).join("")+'</div>';
+      $("kl-body").innerHTML=b;$("kl-act").innerHTML='<button type="button" class="btn text" data-kl="back">Back</button><span style="flex:1"></span><button type="button" class="btn text" data-kl="cancel">Cancel</button>';
+      var qf=$("kl-q");if(qf)qf.focus();return;
+    }
+    if(s.step==="new"){
+      var sp=s.spec||{name:"Class Roster",tabs:[]};
+      $("kl-t").textContent="Create a New Sheet";
+      var cols='<div class="kl-spec">'+sp.tabs.map(function(t,i){return '<div class="kl-tabspec"><div class="kl-tabhead"><b>Tab: '+esc(t.name)+'</b>'+(t.cols.length&&!live()?'<button type="button" class="btn tonal sm" data-klcopy="'+i+'">Copy the Headings</button>':'')+'</div>'+(t.cols.length?'<div class="kl-cols">'+t.cols.map(function(c){return '<span>'+esc(c)+'</span>'}).join("")+'</div>':'<span class="kl-help">No set headings. Name the tab and the tool fills it in.</span>')+'</div>'}).join("")+'</div>'+
+        (sp.tabs.some(function(t){return /^roster$/i.test(t.name)})?'<p class="kl-help">Fill in the student number or the student email, whichever your school uses. You need at least one of them so the tool can tell two students with the same name apart.</p>':'');
+      b='<label class="field" for="kl-nn"><span>Name for the new Sheet</span><input id="kl-nn" value="'+esc(s.newName||sp.name)+'"></label><p class="kl-help" style="font-weight:500;color:inherit">It will have these tabs and column headings:</p>'+cols+
+        (live()?(s.busy?'<p class="kl-help" role="status">Creating the Sheet in your Drive...</p>':''):
+          '<p class="kl-note">This preview is not signed in to Google, so it cannot create the Sheet for you. In your own copy this is one click. For now, three steps:</p><ol class="kl-ol"><li>Select <b>Copy the Headings</b> above.</li><li><a href="https://sheets.new" target="_blank" rel="noopener">Open a New Google Sheet</a>. Click cell A1 and paste. Name the tab at the bottom to match.</li><li>Copy the new Sheet\'s address from the top of the browser and paste it here.</li></ol><label class="field" for="kl-nu"><span>Link to your new Sheet</span><input id="kl-nu" value="'+esc(s.newUrl||"")+'" placeholder="https://docs.google.com/spreadsheets/d/..."></label>')+
+        (s.err?'<p class="kl-err" role="alert">'+esc(s.err)+'</p>':'');
+      $("kl-body").innerHTML=b;$("kl-act").innerHTML='<button type="button" class="btn text" data-kl="back">Back</button><span style="flex:1"></span><button type="button" class="btn text" data-kl="cancel">Cancel</button><button type="submit" class="btn filled"'+(s.busy?" disabled":"")+'>'+(live()?"Create It for Me":"Continue")+'</button>';
+      return;
+    }
     if(s.step===1){
       b='<p class="kl-step">Step 1 of 2: paste the link</p>'+
         '<p class="kl-help">Open the Google Sheet, copy the address from the top of the browser, and paste it here.</p>'+
@@ -299,6 +326,7 @@ var KLink=(function(){
         (s.manual?'<p class="kl-note">This preview is not signed in to Google, so it cannot open your Sheet. In your own copy, the name and the list of tabs fill in by themselves. For now, type them.</p>'+
           '<label class="field" for="kl-name"><span>Name of the Sheet</span><input id="kl-name" value="'+esc(s.name)+'"></label>'+
           '<label class="field" for="kl-all"><span>Tab names, separated by commas</span><input id="kl-all" value="'+esc(s.all.join(", "))+'" placeholder="Roster, Schedule"></label>':'')+
+        '<div class="kl-samples"><span class="kl-help">No link yet?</span><button type="button" data-kl="search">Search My Google Drive</button><button type="button" data-kl="new">Create a New Sheet</button></div>'+
         (live()?'':'<div class="kl-samples"><span class="kl-help">No link handy? Try a sample Sheet:</span>'+SAMPLES.map(function(x,i){return '<button type="button" data-kls="'+i+'">'+esc(x.name)+'</button>'}).join("")+'</div>');
       a='<span style="flex:1"></span><button type="button" class="btn text" data-kl="cancel">Cancel</button><button type="submit" class="btn filled"'+(s.busy?" disabled":"")+'>'+(s.manual?"Continue":"Find this Sheet")+'</button>';
     }else{
@@ -341,6 +369,13 @@ var KLink=(function(){
     e.preventDefault();
     if(mode==="restore"){doRestore();return}
     if(mode!=="link")return;
+    if(s.step==="search"){var q=$("kl-q");if(!q)return;s.q=q.value.trim();s.err="";s.busy=true;s.hits=null;render();
+      google.script.run.withSuccessHandler(function(r){if(mode!=="link")return;s.busy=false;s.hits=r||[];render()}).withFailureHandler(function(){if(mode!=="link")return;s.busy=false;s.err="Your Drive could not be searched. Try again in a moment.";render()}).searchSheets(s.q);return}
+    if(s.step==="new"){var sp=s.spec||{name:"Class Roster",tabs:[]};s.newName=$("kl-nn").value.trim()||sp.name;s.err="";
+      if(live()){s.busy=true;render();google.script.run.withSuccessHandler(function(r){if(mode!=="link")return;s.busy=false;s.url=r.url;s.picked=r.tabs.slice();if(!s.use)s.use=sp.use||"";found(r)}).withFailureHandler(function(){if(mode!=="link")return;s.busy=false;s.err="The Sheet could not be created. Check that you are signed in, then try again.";render()}).createSheet(s.newName,sp.tabs);return}
+      s.newUrl=$("kl-nu").value.trim();
+      if(!ok(s.newUrl)){s.err="Paste the link to the new Sheet. It should start with https://docs.google.com/spreadsheets/d/";render();return}
+      s.url=s.newUrl;s.picked=sp.tabs.map(function(t){return t.name});found({name:s.newName,tabs:sp.tabs.map(function(t){return t.name})});return}
     if(s.step===1){find();return}
     keep();
     if(!s.picked.length){s.err="Tick at least one tab to use.";render();return}
@@ -350,6 +385,10 @@ var KLink=(function(){
   $("kl-dlg").addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
     if(b.dataset.kl==="cancel")close();
+    else if(b.dataset.kl==="search"||b.dataset.kl==="new"){keep();s.err="";s.busy=false;s.hits=null;s.step=b.dataset.kl;render()}
+    else if(b.dataset.kl==="back"){s.err="";s.busy=false;s.step=1;render()}
+    else if(b.dataset.klh!==undefined){var hit=s.hits[+b.dataset.klh];s.url=hit.url;s.manual=false;s.step=1;find(true)}
+    else if(b.dataset.klcopy!==undefined){var tb=(s.spec||{tabs:[]}).tabs[+b.dataset.klcopy],tx=tb.cols.join("\t"),say=function(m){b.textContent=m;setTimeout(function(){b.textContent="Copy the Headings"},1800)};try{navigator.clipboard.writeText(tx).then(function(){say("Copied")},function(){say("Copy Blocked")})}catch(e2){say("Copy Blocked")}}
     else if(b.dataset.kl==="change"){keep();s.step=1;s.err="";s.manual=!live()&&!isSample(s.url)&&!!s.url;render()}
     else if(b.dataset.kl==="delete"){var fn=o.onDelete;close();fn()}
     else if(b.dataset.kls){keep();s.url=SAMPLES[+b.dataset.kls].url;s.manual=false;find(true)}
@@ -693,6 +732,10 @@ var K=(function(){
     "Substitute Binder":[["Substitute Binder Data","Info, Schedule, Routines, Plans, Notes","Everything in the binder","save"],["School Calendar","Dates","Early release and testing days","ref"]],
     "Rubric Grader":[["Rubric Scores","Scores, Notes","Scores and teacher notes","save"],["Class Roster","Roster","Student names","ref"],["Department Rubrics","Rubric","Shared rubric criteria","ref"]]
   };
+  /* The column headings each tab needs. Used when a teacher creates a new Sheet from inside a tool. */
+  var ROSTER=["Last name","First name","Period","Course","Student number","Student email"];
+  var FIELDS={"PBIS Points Board|Roster": ["Last name", "First name", "Period", "Course", "Student number", "Student email"], "PBIS Points Board|Expectations": ["Expectation", "Points"], "PBIS Points Board|Awards": ["Date", "Student", "Expectation", "Points"], "PBIS Points Board|Rewards": ["Reward", "Cost"], "PBIS Points Board|Redeemed": ["Date", "Student", "Reward", "Cost"], "Hall Pass Log|Roster": ["Last name", "First name", "Period", "Course", "Student number", "Student email"], "Hall Pass Log|Passes": ["Date", "Student", "Period", "Going to", "Time out", "Time back", "Minutes"], "Family Contact Log|Roster": ["Last name", "First name", "Period", "Course", "Student number", "Student email"], "Family Contact Log|Contacts": ["Date", "Student", "Family member", "How", "Reason", "Summary", "Follow up by", "Done"], "Missing Work Tracker|Roster": ["Last name", "First name", "Period", "Course", "Student number", "Student email"], "Missing Work Tracker|Missing": ["Student", "Period", "Assignment", "Due date", "Status", "Date closed"], "Classroom Jobs Board|Roster": ["Last name", "First name", "Period", "Course", "Student number", "Student email"], "Classroom Jobs Board|Jobs": ["Job", "Helpers needed", "What the helper does"], "Classroom Jobs Board|Order": ["Position", "Student"], "Substitute Binder|Info": ["Label", "What the substitute should know"], "Substitute Binder|Schedule": ["Time", "What happens", "Where"], "Substitute Binder|Routines": ["Routine", "What to do"], "Substitute Binder|Plans": ["Subject", "Lesson title", "Steps", "Materials"], "Substitute Binder|Notes": ["Date", "Note"], "Class Poll|Polls": ["Question", "Kind", "Choices", "Open", "Show results"], "Class Poll|Responses": ["Timestamp", "Question", "Answer"], "Class Whiteboard|Boards": ["Board ID", "Name", "Date made", "Background"], "Class Whiteboard|Strokes": ["Board ID", "Order", "Tool", "Color", "Size", "Points", "Start time", "Length"], "Class Idea Board|Sections": ["Section"], "Class Idea Board|Posts": ["Timestamp", "Name", "Section", "Idea", "More detail", "Approved", "Likes"]};
+  function specFor(name,tabs){var o={name:name,tabs:[]};String(tabs||"").split(",").map(function(x){return x.trim()}).filter(Boolean).forEach(function(tb){o.tabs.push({name:tb,cols:/^roster$/i.test(tb)?ROSTER:(FIELDS[TITLE+"|"+tb]||[])})});return o}
   var KEYS={"Flex Period Scheduling Dashboard":"demo-flex-v1","Grade Level Team Dashboard":"demo-team-v1","Chromebook Repair Tracker":"demo-repair-v1","Classroom Quiz Show":"demo-quiz-v1","Station Rotation Board":"demo-stations-v1","Weekly Lesson Planner":"demo-planner-v1","Group Maker and Picker":"demo-groups-v1","Standards Mastery Tracker":"demo-mastery-v1","Class Agenda Board":"demo-agenda-v1","Rubric Grader":"demo-rubric-v1","PBIS Points Board":"demo-pbis-v1","Class Poll":"demo-poll-v1","Class Whiteboard":"demo-wb-v1","Class Idea Board":"demo-board-v1","Curriculum Warehouse":"demo-warehouse-v1","Coaching Cycle Tracker":"demo-coach-v1","Pacing Guide":"demo-pacing-v1","Instructional Materials Review":"demo-materials-v1","Hall Pass Log":"demo-pass-v1","Family Contact Log":"demo-contact-v1","Missing Work Tracker":"demo-missing-v1","Classroom Jobs Board":"demo-jobs-v1","Substitute Binder":"demo-sub-v1"};
   function sources(){
     var title=TITLE,defs=SRC_DEFAULTS[title];if(!defs||$("k-sources"))return;
@@ -735,9 +778,9 @@ var K=(function(){
         else KLink.restore(title,bkeys);
         return}
       var b=e.target.closest("[data-ksrc]");if(!b)return;
-      if(b.dataset.ksrc==="add"){KLink.open({source:null,onSave:function(v){v.id=uid();list.push(v);save(key,list);draw();toast(v.name+" linked.")}});return}
+      if(b.dataset.ksrc==="add"){KLink.open({source:null,spec:specFor("Class Roster","Roster"),onSave:function(v){v.id=uid();list.push(v);save(key,list);draw();toast(v.name+" linked.")}});return}
       var s=list.filter(function(x){return x.id===b.dataset.ksrc})[0];
-      KLink.open({source:s,onSave:function(v){s.name=v.name;s.url=v.url;s.tabs=v.tabs;s.allTabs=v.allTabs;s.use=v.use;s.mode=v.mode;save(key,list);draw()},
+      KLink.open({source:s,spec:specFor(s.name,s.tabs),onSave:function(v){s.name=v.name;s.url=v.url;s.tabs=v.tabs;s.allTabs=v.allTabs;s.use=v.use;s.mode=v.mode;save(key,list);draw()},
         onDelete:function(){var before=JSON.stringify(list);list=list.filter(function(x){return x!==s});save(key,list);draw();toast("Data source removed.",function(){list=JSON.parse(before);save(key,list);draw()})}});
     });
     draw();syncInit();var d0=draw;draw=function(){d0();status()};
