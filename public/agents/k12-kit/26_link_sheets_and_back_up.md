@@ -24,6 +24,27 @@ On the first step, under the link box, there are two buttons.
 
 Fill in the student number or the student email, whichever your school uses. You need at least one of them, so the tool can tell apart two students with the same name. Use Period for a class period or section, and Course for the course name.
 
+### Match your columns
+
+Your roster does not have to use the tool's column names. After you tick the tabs, a third step named **Match Your Columns** appears for any Sheet that is a class roster.
+
+1. The tool reads the column names from row 1 of your Sheet.
+2. For each thing the tool needs, pick the column in your Sheet that holds it. The tool makes a first guess. Check each one.
+3. Click **Save**.
+
+The fewest columns a roster needs:
+
+* Last name
+* First name
+* One of these: period, section, or course
+* One of these: student number or student email
+
+If your Sheet is missing one, the tool tells you which. Add that column to your Sheet, or pick a different column.
+
+After you save, the tool writes a formula that pulls your roster in with the standard column names and order, whatever your Sheet calls them. Copy it from under the Data sources table.
+
+In an example tool, the tool cannot read row 1 for you. Click the row number 1 in your Sheet, copy it, and paste it into the box.
+
 ### Why the example tools ask you to type the name and tabs
 
 The example tools in the gallery are previews. They are not signed in to Google, so they cannot open your Sheet. They ask you to type the name and the tab names instead, or to try a sample Sheet. Your own copy fills these in by itself.

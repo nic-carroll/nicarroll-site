@@ -65,7 +65,7 @@ This protects offline work. It also means two people editing the same tool at th
 
 ## Part 4. The one time setup that makes sync work
 
-A tech coach does this once. It is the same web app setup described in `18_data_without_apps_script.md`, with five functions added. They cover reading a Sheet's name and tabs, searching Drive for Sheets, creating a new Sheet with the right headings, and saving and loading a tool's data. The script runs as the person using the page, so it can only open Sheets that person can already open.
+A tech coach does this once. It is the same web app setup described in `18_data_without_apps_script.md`, with six functions added. They cover reading a Sheet's name and tabs, reading its column names, searching Drive for Sheets, creating a new Sheet with the right headings, and saving and loading a tool's data. The script runs as the person using the page, so it can only open Sheets that person can already open.
 
 ```
 var DATA_TAB = 'App Data';
@@ -76,6 +76,14 @@ function sheetInfo(url) {
     name: ss.getName(),
     tabs: ss.getSheets().map(function (s) { return s.getName(); })
   };
+}
+
+function sheetHeaders(url, tab) {
+  var sheet = SpreadsheetApp.openByUrl(url).getSheetByName(tab);
+  if (!sheet || sheet.getLastColumn() === 0) return [];
+  return sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    .map(function (v) { return String(v).trim(); })
+    .filter(function (v) { return v; });
 }
 
 function searchSheets(query) {
