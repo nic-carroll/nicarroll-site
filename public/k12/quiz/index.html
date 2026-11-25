@@ -152,6 +152,22 @@ canvas.confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
   @keyframes glow{50%{box-shadow:0 6px 0 #B8860B,0 14px 40px rgba(255,213,74,.55)}}
 }
 @media (max-width:640px){.qhead .stem{font-size:1.25rem;line-height:1.75rem}.tile{min-height:68px;font-size:1.0625rem}.qpanel{padding:16px}.ring{width:52px;height:52px}.ring svg{width:52px;height:52px}.count{width:150px;height:150px;font-size:3.75rem}.starsrow span{font-size:48px}}
+.tabseg{margin:0 0 16px}
+.rzrow{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--md-outline-variant)}
+.rzsel{display:inline-flex;align-items:center;gap:8px}.rzsel select{height:40px;padding:0 8px;border:1px solid var(--md-outline);border-radius:var(--md-shape-xs);background:var(--md-surface);font:500 1rem/1 var(--md-font);color:var(--md-on-surface)}
+.rzchk{display:inline-flex;align-items:center;gap:8px;font:500 .875rem/1.25rem var(--md-font)}.rzchk input{width:18px;height:18px;accent-color:var(--md-primary)}
+.rzsum{margin-top:8px;padding:12px 16px;border-radius:var(--md-shape-m);background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:12px}
+.libcard{display:grid;gap:8px;align-content:start;padding:16px;border:1px solid var(--md-outline-variant);border-radius:var(--md-shape-l);background:var(--md-surface)}
+.libcard.live{border:2px solid var(--md-primary)}.libcard h3{font:500 1.375rem/1.75rem var(--md-font);margin:0}
+.stu{display:inline-flex;align-items:center;gap:2px;height:36px;padding:0 4px 0 12px;border:1px solid var(--md-outline-variant);border-radius:var(--md-shape-s);font:500 .875rem/1 var(--md-font)}
+.stu .iconb{width:32px;height:32px}.stu .iconb span{font-size:18px}
+.tablewrap{overflow-x:auto;margin-top:12px}
+.who{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
+.who .field{flex:1 1 200px;max-width:280px;text-align:left}
+.who .field>span{position:static;background:none;color:#fff;padding:0 0 4px;font-size:.875rem}
+.who select{width:100%;height:52px;padding:0 12px;border:2px solid rgba(255,255,255,.5);border-radius:14px;background:#fff;color:#1b1b1f;font:500 1.0625rem/1 var(--md-font)}
+.whomsg{font-size:1rem;max-width:46ch}
 </style>
 </head>
 <body>
@@ -171,7 +187,7 @@ canvas.confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
 <script>
 (function(){
 "use strict";
-var KEY="demo-quiz-v1",$=function(id){return document.getElementById(id)},esc=K.esc;
+var KEY="demo-quiz-v1",LKEY="demo-quiz-lib-v2",$=function(id){return document.getElementById(id)},esc=K.esc;
 var TYPES={mc:"Multiple choice",ms:"Multi select",twopart:"Two part",dropdown:"Drop down",dragdrop:"Drag and drop",numeric:"Keypad input"};
 var TYPEHELP={mc:"one correct answer",ms:"more than one correct answer",twopart:"Part A, then Part B that supports it",dropdown:"menus inside a sentence",dragdrop:"sort items into groups",numeric:"type a number"};
 function sym(n){return '<span class="material-symbols-outlined" aria-hidden="true">'+n+'</span>'}
@@ -199,14 +215,46 @@ function sample(){return {
     {id:K.uid(),type:"dragdrop",std:"3.PAR.3",time:60,stem:"Sort each expression by its value.",categories:[{name:"Equals 24",items:["3 × 8","4 × 6","48 ÷ 2"]},{name:"Equals 36",items:["6 × 6","4 × 9","72 ÷ 2"]}],why:"3 × 8, 4 × 6, and 48 ÷ 2 all equal 24. The others equal 36."},
     {id:K.uid(),type:"numeric",std:"3.GSR.7",time:30,stem:"A rectangle is 8 units long and 5 units wide. What is its area in square units?",answer:"40",why:"Area is length times width: 8 × 5 = 40."},
     {id:K.uid(),type:"mc",std:"3.MDR.5",time:30,stem:"Soccer practice starts at 3:15 and lasts 45 minutes. What time does it end?",choices:["3:45","4:00","3:60","4:15"],correct:[1],why:"15 minutes plus 45 minutes is 60 minutes, so practice ends one hour after 3:00."},
-    {id:K.uid(),type:"numeric",std:"3.PAR.3",time:30,stem:"56 stickers are shared equally among 8 students. How many stickers does each student get?",answer:"7",why:"56 ÷ 8 = 7 because 8 × 7 = 56."}
+    {id:K.uid(),type:"numeric",std:"3.PAR.3",time:30,stem:"56 stickers are shared equally among 8 students. How many stickers does each student get?",answer:"7",why:"56 ÷ 8 = 7 because 8 × 7 = 56."},
+    {id:K.uid(),type:"mc",dok:1,std:"3.PAR.3",time:30,stem:"What is 9 × 4?",choices:["32","36","13","45"],correct:[1],why:"9 groups of 4 is 36."},
+    {id:K.uid(),type:"numeric",dok:1,std:"3.NR.1",time:30,stem:"Round 387 to the nearest ten.",answer:"390",why:"387 is closer to 390 than to 380."},
+    {id:K.uid(),type:"numeric",dok:2,std:"3.PAR.3",time:45,stem:"A classroom has 4 rows of 7 desks. 3 desks are empty. How many desks are being used?",answer:"25",why:"4 × 7 = 28 desks, and 28 − 3 = 25."},
+    {id:K.uid(),type:"mc",dok:2,std:"3.NR.4",time:30,stem:"Which fraction is greater than 1/2?",choices:["1/4","3/8","3/4","2/6"],correct:[2],why:"3/4 is more than half because 3 is more than half of 4."},
+    {id:K.uid(),type:"twopart",dok:3,std:"3.PAR.3",time:60,stem:"Mia has 3 packs of 8 pencils. She gives away 5 pencils. How many pencils does she have left?",choices:["19","24","29","16"],correct:[0],
+      b:{stem:"Which equation shows how to solve Part A?",choices:["(3 × 8) − 5 = 19","(3 + 8) − 5 = 6","(3 × 8) + 5 = 29","(8 − 5) × 3 = 9"],correct:[0]},why:"3 packs of 8 is 24 pencils, and 24 − 5 = 19."},
+    {id:K.uid(),type:"ms",dok:3,std:"3.PAR.3",time:45,stem:"Select the TWO statements that are true about 4 × 6.",choices:["It equals 6 × 4","It equals 12 + 12","It equals 4 + 6","It equals 46"],correct:[0,1],why:"4 × 6 = 24. So does 6 × 4, and so does 12 + 12."}
   ],
+  settings:{shuffle:true,take:{1:3,2:3,3:2}},
   gen:{std:"3.PAR.3",types:{mc:1,ms:1,twopart:1,dropdown:1,dragdrop:1,numeric:1},count:5,topic:""}
 }}
-var S=K.load(KEY,sample),view="build";
-function save(){K.save(KEY,S)}
-function snap(){return JSON.stringify(S)}
-function restore(j){S=JSON.parse(j);save();draw()}
+/* The library: every quiz the teacher has made, the class lists, and every score. */
+var DOKS={1:"Recall",2:"Skill and concept",3:"Strategic thinking",4:"Extended thinking"};
+function defaultDok(q){return q.type==="twopart"?3:(q.type==="ms"||q.type==="dropdown"||q.type==="dragdrop")?2:1}
+function sampleLib(){var q=K.load(KEY,sample);q.id=q.id||K.uid();
+  return {quizzes:[q],current:q.id,scores:[],who:{cls:"c1",name:""},
+    classes:[{id:"c1",name:"Period 1",students:["Avery B.","Jordan C.","Maya N.","Elijah H.","Sofia R.","Noah W."]},{id:"c2",name:"Period 2",students:["Liam T.","Zoe M.","Carlos D.","Priya S.","Ethan K.","Grace L."]}]}}
+var L=K.load(LKEY,sampleLib),S=null,view="build",tab="questions",scQuiz="",scCls="";
+function pickCurrent(){
+  S=L.quizzes.filter(function(x){return x.id===L.current})[0]||L.quizzes[0];L.current=S.id;
+  S.settings=S.settings||{shuffle:true,take:{}};S.settings.take=S.settings.take||{};
+  S.questions.forEach(function(q){if(!q.dok)q.dok=defaultDok(q)});
+  L.who=L.who||{cls:"",name:""};if(!L.classes.some(function(c){return c.id===L.who.cls}))L.who={cls:L.classes[0]?L.classes[0].id:"",name:""};
+}
+pickCurrent();
+function save(){K.save(LKEY,L)}
+function snap(){return JSON.stringify(L)}
+function restore(j){L=JSON.parse(j);pickCurrent();save();draw()}
+function pools(){var p={};S.questions.forEach(function(q){(p[q.dok]=p[q.dok]||[]).push(q)});return p}
+function takeN(k,max){var t=S.settings.take[k];return t==null?max:Math.max(0,Math.min(max,t))}
+function perStudent(){var p=pools();return Object.keys(p).reduce(function(n,k){return n+takeN(k,p[k].length)},0)}
+function rnd(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+/* One student's set: the same number of questions at each DOK level, drawn at random from that level's pool. */
+function drawSet(){var p=pools(),out=[];
+  Object.keys(p).sort().forEach(function(k){var a=S.settings.shuffle?rnd(p[k]):p[k];out=out.concat(a.slice(0,takeN(k,a.length)))});
+  return S.settings.shuffle?rnd(out):out}
+function clsById(id){return L.classes.filter(function(c){return c.id===id})[0]}
+function scoresFor(quizId){return L.scores.filter(function(x){return x.quiz===quizId})}
+function fmtDate(t){try{return new Date(t).toLocaleDateString(undefined,{month:"short",day:"numeric"})}catch(e){return ""}}
 function stdLabel(code){var s=S.standards.filter(function(x){return x.code===code})[0];return s?s.label:""}
 
 /* ---------- text encodings used by the edit forms ---------- */
@@ -240,18 +288,59 @@ function prompt(){
     "Standard code: "+g.std+"\nTopic: "+stdLabel(g.std)+"\nOfficial wording from SuitCASE: [paste the standard and its learning objectives here]\n"+
     (g.topic?"Lesson focus: "+g.topic+"\n":"")+
     "\nWrite "+g.count+" questions aligned to this standard. Use a mix of these Georgia Milestones style item types: "+types.map(function(t){return TYPES[t]+" ("+TYPEHELP[t]+")"}).join("; ")+".\n\n"+
-    "Rules:\n1. Match the grade level and the depth of the standard.\n2. Every question has a clearly correct answer. Check the math or facts twice.\n3. Wrong choices come from common student mistakes.\n4. Use short, clear wording. No real student names.\n5. Add a one sentence explanation a student can learn from.\n6. In drop down sentences, put a * in front of the correct option inside each {{ }}.\n7. In \"correct\", count choices starting at 0.\n\n"+
-    "Return ONLY a JSON array with no other text. Add \"standard\":\""+g.std+"\" to every question. Use these shapes:\n"+types.map(function(t){return shapes[t]}).join("\n");
+    "Rules:\n1. Match the grade level and the depth of the standard.\n2. Every question has a clearly correct answer. Check the math or facts twice.\n3. Wrong choices come from common student mistakes.\n4. Use short, clear wording. No real student names.\n5. Add a one sentence explanation a student can learn from.\n6. In drop down sentences, put a * in front of the correct option inside each {{ }}.\n7. In \"correct\", count choices starting at 0.\n8. Add \"dok\" to every question: 1 for recall, 2 for skill and concept, 3 for strategic thinking. Write at least two questions at each level, so each student can get a different question at the same level.\n\n"+
+    "Return ONLY a JSON array with no other text. Add \"standard\":\""+g.std+"\" and \"dok\":1, 2, or 3 to every question. Use these shapes:\n"+types.map(function(t){return shapes[t]}).join("\n");
 }
 function qSummary(q){
   var a=answerText(q);
-  return '<div class="qitem"><span class="n">'+(S.questions.indexOf(q)+1)+'</span><div class="body"><div class="tagrow"><span class="pill info">'+TYPES[q.type]+'</span><span class="pill ok">'+esc(q.std||"No standard")+'</span><span class="pill" style="background:var(--md-surface-container-highest)">'+q.time+' sec</span></div><div>'+esc(q.stem)+'</div><div class="muted small">Answer: '+esc(a)+'</div></div><div class="tools"><button class="iconb" type="button" data-up="'+q.id+'" aria-label="Move question up">'+sym("arrow_upward")+'</button><button class="iconb" type="button" data-down="'+q.id+'" aria-label="Move question down">'+sym("arrow_downward")+'</button><button class="iconb" type="button" data-edit="'+q.id+'" aria-label="Edit question">'+sym("edit")+'</button><button class="iconb" type="button" data-del="'+q.id+'" aria-label="Delete question">'+sym("delete")+'</button></div></div>';
+  return '<div class="qitem"><span class="n">'+(S.questions.indexOf(q)+1)+'</span><div class="body"><div class="tagrow"><span class="pill info">'+TYPES[q.type]+'</span><span class="pill ok">'+esc(q.std||"No standard")+'</span><span class="pill warn">DOK '+q.dok+'</span><span class="pill" style="background:var(--md-surface-container-highest)">'+q.time+' sec</span></div><div>'+esc(q.stem)+'</div><div class="muted small">Answer: '+esc(a)+'</div></div><div class="tools"><button class="iconb" type="button" data-up="'+q.id+'" aria-label="Move question up">'+sym("arrow_upward")+'</button><button class="iconb" type="button" data-down="'+q.id+'" aria-label="Move question down">'+sym("arrow_downward")+'</button><button class="iconb" type="button" data-edit="'+q.id+'" aria-label="Edit question">'+sym("edit")+'</button><button class="iconb" type="button" data-del="'+q.id+'" aria-label="Delete question">'+sym("delete")+'</button></div></div>';
 }
+var TABS=[["questions","Questions"],["quizzes","My Quizzes"],["classes","Classes"],["scores","Scores"]];
+function tabBar(){return '<div class="seg tabseg" role="group" aria-label="Teacher tools">'+TABS.map(function(t){return '<button type="button" data-tab="'+t[0]+'" aria-pressed="'+(tab===t[0])+'">'+t[1]+'</button>'}).join("")+'</div>'}
+function randomizer(){
+  var p=pools(),keys=Object.keys(p).sort(),n=perStudent();
+  var rows=keys.map(function(k){var max=p[k].length,t=takeN(k,max),opts="";for(var i=0;i<=max;i++)opts+='<option'+(i===t?" selected":"")+'>'+i+'</option>';
+    return '<div class="rzrow"><span><b>DOK '+k+'</b> <span class="muted">'+DOKS[k]+'</span></span><label class="rzsel"><span class="muted small">Each student gets</span><select data-take="'+k+'" aria-label="How many DOK '+k+' questions each student gets">'+opts+'</select><span class="muted small">of '+max+' in the pool</span></label></div>'}).join("");
+  var spare=S.questions.length-n;
+  return '<div class="panel"><div class="ph"><h2>Randomizer</h2><label class="rzchk"><input type="checkbox" id="rz-shuffle"'+(S.settings.shuffle?" checked":"")+'> Mix the questions for every student</label></div>'+
+    '<p class="muted small">Every student gets the same number of questions at each Depth of Knowledge level. When a level has more questions than a student needs, each student gets a different draw from that pool.</p>'+
+    (rows||'<p class="empty">Add questions to set up the randomizer.</p>')+
+    '<p class="rzsum"><b>'+n+' questions per student.</b> '+(S.settings.shuffle?(spare>0?spare+' spare in the pools, so students in the same period see different questions at the same level.':'Every question is used, so students see the same questions in a different order. Add more questions at a level to give different questions.'):'Mixing is off, so every student gets the same questions in the same order.')+'</p></div>';
+}
+function drawQuizzes(){
+  return '<div class="panel"><div class="ph"><h2>My Quizzes and Tests</h2><button class="btn filled" type="button" id="newquiz">'+sym("add")+'New quiz</button></div><p class="muted small">Everything you have made stays here. Open an old quiz to change it, or give it again to a new group of students.</p><div class="libgrid">'+
+   L.quizzes.map(function(q){var sc=scoresFor(q.id),who={};sc.forEach(function(x){who[x.cls+"|"+x.student]=1});
+     var avg=sc.length?Math.round(sc.reduce(function(n,x){return n+x.pct},0)/sc.length):null,last=sc.length?fmtDate(Math.max.apply(null,sc.map(function(x){return x.when}))):"";
+     return '<div class="libcard'+(q.id===L.current?" live":"")+'"><div class="tagrow">'+(q.id===L.current?'<span class="pill ok">Open now</span>':'')+'<span class="pill info">'+q.questions.length+' questions</span><span class="pill" style="background:var(--md-surface-container-highest)">'+Object.keys(who).length+' students, '+sc.length+' tries</span></div><h3>'+esc(q.title)+'</h3><p class="muted small">'+(avg==null?"No scores yet.":"Average "+avg+"%. Last taken "+last+".")+'</p><div class="checks"><button class="btn tonal sm" type="button" data-openquiz="'+q.id+'">Open and edit</button><button class="btn tonal sm" type="button" data-givequiz="'+q.id+'">Give to students</button><button class="btn outlined sm" type="button" data-seescores="'+q.id+'">Scores</button><button class="btn outlined sm" type="button" data-copyquiz="'+q.id+'">Make a copy</button>'+(L.quizzes.length>1?'<button class="btn text sm danger" type="button" data-delquiz="'+q.id+'">Delete</button>':'')+'</div></div>'}).join("")+'</div></div>';
+}
+function drawClasses(){
+  return '<div class="panel"><div class="ph"><h2>Classes</h2><button class="btn filled" type="button" id="addcls">'+sym("add")+'Add a class</button></div><p class="muted small">Students pick their class and name before they play, so every score lands beside the right student. Use first name and last initial.</p></div>'+
+   '<div class="two">'+L.classes.map(function(c){return '<div class="panel"><div class="ph"><h2>'+esc(c.name)+'</h2><span class="muted small">'+c.students.length+' students</span></div><div class="checks">'+(c.students.map(function(n,i){return '<span class="stu">'+esc(n)+'<button type="button" class="iconb" data-delstu="'+c.id+'|'+i+'" aria-label="Remove '+esc(n)+'">'+sym("delete")+'</button></span>'}).join("")||'<span class="empty">No students yet.</span>')+'</div><div class="checks"><button class="btn tonal sm" type="button" data-addstu="'+c.id+'">Add students</button><button class="btn outlined sm" type="button" data-rencls="'+c.id+'">Rename</button>'+(L.classes.length>1?'<button class="btn text sm danger" type="button" data-delcls="'+c.id+'">Delete class</button>':'')+'</div></div>'}).join("")+'</div>';
+}
+function scoreRows(){
+  var qid=scQuiz||L.current,sc=scoresFor(qid),rows=[],seen={};
+  L.classes.forEach(function(c){if(scCls&&scCls!==c.id)return;c.students.forEach(function(n){seen[c.id+"|"+n]=1;rows.push({cls:c,name:n})})});
+  sc.forEach(function(x){var k=x.cls+"|"+x.student;if(seen[k])return;if(scCls&&scCls!==x.cls)return;seen[k]=1;rows.push({cls:clsById(x.cls)||{id:x.cls,name:x.clsName||"Class removed"},name:x.student})});
+  rows.forEach(function(r){var mine=sc.filter(function(x){return x.cls===r.cls.id&&x.student===r.name}).sort(function(a,b){return a.when-b.when});
+    r.tries=mine.length;r.best=mine.length?Math.max.apply(null,mine.map(function(x){return x.score})):0;r.pct=mine.length?Math.max.apply(null,mine.map(function(x){return x.pct})):0;r.last=mine.length?mine[mine.length-1]:null});
+  return rows;
+}
+function drawScores(){
+  var qid=scQuiz||L.current,quiz=L.quizzes.filter(function(x){return x.id===qid})[0]||S,rows=scoreRows(),done=rows.filter(function(r){return r.tries}),avg=done.length?Math.round(done.reduce(function(n,r){return n+r.pct},0)/done.length):0;
+  return '<div class="kpis"><div class="kpi"><div class="v">'+done.length+' of '+rows.length+'</div><div class="k">Students who have taken it</div></div><div class="kpi good"><div class="v">'+(done.length?avg+"%":"None")+'</div><div class="k">Average of best scores</div></div><div class="kpi"><div class="v">'+scoresFor(qid).length+'</div><div class="k">Tries in all</div></div><div class="kpi"><div class="v">'+(rows.length-done.length)+'</div><div class="k">Still need to take it</div></div></div>'+
+   '<div class="panel"><div class="ph"><h2>Scores</h2><div class="checks"><button class="btn tonal sm" type="button" id="csv">'+sym("download")+'Download scores</button><button class="btn text sm danger" type="button" id="clearscores">Clear scores for this quiz</button></div></div>'+
+   '<div class="controls"><label class="field" for="sc-quiz" style="flex:1 1 240px"><span>Quiz or test</span><select id="sc-quiz">'+L.quizzes.map(function(q){return '<option value="'+q.id+'"'+(q.id===qid?" selected":"")+'>'+esc(q.title)+'</option>'}).join("")+'</select></label><label class="field" for="sc-cls" style="flex:1 1 200px"><span>Class</span><select id="sc-cls"><option value="">All classes</option>'+L.classes.map(function(c){return '<option value="'+c.id+'"'+(c.id===scCls?" selected":"")+'>'+esc(c.name)+'</option>'}).join("")+'</select></label></div>'+
+   '<div class="tablewrap"><table><thead><tr><th>Student</th><th>Class</th><th>Status</th><th>Tries</th><th>Best points</th><th>Best percent</th><th>Last try</th></tr></thead><tbody>'+
+   (rows.map(function(r){return '<tr><td><b>'+esc(r.name)+'</b></td><td>'+esc(r.cls.name)+'</td><td><span class="pill '+(r.tries?"ok":"warn")+'">'+(r.tries?"Taken":"Not yet")+'</span></td><td>'+r.tries+'</td><td>'+(r.tries?r.best.toLocaleString():"")+'</td><td>'+(r.tries?r.pct+"%":"")+'</td><td>'+(r.last?fmtDate(r.last.when)+", "+r.last.right+" of "+r.last.total+" correct":"")+'</td></tr>'}).join("")||'<tr><td colspan="7" class="empty">Add a class to see students here.</td></tr>')+
+   '</tbody></table></div><p class="muted small">Giving <b>'+esc(quiz.title)+'</b> again? Students marked Not yet can take it now. Students who already took it get a fresh mix, and every try is kept.</p></div>';
+}
+var BUILTNOTE='<div class="built"><b>How it works in a school</b><span>On this demo, quizzes, class lists, and scores save in this browser only, so it works for one shared screen. In the Google Sheet version each one is a tab in the teacher\'s Sheet, students are recognized by their school Google account, and scores from every Chromebook land in the Sheet. Saving student scores needs the data owner\'s approval. Kit file <code>11_quiz_show.md</code> has the prompts and setup.</span></div>';
 function drawBuild(){
+  if(tab!=="questions"){$("build").innerHTML=tabBar()+(tab==="quizzes"?drawQuizzes():tab==="classes"?drawClasses():drawScores())+BUILTNOTE;return}
   var used={},stds={},secs=0;S.questions.forEach(function(q){used[q.type]=1;if(q.std)stds[q.std]=1;secs+=q.time});
   var g=S.gen;
-  $("build").innerHTML=
-  '<div class="kpis"><div class="kpi"><div class="v">'+S.questions.length+'</div><div class="k">Questions</div></div><div class="kpi good"><div class="v">'+Object.keys(used).length+' of 6</div><div class="k">Item types used</div></div><div class="kpi"><div class="v">'+Object.keys(stds).length+'</div><div class="k">Standards covered</div></div><div class="kpi"><div class="v">'+Math.ceil(secs/60)+' min</div><div class="k">Longest play time</div></div></div>'+
+  $("build").innerHTML=tabBar()+
+  '<div class="kpis"><div class="kpi"><div class="v">'+S.questions.length+'</div><div class="k">Questions in the pool</div></div><div class="kpi good"><div class="v">'+Object.keys(used).length+' of 6</div><div class="k">Item types used</div></div><div class="kpi"><div class="v">'+Object.keys(stds).length+'</div><div class="k">Standards covered</div></div><div class="kpi"><div class="v">'+Math.ceil(secs/60)+' min</div><div class="k">Longest play time</div></div></div>'+
   '<div class="two">'+
    '<div class="stack">'+
     '<div class="panel"><div class="ph"><h2>Create questions with Gemini</h2></div>'+
@@ -264,33 +353,34 @@ function drawBuild(){
     '</div>'+
     '<div class="panel"><h2>Paste what Gemini wrote</h2><textarea class="paste" id="paste" aria-label="Paste the questions from Gemini" placeholder="Paste the JSON from Gemini here"></textarea><div class="ph"><button class="btn tonal" type="button" id="import">'+sym("download")+'Add these questions</button><span class="muted small" id="import-msg">Read every question before you use it. You are the expert, Gemini is the helper.</span></div></div>'+
    '</div>'+
-   '<div class="panel"><div class="ph"><h2>Questions</h2><span class="muted small">'+S.questions.length+' in this quiz</span></div>'+
+   '<div class="stack">'+randomizer()+'<div class="panel"><div class="ph"><h2>Questions</h2><span class="muted small">'+S.questions.length+' in this quiz</span></div>'+
     '<label class="field" for="title" style="display:flex"><span>Quiz title</span><input id="title" type="text" value="'+esc(S.title)+'"></label>'+
     '<div class="stack" id="qlist">'+(S.questions.map(qSummary).join("")||'<p class="empty">No questions yet. Create some with Gemini or add one below.</p>')+'</div>'+
     '<div><p class="small" style="margin-bottom:8px">Add a question by hand</p><div class="checks">'+Object.keys(TYPES).map(function(k){return '<button class="btn tonal sm" type="button" data-add="'+k+'">'+TYPES[k]+'</button>'}).join("")+'</div></div>'+
-   '</div>'+
-  '</div>'+
-  '<div class="built"><b>How teachers share it</b><span>In the real tool the questions live in the teacher\'s Google Sheet. The teacher has edit rights and sees this builder. Students get view rights through the class group, so the same link posted in Google Classroom opens the student view only. Kit file <code>11_quiz_show.md</code> has the prompts and setup. Changes on this demo save in your browser only.</span></div>';
+   '</div></div>'+
+  '</div>'+BUILTNOTE+
+  '<div class="built" hidden><b>How teachers share it</b><span>In the real tool the questions live in the teacher\'s Google Sheet. The teacher has edit rights and sees this builder. Students get view rights through the class group, so the same link posted in Google Classroom opens the student view only. Kit file <code>11_quiz_show.md</code> has the prompts and setup. Changes on this demo save in your browser only.</span></div>';
 }
 function formFor(type){
   var std={k:"std",l:"Standard",type:"select",options:S.standards.map(function(s){return [s.code,s.code+"  "+s.label]})};
   var time={k:"time",l:"Seconds to answer",type:"select",options:["20","30","45","60","90","120"]};
+  var dok={k:"dok",l:"Depth of Knowledge level",type:"select",options:Object.keys(DOKS).map(function(k){return [k,"DOK "+k+": "+DOKS[k]]})};
   var why={k:"why",l:"Explanation shown after answering",type:"textarea"};
   var ch="One choice per line. Put * in front of each correct choice.\n*42\n36\n48";
-  if(type==="mc"||type==="ms")return [{k:"stem",l:"Question",type:"textarea"},{k:"choicesText",l:"Choices",type:"textarea",ph:ch},std,time,why];
-  if(type==="twopart")return [{k:"stem",l:"Part A question",type:"textarea"},{k:"choicesText",l:"Part A choices",type:"textarea",ph:ch},{k:"bstem",l:"Part B question",type:"textarea"},{k:"bchoicesText",l:"Part B choices",type:"textarea",ph:ch},std,time,why];
-  if(type==="dropdown")return [{k:"stem",l:"Directions"},{k:"sentence",l:"Sentence with menus",type:"textarea",ph:"Put each menu in double braces with * on the correct option.\nThe sum of 6 and 7 is {{12|*13|14}}."},std,time,why];
-  if(type==="dragdrop")return [{k:"stem",l:"Directions"},{k:"catsText",l:"Groups and their items",type:"textarea",ph:"One group per line.\nEven: 2; 4; 6\nOdd: 1; 3; 5"},std,time,why];
-  return [{k:"stem",l:"Question",type:"textarea"},{k:"answer",l:"Correct answer (a number or a fraction like 3/4)"},std,time,why];
+  if(type==="mc"||type==="ms")return [{k:"stem",l:"Question",type:"textarea"},{k:"choicesText",l:"Choices",type:"textarea",ph:ch},std,dok,time,why];
+  if(type==="twopart")return [{k:"stem",l:"Part A question",type:"textarea"},{k:"choicesText",l:"Part A choices",type:"textarea",ph:ch},{k:"bstem",l:"Part B question",type:"textarea"},{k:"bchoicesText",l:"Part B choices",type:"textarea",ph:ch},std,dok,time,why];
+  if(type==="dropdown")return [{k:"stem",l:"Directions"},{k:"sentence",l:"Sentence with menus",type:"textarea",ph:"Put each menu in double braces with * on the correct option.\nThe sum of 6 and 7 is {{12|*13|14}}."},std,dok,time,why];
+  if(type==="dragdrop")return [{k:"stem",l:"Directions"},{k:"catsText",l:"Groups and their items",type:"textarea",ph:"One group per line.\nEven: 2; 4; 6\nOdd: 1; 3; 5"},std,dok,time,why];
+  return [{k:"stem",l:"Question",type:"textarea"},{k:"answer",l:"Correct answer (a number or a fraction like 3/4)"},std,dok,time,why];
 }
-function toForm(q){var v={stem:q.stem,std:q.std,time:String(q.time),why:q.why||""};
+function toForm(q){var v={stem:q.stem,std:q.std,dok:String(q.dok||1),time:String(q.time),why:q.why||""};
   if(q.choices)v.choicesText=fmtChoices(q.choices,q.correct);
   if(q.b){v.bstem=q.b.stem;v.bchoicesText=fmtChoices(q.b.choices,q.b.correct)}
   if(q.sentence!==undefined)v.sentence=q.sentence;
   if(q.categories)v.catsText=fmtCats(q.categories);
   if(q.answer!==undefined)v.answer=q.answer;return v}
 function fromForm(q,v){
-  q.stem=v.stem;q.std=v.std;q.time=parseInt(v.time,10)||30;q.why=v.why;
+  q.stem=v.stem;q.std=v.std;q.dok=parseInt(v.dok,10)||1;q.time=parseInt(v.time,10)||30;q.why=v.why;
   if(q.type==="mc"||q.type==="ms"||q.type==="twopart"){var p=parseChoices(v.choicesText);q.choices=p.choices;q.correct=p.correct;
     if(q.type==="mc"&&q.correct.length>1)q.type="ms";if(q.type==="ms"&&q.correct.length===1)q.type="mc";if(q.type==="twopart")q.correct=[q.correct[0]]}
   if(q.type==="twopart"){var pb=parseChoices(v.bchoicesText);q.b={stem:v.bstem,choices:pb.choices,correct:pb.correct}}
@@ -307,7 +397,7 @@ function valid(q){
   if(q.type==="dragdrop")return q.categories.length>=2;
   return !isNaN(num(q.answer));
 }
-function blank(type){return {id:K.uid(),type:type,std:S.gen.std,time:type==="mc"||type==="numeric"?30:60,stem:"",why:""}}
+function blank(type){return {id:K.uid(),type:type,dok:defaultDok({type:type}),std:S.gen.std,time:type==="mc"||type==="numeric"?30:60,stem:"",why:""}}
 function editQ(q,isNew){
   K.form({title:(isNew?"Add ":"Edit ")+TYPES[q.type].toLowerCase()+" question",fields:formFor(q.type),values:toForm(q),
     onSave:function(v){var copy=fromForm(JSON.parse(JSON.stringify(q)),v);
@@ -324,6 +414,7 @@ function importText(t){
     try{
       var q={id:K.uid(),type:String(r.type||"mc").toLowerCase(),std:r.standard||S.gen.std,time:parseInt(r.time,10)||0,stem:String(r.stem||""),why:String(r.explanation||"")};
       if(!TYPES[q.type])throw 0;
+      q.dok=Math.max(1,Math.min(4,parseInt(r.dok,10)||defaultDok(q)));
       if(q.type==="mc"||q.type==="ms"||q.type==="twopart"){q.choices=r.choices.map(String);q.correct=[].concat(r.correct).map(Number).filter(function(i){return i>=0&&i<q.choices.length});if(!q.correct.length)throw 0}
       if(q.type==="twopart"){q.correct=[q.correct[0]];q.b={stem:String(r.partB.stem),choices:r.partB.choices.map(String),correct:[].concat(r.partB.correct).map(Number)}}
       if(q.type==="dropdown")q.sentence=String(r.sentence||"");
@@ -340,6 +431,23 @@ function importText(t){
 $("build").addEventListener("click",function(e){
   var t=e.target.closest("button");if(!t)return;var d=t.dataset;
   function byId(id){return S.questions.filter(function(q){return q.id===id})[0]}
+  function quizById(id){return L.quizzes.filter(function(x){return x.id===id})[0]}
+  if(d.tab){tab=d.tab;draw();return}
+  if(d.openquiz||d.givequiz){L.current=d.openquiz||d.givequiz;pickCurrent();save();tab="questions";if(d.givequiz){view="play";draw();startScreen();K.toast(S.title+" is open for students.")}else draw();window.scrollTo(0,0);return}
+  if(d.seescores){scQuiz=d.seescores;tab="scores";draw();return}
+  if(d.copyquiz){var c=JSON.parse(JSON.stringify(quizById(d.copyquiz)));c.id=K.uid();c.title="Copy of "+c.title;c.questions.forEach(function(q){q.id=K.uid()});L.quizzes.push(c);save();draw();K.toast("Copy made. Its scores start fresh.");return}
+  if(d.delquiz){var b1=snap(),dq=quizById(d.delquiz);L.quizzes=L.quizzes.filter(function(x){return x!==dq});L.scores=L.scores.filter(function(x){return x.quiz!==dq.id});if(L.current===dq.id)L.current=L.quizzes[0].id;pickCurrent();save();draw();K.toast("Quiz and its scores deleted.",function(){restore(b1)});return}
+  if(t.id==="newquiz"){K.form({title:"New quiz or test",fields:[{k:"title",l:"Title",ph:"Unit 3 Fractions Quiz"}],values:{},onSave:function(v){var nq={id:K.uid(),title:(v.title||"").trim()||"Untitled quiz",standards:JSON.parse(JSON.stringify(S.standards)),questions:[],settings:{shuffle:true,take:{}},gen:JSON.parse(JSON.stringify(S.gen))};L.quizzes.push(nq);L.current=nq.id;pickCurrent();save();tab="questions";draw()}});return}
+  if(t.id==="addcls"){K.form({title:"Add a class",fields:[{k:"name",l:"Class name",ph:"Period 3"},{k:"names",l:"Students, one per line",type:"textarea",ph:"Avery B.\nJordan C."}],values:{},onSave:function(v){L.classes.push({id:K.uid(),name:(v.name||"").trim()||"New class",students:String(v.names||"").split("\n").map(function(x){return x.trim()}).filter(Boolean)});save();draw()}});return}
+  if(d.addstu){var ac=clsById(d.addstu);K.form({title:"Add students to "+ac.name,fields:[{k:"names",l:"Students, one per line",type:"textarea",ph:"Avery B.\nJordan C."}],values:{},onSave:function(v){String(v.names||"").split("\n").map(function(x){return x.trim()}).filter(Boolean).forEach(function(n){if(ac.students.indexOf(n)<0)ac.students.push(n)});save();draw()}});return}
+  if(d.rencls){var rc=clsById(d.rencls);K.form({title:"Rename class",fields:[{k:"name",l:"Class name"}],values:{name:rc.name},onSave:function(v){rc.name=(v.name||"").trim()||rc.name;save();draw()}});return}
+  if(d.delcls){var b2=snap();L.classes=L.classes.filter(function(c){return c.id!==d.delcls});pickCurrent();save();draw();K.toast("Class removed. Its scores are kept.",function(){restore(b2)});return}
+  if(d.delstu){var b3=snap(),ps=d.delstu.split("|"),sc2=clsById(ps[0]);sc2.students.splice(+ps[1],1);save();draw();K.toast("Student removed. Their scores are kept.",function(){restore(b3)});return}
+  if(t.id==="clearscores"){var b4=snap(),cq=scQuiz||L.current;L.scores=L.scores.filter(function(x){return x.quiz!==cq});save();draw();K.toast("Scores cleared for this quiz.",function(){restore(b4)});return}
+  if(t.id==="csv"){var qz=quizById(scQuiz||L.current)||S,lines=[["Quiz","Class","Student","Date","Points","Percent","Correct","Questions","Practice mode"]];
+    scoresFor(qz.id).forEach(function(x){if(scCls&&scCls!==x.cls)return;var c=clsById(x.cls);lines.push([qz.title,c?c.name:(x.clsName||""),x.student,new Date(x.when).toLocaleString(),x.score,x.pct,x.right,x.total,x.untimed?"Yes":"No"])});
+    var csv=lines.map(function(r){return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"'}).join(",")}).join("\n");
+    try{var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download=qz.title.replace(/[^A-Za-z0-9]+/g,"_")+"_scores.csv";document.body.appendChild(a);a.click();a.remove();K.toast((lines.length-1)+" scores downloaded.")}catch(err){K.toast("The download did not start in this browser.")}return}
   if(d.t){S.gen.types[d.t]=S.gen.types[d.t]?0:1;save();draw()}
   else if(d.add)editQ(blank(d.add),true);
   else if(d.edit)editQ(byId(d.edit),false);
@@ -360,6 +468,10 @@ $("build").addEventListener("change",function(e){
   if(id==="g-std"){S.gen.std=e.target.value;save();draw()}
   if(id==="g-count"){S.gen.count=+e.target.value;save();draw()}
   if(id==="title"){S.title=e.target.value.trim()||"Untitled quiz";save()}
+  if(id==="rz-shuffle"){S.settings.shuffle=e.target.checked;save();draw()}
+  if(e.target.dataset.take){S.settings.take[e.target.dataset.take]=+e.target.value;save();draw()}
+  if(id==="sc-quiz"){scQuiz=e.target.value;draw()}
+  if(id==="sc-cls"){scCls=e.target.value;draw()}
 });
 $("build").addEventListener("input",function(e){if(e.target.id==="g-topic"){S.gen.topic=e.target.value;save();$("g-prompt").textContent=prompt()}});
 
@@ -369,11 +481,18 @@ function shuffle(a,seed){a=a.slice();var s=seed||7;for(var i=a.length-1;i>0;i--)
 function startScreen(){
   clearInterval(tick);P=null;
   var stds={},types={};S.questions.forEach(function(q){if(q.std)stds[q.std]=1;types[q.type]=1});
-  $("play").innerHTML='<div class="stage"><div class="marquee"><div class="floaters" aria-hidden="true">'+["calculate","lightbulb","star","school","emoji_events","bolt"].map(function(n,i){return '<span class="material-symbols-outlined f'+i+'">'+n+'</span>'}).join("")+'</div><p class="eyebrow">Ready, set, think</p><h2 class="title">'+esc(S.title)+'</h2><div class="tagrow" style="justify-content:center"><span class="glass">'+S.questions.length+' questions</span><span class="glass">'+Object.keys(types).length+' question styles</span><span class="glass">'+Object.keys(stds).length+' standards</span></div><button class="go" type="button" id="start"'+(S.questions.length?"":" disabled")+'>'+sym("play_arrow")+'Start quiz</button><label class="untimed"><input type="checkbox" id="untimed"> Practice mode with no timer</label><p class="hint">Answer fast for bonus points. Every question shows an explanation.</p></div></div>';
+  $("play").innerHTML='<div class="stage"><div class="marquee"><div class="floaters" aria-hidden="true">'+["calculate","lightbulb","star","school","emoji_events","bolt"].map(function(n,i){return '<span class="material-symbols-outlined f'+i+'">'+n+'</span>'}).join("")+'</div><p class="eyebrow">Ready, set, think</p><h2 class="title">'+esc(S.title)+'</h2><div class="tagrow" style="justify-content:center"><span class="glass">'+perStudent()+' questions</span><span class="glass">'+Object.keys(types).length+' question styles</span><span class="glass">'+Object.keys(stds).length+' standards</span></div><div class="who"><label class="field" for="who-cls"><span>Your class</span><select id="who-cls">'+L.classes.map(function(c){return '<option value="'+c.id+'"'+(c.id===L.who.cls?" selected":"")+'>'+esc(c.name)+'</option>'}).join("")+'</select></label><label class="field" for="who-name"><span>Your name</span><select id="who-name"><option value="">Choose your name</option>'+((clsById(L.who.cls)||{students:[]}).students.map(function(n){return '<option'+(n===L.who.name?" selected":"")+'>'+esc(n)+'</option>'}).join(""))+'<option value="__new">My name is not on the list</option></select></label></div><p class="hint whomsg" role="status">'+whoMsg()+'</p><button class="go" type="button" id="start"'+(perStudent()?"":" disabled")+'>'+sym("play_arrow")+'Start quiz</button><label class="untimed"><input type="checkbox" id="untimed"> Practice mode with no timer</label><p class="hint">Answer fast for bonus points. Every question shows an explanation.</p></div></div>';
+}
+function nm(n){return esc(String(n).replace(/\.$/,""))}
+function whoMsg(){
+  if(!L.who.name)return "Pick your name so your score is saved. Without a name you play as a guest and nothing is saved.";
+  var mine=scoresFor(S.id).filter(function(x){return x.cls===L.who.cls&&x.student===L.who.name});
+  if(!mine.length)return "Hi, "+nm(L.who.name)+". This is your first try on this quiz. Your score will be saved.";
+  return "Welcome back, "+nm(L.who.name)+". This is try "+(mine.length+1)+". Your best so far is "+Math.max.apply(null,mine.map(function(x){return x.score})).toLocaleString()+" points. You will get a fresh mix of questions.";
 }
 var REDUCED=false;try{REDUCED=window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
 function begin(untimed){
-  P={i:0,score:0,streak:0,untimed:untimed,res:[]};
+  P={i:0,score:0,streak:0,untimed:untimed,res:[],qs:drawSet(),cls:L.who.cls,student:L.who.name};
   if(REDUCED){showQ();return}
   var n=3,mine=P;$("play").innerHTML='<div class="stage"><div class="count" id="count" role="status">3</div></div>';
   var t=setInterval(function(){
@@ -397,7 +516,7 @@ function confetti(count){
   })(t0);
 }
 function showQ(){
-  var q=S.questions[P.i];P.q=q;P.done=false;P.left=q.time;P.shown=false;P.fresh=false;
+  var q=P.qs[P.i];P.q=q;P.done=false;P.left=q.time;P.shown=false;P.fresh=false;
   if(q.type==="mc")P.ans={sel:-1};
   if(q.type==="ms")P.ans={sel:[]};
   if(q.type==="twopart")P.ans={a:-1,b:[]};
@@ -430,13 +549,13 @@ function drawQ(){
   if(q.type==="numeric")body='<div class="numbox"><input id="numin" type="text" inputmode="decimal" aria-label="Your answer" value="'+esc(a.v)+'"'+(r?" disabled":"")+'><div class="keypad" aria-label="Keypad">'+["7","8","9","4","5","6","1","2","3","0",".","/"].map(function(x){return '<button type="button" data-key="'+x+'"'+(r?" disabled":"")+'>'+x+'</button>'}).join("")+'<button type="button" data-key="neg"'+(r?" disabled":"")+' aria-label="Negative sign">(−)</button><button type="button" data-key="back"'+(r?" disabled":"")+' aria-label="Backspace" style="grid-column:span 2">'+sym("backspace")+'</button></div></div>';
   var fb="";
   if(r){var last=P.res[P.res.length-1],cls=last.frac===1?"ok":last.frac>0?"part":"no";
-    fb='<div class="feedback '+cls+'" role="status"><b>'+(last.frac===1?"Correct! +"+last.pts+" points":last.frac>0?"Partly correct. +"+last.pts+" points":last.timeout?"Time is up":"Not quite")+'</b>'+(last.frac<1?'<span>Answer: '+esc(answerText(q))+'</span>':'')+(q.why?'<span>'+esc(q.why)+'</span>':'')+'</div><div style="display:flex;justify-content:flex-end"><button class="btn filled" type="button" id="next" style="height:48px">'+(P.i+1<S.questions.length?"Next question":"See results")+sym("arrow_forward")+'</button></div>'}
+    fb='<div class="feedback '+cls+'" role="status"><b>'+(last.frac===1?"Correct! +"+last.pts+" points":last.frac>0?"Partly correct. +"+last.pts+" points":last.timeout?"Time is up":"Not quite")+'</b>'+(last.frac<1?'<span>Answer: '+esc(answerText(q))+'</span>':'')+(q.why?'<span>'+esc(q.why)+'</span>':'')+'</div><div style="display:flex;justify-content:flex-end"><button class="btn filled" type="button" id="next" style="height:48px">'+(P.i+1<P.qs.length?"Next question":"See results")+sym("arrow_forward")+'</button></div>'}
   else if(q.type!=="mc")fb='<div style="display:flex;justify-content:flex-end"><button class="btn filled" type="button" id="submit" style="height:48px">'+sym("check")+'Submit answer</button></div>';
   var last2=r?P.res[P.res.length-1]:null;
-  var dots=S.questions.map(function(x,i){var rr=P.res[i];return '<i class="'+(rr?(rr.frac===1?"ok":rr.frac>0?"part":"no"):i===P.i?"cur":"")+'"></i>'}).join("");
+  var dots=P.qs.map(function(x,i){var rr=P.res[i];return '<i class="'+(rr?(rr.frac===1?"ok":rr.frac>0?"part":"no"):i===P.i?"cur":"")+'"></i>'}).join("");
   var ring=P.untimed?'':'<div class="ring'+(P.left<q.time*.25?" low":"")+'" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="26"/><circle id="ringc" class="fg" cx="32" cy="32" r="26" stroke-dasharray="163.4" stroke-dashoffset="'+((1-Math.max(0,P.left/q.time))*163.4)+'"/></svg><span id="ringn">'+Math.ceil(Math.max(0,P.left))+'</span></div>';
   var anim=(P.shown?"":" enter")+(P.fresh?" fresh":"")+(P.fresh&&last2.frac===0?" shake":"");
-  $("play").innerHTML='<div class="stage"><div class="hud"><span class="glass">Question '+(P.i+1)+' of '+S.questions.length+'</span><span class="glass">'+TYPES[q.type]+'</span>'+(q.std?'<span class="glass">'+esc(q.std)+'</span>':'')+'<span class="sp"></span>'+(P.streak>1?'<span class="streak">'+sym("local_fire_department")+P.streak+' in a row</span>':'')+'<span class="score'+(P.fresh&&last2.pts>0?" bump":"")+'">'+sym("stars")+P.score+'</span></div><div class="dots" aria-hidden="true">'+dots+'</div><div class="panel qpanel'+anim+'"><div class="qhead"><div class="stem">'+esc(q.stem)+'</div>'+ring+'</div>'+body+fb+'</div></div>';
+  $("play").innerHTML='<div class="stage"><div class="hud"><span class="glass">Question '+(P.i+1)+' of '+P.qs.length+'</span><span class="glass">'+TYPES[q.type]+'</span>'+(q.std?'<span class="glass">'+esc(q.std)+'</span>':'')+'<span class="sp"></span>'+(P.streak>1?'<span class="streak">'+sym("local_fire_department")+P.streak+' in a row</span>':'')+'<span class="score'+(P.fresh&&last2.pts>0?" bump":"")+'">'+sym("stars")+P.score+'</span></div><div class="dots" aria-hidden="true">'+dots+'</div><div class="panel qpanel'+anim+'"><div class="qhead"><div class="stem">'+esc(q.stem)+'</div>'+ring+'</div>'+body+fb+'</div></div>';
   P.shown=true;
   if(r){var n=$("next");if(n)n.focus()}
 }
@@ -461,10 +580,14 @@ function results(){
   clearInterval(tick);var right=P.res.filter(function(r){return r.frac===1}).length,by={};
   var avg=P.res.reduce(function(s,r){return s+r.frac},0)/Math.max(1,P.res.length),stars=avg>=.9?3:avg>=.6?2:avg>0?1:0,final=P.score;
   P.res.forEach(function(r){var k=r.q.std||"No standard";(by[k]=by[k]||[]).push(r.frac)});
+  var savedMsg="Playing as a guest, so this score was not saved.";
+  if(P.student&&!P.saved){P.saved=true;var c0=clsById(P.cls);
+    L.scores.push({id:K.uid(),quiz:S.id,cls:P.cls,clsName:c0?c0.name:"",student:P.student,when:Date.now(),score:final,right:right,total:P.res.length,pct:Math.round(avg*100),untimed:!!P.untimed,doks:P.res.map(function(r){return r.q.dok})});save();}
+  if(P.student)savedMsg="Saved for "+nm(P.student)+((clsById(P.cls)||{}).name?", "+esc(clsById(P.cls).name):"")+". Your teacher can see this score.";
   var rows=Object.keys(by).map(function(k){var a=by[k],pct=Math.round(a.reduce(function(s,x){return s+x},0)/a.length*100);
     return '<div class="barrow"><div class="t"><span><b>'+esc(k)+'</b> <span class="muted">'+esc(stdLabel(k))+'</span></span><span class="r">'+pct+'% on '+a.length+(a.length===1?" question":" questions")+'</span></div><div class="track"><div class="fill '+(pct>=80?"":pct>=50?"near":"full")+'" style="width:'+pct+'%'+(pct>=80?";background:var(--md-tertiary)":"")+'"></div></div></div>'}).join("");
   var review=P.res.map(function(r,i){return '<div class="qitem"><span class="n">'+(i+1)+'</span><div class="body"><div class="tagrow"><span class="pill '+(r.frac===1?"ok":r.frac>0?"warn":"bad")+'">'+(r.frac===1?"Correct":r.frac>0?"Partly correct":"Missed")+'</span><span class="pill info">'+TYPES[r.q.type]+'</span></div><div>'+esc(r.q.stem)+'</div><div class="muted small">Answer: '+esc(answerText(r.q))+'</div></div></div>'}).join("");
-  $("play").innerHTML='<div class="stage"><div class="marquee"><p class="eyebrow">'+esc(S.title)+'</p><div class="starsrow" role="img" aria-label="'+stars+' of 3 stars">'+[1,2,3].map(function(i){return '<span class="material-symbols-outlined'+(i<=stars?" on":"")+'" style="animation-delay:'+(i*.2)+'s">star</span>'}).join("")+'</div><div class="bigscore" id="bigscore">'+final+'</div><p class="hint" style="font-size:1rem">points, with '+right+' of '+P.res.length+' fully correct</p><button class="go" type="button" id="again">'+sym("replay")+'Play again</button></div><div class="panel"><h2>How you did by standard</h2><div class="bars">'+rows+'</div></div><div class="panel"><h2>Review</h2><div class="stack">'+review+'</div></div></div>';
+  $("play").innerHTML='<div class="stage"><div class="marquee"><p class="eyebrow">'+esc(S.title)+'</p><div class="starsrow" role="img" aria-label="'+stars+' of 3 stars">'+[1,2,3].map(function(i){return '<span class="material-symbols-outlined'+(i<=stars?" on":"")+'" style="animation-delay:'+(i*.2)+'s">star</span>'}).join("")+'</div><div class="bigscore" id="bigscore">'+final+'</div><p class="hint" style="font-size:1rem">points, with '+right+' of '+P.res.length+' fully correct</p><p class="hint whomsg" role="status">'+savedMsg+'</p><button class="go" type="button" id="again">'+sym("replay")+'Play again</button></div><div class="panel"><h2>How you did by standard</h2><div class="bars">'+rows+'</div></div><div class="panel"><h2>Review</h2><div class="stack">'+review+'</div></div></div>';
   window.scrollTo(0,0);
   if(!REDUCED&&final>0){var el=$("bigscore"),t0=performance.now();(function up(now){var k=Math.min(1,(now-t0)/900);if(!el.isConnected)return;el.textContent=Math.round(final*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(up)})(t0)}
   if(stars>=2)confetti(160);
@@ -475,7 +598,7 @@ $("play").addEventListener("click",function(e){
   if(t.id==="start"){begin($("untimed").checked);return}
   if(t.id==="again"){startScreen();return}
   if(!P)return;
-  if(t.id==="next"){P.i++;if(P.i<S.questions.length)showQ();else results();return}
+  if(t.id==="next"){P.i++;if(P.i<P.qs.length)showQ();else results();return}
   if(P.done)return;
   if(t.id==="submit"){submit();return}
   if(d.mc!==undefined){a.sel=+d.mc;submit()}
@@ -486,7 +609,12 @@ $("play").addEventListener("click",function(e){
   else if(d.bucket!==undefined){place(+d.bucket)}
   else if(d.key){var inp=$("numin"),v=inp.value;if(d.key==="back")v=v.slice(0,-1);else if(d.key==="neg")v=v.charAt(0)==="-"?v.slice(1):"-"+v;else v+=d.key;inp.value=v;a.v=v}
 });
-$("play").addEventListener("change",function(e){if(e.target.dataset.menu!==undefined&&P&&!P.done){P.ans.sel[+e.target.dataset.menu]=+e.target.value}});
+$("play").addEventListener("change",function(e){
+  if(e.target.id==="who-cls"){L.who={cls:e.target.value,name:""};save();startScreen();return}
+  if(e.target.id==="who-name"){
+    if(e.target.value==="__new"){var wc=clsById(L.who.cls);e.target.value="";if(!wc)return;
+      K.form({title:"Add your name to "+wc.name,fields:[{k:"name",l:"First name and last initial",ph:"Avery B."}],values:{},onSave:function(v){var n=(v.name||"").trim();if(!n)return;if(wc.students.indexOf(n)<0)wc.students.push(n);L.who.name=n;save();startScreen()}});return}
+    L.who.name=e.target.value;save();startScreen();return}if(e.target.dataset.menu!==undefined&&P&&!P.done){P.ans.sel[+e.target.dataset.menu]=+e.target.value}});
 $("play").addEventListener("input",function(e){if(e.target.id==="numin"&&P)P.ans.v=e.target.value});
 $("play").addEventListener("keydown",function(e){
   if(e.key==="Enter"&&e.target.id==="numin"){e.preventDefault();submit()}
@@ -503,7 +631,7 @@ function draw(){
   if(view==="build"){clearInterval(tick);drawBuild()}
 }
 $("mode").addEventListener("click",function(e){var b=e.target.closest("[data-v]");if(!b)return;view=b.dataset.v;draw();if(view==="play")startScreen();window.scrollTo(0,0)});
-$("reset").addEventListener("click",function(){var before=snap();S=sample();save();draw();if(view==="play")startScreen();K.toast("Sample quiz restored.",function(){restore(before);if(view==="play")startScreen()})});
+$("reset").addEventListener("click",function(){var before=snap(),fresh=sample();fresh.id=S.id;L.quizzes[L.quizzes.indexOf(S)]=fresh;pickCurrent();save();draw();if(view==="play")startScreen();K.toast("Sample quiz restored.",function(){restore(before);if(view==="play")startScreen()})});
 if(location.hash==="#play")view="play";
 draw();if(view==="play")startScreen();
 })();
