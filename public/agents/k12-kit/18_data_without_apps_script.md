@@ -1,5 +1,7 @@
 # Save Your Data in Google Sheets, No Apps Script Needed
 
+> On the playbook page these three are shown as Paths 2, 3, and 4. Path 1 there is placing a finished tool on a Google Site, which is in `33_put_a_tool_on_google_sites.md`.
+
 Every tool in this kit is a dashboard on top of a Google Sheet. The Sheet is the notebook where the data is kept. The dashboard is the easy way to see it and change it.
 
 This file shows three ways to connect the two **without writing or installing any script**, plus how to link more Sheets later.

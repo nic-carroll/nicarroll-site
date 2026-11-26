@@ -76,3 +76,4 @@ Read this one for every tool:
 * `30_curriculum_team_tools.md` Curriculum Warehouse, Pacing Guide, Coaching Cycle Tracker, and Instructional Materials Review
 * `31_georgia_standards.md` How to load the Georgia standards so teachers can click them in every tool
 * `32_saving_sync_and_offline.md` How tools save on the device first, sync to the Sheet, work offline, and move to a new Sheet
+* `33_put_a_tool_on_google_sites.md` Place a finished tool on a Google Site as a full page, on the device or connected to your own Sheet

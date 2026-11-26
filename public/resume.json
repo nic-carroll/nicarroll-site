@@ -514,7 +514,7 @@
       "title": "Gemini Tool Builder Playbook",
       "sub": "School Staff Build Their Own Tools With AI",
       "status": "Live demo",
-      "summary": "A playbook that teaches K12 staff to turn a school problem into a working dashboard, tracker, or scheduler in Gemini, inside Google Workspace for Education. Nine steps, 24 live example tools, 33 setup guides to read or download, a prompt library, and sharing rules that keep the data owner in control.",
+      "summary": "A playbook that teaches K12 staff to turn a school problem into a working dashboard, tracker, or scheduler in Gemini, inside Google Workspace for Education. Nine steps, 24 live example tools, 34 setup guides to read or download, a prompt library, and sharing rules that keep the data owner in control.",
       "tags": [
         "K12",
         "AI",
@@ -2897,7 +2897,7 @@
           "name": "Builder Kit: Start Here",
           "for": "Gemini Tool Builder Playbook",
           "when": "K12",
-          "text": "The map of all 33 Builder Kit guides and the order to use them.",
+          "text": "The map of all 34 Builder Kit guides and the order to use them.",
           "file": "agents/k12-kit/00_START_HERE.md",
           "type": "Playbook"
         },
@@ -2939,6 +2939,14 @@
           "when": "K12",
           "text": "Ten checks to run on any tool before another person uses it.",
           "file": "agents/k12-kit/19_test_before_you_share.md",
+          "type": "Playbook"
+        },
+        {
+          "name": "Put a Tool on Google Sites",
+          "for": "Gemini Tool Builder Playbook",
+          "when": "K12",
+          "text": "Place a finished tool on a Google Site as a full page by pasting its code, with no script. A district can add saving to Google Sheets for every teacher with one shared link.",
+          "file": "agents/k12-kit/33_put_a_tool_on_google_sites.md",
           "type": "Playbook"
         }
       ]
